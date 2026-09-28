@@ -91,7 +91,7 @@ async function startSession(category){
 }
 
 function currentTitle(){ return state.filteredTitles[state.index]; }
-function titleImage(t){ return t.custom_image_url || t.poster_url || ''; }
+function titleImage(t){ return t.dvd_cover_url || t.custom_image_url || t.poster_url || ''; }
 function renderPoster(t){ const url = titleImage(t); return url ? `<img src="${url}" alt="${t.name}">` : `<div class="poster-placeholder">${t.name}</div>`; }
 
 function renderMovie(){
