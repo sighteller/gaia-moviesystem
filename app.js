@@ -1,5 +1,5 @@
-import { mountCoverPicker } from './cover-picker.js?v=20261001b';
-import { initFeatures } from './features.js?v=20261001b';
+import { mountCoverPicker } from './cover-picker.js?v=20261001c';
+import { initFeatures } from './features.js?v=20261001c';
 const API_URL = 'https://mahjewznwqvdgtdjtekc.supabase.co/functions/v1/gaia-api';
 
 const app = document.querySelector('#app');

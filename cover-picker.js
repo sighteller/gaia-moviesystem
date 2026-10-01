@@ -1,4 +1,4 @@
-import { curator,esc,safeImage } from './curator-client.js?v=20261001b';
+import { curator,esc,safeImage } from './curator-client.js?v=20261001c';
 export function coverSaveRequired(candidate){return candidate!=null;}
 export async function mountCoverPicker(container,title){
   let selected=null;
@@ -20,13 +20,13 @@ export async function mountCoverPicker(container,title){
         status.textContent='Anteprima: premi Salva copertina per confermare.';return;
       }
       if(b.hasAttribute('data-save-cover')&&selected){
-        b.disabled=true;status.textContent='Salvataggio…';const choice=selected;
+        b.disabled=true;container.querySelectorAll('[data-cover-choice]').forEach(x=>x.disabled=true);status.textContent='Salvataggio…';const choice=selected;
         try{
           const result=await curator('saveCover',{titleId:title.id,candidateId:choice.id,expectedUrl:title.dvd_cover_url??null});
           title.dvd_cover_url=result.url;
           if(!container.isConnected)return;
-          selected=null;container.querySelector('.cover-save-actions').replaceChildren();status.textContent='Copertina salvata.';
-        }catch(err){if(container.isConnected){status.textContent=err.message;b.disabled=false;}}
+          selected=null;container.querySelectorAll('[data-cover-choice]').forEach(x=>x.disabled=false);container.querySelector('.cover-save-actions').replaceChildren();status.textContent='Copertina salvata.';
+        }catch(err){if(container.isConnected){status.textContent=err.message;b.disabled=false;container.querySelectorAll('[data-cover-choice]').forEach(x=>x.disabled=false);}}
       }
     });
   }catch(err){if(container.isConnected)container.innerHTML=`<p class="cover-status" role="status">${esc(err.message)}</p>`;}
