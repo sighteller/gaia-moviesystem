@@ -7,7 +7,8 @@ test('distinct titles stay distinct after backtracking; repaint does not count a
  assert.deepEqual(s.titleIds,['a','b','c']);assert.equal(s.steps,4);
 });
 test('messages use agreed boundaries and include the count',()=>{
- for(const [count,word] of [[1,'prima'],[5,'casting'],[6,'provini'],[10,'provini'],[11,'vincitore'],[30,'vincitore'],[31,'festival'],[70,'festival'],[71,'giro']]){
+ assert.match(choiceMessage(1),/primo tentativo.*Merlino/);
+ for(const [count,word] of [[5,'Kiki'],[6,'ingredienti'],[10,'ingredienti'],[11,'cipolla'],[30,'cipolla'],[31,'Nuota'],[70,'Nuota'],[71,'Nemo']]){
   assert.ok(choiceMessage(count).includes(word));assert.ok(choiceMessage(count).includes(String(count)));
  }
 });

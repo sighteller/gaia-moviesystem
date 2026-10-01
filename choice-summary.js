@@ -4,12 +4,12 @@ export function recordConsultation(summary,titleId){
 }
 export function choiceMessage(count){
   const n=Math.max(1,Math.trunc(count));
-  if(n===1)return 'Buona la prima: 1 film ed è già quello giusto.';
-  if(n<=5)return `Hai fatto il casting a ${n} film. Il ruolo è assegnato!`;
-  if(n<=10)return `${n} film ai provini, uno solo sul divano. Buona visione!`;
-  if(n<=30)return `Dopo ${n} film, abbiamo il vincitore. Il discorso di ringraziamento può aspettare.`;
-  if(n<=70)return `Hai consultato ${n} film: il festival è finito, la serata può cominciare.`;
-  return `Il giro del cinema in ${n} film. Ora il viaggio continua dal divano!`;
+  if(n===1)return 'Ha estratto il film al primo tentativo! Che dirà Merlino?';
+  if(n<=5)return `È arrivata Kiki! Porta il film giusto, dopo ${n} tentativi.`;
+  if(n<=10)return `Ci vogliono almeno ${n} ingredienti per fare una ratatouille spettacolare come la mia!`;
+  if(n<=30)return `La scelta è come una cipolla: ha tanti strati. Tu ne hai sfogliati ${n}.`;
+  if(n<=70)return `Nuota e nuota, zitto e nuota… ×${n}. Eccolo finalmente!`;
+  return `Hai cercato tra ${n} film. Nemo, al confronto, era dietro l’angolo.`;
 }
 export function platformUrl(url){
   if(!url)return '';

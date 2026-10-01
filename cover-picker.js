@@ -1,4 +1,4 @@
-import { curator,esc,safeImage } from './curator-client.js?v=20261001g';
+import { curator,esc,safeImage } from './curator-client.js?v=20261001h';
 export function coverSaveRequired(candidate){return candidate!=null;}
 export async function mountCoverPicker(container,title){
   let selected=null;

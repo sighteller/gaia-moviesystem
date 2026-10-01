@@ -1,6 +1,6 @@
-import { recordConsultation, choiceMessage, platformUrl } from './choice-summary.js?v=20261001g';
-import { mountCoverPicker } from './cover-picker.js?v=20261001g';
-import { initFeatures } from './features.js?v=20261001g';
+import { recordConsultation, choiceMessage, platformUrl } from './choice-summary.js?v=20261001h';
+import { mountCoverPicker } from './cover-picker.js?v=20261001h';
+import { initFeatures } from './features.js?v=20261001h';
 const API_URL = 'https://mahjewznwqvdgtdjtekc.supabase.co/functions/v1/gaia-api';
 
 const app = document.querySelector('#app');
@@ -77,8 +77,15 @@ function homeCarousel(){
 function renderIntro(){
   state.category=null;state.session=null;
   if(state.currentAudio){state.currentAudio.pause();state.currentAudio=null;}
-  app.innerHTML=`<div class="shell">${topbar()}<section class="intro-screen"><h1 class="intro-greeting"><span>Ciao Gaia!</span><span class="intro-question"><span>che</span>${homeCarousel()}<span>film</span></span><span>vediamo oggi?</span></h1><button class="intro-start" data-action="categories">Cominciamo <span aria-hidden="true">⏎</span></button></section></div>`;
-
+  app.innerHTML=`<div class="shell">${topbar()}<section class="intro-screen"><h1 class="intro-greeting"><span data-typewriter>Ciao Gaia!</span><span class="intro-question"><span data-typewriter>che</span>${homeCarousel()}<span data-typewriter>film</span></span><span data-typewriter>vediamo oggi?</span></h1><button class="intro-start" data-action="categories">Cominciamo <span class="return-glyph" aria-hidden="true">⏎</span></button></section></div>`;
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    let delay=0;
+    app.querySelectorAll('[data-typewriter]').forEach(line=>{
+      const text=line.textContent;
+      line.innerHTML=`<span class="typing-space" aria-hidden="true">${text}</span><span class="typing-text">${[...text].map((char,i)=>`<span style="animation-delay:${delay+i*45}ms">${char===' '?'&nbsp;':char}</span>`).join('')}</span>`;
+      delay+=text.length*45+100;
+    });
+  }
 }
 
 function renderCategories(){
@@ -205,7 +212,7 @@ function renderConfirm(){
   if(state.navigating)return;
   const stage=app.querySelector('.movie-stage');if(!stage)return;
   stage.dataset.confirming='true';
-  stage.querySelector('.movie-navigation').innerHTML='<p class="confirmation-question">Sei sicura?</p><div class="confirm-navigation navigation-arrows"><button class="ghost-btn arrow-btn" data-action="back-to-movie" aria-label="Torna al film">←</button><button class="ghost-btn confirm-btn" data-action="confirm-title">Conferma</button></div>';
+  stage.querySelector('.movie-navigation').innerHTML='<p class="confirmation-question">Sei sicura?</p><div class="confirm-navigation navigation-arrows"><button class="ghost-btn arrow-btn" data-action="back-to-movie" aria-label="Torna al film">←</button><button class="ghost-btn confirm-btn preselected" data-action="confirm-title">Conferma</button></div>';
 }
 function cancelConfirm(){
   const stage=app.querySelector('.movie-stage');if(!stage)return;
@@ -217,12 +224,12 @@ function renderPlatformSummary(mode,savedPlatform=null){
   const t=currentTitle();const ps=availablePlatformsForTitle(t);const count=state.consultation.titleIds.length;
   const link=savedPlatform?state.links.find(l=>l.title_id===t.id&&l.platform_id===savedPlatform.id):null;
   const url=platformUrl(link?.url);
-  app.innerHTML=`<div class="shell">${topbar()}<div class="hero-center"><div class="empty choice-result"><h2>${escapeHtml(choiceMessage(count))}</h2><p>${escapeHtml(t.name)}</p><p class="choice-counter">${count} ${count===1?'titolo consultato':'titoli consultati'} prima della scelta.</p><h3>Dove lo guardiamo?</h3><div class="platform-list">${ps.map(p=>`<button class="platform-option ${savedPlatform?.id===p.id?'selected':''}" data-choice-platform="${p.id}" ${savedPlatform?'disabled':''}>${escapeHtml(p.name)}</button>`).join('')}</div><p class="choice-status" role="status"></p>${savedPlatform?(url?`<a class="ghost-btn platform-launch" href="${escapeHtml(url)}">Apri su ${escapeHtml(savedPlatform.name)} ⏎</a>`:'<p>Il collegamento diretto a questa piattaforma non è ancora configurato.</p>'):''}<button class="ghost-btn" data-action="home">Torna a Gaia</button></div></div></div>`;
+  app.innerHTML=`<div class="shell">${topbar()}<div class="hero-center"><div class="empty choice-result"><h2>${escapeHtml(choiceMessage(count))}</h2><p>${escapeHtml(t.name)}</p><p class="choice-counter">${count} ${count===1?'titolo consultato':'titoli consultati'} prima della scelta.</p><h3>Dove lo guardiamo?</h3><div class="platform-list">${ps.map((p,i)=>`<button class="platform-option ${savedPlatform?.id===p.id?'selected':''}" data-choice-platform="${p.id}" ${savedPlatform?'disabled':''}>${escapeHtml(p.name)} <kbd>${i+1}</kbd></button>`).join('')}</div><p class="choice-status" role="status"></p>${savedPlatform?(url?`<a class="ghost-btn platform-launch" href="${escapeHtml(url)}">Apri su ${escapeHtml(savedPlatform.name)} ⏎</a>`:'<p>Il collegamento diretto a questa piattaforma non è ancora configurato.</p>'):''}<button class="ghost-btn" data-action="home">Torna a Gaia</button></div></div></div>`;
 }
 
 function renderMode(){
   app.innerHTML = `<div class="shell">${topbar()}<div class="hero-center"><div><h1 style="font-size:clamp(42px,6vw,76px);letter-spacing:-.05em;margin:0 0 28px">Come è avvenuta la scelta?</h1><div class="mode-grid">
-    <button class="mode-card" data-mode="unlimited"><h2>Illimitata</h2><p>Nessun limite imposto alla scelta.</p></button>
+    <button class="mode-card preselected" data-mode="unlimited"><h2>Illimitata</h2><p>Nessun limite imposto alla scelta.</p></button>
     <button class="mode-card" data-mode="limited"><h2>Limitata</h2><p>Scelta fra pochi titoli.</p></button>
   </div></div></div></div>`;
 }
@@ -294,6 +301,10 @@ app.addEventListener('click', async e => {
   }
 });
 
+for(const event of ['pointerover','focusin'])document.addEventListener(event,e=>{
+  const mode=e.target.closest('.mode-card');
+  if(mode)app.querySelectorAll('.mode-card').forEach(b=>b.classList.toggle('preselected',b===mode));
+});
 document.addEventListener('keydown', async e => {
   if (e.target.closest('input,textarea,select,form')) return;
   if(document.querySelector('.intro-screen')&&!document.querySelector('[data-overlay]')&&(e.code==='Space'||e.key==='Enter')&&(!e.target.closest('button')||e.target.closest('.intro-start'))){e.preventDefault();if(!e.repeat)renderCategories();return;}
@@ -302,6 +313,19 @@ document.addEventListener('keydown', async e => {
     const selected=categories.findIndex(b=>b.classList.contains('preselected'));
     if(['ArrowRight','ArrowLeft'].includes(e.key)){e.preventDefault();chooseCategory(categories[(selected+(e.key==='ArrowRight'?1:-1)+categories.length)%categories.length],true);return;}
     if(e.key==='Enter'&&(e.target.closest('.category-card')||!e.target.closest('button'))){e.preventDefault();categories[Math.max(selected,0)].click();return;}
+  }
+  const modes=[...app.querySelectorAll('.mode-card')];
+  if(modes.length&&!app.querySelector('[data-overlay]')){
+    const selected=Math.max(0,modes.findIndex(b=>b.classList.contains('preselected')));
+    if(['ArrowRight','ArrowLeft'].includes(e.key)){
+      e.preventDefault();const next=modes[(selected+1)%modes.length];
+      modes.forEach(b=>b.classList.toggle('preselected',b===next));next.focus({preventScroll:true});return;
+    }
+    if(e.key==='Enter'&&!e.target.closest('button:not(.mode-card)')){e.preventDefault();modes[selected].click();return;}
+  }
+  if(/^[1-5]$/.test(e.key)&&!app.querySelector('[data-overlay]')){
+    const platform=app.querySelectorAll('[data-choice-platform]')[Number(e.key)-1];
+    if(platform&&!platform.disabled){e.preventDefault();if(!e.repeat)platform.click();return;}
   }
   if(e.target.closest('.cover-options')||e.target.closest('.curator'))return;
   if (e.key.toLowerCase() === 'm') { e.preventDefault(); return toggleMute(); }
