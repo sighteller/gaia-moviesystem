@@ -71,3 +71,18 @@ riservate al servizio, senza accesso client. Nessun avviso di sicurezza.
 
 Il programma non è stato eseguito su Windows o sul Jellyfin domestico: la prova
 reale rimane l'esecuzione di Configura.cmd e della prima sincronizzazione.
+
+## Correzione dopo prima prova Windows — 1 ottobre 2026
+
+La lettura domestica ha trovato 435 titoli, ma l'avvio della sincronizzazione
+era bloccato dalla protezione safeupdate della connessione HTTP al database:
+`DELETE requires a WHERE clause` (SQLSTATE 21000). I precedenti test SQL diretti
+non avevano la stessa protezione attiva. La pulizia ora riguarda soltanto il
+run sostituito o righe temporanee vecchie di oltre un giorno. Una prova HTTP
+autenticata dell'avvio con 435 titoli, tramite RPC con rollback interno, passa
+e non lascia run, server fittizi o titoli di prova. La correzione è lato server;
+il pacchetto originale può riprovare senza reinserire le chiavi.
+
+Il pacchetto aggiornato mostra passaggio, codice HTTP e codice diagnostico
+in caso di errore, senza stampare credenziali o payload. L'avvio manuale aggiorna
+anche la copia usata dall'attività Windows quando è già installata.

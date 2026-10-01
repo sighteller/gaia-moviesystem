@@ -7,15 +7,24 @@ $Local='http://localhost:8096'
 $HomeDir=Join-Path $env:LOCALAPPDATA 'GaiaSync'
 $ConfigPath=Join-Path $HomeDir 'credentials.xml'
 $TaskName='Gaia Jellyfin Sync'
+$script:Phase='Avvio'
+function Diagnostic($record) {
+ $code='';$http=''
+ try {if($record.Exception.Response){$http='; HTTP '+[int]$record.Exception.Response.StatusCode}}catch{}
+ try {$detail=$record.ErrorDetails.Message|ConvertFrom-Json;if($detail.diagnostic -match '^[A-Z0-9_]+$'){$code='; codice '+$detail.diagnostic}}catch{}
+ return ('Passaggio: '+$script:Phase+$http+$code+'; riga '+$record.InvocationInfo.ScriptLineNumber+'.')
+}
 function Plain($secure) {
  $p=[Runtime.InteropServices.Marshal]::SecureStringToBSTR($secure)
  try { [Runtime.InteropServices.Marshal]::PtrToStringBSTR($p) } finally { [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($p) }
 }
 function Cloud($action,$payload=@{}) {
+ $script:Phase='Gaia / '+$action
  $body=@{action=$action;payload=$payload}|ConvertTo-Json -Depth 30 -Compress
  Invoke-RestMethod -Uri $Cloud -Method Post -Headers @{Authorization=('Bearer '+(Plain $script:Credentials.Gaia))} -ContentType 'application/json; charset=utf-8' -Body ([Text.Encoding]::UTF8.GetBytes($body)) -TimeoutSec 120
 }
 function Jelly($path) {
+ $script:Phase='Jellyfin / lettura catalogo'
  Invoke-RestMethod -Uri ($Local+$path) -Headers @{Authorization=('MediaBrowser Client="Gaia Sync", Device="Windows", DeviceId="gaia-windows-sync", Version="1.0", Token="'+(Plain $script:Credentials.Jellyfin)+'"')} -TimeoutSec 90
 }
 function Catalog($type='Movie,Series',$parent='') {
@@ -71,6 +80,7 @@ function RunSync {
    if($tag){
     if($cache.ContainsKey($id) -and $cache[$id].tag -eq $tag -and $cache[$id].url){$url=$cache[$id].url}
     else {
+     $script:Phase='Jellyfin / lettura copertina'
      $image=Invoke-WebRequest -UseBasicParsing -Uri ($Local+'/Items/'+$id+'/Images/Primary?MaxWidth=800&Quality=85&Format=Jpg') -Headers @{Authorization=('MediaBrowser Token="'+(Plain $script:Credentials.Jellyfin)+'"')} -TimeoutSec 90
      $bytes=$image.RawContentStream.ToArray()
      if($bytes.Length -gt 1048576){throw 'Copertina troppo grande'}
@@ -96,8 +106,10 @@ function RunSync {
   $r=Cloud 'complete' @{run=$run};$run=$null
   SaveResult ('Aggiornamento riuscito: '+(Get-Date -Format 'dd/MM/yyyy HH:mm')+'. Titoli: '+$r.total+'; nuovi: '+$r.added+'; associati: '+$r.linked+'; da verificare: '+$r.review+'; non piu disponibili: '+$r.removed+'.')
  }catch {
+  $failure=$_;$diagnostic=Diagnostic $failure
   if($run){try{$null=Cloud 'fail' @{run=$run}}catch{}}
-  SaveResult 'Aggiornamento non riuscito. Il catalogo precedente e conservato. Controlla che Jellyfin sia aperto, che Internet funzioni e che la chiave sia corretta; poi riprova con Verifica collegamento.'
+  SaveResult ('Aggiornamento non riuscito. Il catalogo precedente e conservato. '+$diagnostic+' Comunica questo messaggio, senza inviare chiavi.')
+  $script:Phase=($diagnostic -replace ';.*$','')
   throw
  }
 }
@@ -115,6 +127,10 @@ try {
   [pscustomobject]@{Jellyfin=$j;Gaia=$g}|Export-Clixml -Path $ConfigPath
  }
  $script:Credentials=Import-Clixml $ConfigPath
+ # A manual launch also updates the installed copy, keeping existing credentials.
+ $installed=Join-Path $HomeDir 'Gaia-Sync.ps1'
+ $source=Join-Path $PSScriptRoot 'Gaia-Sync.ps1'
+ if(!$Automatic -and (Test-Path $installed) -and $installed -ne $source){Copy-Item $source $installed -Force}
  if($Install){
   Copy-Item (Join-Path $PSScriptRoot 'Gaia-Sync.ps1') (Join-Path $HomeDir 'Gaia-Sync.ps1') -Force
   $a=New-ScheduledTaskAction -Execute 'powershell.exe' -Argument ('-NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File "'+(Join-Path $HomeDir 'Gaia-Sync.ps1')+'" -Automatic')
@@ -140,6 +156,6 @@ try {
   RunSync
  }finally{if($locked){$mutex.ReleaseMutex()};$mutex.Dispose()}
 }catch {
- if(!$Automatic){Write-Host 'Operazione non riuscita. Controlla Jellyfin, Internet e la chiave inserita. Per reinserirla, apri Ripristina configurazione.cmd.' -ForegroundColor Red}
+ if(!$Automatic){Write-Host ('Operazione non riuscita. '+(Diagnostic $_)+' Se la configurazione aveva gia funzionato, non occorre reinserire la chiave.') -ForegroundColor Red}
  exit 1
 }

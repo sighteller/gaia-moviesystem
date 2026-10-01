@@ -9,6 +9,7 @@ create table public.jellyfin_sync_state (
 insert into public.jellyfin_sync_state(id) values(true);
 create table public.jellyfin_sync_stage (
  run_id uuid not null, item_id text not null, data jsonb not null,
+ created_at timestamptz not null default now(),
  primary key(run_id,item_id)
 );
 create table public.jellyfin_items (
@@ -40,11 +41,25 @@ begin
  if total<1 or total>10000 then raise exception 'Empty or excessive catalog: no changes'; end if;
  if s.server_id is not null and s.server_id<>server then raise exception 'Different Jellyfin server'; end if;
  if s.run_id is not null and s.run_heartbeat_at>now()-interval '30 minutes' then raise exception 'Sync already running'; end if;
- delete from public.jellyfin_sync_stage;
+ -- Remove only the replaced run or genuinely stale temporary data.
+ delete from public.jellyfin_sync_stage where run_id=s.run_id or created_at<now()-interval '1 day';
  update public.jellyfin_sync_state set server_id=server,run_id=r,run_started_at=now(),run_heartbeat_at=now(),last_seen_at=now(),
   expected_count=total,request_cutoff=now(),last_error=null where id;
  return r;
 end $$;
+
+-- Diagnostic through the same HTTP/RPC path as Windows. Always rolls back its run.
+create function public.jellyfin_probe_sync(server text,total integer) returns jsonb
+language plpgsql security invoker set search_path='' as $$
+begin
+ begin
+  perform public.jellyfin_begin_sync(server,total);
+  raise exception using errcode='P0999',message='probe rollback';
+ exception when sqlstate 'P0999' then return jsonb_build_object('ok',true);
+ end;
+end $$;
+revoke all on function public.jellyfin_probe_sync(text,integer) from public,anon,authenticated;
+grant execute on function public.jellyfin_probe_sync(text,integer) to service_role;
 
 create function public.jellyfin_stage_sync(run uuid,items jsonb) returns void language plpgsql security invoker set search_path='' as $$
 begin

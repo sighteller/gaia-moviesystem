@@ -6,7 +6,13 @@ const cors={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'co
 const reply=(d:unknown,status=200)=>new Response(JSON.stringify(d),{status,headers:{...cors,'Content-Type':'application/json'}});
 async function rest(path:string,init:RequestInit={}) {
  const r=await fetch(base+'/rest/v1/'+path,{...init,headers:{apikey:key,Authorization:'Bearer '+key,'Content-Type':'application/json',...init.headers}});
- if(!r.ok) throw new Error('Database operation failed');
+ if(!r.ok) {
+  const failure=await r.json().catch(()=>({}));
+  console.error('Jellyfin database',r.status,String(failure.code||'unknown'),String(failure.message||'').slice(0,250));
+  const error=new Error('Database operation failed');
+  Object.assign(error,{diagnostic:'DB_'+String(failure.code||r.status)});
+  throw error;
+ }
  const t=await r.text();return t?JSON.parse(t):null;
 }
 const rpc=(name:string,args={})=>rest('rpc/'+name,{method:'POST',body:JSON.stringify(args)});
@@ -30,8 +36,10 @@ Deno.serve(async(req)=>{
    return reply({due:due(s),last_success_at:s.last_success_at});
   }
   if(action==='verify')return reply({ok:true});
-  if(action==='begin'){
+  if(action==='begin'||action==='diagnose'){
    if(!/^[a-zA-Z0-9-]{16,64}$/.test(payload.server)||!Number.isInteger(payload.total))return reply({error:'Invalid server'},400);
+   if(action==='diagnose')return reply(await rpc('jellyfin_probe_sync',{server:payload.server,total:payload.total}));
+   console.log('Jellyfin begin, items:',payload.total);
    const run=await rpc('jellyfin_begin_sync',{server:payload.server,total:payload.total});
    const covers=[];
    for(let offset=0;offset<10000;offset+=500){
@@ -64,5 +72,5 @@ Deno.serve(async(req)=>{
    return reply({ok:true});
   }
   return reply({error:'Unknown action'},400);
- }catch(e){console.error(e instanceof Error?e.message:'Sync error');return reply({error:'Operazione non riuscita. Verifica il collegamento o riprova.'},400);}
+ }catch(e){console.error(e instanceof Error?e.message:'Sync error');return reply({error:'Operazione non riuscita. Verifica il collegamento o riprova.',diagnostic:(e as any)?.diagnostic||'SYNC_ERROR'},400);}
 });
