@@ -1,4 +1,4 @@
-import { recommend } from './discovery.js';
+import { recommend } from './discovery.js?v=20261001';
 const SUPABASE='https://mahjewznwqvdgtdjtekc.supabase.co';
 const CURATOR=SUPABASE+'/functions/v1/image-curator';
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));

@@ -1,4 +1,4 @@
-import { initFeatures } from './features.js';
+import { initFeatures } from './features.js?v=20261001';
 const API_URL = 'https://mahjewznwqvdgtdjtekc.supabase.co/functions/v1/gaia-api';
 
 const app = document.querySelector('#app');
