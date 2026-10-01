@@ -162,3 +162,14 @@ Applicare supabase/schema-choice-metrics.sql dopo gli schemi precedenti. La migr
 Queste metriche sono pronte per un futuro modello di consiglio; per ora non influenzano il ranking né penalizzano le visioni ripetute. Il conteggio mostrato misura la consultazione dei titoli, non la visione dei film. I timer di visione mantengono il comportamento precedente: partono al salvataggio della scelta e restano una stima, senza rilevare l'avvio effettivo sulla piattaforma.
 
 Verifica: nove test automatici; percorso UI completo in una copia locale con risposte simulate (nessuna scelta fittizia inserita nel catalogo); prova SQL con ruolo anon A→B→A, fotografia 2 titoli/3 visualizzazioni, conclusa con ROLLBACK; advisor sicurezza senza segnalazioni.
+
+## Flusso corretto e barra superiore — 1 ottobre 2026
+
+Logo e Torna a Gaia ora aprono l'intro con saluto e carosello; Cominciamo apre le categorie.
+La barra è uniforme su tutte le pagine: Filtri, Scopri con l'icona SVG fornita, + (Aggiungi titolo), Statistiche, audio. Il simbolo + conserva un nome accessibile. Il vettoriale di Scopri è in assets/scopri.svg e i suoi tracciati vengono usati con currentColor per seguire l'hover.
+
+Guarda cambia solamente i comandi della schermata corrente: Sei sicura?, freccia sinistra e Conferma. Il DOM della locandina e del titolo resta identico, senza alterarne posizione o dimensioni. Non vengono mostrate piattaforme in questa fase. Dopo la modalità di scelta si mostra la frase, il contatore e Dove lo guardiamo? con le piattaforme disponibili. La scelta della piattaforma salva la selezione; il collegamento Apri su appare successivamente e richiede un clic separato. Dopo il salvataggio i pulsanti delle piattaforme mostrano la scelta confermata e non inviano ulteriori salvataggi.
+
+Categorie preselezionate e selezione da tastiera hanno il medesimo verde pieno dell'hover. Fatto nei filtri usa la base scura dei pulsanti. Rimossa la scritta di caricamento delle candidate; le alternative sono fuori dal flusso della locandina su desktop, con spazio riservato su mobile, per evitare spostamenti quando arrivano le risposte. Nessun poster successivo è visibile; la transizione parallax rimane.
+
+Verifica aggiuntiva nella copia locale: coordinate e dimensioni della copertina e del titolo identiche prima/dopo Sei sicura; zero piattaforme nella conferma; piattaforme nella schermata finale; salvataggio simulato e link separato; logo e Torna a Gaia raggiungono l'intro; tastiera verde pieno; Fatto scuro; ordine dei cinque comandi. Nessuna selezione fittizia salvata nel database durante queste verifiche.
