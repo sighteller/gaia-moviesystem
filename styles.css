@@ -55,6 +55,33 @@ body { min-height: 100vh; }
 .empty { text-align: center; max-width: 700px; margin: auto; }
 .empty h2 { font-size: 42px; margin-bottom: 10px; }
 .empty p { color: var(--muted); }
+.curator { width:min(1160px,100%); margin:0 auto; }
+.curator h1 { font-size:clamp(32px,5vw,60px); letter-spacing:-.04em; }
+.curator p { color:var(--muted); line-height:1.6; }
+.curator form { display:grid; gap:16px; max-width:700px; margin:24px 0; }
+.curator label { display:grid; gap:8px; }
+.curator input:not([type=checkbox]), .curator select { width:100%; padding:14px; background:var(--panel); color:var(--text); border:1px solid #454e3b; border-radius:12px; font:inherit; }
+.curator fieldset { border:1px solid #454e3b; border-radius:12px; padding:18px; }
+.curator .checkbox { display:flex; align-items:center; gap:12px; margin:14px 0; }
+.results-grid { display:grid; gap:16px; margin:24px 0; }
+.result-card { display:flex; gap:22px; text-align:left; background:var(--panel); color:var(--text); border:1px solid #454e3b; border-radius:16px; padding:20px; cursor:pointer; }
+.result-card img { width:85px; aspect-ratio:129.5/183; object-fit:contain; flex-shrink:0; }
+.result-card span { display:grid; gap:8px; }
+.result-card small { color:var(--accent); }
+.cover-grid,.discovery-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:20px; margin:30px 0; }
+.cover-card,.discovery-card { padding:12px; border:2px solid #454e3b; border-radius:16px; background:var(--panel); color:var(--text); min-width:0; }
+.cover-card { cursor:pointer; }
+.cover-card img,.discovery-card img { width:100%; aspect-ratio:129.5/183; object-fit:contain; background:#0c0d0b; border-radius:8px; }
+.cover-card span { display:block; margin-top:12px; line-height:1.6; font-size:13px; }
+.cover-card.selected { border-color:var(--accent); box-shadow:0 0 0 3px var(--ring); }
+.discovery-card h3 { overflow-wrap:anywhere; }
+.discovery-card p { font-size:14px; }
+.discovery-card button { width:100%; }
+.tmdb-logo { width:130px; height:auto; margin-top:15px; }
+.error { color:var(--danger)!important; }
+button:disabled { opacity:.5; cursor:not-allowed; }
+.small-actions { flex-wrap:wrap; }
+@media(max-width:650px) { .topbar { flex-wrap:wrap; } .shell { padding:20px; } .result-card { padding:14px; gap:14px; } }
 @media (max-width: 900px) {
   .category-grid, .mode-grid, .movie-stage, .confirm-layout { grid-template-columns: 1fr; }
   .poster-wrap { height: min(48vh, 620px); width: auto; max-width: 100%; margin: 0 auto; }

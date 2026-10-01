@@ -1,0 +1,5 @@
+[functions.gaia-api]
+verify_jwt = false
+
+[functions.image-curator]
+verify_jwt = true

@@ -1,3 +1,4 @@
+import { initFeatures } from './features.js';
 const API_URL = 'https://mahjewznwqvdgtdjtekc.supabase.co/functions/v1/gaia-api';
 
 const app = document.querySelector('#app');
@@ -26,6 +27,7 @@ async function call(action, payload = {}) {
   return data;
 }
 
+function escapeHtml(x) { return String(x ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function logo() { return `<div class="brand">Gaia <span>| Movie System</span></div>`; }
 function muteButton() { return `<button class="icon-btn ${state.muted?'active':''}" data-action="mute">${state.muted?'MUTE attivo':'MUTE'}</button>`; }
 function topbar(extra='') { return `<div class="topbar">${logo()}<div class="small-actions">${extra}${muteButton()}</div></div>`; }
@@ -33,7 +35,9 @@ function topbar(extra='') { return `<div class="topbar">${logo()}<div class="sma
 async function loadData() {
   const data = await call('catalog');
   state.titles = data.titles || [];
-  state.platforms = data.platforms || [];
+  state.platforms = (data.platforms || []).filter(p => ['jellyfin','netflix','disney-plus','prime-video','rai-play'].includes(p.slug));
+  const allowedIds = new Set(state.platforms.map(p=>p.id));
+  if (Array.isArray(state.selectedPlatformIds)) state.selectedPlatformIds=state.selectedPlatformIds.filter(id=>allowedIds.has(id));
   state.links = data.links || [];
   if (!Array.isArray(state.selectedPlatformIds) || !state.selectedPlatformIds.length) {
     state.selectedPlatformIds = state.platforms.map(p => p.id);
@@ -63,14 +67,14 @@ async function resumeSessionIfAny() {
 
 function renderCategories(){
   state.category = null; state.session = null;
-  app.innerHTML = `<div class="shell">${topbar('<button class="ghost-btn" data-action="stats">Statistiche</button><button class="ghost-btn" data-action="filters">Piattaforme</button>')}<div class="hero-center"><div class="category-grid">
+  app.innerHTML = `<div class="shell">${topbar('<button class="ghost-btn" data-action="discover">Scopri</button><button class="ghost-btn" data-action="admin">Aggiungi titolo</button><button class="ghost-btn" data-action="stats">Statistiche</button><button class="ghost-btn" data-action="filters">Piattaforme</button>')}<div class="hero-center"><div class="category-grid">
     <button class="category-card" data-category="animation"><h2>Animazione</h2><p>Film e serie animate</p></button>
     <button class="category-card" data-category="film"><h2>Film</h2><p>Film e serie con persone reali</p></button>
   </div></div></div>`;
 }
 
 function renderFilters(){
-  const chips = state.platforms.map(p => `<button class="chip ${state.selectedPlatformIds.includes(p.id)?'selected':''}" data-platform-filter="${p.id}">${p.name}</button>`).join('');
+  const chips = state.platforms.map(p => `<button class="chip ${state.selectedPlatformIds.includes(p.id)?'selected':''}" data-platform-filter="${p.id}">${escapeHtml(p.name)}</button>`).join('');
   app.insertAdjacentHTML('beforeend', `<div class="platform-panel" data-overlay="filters"><div class="platform-box"><h2>Piattaforme disponibili</h2><p>Mostra solo i titoli disponibili su almeno una delle piattaforme selezionate.</p><div class="chips">${chips}</div><button class="primary" data-action="close-filters">Fatto</button></div></div>`);
 }
 
@@ -92,13 +96,13 @@ async function startSession(category){
 
 function currentTitle(){ return state.filteredTitles[state.index]; }
 function titleImage(t){ return t.dvd_cover_url || t.custom_image_url || t.poster_url || ''; }
-function renderPoster(t){ const url = titleImage(t); return url ? `<img src="${url}" alt="${t.name}">` : `<div class="poster-placeholder">${t.name}</div>`; }
+function renderPoster(t){ const url = titleImage(t); return url ? `<img src="${escapeHtml(url)}" alt="${escapeHtml(t.name)}">` : `<div class="poster-placeholder">${escapeHtml(t.name)}</div>`; }
 
 function renderMovie(){
   const t = currentTitle(); if (!t) return renderEmpty();
   app.innerHTML = `<div class="shell">${topbar('<button class="ghost-btn" data-action="categories">Categorie</button>')}<div class="movie-stage">
     <div class="poster-wrap">${renderPoster(t)}</div>
-    <div class="movie-info"><h1>${t.name}</h1><div class="movie-meta">${t.media_type==='series'?'Serie TV':'Film'}${t.release_year?' · '+t.release_year:''}</div><div class="hint">← precedente · → no / successivo · Invio conferma · M mute</div></div>
+    <div class="movie-info"><h1>${escapeHtml(t.name)}</h1><div class="movie-meta">${t.media_type==='series'?'Serie TV':'Film'}${t.release_year?' · '+t.release_year:''}</div><div class="hint">← precedente · → no / successivo · Invio conferma · M mute</div></div>
   </div></div>`;
   playAudio(t);
 }
@@ -140,7 +144,7 @@ function availablePlatformsForTitle(t){
 
 function renderConfirm(){
   const t = currentTitle(); const ps = availablePlatformsForTitle(t); state.confirmPlatform = null;
-  app.innerHTML = `<div class="shell">${topbar()}<div class="confirm-layout"><div class="poster-wrap">${renderPoster(t)}</div><div class="confirm-copy"><h1>${t.name}</h1><h2>Sei sicura?</h2><div class="platform-list">${ps.map(p => `<button class="platform-option" data-platform="${p.id}">${p.name}</button>`).join('')}</div><button class="primary" data-action="confirm-platform" disabled>Conferma</button><div class="hint">Esc / Indietro = no e film successivo</div></div></div></div>`;
+  app.innerHTML = `<div class="shell">${topbar()}<div class="confirm-layout"><div class="poster-wrap">${renderPoster(t)}</div><div class="confirm-copy"><h1>${escapeHtml(t.name)}</h1><h2>Sei sicura?</h2><div class="platform-list">${ps.map(p => `<button class="platform-option" data-platform="${p.id}">${escapeHtml(p.name)}</button>`).join('')}</div><button class="primary" data-action="confirm-platform" disabled>Conferma</button><div class="hint">Esc / Indietro = no e film successivo</div></div></div></div>`;
 }
 
 function renderMode(){
@@ -167,13 +171,13 @@ async function finalize(mode){
   state.session = null;
   if (link?.url) location.href = link.url;
   else {
-    app.innerHTML = `<div class="shell">${topbar()}<div class="hero-center"><div class="empty"><h2>Scelta salvata</h2><p>${t.name} · ${p.name}</p><p>Il collegamento diretto a questa piattaforma non è ancora configurato.</p><button class="primary" data-action="categories">Torna a Gaia</button></div></div></div>`;
+    app.innerHTML = `<div class="shell">${topbar()}<div class="hero-center"><div class="empty"><h2>Scelta salvata</h2><p>${escapeHtml(t.name)} · ${escapeHtml(p.name)}</p><p>Il collegamento diretto a questa piattaforma non è ancora configurato.</p><button class="primary" data-action="categories">Torna a Gaia</button></div></div></div>`;
   }
 }
 
 async function renderStats(){
   const { rows } = await call('stats');
-  app.innerHTML = `<div class="shell">${topbar('<button class="ghost-btn" data-action="categories">Categorie</button>')}<div style="width:min(1100px,100%);margin:0 auto"><h1 style="font-size:clamp(44px,6vw,76px);letter-spacing:-.05em;margin:10px 0 26px">Statistiche</h1><div style="display:grid;gap:12px">${rows.map(r => `<div style="display:grid;grid-template-columns:minmax(220px,2fr) repeat(5,minmax(80px,1fr));gap:12px;align-items:center;padding:18px 20px;border:1px solid #30362b;border-radius:16px;background:#1a1d17"><strong>${r.title.name}</strong><span>Scelto ${r.chosen}</span><span>No ${r.no}</span><span>Limitata ${r.limited}</span><span>Illimitata ${r.unlimited}</span><span>Cambiato ${r.changed}</span></div>`).join('')}</div></div></div>`;
+  app.innerHTML = `<div class="shell">${topbar('<button class="ghost-btn" data-action="categories">Categorie</button>')}<div style="width:min(1100px,100%);margin:0 auto"><h1 style="font-size:clamp(44px,6vw,76px);letter-spacing:-.05em;margin:10px 0 26px">Statistiche</h1><div style="display:grid;gap:12px">${rows.map(r => `<div style="display:grid;grid-template-columns:minmax(220px,2fr) repeat(5,minmax(80px,1fr));gap:12px;align-items:center;padding:18px 20px;border:1px solid #30362b;border-radius:16px;background:#1a1d17"><strong>${escapeHtml(r.title.name)}</strong><span>Scelto ${r.chosen}</span><span>No ${r.no}</span><span>Limitata ${r.limited}</span><span>Illimitata ${r.unlimited}</span><span>Cambiato ${r.changed}</span></div>`).join('')}</div></div></div>`;
 }
 
 function renderEmpty(){
@@ -212,6 +216,7 @@ app.addEventListener('click', async e => {
 });
 
 document.addEventListener('keydown', async e => {
+  if (e.target.closest('input,textarea,select,form')) return;
   if (e.key.toLowerCase() === 'm') { e.preventDefault(); return toggleMute(); }
   if (!state.session) return;
   if (document.querySelector('.confirm-copy')) {
@@ -232,6 +237,9 @@ document.addEventListener('keydown', async e => {
     if (e.key === 'Enter') { e.preventDefault(); return renderConfirm(); }
   }
 });
+
+initFeatures({ app, state, loadData, renderCategories, startSession, call, deviceId });
+document.addEventListener('gaia-render-movie', renderMovie);
 
 (async function init(){
   try {
