@@ -1,4 +1,5 @@
-import { initFeatures } from './features.js?v=20261001';
+import { mountCoverPicker } from './cover-picker.js?v=20261001b';
+import { initFeatures } from './features.js?v=20261001b';
 const API_URL = 'https://mahjewznwqvdgtdjtekc.supabase.co/functions/v1/gaia-api';
 
 const app = document.querySelector('#app');
@@ -28,9 +29,10 @@ async function call(action, payload = {}) {
 }
 
 function escapeHtml(x) { return String(x ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-function logo() { return `<div class="brand">Gaia <span>| Movie System</span></div>`; }
-function muteButton() { return `<button class="icon-btn ${state.muted?'active':''}" data-action="mute">${state.muted?'MUTE attivo':'MUTE'}</button>`; }
-function topbar(extra='') { return `<div class="topbar">${logo()}<div class="small-actions">${extra}${muteButton()}</div></div>`; }
+function svgIcon(paths) { return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`; }
+function logo() { return `<button class="brand" data-action="categories" aria-label="Home">Gaia <span>| Movie System</span></button>`; }
+function muteButton() { return `<button class="icon-btn ${state.muted?'active':''}" data-action="mute" aria-label="${state.muted?'Attiva audio':'Disattiva audio'}" aria-pressed="${state.muted}">${svgIcon('<path d="M11 5 6 9H3v6h3l5 4z"/>'+(state.muted?'<path d="m16 9 5 6m0-6-5 6"/>':'<path d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/>'))}</button>`; }
+function topbar(extra='') { return `<div class="topbar">${logo()}<div class="small-actions">${extra}<button class="icon-btn" data-action="stats" aria-label="Statistiche">${svgIcon('<path d="M4 20V10m8 10V4m8 16v-7M2 20h20"/>')}</button><button class="ghost-btn" data-action="filters">Filtri</button>${muteButton()}</div></div>`; }
 
 async function loadData() {
   const data = await call('catalog');
@@ -67,15 +69,25 @@ async function resumeSessionIfAny() {
 
 function renderCategories(){
   state.category = null; state.session = null;
-  app.innerHTML = `<div class="shell">${topbar('<button class="ghost-btn" data-action="discover">Scopri</button><button class="ghost-btn" data-action="admin">Aggiungi titolo</button><button class="ghost-btn" data-action="stats">Statistiche</button><button class="ghost-btn" data-action="filters">Piattaforme</button>')}<div class="hero-center"><div class="category-grid">
+  if (state.currentAudio) { state.currentAudio.pause(); state.currentAudio = null; }
+  app.innerHTML = `<div class="shell">${topbar('<button class="ghost-btn" data-action="discover">Scopri</button><button class="ghost-btn" data-action="add-title">Aggiungi titolo</button>')}<div class="hero-center"><div class="category-grid">
     <button class="category-card" data-category="animation"><h2>Animazione</h2><p>Film e serie animate</p></button>
     <button class="category-card" data-category="film"><h2>Film</h2><p>Film e serie con persone reali</p></button>
   </div></div></div>`;
+  chooseCategory(document.querySelector('[data-category="animation"]'),true);
 }
+
+function chooseCategory(button,focus=false){
+  if(!button)return;
+  document.querySelectorAll('.category-card').forEach(b=>b.classList.toggle('preselected',b===button));
+  if(focus)button.focus({preventScroll:true});
+}
+app.addEventListener('pointerover',e=>{const b=e.target.closest('.category-card');if(b)chooseCategory(b,true);});
+app.addEventListener('focusin',e=>{const b=e.target.closest('.category-card');if(b)chooseCategory(b);});
 
 function renderFilters(){
   const chips = state.platforms.map(p => `<button class="chip ${state.selectedPlatformIds.includes(p.id)?'selected':''}" data-platform-filter="${p.id}">${escapeHtml(p.name)}</button>`).join('');
-  app.insertAdjacentHTML('beforeend', `<div class="platform-panel" data-overlay="filters"><div class="platform-box"><h2>Piattaforme disponibili</h2><p>Mostra solo i titoli disponibili su almeno una delle piattaforme selezionate.</p><div class="chips">${chips}</div><button class="primary" data-action="close-filters">Fatto</button></div></div>`);
+  app.insertAdjacentHTML('beforeend', `<div class="platform-panel" data-overlay="filters"><div class="platform-box"><h2>Filtri</h2><p>Mostra solo i titoli disponibili su almeno una delle piattaforme selezionate.</p><div class="chips">${chips}</div><button class="primary" data-action="close-filters">Fatto</button></div></div>`);
 }
 
 function buildFilteredTitles(){
@@ -100,10 +112,12 @@ function renderPoster(t){ const url = titleImage(t); return url ? `<img src="${e
 
 function renderMovie(){
   const t = currentTitle(); if (!t) return renderEmpty();
-  app.innerHTML = `<div class="shell">${topbar('<button class="ghost-btn" data-action="categories">Categorie</button>')}<div class="movie-stage">
-    <div class="poster-wrap">${renderPoster(t)}</div>
-    <div class="movie-info"><h1>${escapeHtml(t.name)}</h1><div class="movie-meta">${t.media_type==='series'?'Serie TV':'Film'}${t.release_year?' · '+t.release_year:''}</div><div class="hint">← precedente · → no / successivo · Invio conferma · M mute</div></div>
+  app.innerHTML = `<div class="shell">${topbar()}<div class="movie-stage" tabindex="-1">
+    <div class="poster-column"><div class="poster-wrap">${renderPoster(t)}</div><div class="cover-options"></div></div>
+    <div class="movie-info"><h1>${escapeHtml(t.name)}</h1><div class="movie-meta">${t.media_type==='series'?'Serie TV':'Film'}${t.release_year?' · '+t.release_year:''}</div><div class="movie-navigation"><div class="navigation-arrows"><button class="ghost-btn arrow-btn" data-action="previous" aria-label="Titolo precedente" ${state.history.length?'':'disabled'}>←</button><button class="ghost-btn arrow-btn" data-action="next" aria-label="No, titolo successivo">→</button></div><button class="watch-btn" data-action="watch">Guarda <span aria-hidden="true">↵</span></button></div></div>
   </div></div>`;
+  mountCoverPicker(app.querySelector('.cover-options'),t);
+  app.querySelector('.movie-stage').focus({preventScroll:true});
   playAudio(t);
 }
 
@@ -177,7 +191,7 @@ async function finalize(mode){
 
 async function renderStats(){
   const { rows } = await call('stats');
-  app.innerHTML = `<div class="shell">${topbar('<button class="ghost-btn" data-action="categories">Categorie</button>')}<div style="width:min(1100px,100%);margin:0 auto"><h1 style="font-size:clamp(44px,6vw,76px);letter-spacing:-.05em;margin:10px 0 26px">Statistiche</h1><div style="display:grid;gap:12px">${rows.map(r => `<div style="display:grid;grid-template-columns:minmax(220px,2fr) repeat(5,minmax(80px,1fr));gap:12px;align-items:center;padding:18px 20px;border:1px solid #30362b;border-radius:16px;background:#1a1d17"><strong>${escapeHtml(r.title.name)}</strong><span>Scelto ${r.chosen}</span><span>No ${r.no}</span><span>Limitata ${r.limited}</span><span>Illimitata ${r.unlimited}</span><span>Cambiato ${r.changed}</span></div>`).join('')}</div></div></div>`;
+  app.innerHTML = `<div class="shell">${topbar()}<div style="width:min(1100px,100%);margin:0 auto"><h1 style="font-size:clamp(44px,6vw,76px);letter-spacing:-.05em;margin:10px 0 26px">Statistiche</h1><div style="display:grid;gap:12px">${rows.map(r => `<div style="display:grid;grid-template-columns:minmax(220px,2fr) repeat(5,minmax(80px,1fr));gap:12px;align-items:center;padding:18px 20px;border:1px solid #30362b;border-radius:16px;background:#1a1d17"><strong>${escapeHtml(r.title.name)}</strong><span>Scelto ${r.chosen}</span><span>No ${r.no}</span><span>Limitata ${r.limited}</span><span>Illimitata ${r.unlimited}</span><span>Cambiato ${r.changed}</span></div>`).join('')}</div></div></div>`;
 }
 
 function renderEmpty(){
@@ -188,11 +202,16 @@ function toggleMute(){
   state.muted = !state.muted;
   localStorage.setItem('gaia_muted', state.muted ? '1' : '0');
   if (state.muted && state.currentAudio) state.currentAudio.pause();
-  if (state.category && state.session) renderMovie(); else renderCategories();
+  app.querySelectorAll('[data-action="mute"]').forEach(b=>b.outerHTML=muteButton());
+  if (!state.muted && document.querySelector('.movie-stage')) playAudio(currentTitle());
 }
 
 app.addEventListener('click', async e => {
   const b = e.target.closest('button'); if (!b) return;
+  if (b.disabled) return;
+  if (b.dataset.action === 'previous') return previousMovie();
+  if (b.dataset.action === 'next') return nextMovie(true);
+  if (b.dataset.action === 'watch') return renderConfirm();
   if (b.dataset.action === 'mute') return toggleMute();
   if (b.dataset.action === 'filters') return renderFilters();
   if (b.dataset.action === 'stats') return renderStats();
@@ -217,6 +236,13 @@ app.addEventListener('click', async e => {
 
 document.addEventListener('keydown', async e => {
   if (e.target.closest('input,textarea,select,form')) return;
+  const categories=[...document.querySelectorAll('.category-card')];
+  if(categories.length&&!document.querySelector('[data-overlay]')){
+    const selected=categories.findIndex(b=>b.classList.contains('preselected'));
+    if(['ArrowRight','ArrowLeft'].includes(e.key)){e.preventDefault();chooseCategory(categories[(selected+(e.key==='ArrowRight'?1:-1)+categories.length)%categories.length],true);return;}
+    if(e.key==='Enter'&&(e.target.closest('.category-card')||!e.target.closest('button'))){e.preventDefault();categories[Math.max(selected,0)].click();return;}
+  }
+  if(e.target.closest('.cover-options')||e.target.closest('.curator'))return;
   if (e.key.toLowerCase() === 'm') { e.preventDefault(); return toggleMute(); }
   if (!state.session) return;
   if (document.querySelector('.confirm-copy')) {
@@ -232,13 +258,14 @@ document.addEventListener('keydown', async e => {
     return;
   }
   if (document.querySelector('.movie-stage')) {
+    if(e.key==='Enter'&&e.target.closest('button'))return;
     if (e.key === 'ArrowRight') { e.preventDefault(); return nextMovie(true); }
     if (e.key === 'ArrowLeft') { e.preventDefault(); return previousMovie(); }
     if (e.key === 'Enter') { e.preventDefault(); return renderConfirm(); }
   }
 });
 
-initFeatures({ app, state, loadData, renderCategories, startSession, call, deviceId });
+initFeatures({ app, state, loadData, renderCategories, startSession, call, deviceId, topbar });
 document.addEventListener('gaia-render-movie', renderMovie);
 
 (async function init(){
