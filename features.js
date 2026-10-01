@@ -1,5 +1,5 @@
-import { recommend } from './discovery.js?v=20261001e';
-import { curator,esc,safeImage } from './curator-client.js?v=20261001e';
+import { recommend } from './discovery.js?v=20261001f';
+import { curator,esc,safeImage } from './curator-client.js?v=20261001f';
 let config={},covers=[],selectedCover=null,searchPage=1,lastQuery='',totalPages=1,renderVersion=0;
 export function initFeatures({app,state,loadData,startSession,call,deviceId,topbar}) {
   const shell=body=>`<div class="shell">${topbar()}<section class="curator">${body}</section></div>`;
@@ -45,7 +45,7 @@ export function initFeatures({app,state,loadData,startSession,call,deviceId,topb
       if(b.dataset.feature==='back-search')return await searchScreen();
       if(b.dataset.feature==='next-page')return await search(lastQuery,searchPage+1);
       if(b.dataset.feature==='prev-page')return await search(lastQuery,searchPage-1);
-      if(b.dataset.discoverTitle){const t=state.titles.find(t=>t.id===b.dataset.discoverTitle);await startSession(t.category);state.index=state.filteredTitles.findIndex(x=>x.id===t.id);await call('touch',{sessionId:state.session.id,currentTitleId:t.id,history:[]});document.dispatchEvent(new CustomEvent('gaia-render-movie'));}
+      if(b.dataset.discoverTitle){const t=state.titles.find(t=>t.id===b.dataset.discoverTitle);await startSession(t.category,t.id);}
     }catch(err){message(err.message,true);}
   });
   app.addEventListener('submit',async e=>{

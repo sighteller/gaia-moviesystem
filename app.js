@@ -1,5 +1,6 @@
-import { mountCoverPicker } from './cover-picker.js?v=20261001e';
-import { initFeatures } from './features.js?v=20261001e';
+import { recordConsultation, choiceMessage, platformUrl } from './choice-summary.js?v=20261001f';
+import { mountCoverPicker } from './cover-picker.js?v=20261001f';
+import { initFeatures } from './features.js?v=20261001f';
 const API_URL = 'https://mahjewznwqvdgtdjtekc.supabase.co/functions/v1/gaia-api';
 
 const app = document.querySelector('#app');
@@ -8,7 +9,8 @@ const state = {
   category: null, filteredTitles: [], index: 0,
   selectedPlatformIds: JSON.parse(localStorage.getItem('gaia_platforms') || 'null'),
   muted: localStorage.getItem('gaia_muted') === '1',
-  session: null, history: [], confirmPlatform: null, currentAudio: null
+  session: null, history: [], confirmPlatform: null, currentAudio: null, navigating:false,
+  consultation:{titleIds:[],steps:0,lastTitleId:null}
 };
 
 function deviceId() {
@@ -77,8 +79,8 @@ function homeActions(){return '<button class="ghost-btn" data-action="discover">
 function renderIntro(){
   state.category=null;state.session=null;
   if(state.currentAudio){state.currentAudio.pause();state.currentAudio=null;}
-  app.innerHTML=`<div class="shell">${topbar(homeActions())}<section class="intro-screen"><h1 class="intro-greeting"><span>Ciao Gaia!</span><span class="intro-question"><span>che</span>${homeCarousel()}<span>film</span></span><span>vediamo oggi?</span></h1><button class="intro-start" data-action="categories">Cominciamo <kbd aria-label="barra spaziatrice">␣</kbd></button></section></div>`;
-  app.querySelector('.intro-start').focus({preventScroll:true});
+  app.innerHTML=`<div class="shell">${topbar(homeActions())}<section class="intro-screen"><h1 class="intro-greeting"><span>Ciao Gaia!</span><span class="intro-question"><span>che</span>${homeCarousel()}<span>film</span></span><span>vediamo oggi?</span></h1><button class="intro-start" data-action="categories">Cominciamo <span aria-hidden="true">⏎</span></button></section></div>`;
+
 }
 
 function renderCategories(){
@@ -109,30 +111,57 @@ function buildFilteredTitles(){
   state.filteredTitles = state.titles.filter(t => t.category === state.category && allowed.has(t.id));
 }
 
-async function startSession(category){
-  state.category = category; buildFilteredTitles(); state.index = 0;
+async function startSession(category,titleId=null){
+  state.category = category; buildFilteredTitles(); state.index = Math.max(0,state.filteredTitles.findIndex(t=>t.id===titleId));
   if (!state.filteredTitles.length) { renderEmpty(); return; }
   const { session } = await call('start', {
     deviceId: deviceId(), category,
     enabledPlatformIds: state.selectedPlatformIds,
-    currentTitleId: state.filteredTitles[0].id
+    currentTitleId: state.filteredTitles[state.index].id
   });
-  state.session = session; state.history = []; renderMovie();
+  state.session = session; state.history = []; state.consultation={titleIds:[],steps:0,lastTitleId:null}; renderMovie();
 }
 
 function currentTitle(){ return state.filteredTitles[state.index]; }
 function titleImage(t){ return t.dvd_cover_url || t.custom_image_url || t.poster_url || ''; }
 function renderPoster(t){ const url = titleImage(t); return url ? `<img src="${escapeHtml(url)}" alt="${escapeHtml(t.name)}">` : `<div class="poster-placeholder">${escapeHtml(t.name)}</div>`; }
 
+function movieCopy(t){return `<h1>${escapeHtml(t.name)}</h1><div class="movie-meta">${t.media_type==='series'?'Serie TV':'Film'}${t.release_year?' · '+t.release_year:''}</div>`;}
+function moviePeek(){
+  const next=state.filteredTitles[(state.index+1)%state.filteredTitles.length];
+  return state.filteredTitles.length>1?`<div class="movie-peek" aria-hidden="true">${renderPoster(next)}</div>`:'';
+}
 function renderMovie(){
   const t = currentTitle(); if (!t) return renderEmpty();
-  app.innerHTML = `<div class="shell">${topbar()}<div class="movie-stage" tabindex="-1">
+  state.consultation=recordConsultation(state.consultation,t.id);
+  app.innerHTML = `<div class="shell movie-shell">${topbar()}<div class="movie-stage" tabindex="-1">
     <div class="poster-column"><div class="poster-wrap">${renderPoster(t)}</div><div class="cover-options"></div></div>
-    <div class="movie-info"><h1>${escapeHtml(t.name)}</h1><div class="movie-meta">${t.media_type==='series'?'Serie TV':'Film'}${t.release_year?' · '+t.release_year:''}</div><div class="movie-navigation"><div class="navigation-arrows"><button class="ghost-btn arrow-btn" data-action="previous" aria-label="Titolo precedente" ${state.history.length?'':'disabled'}>←</button><button class="ghost-btn arrow-btn" data-action="next" aria-label="No, titolo successivo">→</button></div><button class="watch-btn" data-action="watch">Guarda <span aria-hidden="true">↵</span></button></div></div>
-  </div></div>`;
+    <div class="movie-info"><div class="movie-copy">${movieCopy(t)}</div><div class="movie-navigation"><div class="navigation-arrows"><button class="ghost-btn arrow-btn" data-action="previous" aria-label="Titolo precedente" ${state.history.length?'':'disabled'}>←</button><button class="ghost-btn arrow-btn" data-action="next" aria-label="No, titolo successivo">→</button></div><button class="watch-btn" data-action="watch">Guarda <span aria-hidden="true">⏎</span></button><p class="navigation-status" role="status"></p></div></div>
+  </div><div class="movie-peek-slot">${moviePeek()}</div></div>`;
   mountCoverPicker(app.querySelector('.cover-options'),t);
   app.querySelector('.movie-stage').focus({preventScroll:true});
   playAudio(t);
+}
+async function movieMotion(stage,direction,entering){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const parts=[stage.querySelector('.poster-column'),stage.querySelector('.movie-copy')];
+  await Promise.all(parts.map((element,i)=>element.animate(
+    entering?[{transform:`translateX(${direction*(i?120:240)}px)`,opacity:0},{transform:'translateX(0)',opacity:1}]:[{transform:'translateX(0)',opacity:1},{transform:`translateX(${-direction*(i?90:180)}px)`,opacity:0}],
+    {duration:entering?(i?480:420):220,easing:'cubic-bezier(.22,.7,.2,1)',fill:'forwards'}).finished.catch(()=>{})));
+}
+async function refreshMovie(stage,direction){
+  await movieMotion(stage,direction,false);
+  if(!stage.isConnected)return;
+  const t=currentTitle();
+  const posterColumn=stage.querySelector('.poster-column');
+  posterColumn.innerHTML=`<div class="poster-wrap">${renderPoster(t)}</div><div class="cover-options"></div>`;
+  stage.querySelector('.movie-copy').innerHTML=movieCopy(t);
+  app.querySelector('.movie-peek-slot').innerHTML=moviePeek();
+  stage.querySelector('[data-action="previous"]').disabled=!state.history.length;
+  state.consultation=recordConsultation(state.consultation,t.id);
+  mountCoverPicker(stage.querySelector('.cover-options'),t);playAudio(t);
+  await movieMotion(stage,direction,true);
+  for(const part of [posterColumn,stage.querySelector('.movie-copy')])part.getAnimations().forEach(a=>a.cancel());
 }
 
 function playAudio(t){
@@ -141,29 +170,37 @@ function playAudio(t){
   const a = new Audio(t.audio_url); state.currentAudio = a; a.play().catch(()=>{});
 }
 
-async function touchSession(titleId=currentTitle()?.id){
-  if (!state.session) return;
-  await call('touch', { sessionId: state.session.id, currentTitleId: titleId, history: state.history });
+async function touchSession(titleId=currentTitle()?.id,history=state.history){
+  if(!state.session)return;
+  await call('touch',{sessionId:state.session.id,currentTitleId:titleId,history});
 }
-
-async function nextMovie(recordNo=true){
-  const t = currentTitle();
-  if (recordNo) await call('reject', { sessionId: state.session.id, titleId: t.id });
-  state.history.push(t.id);
-  state.index = (state.index + 1) % state.filteredTitles.length;
-  await touchSession(currentTitle().id); renderMovie();
+async function changeMovie(direction,recordNo=true){
+  if(state.navigating||!state.session||(direction<0&&!state.history.length))return;
+  const stage=app.querySelector('.movie-stage');
+  const sessionId=state.session.id;
+  const button=stage?.querySelector(`[data-action="${direction>0?'next':'previous'}"]`);
+  button?.classList.add('navigation-flash');setTimeout(()=>button?.classList.remove('navigation-flash'),600);
+  state.navigating=true;
+  try{
+    const history=[...state.history];let index;
+    if(direction>0){
+      if(recordNo)await call('reject',{sessionId,titleId:currentTitle().id});
+      history.push(currentTitle().id);index=(state.index+1)%state.filteredTitles.length;
+    }else{
+      const id=history.pop();index=state.filteredTitles.findIndex(t=>t.id===id);
+      if(index<0)return;
+      await call('unreject',{sessionId,titleId:id});
+    }
+    if(state.session?.id!==sessionId||!stage?.isConnected)return;
+    await touchSession(state.filteredTitles[index].id,history);
+    if(state.session?.id!==sessionId||!stage.isConnected)return;
+    state.history=history;state.index=index;
+    await refreshMovie(stage,direction);
+  }catch(err){if(stage?.isConnected)stage.querySelector('.navigation-status').textContent='Non riesco a cambiare titolo. Riprova.';console.error(err);}
+  finally{state.navigating=false;}
 }
-
-async function previousMovie(){
-  if (!state.history.length) return;
-  const previousId = state.history.pop();
-  const idx = state.filteredTitles.findIndex(t => t.id === previousId);
-  if (idx < 0) return;
-  state.index = idx;
-  const t = currentTitle();
-  await call('unreject', { sessionId: state.session.id, titleId: t.id });
-  await touchSession(t.id); renderMovie();
-}
+function nextMovie(recordNo=true){return changeMovie(1,recordNo);}
+function previousMovie(){return changeMovie(-1);}
 
 function availablePlatformsForTitle(t){
   const ids = state.links.filter(l => l.title_id === t.id && state.selectedPlatformIds.includes(l.platform_id)).map(l => l.platform_id);
@@ -171,8 +208,9 @@ function availablePlatformsForTitle(t){
 }
 
 function renderConfirm(){
+  if(state.navigating)return;
   const t = currentTitle(); const ps = availablePlatformsForTitle(t); state.confirmPlatform = null;
-  app.innerHTML = `<div class="shell">${topbar()}<div class="confirm-layout"><div class="poster-wrap">${renderPoster(t)}</div><div class="confirm-copy"><h1>${escapeHtml(t.name)}</h1><h2>Sei sicura?</h2><div class="platform-list">${ps.map(p => `<button class="platform-option" data-platform="${p.id}">${escapeHtml(p.name)}</button>`).join('')}</div><button class="primary" data-action="confirm-platform" disabled>Conferma</button><div class="hint">Esc / Indietro = no e film successivo</div></div></div></div>`;
+  app.innerHTML = `<div class="shell">${topbar()}<div class="confirm-layout"><div class="poster-wrap">${renderPoster(t)}</div><div class="confirm-copy"><h1>${escapeHtml(t.name)}</h1><h2>Sei sicura?</h2><div class="platform-list">${ps.map(p => `<button class="platform-option" data-platform="${p.id}">${escapeHtml(p.name)}</button>`).join('')}</div><div class="confirm-navigation navigation-arrows"><button class="ghost-btn arrow-btn" data-action="back-to-movie" aria-label="Torna al film">←</button><button class="ghost-btn confirm-btn" data-action="confirm-platform" disabled>Conferma</button></div></div></div></div>`;
 }
 
 function renderMode(){
@@ -183,24 +221,26 @@ function renderMode(){
 }
 
 async function finalize(mode){
+  const sessionId=state.session.id;
+  const count=state.consultation.titleIds.length;
   const t = currentTitle();
   const p = state.platforms.find(x => x.id === state.confirmPlatform);
   const link = state.links.find(l => l.title_id === t.id && l.platform_id === p.id);
   const now = new Date();
   const expected = (t.media_type === 'movie' && t.runtime_minutes) ? new Date(now.getTime() + t.runtime_minutes * 60000) : null;
   await call('finalize', {
-    sessionId: state.session.id,
+    sessionId,
     deviceId: deviceId(),
     titleId: t.id,
     platformId: p.id,
     mode,
     expectedEndAt: expected?.toISOString() || null
   });
+  if(state.session?.id!==sessionId)return;
   state.session = null;
-  if (link?.url) location.href = link.url;
-  else {
-    app.innerHTML = `<div class="shell">${topbar()}<div class="hero-center"><div class="empty"><h2>Scelta salvata</h2><p>${escapeHtml(t.name)} · ${escapeHtml(p.name)}</p><p>Il collegamento diretto a questa piattaforma non è ancora configurato.</p><button class="primary" data-action="categories">Torna a Gaia</button></div></div></div>`;
-  }
+  const url=platformUrl(link?.url);
+  app.innerHTML = `<div class="shell">${topbar()}<div class="hero-center"><div class="empty choice-result"><h2>${escapeHtml(choiceMessage(count))}</h2><p>${escapeHtml(t.name)} · ${escapeHtml(p.name)}</p><p class="choice-counter">${count} ${count===1?'titolo consultato':'titoli consultati'} prima della scelta.</p>${url?`<a class="primary platform-launch" href="${escapeHtml(url)}">Apri su ${escapeHtml(p.name)} ⏎</a>`:'<p>Il collegamento diretto a questa piattaforma non è ancora configurato.</p>'}<button class="ghost-btn" data-action="categories">Torna a Gaia</button></div></div></div>`;
+
 }
 
 async function renderStats(){
@@ -225,6 +265,7 @@ app.addEventListener('click', async e => {
   if (b.disabled) return;
   if (b.dataset.action === 'previous') return previousMovie();
   if (b.dataset.action === 'next') return nextMovie(true);
+  if (b.dataset.action === 'back-to-movie') return renderMovie();
   if (b.dataset.action === 'watch') return renderConfirm();
   if (b.dataset.action === 'mute') return toggleMute();
   if (b.dataset.action === 'filters') return renderFilters();
@@ -245,12 +286,16 @@ app.addEventListener('click', async e => {
     return;
   }
   if (b.dataset.action === 'confirm-platform' && state.confirmPlatform) return renderMode();
-  if (b.dataset.mode) return finalize(b.dataset.mode);
+  if (b.dataset.mode) {
+    app.querySelectorAll('[data-mode]').forEach(x=>x.disabled=true);
+    try{await finalize(b.dataset.mode);}catch(err){app.querySelectorAll('[data-mode]').forEach(x=>x.disabled=false);app.querySelector('.mode-error')?.remove();app.querySelector('.mode-grid')?.insertAdjacentHTML('afterend','<p class="mode-error" role="alert">Non riesco a salvare la scelta. Riprova.</p>');console.error(err);}
+    return;
+  }
 });
 
 document.addEventListener('keydown', async e => {
   if (e.target.closest('input,textarea,select,form')) return;
-  if(document.querySelector('.intro-screen')&&!document.querySelector('[data-overlay]')&&e.code==='Space'&&(!e.target.closest('button')||e.target.closest('.intro-start'))){e.preventDefault();if(!e.repeat)renderCategories();return;}
+  if(document.querySelector('.intro-screen')&&!document.querySelector('[data-overlay]')&&(e.code==='Space'||e.key==='Enter')&&(!e.target.closest('button')||e.target.closest('.intro-start'))){e.preventDefault();if(!e.repeat)renderCategories();return;}
   const categories=[...document.querySelectorAll('.category-card')];
   if(categories.length&&!document.querySelector('[data-overlay]')){
     const selected=categories.findIndex(b=>b.classList.contains('preselected'));
@@ -259,10 +304,11 @@ document.addEventListener('keydown', async e => {
   }
   if(e.target.closest('.cover-options')||e.target.closest('.curator'))return;
   if (e.key.toLowerCase() === 'm') { e.preventDefault(); return toggleMute(); }
+  if(document.querySelector('[data-overlay]'))return;
   if (!state.session) return;
   if (document.querySelector('.confirm-copy')) {
-    if (e.key === 'Escape' || e.key === 'Backspace') { e.preventDefault(); return nextMovie(true); }
-    if (e.key === 'Enter' && state.confirmPlatform) { e.preventDefault(); return renderMode(); }
+    if (e.key === 'Escape' || e.key === 'Backspace') { e.preventDefault(); return renderMovie(); }
+    if (e.key === 'Enter' && state.confirmPlatform && !e.target.closest('button')) { e.preventDefault(); return renderMode(); }
     const opts = [...document.querySelectorAll('.platform-option')];
     if ((e.key === 'ArrowRight' || e.key === 'ArrowLeft') && opts.length) {
       e.preventDefault();

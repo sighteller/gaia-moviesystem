@@ -171,3 +171,38 @@ button:disabled { opacity:.5; cursor:not-allowed; }
   .category-screen { padding:24px 0; }
   .category-screen .category-card { min-height:220px; }
 }
+
+/* Choice flow and consistent green hover. */
+@media(hover:hover) {
+  :is(.ghost-btn,.icon-btn,.watch-btn,.arrow-btn,.intro-start,.platform-option,.mode-card,.category-card,.chip,.primary,.platform-launch):not(:disabled):hover { background:var(--accent); color:#17200c; border-color:var(--accent); }
+  :is(.mode-card,.category-card):hover p { color:#35451e; }
+  .watch-btn:hover span { color:inherit; }
+}
+.navigation-flash { background:var(--accent)!important; color:#17200c!important; border-color:var(--accent)!important; }
+.movie-shell { overflow:hidden; }
+.movie-stage { width:min(1100px,100%); margin:0 auto; grid-template-columns:min(30vw,calc(58vh * .70765)) minmax(0,1fr); gap:clamp(30px,4vw,64px); }
+.movie-stage .poster-column { width:100%; max-width:none; }
+.movie-info { min-width:0; }
+.movie-copy { height:clamp(240px,36vh,340px); display:flex; flex-direction:column; justify-content:center; }
+.movie-info h1 { font-size:clamp(44px,5vw,80px); line-height:1; }
+.movie-copy .movie-meta { margin-bottom:24px; }
+.movie-navigation { width:174px; justify-items:stretch; }
+.movie-navigation .navigation-arrows { width:100%; }
+.movie-navigation .arrow-btn { width:80px; }
+.watch-btn { width:100%; }
+.navigation-status { margin:0; font-size:13px; color:var(--muted); }
+.navigation-status:empty { display:none; }
+.movie-peek { position:fixed; right:calc(-1 * min(30vw,calc(58vh * .70765)) + 20px); top:50%; transform:translateY(-50%); width:min(30vw,calc(58vh * .70765)); aspect-ratio:129.5/183; border-radius:24px; overflow:hidden; pointer-events:none; opacity:.45; }
+.movie-peek img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:#0c0d0b; }
+.confirm-navigation { align-items:stretch; }
+.confirm-btn { min-width:120px; }
+.choice-result { max-width:820px; }
+.choice-result h2 { font-size:clamp(32px,4vw,56px); letter-spacing:-.04em; }
+.choice-counter { font-size:20px; }
+.platform-launch { display:inline-block; text-decoration:none; margin:20px 12px 20px 0; }
+@media(max-width:900px) {
+  .movie-stage { grid-template-columns:1fr; gap:20px; }
+  .movie-stage .poster-column { width:min(100%,calc(46vh * .70765)); }
+  .movie-copy { height:auto; }
+  .movie-peek { display:none; }
+}

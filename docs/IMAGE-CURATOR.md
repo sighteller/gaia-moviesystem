@@ -142,3 +142,23 @@ pulsante funziona come azione nativa. I cinque poster decorativi rimangono solta
 nell'intro. Animazione è preselezionata nella seconda pagina. Il logo SVG fornito
 è in assets/gaia-logo.svg e riporta alla scelta delle categorie. L'intro ha priorità
 sul precedente ripristino automatico di una sessione durante il caricamento.
+
+## Navigazione e riepilogo della scelta — 1 ottobre 2026
+
+- Cominciamo usa ⏎ senza focus automatico all'apertura; Spazio resta la scorciatoia.
+- Pulsanti e opzioni hanno hover verde pieno; la freccia usata lampeggia anche con la tastiera.
+- Guarda ha la stessa larghezza dell'intera coppia di frecce (174 px).
+- Navigazione serializzata: durante una richiesta/transizione non si può avviare un secondo cambio titolo.
+- Copertina e testo scorrono a velocità diverse; i comandi restano al loro posto. Il poster successivo appare in una sottile fascia laterale su desktop, esclusa dal conteggio. Con riduzione movimento attiva il cambio è immediato.
+- Conferma: freccia sinistra torna al film corrente, senza rifiutarlo o avanzare; a destra Conferma diventa attivo dopo la scelta della piattaforma. Nessun collegamento viene aperto in questa pagina.
+- Alla fine compare sempre il riepilogo con titolo, piattaforma, frase e numero. Apri su [piattaforma] è un link esplicito; nessun redirect automatico.
+
+Fasce delle frasi: 1–5, 6–10, 11–30, 31–70, 71+. Il caso 1 usa Buona la prima; le altre frasi parlano di casting, provini, vincitore, festival e giro del cinema.
+
+Il contatore include il primo titolo e quello scelto. Ritorni e cicli non aumentano il numero di titoli diversi. Il totale dei passaggi è conservato separatamente. Cambiare cover, ridisegnare la pagina o tornare dalla conferma non aumenta nessuno dei due numeri. Una scelta da Scopri parte direttamente dal titolo cliccato, senza conteggiare un altro titolo transitorio.
+
+Applicare supabase/schema-choice-metrics.sql dopo gli schemi precedenti. La migration track_distinct_title_consultations è già applicata al progetto. Trigger SECURITY INVOKER in gaia_private raccolgono consulted_title_ids e browse_steps nelle nuove sessions. Ogni nuova selections conserva consulted_title_ids, titles_consulted e browse_steps come fotografia della consultazione. I dati storici rimangono NULL, perché il loro percorso non è ricostruibile. Nessuna modifica a chiavi, accessi o policy.
+
+Queste metriche sono pronte per un futuro modello di consiglio; per ora non influenzano il ranking né penalizzano le visioni ripetute. Il conteggio mostrato misura la consultazione dei titoli, non la visione dei film. I timer di visione mantengono il comportamento precedente: partono al salvataggio della scelta e restano una stima, senza rilevare l'avvio effettivo sulla piattaforma.
+
+Verifica: nove test automatici; percorso UI completo in una copia locale con risposte simulate (nessuna scelta fittizia inserita nel catalogo); prova SQL con ruolo anon A→B→A, fotografia 2 titoli/3 visualizzazioni, conclusa con ROLLBACK; advisor sicurezza senza segnalazioni.
