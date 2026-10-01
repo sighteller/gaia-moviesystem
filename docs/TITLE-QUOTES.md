@@ -4,7 +4,7 @@ La citazione è in grande; la battuta sui tentativi resta sotto. Il testo numeri
 
 Le citazioni sono brevi estratti italiani riscontrati nelle fonti collegate, non generate con AI. Wikiquote è una fonte editoriale secondaria: non equivale a riascoltare ogni doppiaggio. Fonti e personaggi rimangono salvati nel modulo `title-quotes.js`; il simbolo ↗ accanto al titolo apre la fonte. Nessuna ricerca viene eseguita durante la navigazione.
 
-Il matching richiede titolo e anno esatti. Remake, sequel, nomi di file ed episodi non ereditano citazioni per somiglianza. Un titolo senza citazione mostra il proprio nome in grande e la battuta sui tentativi sotto.
+Il matching richiede titolo e anno esatti. Remake, sequel, nomi di file ed episodi non ereditano citazioni per somiglianza. Un titolo senza citazione mostra la frase standard in grande e la battuta sui tentativi sotto.
 
 ## Copertura
 
@@ -12,92 +12,88 @@ Citazioni approvate: 80; record coperti incluse varianti verificate: 84. Ricerca
 
 ## Fonti approvate
 
-| Titolo | Anno | Fonte |
-|---|---|---|
-| A qualcuno piace caldo | 1959 | [Fonte](https://it.wikiquote.org/wiki/A_qualcuno_piace_caldo) |
-| Aladdin | 1992 | [Fonte](https://it.wikiquote.org/wiki/Aladdin) |
-| Alice nel paese delle meraviglie | 1951 | [Fonte](https://it.wikiquote.org/wiki/Alice_nel_Paese_delle_Meraviglie_%28film_1951%29) |
-| Alla ricerca di Nemo | 2003 | [Fonte](https://it.wikiquote.org/wiki/Alla_ricerca_di_Nemo) |
-| Angry Birds - Il film | 2016 | [Fonte](https://it.wikiquote.org/wiki/Angry_Birds_-_Il_film) |
-| Balto | 1995 | [Fonte](https://it.wikiquote.org/wiki/Balto) |
-| Billy Elliot | 2000 | [Fonte](https://it.wikiquote.org/wiki/Billy_Elliot) |
-| Cantando sotto la pioggia | 1952 | [Fonte](https://it.wikiquote.org/wiki/Cantando_sotto_la_pioggia) |
-| Chi ha incastrato Roger Rabbit | 1988 | [Fonte](https://it.wikiquote.org/wiki/Chi_ha_incastrato_Roger_Rabbit) |
-| Come d'incanto | 2007 | [Fonte](https://it.wikiquote.org/wiki/Come_d%27incanto) |
-| Flashdance | 1983 | [Fonte](https://it.wikiquote.org/wiki/Flashdance) |
-| Frozen - Il regno di ghiaccio | 2013 | [Fonte](https://it.wikiquote.org/wiki/Frozen_-_Il_regno_di_ghiaccio) |
-| Frozen II - Il segreto di Arendelle | 2019 | [Fonte](https://it.wikiquote.org/wiki/Frozen_II_-_Il_segreto_di_Arendelle) |
-| Gli Aristogatti | 1970 | [Fonte](https://it.wikiquote.org/wiki/Gli_Aristogatti) |
-| Gli Incredibili - Una "normale" famiglia di supereroi | 2004 | [Fonte](https://it.wikiquote.org/wiki/Gli_Incredibili_-_Una_%22normale%22_famiglia_di_supereroi) |
-| Hercules | 1997 | [Fonte](https://it.wikiquote.org/wiki/Hercules_%28film_1997%29) |
-| Hotel Transylvania | 2012 | [Fonte](https://it.wikiquote.org/wiki/Hotel_Transylvania) |
-| Hugo Cabret | 2011 | [Fonte](https://it.wikiquote.org/wiki/Hugo_Cabret) |
-| I Goonies | 1985 | [Fonte](https://it.wikiquote.org/wiki/I_Goonies) |
-| Il castello errante di Howl | 2004 | [Fonte](https://it.wikiquote.org/wiki/Il_castello_errante_di_Howl) |
-| Il grande e potente Oz | 2013 | [Fonte](https://it.wikiquote.org/wiki/Il_grande_e_potente_Oz) |
-| Il libro della giungla | 1967 | [Fonte](https://it.wikiquote.org/wiki/Il_libro_della_giungla_%28film_1967%29) |
-| Il re leone | 1994 | [Fonte](https://it.wikiquote.org/wiki/Il_re_leone) |
-| Il viaggio di Arlo | 2015 | [Fonte](https://it.wikiquote.org/wiki/Il_viaggio_di_Arlo) |
-| Jumanji | 1995 | [Fonte](https://it.wikiquote.org/wiki/Jumanji) |
-| L'era glaciale 2 - Il disgelo | 2006 | [Fonte](https://it.wikiquote.org/wiki/L%27era_glaciale_2_-_Il_disgelo) |
-| L'era glaciale 3 - L'alba dei dinosauri | 2009 | [Fonte](https://it.wikiquote.org/wiki/L%27era_glaciale_3_-_L%27alba_dei_dinosauri) |
-| L'era glaciale 4 - Continenti alla deriva | 2012 | [Fonte](https://it.wikiquote.org/wiki/L%27era_glaciale_4_-_Continenti_alla_deriva) |
-| La bella addormentata nel bosco | 1959 | [Fonte](https://it.wikiquote.org/wiki/La_bella_addormentata_nel_bosco) |
-| La carica dei 101 | 1961 | [Fonte](https://it.wikiquote.org/wiki/La_carica_dei_101) |
-| La città incantata | 2001 | [Fonte](https://it.wikiquote.org/wiki/La_citt%C3%A0_incantata) |
-| La La Land | 2016 | [Fonte](https://it.wikiquote.org/wiki/La_La_Land) |
-| La principessa e il ranocchio | 2009 | [Fonte](https://it.wikiquote.org/wiki/La_principessa_e_il_ranocchio) |
-| La ricompensa del gatto | 2002 | [Fonte](https://it.wikiquote.org/wiki/La_ricompensa_del_gatto) |
-| La spada nella roccia | 1963 | [Fonte](https://it.wikiquote.org/wiki/La_spada_nella_roccia) |
-| Le avventure di Bianca e Bernie | 1977 | [Fonte](https://it.wikiquote.org/wiki/Le_avventure_di_Bianca_e_Bernie) |
-| Le avventure di Peter Pan | 1953 | [Fonte](https://it.wikiquote.org/wiki/Le_avventure_di_Peter_Pan) |
-| Le cronache di Narnia - Il leone, la strega e l'armadio | 2005 | [Fonte](https://it.wikiquote.org/wiki/Le_cronache_di_Narnia_-_Il_leone%2C_la_strega_e_l%27armadio) |
-| Le cronache di Narnia - Il principe Caspian | 2008 | [Fonte](https://it.wikiquote.org/wiki/Le_cronache_di_Narnia_-_Il_principe_Caspian) |
-| Le cronache di Narnia - Il viaggio del veliero | 2010 | [Fonte](https://it.wikiquote.org/wiki/Le_cronache_di_Narnia_-_Il_viaggio_del_veliero) |
-| Lilli e il vagabondo | 1955 | [Fonte](https://it.wikiquote.org/wiki/Lilli_e_il_vagabondo) |
-| Madagascar | 2005 | [Fonte](https://it.wikiquote.org/wiki/Madagascar_%28film%29) |
-| Maleficent | 2014 | [Fonte](https://it.wikiquote.org/wiki/Maleficent) |
-| Maleficent [FILM | 2014 | [Fonte](https://it.wikiquote.org/wiki/Maleficent) |
-| Mary Poppins | 1964 | [Fonte](https://it.wikiquote.org/wiki/Mary_Poppins_%28film%29) |
-| Matilda 6 mitica | 1996 | [Fonte](https://it.wikiquote.org/wiki/Matilda_6_mitica) |
-| Monsters and Co. | 2001 | [Fonte](https://it.wikiquote.org/wiki/Monsters_%26_Co.) |
-| Monsters University | 2013 | [Fonte](https://it.wikiquote.org/wiki/Monsters_University) |
-| Moulin Rouge! | 2001 | [Fonte](https://it.wikiquote.org/wiki/Moulin_Rouge%21) |
-| Mulan | 1998 | [Fonte](https://it.wikiquote.org/wiki/Mulan) |
-| Oliver & Company | 1988 | [Fonte](https://it.wikiquote.org/wiki/Oliver_%26_Company) |
-| Onward - Oltre la magia | 2020 | [Fonte](https://it.wikiquote.org/wiki/Onward_-_Oltre_la_magia) |
-| Pomi d'ottone e manici di scopa | 1971 | [Fonte](https://it.wikiquote.org/wiki/Pomi_d%27ottone_e_manici_di_scopa) |
-| Porco Rosso | 1992 | [Fonte](https://it.wikiquote.org/wiki/Porco_Rosso) |
-| Quando c'era Marnie | 2014 | [Fonte](https://it.wikiquote.org/wiki/Quando_c%27era_Marnie) |
-| Quasi amici | 2011 | [Fonte](https://it.wikiquote.org/wiki/Quasi_amici_-_Intouchables) |
-| Rapunzel - L'intreccio della torre | 2010 | [Fonte](https://it.wikiquote.org/wiki/Rapunzel_-_L%27intreccio_della_torre) |
-| Ratatouille | 2007 | [Fonte](https://it.wikiquote.org/wiki/Ratatouille) |
-| Ribelle - The Brave | 2012 | [Fonte](https://it.wikiquote.org/wiki/Ribelle_-_The_Brave) |
-| Shrek 2 | 2004 | [Fonte](https://it.wikiquote.org/wiki/Shrek_2) |
-| Shrek e vissero felici e contenti | 2010 | [Fonte](https://it.wikiquote.org/wiki/Shrek_e_vissero_felici_e_contenti) |
-| Shrek terzo | 2007 | [Fonte](https://it.wikiquote.org/wiki/Shrek_terzo) |
-| Sherk Terzo | 2007 | [Fonte](https://it.wikiquote.org/wiki/Shrek_terzo) |
-| Sister Act - Una svitata in abito da suora | 1992 | [Fonte](https://it.wikiquote.org/wiki/Sister_Act_-_Una_svitata_in_abito_da_suora) |
-| Spider-Man: Un nuovo universo | 2018 | [Fonte](https://it.wikiquote.org/wiki/Spider-Man%3A_Un_nuovo_universo) |
-| Spirit – Cavallo selvaggio | 2002 | [Fonte](https://it.wikiquote.org/wiki/Spirit_-_Cavallo_selvaggio) |
-| The Blues Brothers - I fratelli Blues | 1980 | [Fonte](https://it.wikiquote.org/wiki/The_Blues_Brothers_-_I_fratelli_Blues) |
-| The Help | 2011 | [Fonte](https://it.wikiquote.org/wiki/The_Help) |
-| Totò Sapore e la magica storia della pizza | 2003 | [Fonte](https://it.wikiquote.org/wiki/Tot%C3%B2_Sapore_e_la_magica_storia_della_pizza) |
-| Toy Story - Il mondo dei giocattoli | 1995 | [Fonte](https://it.wikiquote.org/wiki/Toy_Story_-_Il_mondo_dei_giocattoli) |
-| Toy Story 2 - Woody & Buzz alla riscossa | 1999 | [Fonte](https://it.wikiquote.org/wiki/Toy_Story_2_-_Woody_e_Buzz_alla_riscossa) |
-| Toy Story 3 - La grande fuga | 2010 | [Fonte](https://it.wikiquote.org/wiki/Toy_Story_3_-_La_grande_fuga) |
-| Una notte al museo 2 - La fuga | 2009 | [Fonte](https://it.wikiquote.org/wiki/Una_notte_al_museo_2_-_La_fuga) |
-| Up | 2009 | [Fonte](https://it.wikiquote.org/wiki/Up) |
-| Vacanze romane | 1953 | [Fonte](https://it.wikiquote.org/wiki/Vacanze_romane) |
-| Inside Out | 2015 | [Fonte](https://it.wikiquote.org/wiki/Inside_Out_(film_2015)) |
-| Luca | 2021 | [Fonte](https://lumiere-a.akamaihd.net/v1/documents/luca_press_kit_final_06-04-21_9b5cc33b.pdf) |
-| Futurama | 1999 | [Fonte](https://it.wikiquote.org/wiki/Futurama) |
-| Il mago di Oz | 1939 | [Fonte](https://it.wikiquote.org/wiki/Il_mago_di_Oz_(film_1939)) |
-| Pinocchio | 1940 | [Fonte](https://it.wikiquote.org/wiki/Pinocchio_(film_1940)) |
-| Zootropolis | 2016 | [Fonte](https://it.wikiquote.org/wiki/Zootropolis) |
-| Cenerentola | 2015 | [Fonte](https://www.fondazionedettoris.it/site/content/con-cenerentola-vola-la-fantasia) |
-| Cenerentola [FILM | 2015 | [Fonte](https://www.fondazionedettoris.it/site/content/con-cenerentola-vola-la-fantasia) |
-| Cenerentola-IL FILM | 2015 | [Fonte](https://www.fondazionedettoris.it/site/content/con-cenerentola-vola-la-fantasia) |
+| Titolo | Anno | Citazione scelta | Personaggio | Fonte |
+|---|---|---|---|---|
+| A qualcuno piace caldo | 1959 | Non importa quanto si aspetta, ma chi si aspetta. | Josephine | [Fonte](https://it.wikiquote.org/wiki/A_qualcuno_piace_caldo) |
+| Aladdin | 1992 | Ti fidi di me? | Aladdin | [Fonte](https://it.wikiquote.org/wiki/Aladdin) |
+| Alice nel paese delle meraviglie | 1951 | Sono in ritardo! In arciritardissimo! | Bianconiglio | [Fonte](https://it.wikiquote.org/wiki/Alice_nel_Paese_delle_Meraviglie_%28film_1951%29) |
+| Alla ricerca di Nemo | 2003 | I pesci sono amici, non cibo! | Bruto, Randa e Fiocco | [Fonte](https://it.wikiquote.org/wiki/Alla_ricerca_di_Nemo) |
+| Angry Birds - Il film | 2016 | Ci eserciteremo a gestire la nostra rabbia con il movimento. | Matilda | [Fonte](https://it.wikiquote.org/wiki/Angry_Birds_-_Il_film) |
+| Balto | 1995 | Non sei cane, non sei lupo! Sei eroe! | Boris | [Fonte](https://it.wikiquote.org/wiki/Balto) |
+| Billy Elliot | 2000 | È come ti muovi, quello che esprimi che è importante. | Mrs. Wilkinson | [Fonte](https://it.wikiquote.org/wiki/Billy_Elliot) |
+| Cantando sotto la pioggia | 1952 | Ad ogni festa si mostra un film: è legge a Hollywood. | Cosmo | [Fonte](https://it.wikiquote.org/wiki/Cantando_sotto_la_pioggia) |
+| Chi ha incastrato Roger Rabbit | 1988 | Noi cartoni facciamo gli scemi, ma non siamo mica stupidi! | Roger Rabbit | [Fonte](https://it.wikiquote.org/wiki/Chi_ha_incastrato_Roger_Rabbit) |
+| Come d'incanto | 2007 | Il bacio del vero amore è la cosa più potente al mondo. | Giselle | [Fonte](https://it.wikiquote.org/wiki/Come_d%27incanto) |
+| Flashdance | 1983 | Chi rinuncia ai propri sogni è costretto a morire. | Nick Hurley | [Fonte](https://it.wikiquote.org/wiki/Flashdance) |
+| Frozen - Il regno di ghiaccio | 2013 | Ciao a tutti. Io sono Olaf. E amo i caldi abbracci! | Olaf | [Fonte](https://it.wikiquote.org/wiki/Frozen_-_Il_regno_di_ghiaccio) |
+| Frozen II - Il segreto di Arendelle | 2019 | Anna? Elsa? Sven? Samantha? Neanche la conosco una Samantha! | Olaf | [Fonte](https://it.wikiquote.org/wiki/Frozen_II_-_Il_segreto_di_Arendelle) |
+| Gli Aristogatti | 1970 | Io so' Romeo... Er mejo der Colosseo. | Romeo | [Fonte](https://it.wikiquote.org/wiki/Gli_Aristogatti) |
+| Gli Incredibili - Una "normale" famiglia di supereroi | 2004 | I nostri poteri ci rendono speciali! | Flash Parr | [Fonte](https://it.wikiquote.org/wiki/Gli_Incredibili_-_Una_%22normale%22_famiglia_di_supereroi) |
+| Hercules | 1997 | Sono una donzella. Sono in difficoltà. Me la cavo da sola. Buona giornata. | Megara | [Fonte](https://it.wikiquote.org/wiki/Hercules_%28film_1997%29) |
+| Hotel Transylvania | 2012 | Ciao Uomo Invisibile, che piacere... "vederti!" | Dracula | [Fonte](https://it.wikiquote.org/wiki/Hotel_Transylvania) |
+| Hugo Cabret | 2011 | Venite a sognare con me. | Georges Méliès | [Fonte](https://it.wikiquote.org/wiki/Hugo_Cabret) |
+| I Goonies | 1985 | I Goonies non dicono mai la parola morte | Mikey | [Fonte](https://it.wikiquote.org/wiki/I_Goonies) |
+| Il castello errante di Howl | 2004 | Ti stavo cercando, sai? | Howl | [Fonte](https://it.wikiquote.org/wiki/Il_castello_errante_di_Howl) |
+| Il grande e potente Oz | 2013 | So di non essere il mago che stavi aspettando, ma posso essere il mago di cui ha bisogno. | Oscar | [Fonte](https://it.wikiquote.org/wiki/Il_grande_e_potente_Oz) |
+| Il libro della giungla | 1967 | Se farai come quell'ape... ti stancherai troppo. | Baloo | [Fonte](https://it.wikiquote.org/wiki/Il_libro_della_giungla_%28film_1967%29) |
+| Il re leone | 1994 | Ricordati chi sei. Tu sei mio figlio e l'unico vero re! | Mufasa | [Fonte](https://it.wikiquote.org/wiki/Il_re_leone) |
+| Il viaggio di Arlo | 2015 | Vedi, a volte devi superare le tue paure, per riuscire a vedere la bellezza che ti circonda. | Henry | [Fonte](https://it.wikiquote.org/wiki/Il_viaggio_di_Arlo) |
+| Jumanji | 1995 | Un avversario prima o poi va affrontato. | Samuel Parrish | [Fonte](https://it.wikiquote.org/wiki/Jumanji) |
+| L'era glaciale 2 - Il disgelo | 2006 | Siamo viiiiiivi! No, siamo mooooorti! | Sid | [Fonte](https://it.wikiquote.org/wiki/L%27era_glaciale_2_-_Il_disgelo) |
+| L'era glaciale 3 - L'alba dei dinosauri | 2009 | Vi presento Gustuovo, Chiara e Tuorlino. | Sid | [Fonte](https://it.wikiquote.org/wiki/L%27era_glaciale_3_-_L%27alba_dei_dinosauri) |
+| L'era glaciale 4 - Continenti alla deriva | 2012 | Chi dice che le vecchiette non possono guidare? | Nonnina | [Fonte](https://it.wikiquote.org/wiki/L%27era_glaciale_4_-_Continenti_alla_deriva) |
+| La bella addormentata nel bosco | 1959 | È una giornata memorabile. Per la prima volta dopo sedici anni dormirò bene. | Malefica | [Fonte](https://it.wikiquote.org/wiki/La_bella_addormentata_nel_bosco) |
+| La carica dei 101 | 1961 | Prima il motivo, mia cara, e poi le parole! | Rudy | [Fonte](https://it.wikiquote.org/wiki/La_carica_dei_101) |
+| La città incantata | 2001 | E al mio incantesimo cos'è successo? Solo l'amore poteva romperlo! | Zeniba | [Fonte](https://it.wikiquote.org/wiki/La_citt%C3%A0_incantata) |
+| La La Land | 2016 | Resti aggrappato al passato, ma il jazz parla di futuro. | Keith | [Fonte](https://it.wikiquote.org/wiki/La_La_Land) |
+| La principessa e il ranocchio | 2009 | Prima regola: mai seguire le indicazioni di un alligatore! | Ray | [Fonte](https://it.wikiquote.org/wiki/La_principessa_e_il_ranocchio) |
+| La ricompensa del gatto | 2002 | Le persone racchiudono pensieri e desideri. In ciò che si crea infondendovi cose simili, senza accorgersene dimora un animo. | Baron | [Fonte](https://it.wikiquote.org/wiki/La_ricompensa_del_gatto) |
+| La spada nella roccia | 1963 | Quisquilie e pinzillacchere! | Anacleto | [Fonte](https://it.wikiquote.org/wiki/La_spada_nella_roccia) |
+| Le avventure di Bianca e Bernie | 1977 | Tu sei qualcosa di super speciale. | Rufus | [Fonte](https://it.wikiquote.org/wiki/Le_avventure_di_Bianca_e_Bernie) |
+| Le avventure di Peter Pan | 1953 | Solo chi sogna può volare! | Peter Pan | [Fonte](https://it.wikiquote.org/wiki/Le_avventure_di_Peter_Pan) |
+| Le cronache di Narnia - Il leone, la strega e l'armadio | 2005 | Se è una guerra che Aslan vuole... una guerra avrà! | Strega Bianca | [Fonte](https://it.wikiquote.org/wiki/Le_cronache_di_Narnia_-_Il_leone%2C_la_strega_e_l%27armadio) |
+| Le cronache di Narnia - Il principe Caspian | 2008 | Le cose non avvengono mai due volte allo stesso modo. | Aslan | [Fonte](https://it.wikiquote.org/wiki/Le_cronache_di_Narnia_-_Il_principe_Caspian) |
+| Le cronache di Narnia - Il viaggio del veliero | 2010 | Un avvertimento soltanto: gioca brutti scherzi, il mare, alla mente dell'equipaggio. Davvero brutti. | Drinian | [Fonte](https://it.wikiquote.org/wiki/Le_cronache_di_Narnia_-_Il_viaggio_del_veliero) |
+| Lilli e il vagabondo | 1955 | Vedi, bimba, quando sei libero, senza padroni, ti godi solo quanto c'è di meglio. | Biagio | [Fonte](https://it.wikiquote.org/wiki/Lilli_e_il_vagabondo) |
+| Madagascar | 2005 | Quando la zebra sogna non vuole rogna. | Marty | [Fonte](https://it.wikiquote.org/wiki/Madagascar_%28film%29) |
+| Maleficent | 2014 | Come ci si sente? Hmmm? Come si sente una creatura fatata senza ali... in un mondo a cui non appartiene?! | Stefano | [Fonte](https://it.wikiquote.org/wiki/Maleficent) |
+| Mary Poppins | 1964 | Praticamente perfetta sotto ogni aspetto. | Mary Poppins | [Fonte](https://it.wikiquote.org/wiki/Mary_Poppins_%28film%29) |
+| Matilda 6 mitica | 1996 | Adesso basta fare la brava bambina. | Matilda | [Fonte](https://it.wikiquote.org/wiki/Matilda_6_mitica) |
+| Monsters and Co. | 2001 | Combatti la placca! Combatti la placca! I veri mostri non hanno placca! | Mike | [Fonte](https://it.wikiquote.org/wiki/Monsters_%26_Co.) |
+| Monsters University | 2013 | Stasera festeggeremo come dei veri spaventatori! | Mike | [Fonte](https://it.wikiquote.org/wiki/Monsters_University) |
+| Moulin Rouge! | 2001 | La cosa più grande che tu possa imparare è amare e lasciarti amare! | Christian | [Fonte](https://it.wikiquote.org/wiki/Moulin_Rouge%21) |
+| Mulan | 1998 | Il fiore che sboccia nelle avversità è il più raro e il più bello di tutti. | L'imperatore | [Fonte](https://it.wikiquote.org/wiki/Mulan) |
+| Oliver & Company | 1988 | Il fortissimo duo è diventato un fortissimo assolo. | Dodger | [Fonte](https://it.wikiquote.org/wiki/Oliver_%26_Company) |
+| Onward - Oltre la magia | 2020 | Ehila, buon compleanno! Lavori sodo o lavori à la coque? | Colt Bronco | [Fonte](https://it.wikiquote.org/wiki/Onward_-_Oltre_la_magia) |
+| Pomi d'ottone e manici di scopa | 1971 | Fermo lì. A B C, per di qui, per di lì. | Miss Price | [Fonte](https://it.wikiquote.org/wiki/Pomi_d%27ottone_e_manici_di_scopa) |
+| Porco Rosso | 1992 | Piuttosto che diventare un fascista, meglio essere un maiale. | Porco Rosso | [Fonte](https://it.wikiquote.org/wiki/Porco_Rosso) |
+| Quando c'era Marnie | 2014 | Non mi importa chi sia Marnie, io voglio aiutare Marnie. | Anna | [Fonte](https://it.wikiquote.org/wiki/Quando_c%27era_Marnie) |
+| Quasi amici | 2011 | Non ho mai avuto i piedi così ben pettinati! | Philippe | [Fonte](https://it.wikiquote.org/wiki/Quasi_amici_-_Intouchables) |
+| Rapunzel - L'intreccio della torre | 2010 | Io ho dei capelli magici che risplendono quando canto. | Rapunzel | [Fonte](https://it.wikiquote.org/wiki/Rapunzel_-_L%27intreccio_della_torre) |
+| Ratatouille | 2007 | Chiunque può cucinare. | Gusteau | [Fonte](https://it.wikiquote.org/wiki/Ratatouille) |
+| Ribelle - The Brave | 2012 | In ogni leggenda c'è sempre un pizzico di verità. | Merida | [Fonte](https://it.wikiquote.org/wiki/Ribelle_-_The_Brave) |
+| Shrek 2 | 2004 | Sono uno stallone, pupo! | Ciuchino | [Fonte](https://it.wikiquote.org/wiki/Shrek_2) |
+| Shrek e vissero felici e contenti | 2010 | Sai qual è stata la parte più bella di oggi? Ho avuto l'occasione di innamorarmi di te tutto da capo. | Shrek | [Fonte](https://it.wikiquote.org/wiki/Shrek_e_vissero_felici_e_contenti) |
+| Shrek terzo | 2007 | Meglio fuori che dentro, dico sempre! | Shrek | [Fonte](https://it.wikiquote.org/wiki/Shrek_terzo) |
+| Sister Act - Una svitata in abito da suora | 1992 | Ma mi guardi bene, sono una suora? Somiglio a un pinguino! | Deloris | [Fonte](https://it.wikiquote.org/wiki/Sister_Act_-_Una_svitata_in_abito_da_suora) |
+| Spider-Man: Un nuovo universo | 2018 | Ogni scelta che facciamo potrebbe generare innumerevoli conseguenze, praticamente... infinite. | Olivia "Liv" Octavius | [Fonte](https://it.wikiquote.org/wiki/Spider-Man%3A_Un_nuovo_universo) |
+| Spirit – Cavallo selvaggio | 2002 | Per la prima volta nella mia vita, il mio cuore era diviso in due. | Spirit | [Fonte](https://it.wikiquote.org/wiki/Spirit_-_Cavallo_selvaggio) |
+| The Blues Brothers - I fratelli Blues | 1980 | Siamo in missione per conto di Dio. | Elwood Blues | [Fonte](https://it.wikiquote.org/wiki/The_Blues_Brothers_-_I_fratelli_Blues) |
+| The Help | 2011 | Tu sei carina. Tu sei brava. Tu sei importante. | Aibileen | [Fonte](https://it.wikiquote.org/wiki/The_Help) |
+| Totò Sapore e la magica storia della pizza | 2003 | Mannaggia bubbà! | Totò Sapore | [Fonte](https://it.wikiquote.org/wiki/Tot%C3%B2_Sapore_e_la_magica_storia_della_pizza) |
+| Toy Story - Il mondo dei giocattoli | 1995 | Verso l'infinito... e oltre! | Buzz Lightyear | [Fonte](https://it.wikiquote.org/wiki/Toy_Story_-_Il_mondo_dei_giocattoli) |
+| Toy Story 2 - Woody & Buzz alla riscossa | 1999 | Non si dimenticano bambini come... Emily o... Andy... ma loro dimenticano te! | Jessie | [Fonte](https://it.wikiquote.org/wiki/Toy_Story_2_-_Woody_e_Buzz_alla_riscossa) |
+| Toy Story 3 - La grande fuga | 2010 | Preparatevi tutti, avete un appuntamento di giochi col destino. | Lotso | [Fonte](https://it.wikiquote.org/wiki/Toy_Story_3_-_La_grande_fuga) |
+| Una notte al museo 2 - La fuga | 2009 | Sai perché sono diventata pilota? Perché mi divertiva. Se non ti diverti la vita non ha senso. | Amelia Earhart | [Fonte](https://it.wikiquote.org/wiki/Una_notte_al_museo_2_-_La_fuga) |
+| Up | 2009 | Croce sul cuore. | Carl | [Fonte](https://it.wikiquote.org/wiki/Up) |
+| Vacanze romane | 1953 | Il ricordo di questa mia visita non mi abbandonerà fin tanto che vivrò. | Principessa Anna | [Fonte](https://it.wikiquote.org/wiki/Vacanze_romane) |
+| Inside Out | 2015 | Porta Riley sulla luna per me. | Bing Bong | [Fonte](https://it.wikiquote.org/wiki/Inside_Out_(film_2015)) |
+| Luca | 2021 | Silenzio, Bruno! | Alberto | [Fonte](https://lumiere-a.akamaihd.net/v1/documents/luca_press_kit_final_06-04-21_9b5cc33b.pdf) |
+| Futurama | 1999 | Bacia il mio scintillante fondoschiena metallico! | Bender | [Fonte](https://it.wikiquote.org/wiki/Futurama) |
+| Il mago di Oz | 1939 | Nessun posto è bello come casa mia. | Dorothy | [Fonte](https://it.wikiquote.org/wiki/Il_mago_di_Oz_(film_1939)) |
+| Pinocchio | 1940 | Dimostrati bravo, coraggioso, disinteressato e un giorno sarai un bambino vero! | Fata Azzurra | [Fonte](https://it.wikiquote.org/wiki/Pinocchio_(film_1940)) |
+| Zootropolis | 2016 | Non mostrare mai le tue debolezze! | Nick | [Fonte](https://it.wikiquote.org/wiki/Zootropolis) |
+| Cenerentola | 2015 | Sii gentile e abbi coraggio. | La madre di Ella | [Fonte](https://www.fondazionedettoris.it/site/content/con-cenerentola-vola-la-fantasia) |
 
 ## Casi ancora da verificare
 
@@ -341,3 +337,9 @@ Una pagina non trovata non dimostra che il film non abbia citazioni. Per questi 
 ## Aggiungere una citazione
 
 Aggiungere una voce in `title-quotes.js` solo dopo aver verificato titolo, anno, testo breve, personaggio e URL della fonte. Preferire clip italiane ufficiali o materiale del distributore, poi fonti editoriali; non tradurre automaticamente un copione inglese presentandolo come doppiaggio italiano. Per i nuovi titoli la schermata resta funzionante anche in assenza della voce. Non sono richieste API esterne, chiavi o modifiche a Supabase.
+
+## Revisione delle citazioni
+
+Aprire `citazioni.html`: ogni scheda mostra la citazione integrale, il personaggio e la fonte. Salva conserva una modifica nel browser (localStorage), utilizzata nella schermata finale di Gaia sullo stesso browser. Un campo vuoto forza la frase standard anche per un titolo con citazione proposta. Esporta scarica un JSON delle modifiche per una successiva pubblicazione condivisa. Non è richiesto alcun account.
+
+La frase standard è: La scelta è fatta. Buona visione!

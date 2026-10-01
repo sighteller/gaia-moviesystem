@@ -729,3 +729,9 @@ export const titleQuotes = [
 export function titleQuote(title){
   return titleQuotes.find(q=>q.year===title.release_year && q.names.includes(title.name)) || null;
 }
+
+export const standardQuote = 'La scelta è fatta. Buona visione!';
+export function effectiveQuote(title, overrides = []) {
+  const override = overrides.find(q => q.title_id === title.id);
+  return override ? (override.text ? override : null) : titleQuote(title);
+}

@@ -1,6 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {titleQuote,titleQuotes} from '../title-quotes.js';
+import {titleQuote,titleQuotes,effectiveQuote} from '../title-quotes.js';
+
+test('explicit blank overrides use standard text instead of the suggested quote',()=>{
+ const t={id:'example',name:'Il castello errante di Howl',release_year:2004};
+ assert.ok(effectiveQuote(t));
+ assert.equal(effectiveQuote(t,[{title_id:'example',text:''}]),null);
+ const edit={title_id:'example',text:'La mia citazione'};
+ assert.equal(effectiveQuote(t,[edit]),edit);
+});
 
 test('quotes belong to the exact film edition, not a remake or sequel',()=>{
  assert.ok(titleQuote({name:'Lilli e il vagabondo',release_year:1955}));

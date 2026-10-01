@@ -1,4 +1,4 @@
-import { titleQuote } from './title-quotes.js?v=20261001quotes';
+import { effectiveQuote, standardQuote } from './title-quotes.js?v=20261002editor';
 import { recordConsultation, choiceMessage, platformUrl } from './choice-summary.js?v=20261001i';
 import { mountCoverPicker } from './cover-picker.js?v=20261001i';
 import { initFeatures } from './features.js?v=20261001i';
@@ -7,7 +7,7 @@ const API_URL = 'https://mahjewznwqvdgtdjtekc.supabase.co/functions/v1/gaia-api'
 
 const app = document.querySelector('#app');
 const state = {
-  titles: [], platforms: [], links: [],
+  titles: [], platforms: [], links: [], quotes: [],
   category: null, filteredTitles: [], index: 0,
   selectedPlatformIds: JSON.parse(localStorage.getItem('gaia_platforms') || 'null'),
   muted: localStorage.getItem('gaia_muted') === '1',
@@ -41,6 +41,7 @@ function topbar() { return `<div class="topbar">${logo()}<div class="small-actio
 async function loadData() {
   const data = await call('catalog');
   state.titles = data.titles || [];
+  try { state.quotes = JSON.parse(localStorage.getItem('gaia_quote_edits') || '[]'); } catch { state.quotes = []; }
   state.platforms = (data.platforms || []).filter(p => ['jellyfin','netflix','disney-plus','prime-video','rai-play'].includes(p.slug));
   const allowedIds = new Set(state.platforms.map(p=>p.id));
   if (Array.isArray(state.selectedPlatformIds)) state.selectedPlatformIds=state.selectedPlatformIds.filter(id=>allowedIds.has(id));
@@ -79,7 +80,7 @@ function homeCarousel(){
 function renderIntro(){
   state.category=null;state.session=null;
   if(state.currentAudio){state.currentAudio.pause();state.currentAudio=null;}
-  app.innerHTML=`<div class="shell">${topbar()}<section class="intro-screen"><h1 class="intro-greeting"><span data-typewriter>Ciao Gaia!</span><span class="intro-question"><span data-typewriter>che</span>${homeCarousel()}<span data-typewriter>film</span></span><span data-typewriter>vediamo oggi?</span></h1><button class="intro-start" data-action="categories">Cominciamo <svg class="return-glyph" aria-hidden="true" viewBox="0 0 20.35 16.2"><path fill="currentColor" d="M6.07,16.2L0,10.23l6.07-5.97v11.94ZM4.13,11.68v-2.89h16.16v2.89H4.13ZM12.6,2.93V0h7.69v2.93h-7.69ZM17.46,11.68V0h2.89v11.68h-2.89Z"/></svg></button></section></div>`;
+  app.innerHTML=`<div class="shell">${topbar()}<section class="intro-screen"><h1 class="intro-greeting"><span data-typewriter>Ciao Gaia!</span><span class="intro-question"><span data-typewriter>che</span>${homeCarousel()}<span data-typewriter>film</span></span><span data-typewriter>vediamo oggi?</span></h1><button class="intro-start" data-action="categories">Cominciamo <svg class="return-glyph" aria-hidden="true" viewBox="0 0 20.35 16.2"><path fill="currentColor" d="M6.07,16.2L0,10.23l6.07-5.97v11.94ZM4.13,11.68v-2.89h16.16v2.89H4.13ZM12.6,2.93V0h7.69v2.93h-7.69ZM17.46,11.68V0h2.89v11.68h-2.89Z"/></svg></button><a class="intro-quotes" href="citazioni.html">Citazioni dei film</a></section></div>`;
   if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
     let delay=0;
     app.querySelectorAll('[data-typewriter]').forEach(line=>{
@@ -233,8 +234,8 @@ function renderPlatformSummary(mode,savedPlatform=null){
   const t=currentTitle();const ps=availablePlatformsForTitle(t);const count=state.consultation.titleIds.length;
   const link=savedPlatform?state.links.find(l=>l.title_id===t.id&&l.platform_id===savedPlatform.id):null;
   const url=platformUrl(link?.url);
-  const quote=titleQuote(t);
-  app.innerHTML=`<div class="shell">${topbar()}<div class="hero-center"><div class="empty choice-result"><h2 class="film-quote">${quote?`«${escapeHtml(quote.text)}»`:escapeHtml(t.name)}</h2><p class="quote-attribution">${quote?.speaker?`${escapeHtml(quote.speaker)} · `:''}${escapeHtml(t.name)}${quote?` <a class="quote-source" href="${escapeHtml(quote.source)}" target="_blank" rel="noopener noreferrer" aria-label="Fonte della citazione">↗</a>`:''}</p><p class="choice-counter">${escapeHtml(choiceMessage(count))}</p><h3>Dove lo guardiamo?</h3><div class="platform-list">${ps.map((p,i)=>`<button class="platform-option ${savedPlatform?.id===p.id?'selected':''}" data-choice-platform="${p.id}" ${savedPlatform?'disabled':''}>${escapeHtml(p.name)} <kbd>${i+1}</kbd></button>`).join('')}</div><p class="choice-status" role="status"></p>${savedPlatform?(url?`<a class="ghost-btn platform-launch" href="${escapeHtml(url)}">Apri su ${escapeHtml(savedPlatform.name)} ⏎</a>`:'<p>Il collegamento diretto a questa piattaforma non è ancora configurato.</p>'):''}<button class="ghost-btn" data-action="home">Torna a Gaia</button></div></div></div>`;
+  const quote=effectiveQuote(t,state.quotes);
+  app.innerHTML=`<div class="shell">${topbar()}<div class="hero-center"><div class="empty choice-result"><h2 class="film-quote">${quote?`«${escapeHtml(quote.text)}»`:escapeHtml(standardQuote)}</h2><p class="quote-attribution">${quote?.speaker?`${escapeHtml(quote.speaker)} · `:''}${escapeHtml(t.name)}${quote?.source?` <a class="quote-source" href="${escapeHtml(quote.source)}" target="_blank" rel="noopener noreferrer" aria-label="Fonte della citazione">↗</a>`:''}</p><p class="choice-counter">${escapeHtml(choiceMessage(count))}</p><h3>Dove lo guardiamo?</h3><div class="platform-list">${ps.map((p,i)=>`<button class="platform-option ${savedPlatform?.id===p.id?'selected':''}" data-choice-platform="${p.id}" ${savedPlatform?'disabled':''}>${escapeHtml(p.name)} <kbd>${i+1}</kbd></button>`).join('')}</div><p class="choice-status" role="status"></p>${savedPlatform?(url?`<a class="ghost-btn platform-launch" href="${escapeHtml(url)}">Apri su ${escapeHtml(savedPlatform.name)} ⏎</a>`:'<p>Il collegamento diretto a questa piattaforma non è ancora configurato.</p>'):''}<button class="ghost-btn" data-action="home">Torna a Gaia</button></div></div></div>`;
 }
 
 function renderMode(){
