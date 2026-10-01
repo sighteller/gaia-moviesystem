@@ -107,7 +107,7 @@ begin
    else
     -- Fill missing metadata; respect manual edits and selected artwork.
     update public.titles set overview=coalesce(nullif(overview,''),d->>'overview'),
-     runtime_minutes=coalesce(runtime_minutes,(d->>'runtime')::integer),
+     runtime_minutes=case when media_type=d->>'media_type' then coalesce(runtime_minutes,(d->>'runtime')::integer) else runtime_minutes end,
      poster_url=coalesce(poster_url,d->>'cover_url'),updated_at=now() where id=tid;
     linked:=linked+1;
    end if;

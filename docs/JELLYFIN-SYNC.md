@@ -86,3 +86,21 @@ il pacchetto originale può riprovare senza reinserire le chiavi.
 Il pacchetto aggiornato mostra passaggio, codice HTTP e codice diagnostico
 in caso di errore, senza stampare credenziali o payload. L'avvio manuale aggiorna
 anche la copia usata dall'attività Windows quando è già installata.
+
+## Raggruppamento Glee — 1 ottobre 2026
+
+I 108 elementi nominati `1x01…` fino a `5x20…`, classificati Movie da Jellyfin,
+sono stati identificati come Glee confrontando i titoli degli episodi. Stagioni
+disponibili 1–5: 22, 22, 22, 22, 20 episodi. Ogni item conserva dati e ID originali,
+ma title_id ora punta alla scheda serie TMDb 1417 già presente in Gaia. Le schede
+singole sono archiviate con active=false, senza cancellare dati. La copertina
+già scelta per Glee è conservata; disponibilità Jellyfin attiva sulla serie.
+
+Il sincronizzatore riutilizza l'associazione item_id/title_id esistente e quindi
+mantiene il raggruppamento anche se Jellyfin continua a classificare gli item
+come Movie. Per associazioni di questo tipo la durata dell'episodio non viene
+usata per riempire la durata della serie. Una ripetizione del catalogo completo
+in transazione con rollback verifica assenza di nuovi duplicati, raggruppamento
+conservato e durata invariata. Nessuna reinstallazione Windows è necessaria.
+Nuovi episodi con ID mai visti e senza nome/ID della serie richiedono nuova
+identificazione: il formato stagione/episodio da solo non identifica la serie.
