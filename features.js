@@ -1,5 +1,5 @@
-import { recommend } from './discovery.js?v=20261001h';
-import { curator,esc,safeImage } from './curator-client.js?v=20261001h';
+import { recommend } from './discovery.js?v=20261001i';
+import { curator,esc,safeImage } from './curator-client.js?v=20261001i';
 let config={},covers=[],selectedCover=null,searchPage=1,lastQuery='',totalPages=1,renderVersion=0;
 export function initFeatures({app,state,loadData,startSession,call,deviceId,topbar}) {
   const shell=body=>`<div class="shell">${topbar()}<section class="curator">${body}</section></div>`;

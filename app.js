@@ -1,6 +1,6 @@
-import { recordConsultation, choiceMessage, platformUrl } from './choice-summary.js?v=20261001h';
-import { mountCoverPicker } from './cover-picker.js?v=20261001h';
-import { initFeatures } from './features.js?v=20261001h';
+import { recordConsultation, choiceMessage, platformUrl } from './choice-summary.js?v=20261001i';
+import { mountCoverPicker } from './cover-picker.js?v=20261001i';
+import { initFeatures } from './features.js?v=20261001i';
 const API_URL = 'https://mahjewznwqvdgtdjtekc.supabase.co/functions/v1/gaia-api';
 
 const app = document.querySelector('#app');
@@ -77,7 +77,7 @@ function homeCarousel(){
 function renderIntro(){
   state.category=null;state.session=null;
   if(state.currentAudio){state.currentAudio.pause();state.currentAudio=null;}
-  app.innerHTML=`<div class="shell">${topbar()}<section class="intro-screen"><h1 class="intro-greeting"><span data-typewriter>Ciao Gaia!</span><span class="intro-question"><span data-typewriter>che</span>${homeCarousel()}<span data-typewriter>film</span></span><span data-typewriter>vediamo oggi?</span></h1><button class="intro-start" data-action="categories">Cominciamo <span class="return-glyph" aria-hidden="true">⏎</span></button></section></div>`;
+  app.innerHTML=`<div class="shell">${topbar()}<section class="intro-screen"><h1 class="intro-greeting"><span data-typewriter>Ciao Gaia!</span><span class="intro-question"><span data-typewriter>che</span>${homeCarousel()}<span data-typewriter>film</span></span><span data-typewriter>vediamo oggi?</span></h1><button class="intro-start" data-action="categories">Cominciamo <svg class="return-glyph" aria-hidden="true" viewBox="0 0 20.35 16.2"><path fill="currentColor" d="M6.07,16.2L0,10.23l6.07-5.97v11.94ZM4.13,11.68v-2.89h16.16v2.89H4.13ZM12.6,2.93V0h7.69v2.93h-7.69ZM17.46,11.68V0h2.89v11.68h-2.89Z"/></svg></button></section></div>`;
   if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
     let delay=0;
     app.querySelectorAll('[data-typewriter]').forEach(line=>{
@@ -208,9 +208,15 @@ function availablePlatformsForTitle(t){
   return state.platforms.filter(p => ids.includes(p.id));
 }
 
-function renderConfirm(){
+async function renderConfirm(){
   if(state.navigating)return;
   const stage=app.querySelector('.movie-stage');if(!stage)return;
+  if(stage.dataset.confirming)return;
+  const watch=stage.querySelector('.watch-btn');
+  state.navigating=true;watch?.classList.add('navigation-flash');
+  await new Promise(resolve=>setTimeout(resolve,220));
+  state.navigating=false;
+  if(!stage.isConnected)return;
   stage.dataset.confirming='true';
   stage.querySelector('.movie-navigation').innerHTML='<p class="confirmation-question">Sei sicura?</p><div class="confirm-navigation navigation-arrows"><button class="ghost-btn arrow-btn" data-action="back-to-movie" aria-label="Torna al film">←</button><button class="ghost-btn confirm-btn preselected" data-action="confirm-title">Conferma</button></div>';
 }
