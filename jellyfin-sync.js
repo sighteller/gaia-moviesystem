@@ -22,7 +22,7 @@ export function mountJellyfinSync(el,onUpdated){
    const s=await syncCall('status');if(!el.isConnected)return;
    status.textContent=syncMessage(s);button.disabled=busy||!s.configured||s.pending||s.running;
    if(seen && s.last_success_at && s.last_success_at!==last)await onUpdated();last=s.last_success_at;seen=true;
-  }catch{status.textContent='Non riesco a controllare Jellyfin. Riapri i filtri per riprovare.';button.disabled=true;}
+  }catch{status.textContent='Non riesco a controllare Jellyfin. Riapri le impostazioni per riprovare.';button.disabled=true;}
   if(el.isConnected)setTimeout(refresh,15000);
  }
  button.addEventListener('click',async()=>{

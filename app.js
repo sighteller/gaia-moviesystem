@@ -2,7 +2,7 @@ import { effectiveQuote, standardQuote } from './title-quotes.js?v=20261002edito
 import { recordConsultation, choiceMessage, platformUrl } from './choice-summary.js?v=20261001i';
 import { mountCoverPicker } from './cover-picker.js?v=20261001i';
 import { initFeatures } from './features.js?v=20261001i';
-import { mountJellyfinSync } from './jellyfin-sync.js?v=20261001j';
+import { mountJellyfinSync } from './jellyfin-sync.js?v=20261002settings';
 const API_URL = 'https://mahjewznwqvdgtdjtekc.supabase.co/functions/v1/gaia-api';
 
 const app = document.querySelector('#app');
@@ -36,7 +36,7 @@ function escapeHtml(x) { return String(x ?? '').replace(/[&<>"']/g, c => ({'&':'
 function svgIcon(paths) { return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`; }
 function logo() { return `<button class="brand" data-action="home" aria-label="Home"><img src="assets/gaia-logo.svg" alt="Gaia · Movie System" width="235" height="30"></button>`; }
 function muteButton() { return `<button class="icon-btn ${state.muted?'active':''}" data-action="mute" aria-label="${state.muted?'Attiva audio':'Disattiva audio'}" aria-pressed="${state.muted}">${svgIcon('<path d="M11 5 6 9H3v6h3l5 4z"/>'+(state.muted?'<path d="m16 9 5 6m0-6-5 6"/>':'<path d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/>'))}</button>`; }
-function topbar() { return `<div class="topbar">${logo()}<div class="small-actions"><button class="ghost-btn" data-action="filters">Filtri</button><button class="ghost-btn discover-btn" data-action="discover"><svg viewBox="0 0 40.13 40.93" fill="currentColor" aria-hidden="true"><path d="M27.24,28.04c-.23.91-.89,1.44-1.71,1.46-.75.02-1.61-.42-1.82-1.27-1.42-5.79-5.94-10.31-11.72-11.73-.82-.2-1.26-1.05-1.25-1.77s.5-1.52,1.31-1.71c5.72-1.38,10.18-5.79,11.59-11.53C23.86.59,24.54,0,25.43,0s1.59.57,1.81,1.46c1.38,5.64,5.68,10.06,11.32,11.47.91.23,1.5.79,1.57,1.71.06.81-.44,1.67-1.34,1.89-5.67,1.43-10.1,5.76-11.55,11.5Z"/><path d="M10.9,40.11c-.14.58-.74.85-1.18.82-.55-.04-1.01-.39-1.16-.97-.95-3.74-3.82-6.64-7.57-7.61C.37,32.18,0,31.74,0,31.14c0-.65.43-1.05,1.08-1.23,3.73-.98,6.55-3.86,7.48-7.6.15-.59.57-.97,1.14-.99s1.09.33,1.24.96c.94,3.8,3.83,6.69,7.61,7.67.51.13.88.55.95,1s-.14,1.15-.7,1.28c-3.9.96-6.93,3.91-7.92,7.87Z"/></svg><span>Scopri</span></button><button class="icon-btn add-title-btn" data-action="add-title" aria-label="Aggiungi titolo" title="Aggiungi titolo">${svgIcon('<path d="M12 5v14M5 12h14"/>')}</button><button class="icon-btn" data-action="stats" aria-label="Statistiche">${svgIcon('<path d="M4 20V10m8 10V4m8 16v-7M2 20h20"/>')}</button>${muteButton()}</div></div>`; }
+function topbar() { return `<div class="topbar">${logo()}<div class="small-actions"><button class="ghost-btn" data-action="filters">Filtri</button><button class="ghost-btn discover-btn" data-action="discover"><svg viewBox="0 0 40.13 40.93" fill="currentColor" aria-hidden="true"><path d="M27.24,28.04c-.23.91-.89,1.44-1.71,1.46-.75.02-1.61-.42-1.82-1.27-1.42-5.79-5.94-10.31-11.72-11.73-.82-.2-1.26-1.05-1.25-1.77s.5-1.52,1.31-1.71c5.72-1.38,10.18-5.79,11.59-11.53C23.86.59,24.54,0,25.43,0s1.59.57,1.81,1.46c1.38,5.64,5.68,10.06,11.32,11.47.91.23,1.5.79,1.57,1.71.06.81-.44,1.67-1.34,1.89-5.67,1.43-10.1,5.76-11.55,11.5Z"/><path d="M10.9,40.11c-.14.58-.74.85-1.18.82-.55-.04-1.01-.39-1.16-.97-.95-3.74-3.82-6.64-7.57-7.61C.37,32.18,0,31.74,0,31.14c0-.65.43-1.05,1.08-1.23,3.73-.98,6.55-3.86,7.48-7.6.15-.59.57-.97,1.14-.99s1.09.33,1.24.96c.94,3.8,3.83,6.69,7.61,7.67.51.13.88.55.95,1s-.14,1.15-.7,1.28c-3.9.96-6.93,3.91-7.92,7.87Z"/></svg><span>Scopri</span></button><button class="icon-btn add-title-btn" data-action="add-title" aria-label="Aggiungi titolo" title="Aggiungi titolo">${svgIcon('<path d="M12 5v14M5 12h14"/>')}</button><button class="icon-btn" data-action="stats" aria-label="Statistiche">${svgIcon('<path d="M4 20V10m8 10V4m8 16v-7M2 20h20"/>')}</button>${muteButton()}<button class="icon-btn" data-action="settings" aria-label="Impostazioni" title="Impostazioni">${svgIcon('<g transform="translate(1 1)"><path d="m9.2 3-.6 2.1-1.8 1-2.2-.5-1.8 3.1 1.6 1.6v2.1l-1.6 1.6 1.8 3.1 2.2-.5 1.8 1 .6 2.1h3.6l.6-2.1 1.8-1 2.2.5 1.8-3.1-1.6-1.6v-2.1l1.6-1.6-1.8-3.1-2.2.5-1.8-1-.6-2.1z"/><circle cx="11" cy="11" r="3"/></g>')}</button></div></div>`; }
 
 async function loadData() {
   const data = await call('catalog');
@@ -80,7 +80,7 @@ function homeCarousel(){
 function renderIntro(){
   state.category=null;state.session=null;
   if(state.currentAudio){state.currentAudio.pause();state.currentAudio=null;}
-  app.innerHTML=`<div class="shell">${topbar()}<section class="intro-screen"><h1 class="intro-greeting"><span data-typewriter>Ciao Gaia!</span><span class="intro-question"><span data-typewriter>che</span>${homeCarousel()}<span data-typewriter>film</span></span><span data-typewriter>vediamo oggi?</span></h1><button class="intro-start" data-action="categories">Cominciamo <svg class="return-glyph" aria-hidden="true" viewBox="0 0 20.35 16.2"><path fill="currentColor" d="M6.07,16.2L0,10.23l6.07-5.97v11.94ZM4.13,11.68v-2.89h16.16v2.89H4.13ZM12.6,2.93V0h7.69v2.93h-7.69ZM17.46,11.68V0h2.89v11.68h-2.89Z"/></svg></button><a class="intro-quotes" href="citazioni.html">Citazioni dei film</a></section></div>`;
+  app.innerHTML=`<div class="shell">${topbar()}<section class="intro-screen"><h1 class="intro-greeting"><span data-typewriter>Ciao Gaia!</span><span class="intro-question"><span data-typewriter>che</span>${homeCarousel()}<span data-typewriter>film</span></span><span data-typewriter>vediamo oggi?</span></h1><button class="intro-start" data-action="categories">Cominciamo <svg class="return-glyph" aria-hidden="true" viewBox="0 0 20.35 16.2"><path fill="currentColor" d="M6.07,16.2L0,10.23l6.07-5.97v11.94ZM4.13,11.68v-2.89h16.16v2.89H4.13ZM12.6,2.93V0h7.69v2.93h-7.69ZM17.46,11.68V0h2.89v11.68h-2.89Z"/></svg></button></section></div>`;
   if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
     let delay=0;
     app.querySelectorAll('[data-typewriter]').forEach(line=>{
@@ -111,8 +111,14 @@ app.addEventListener('focusin',e=>{const b=e.target.closest('.category-card');if
 
 function renderFilters(){
   const chips = state.platforms.map(p => `<button class="chip ${state.selectedPlatformIds.includes(p.id)?'selected':''}" data-platform-filter="${p.id}">${escapeHtml(p.name)}</button>`).join('');
-  app.insertAdjacentHTML('beforeend', `<div class="platform-panel" data-overlay="filters"><div class="platform-box"><h2>Filtri</h2><p>Mostra solo i titoli disponibili su almeno una delle piattaforme selezionate.</p><div class="chips">${chips}</div><div id="jellyfin-sync-panel"></div><button class="ghost-btn" data-action="close-filters">Fatto</button></div></div>`);
+  app.insertAdjacentHTML('beforeend', `<div class="platform-panel" data-overlay="filters"><div class="platform-box"><h2>Filtri</h2><p>Mostra solo i titoli disponibili su almeno una delle piattaforme selezionate.</p><div class="chips">${chips}</div><button class="ghost-btn" data-action="close-filters">Fatto</button></div></div>`);
+}
+
+function renderSettings(){
+  if(app.querySelector('[data-overlay]'))return;
+  app.insertAdjacentHTML('beforeend', `<div class="platform-panel" data-overlay="settings"><section class="platform-box settings-box" role="dialog" aria-modal="true" aria-labelledby="settings-heading"><h2 id="settings-heading">Impostazioni</h2><h3>Citazioni dei film</h3><p>Leggi le frasi scelte, aggiungi quelle che ricordi o usa la frase standard.</p><a class="ghost-btn" href="citazioni.html">Gestisci citazioni</a><div id="jellyfin-sync-panel"></div><button class="ghost-btn" data-action="close-settings">Fatto</button></section></div>`);
   mountJellyfinSync(app.querySelector('#jellyfin-sync-panel'),loadData);
+  app.querySelector('[data-action="close-settings"]').focus({preventScroll:true});
 }
 
 function buildFilteredTitles(){
@@ -292,6 +298,8 @@ app.addEventListener('click', async e => {
   if (b.dataset.action === 'home') return renderIntro();
   if (b.dataset.action === 'watch') return renderConfirm();
   if (b.dataset.action === 'mute') return toggleMute();
+  if (b.dataset.action === 'settings') return renderSettings();
+  if (b.dataset.action === 'close-settings') { app.querySelector('[data-overlay="settings"]')?.remove(); app.querySelector('[data-action="settings"]')?.focus({preventScroll:true}); return; }
   if (b.dataset.action === 'filters') return renderFilters();
   if (b.dataset.action === 'stats') return renderStats();
   if (b.dataset.action === 'close-filters') { document.querySelector('[data-overlay="filters"]')?.remove(); return; }
@@ -317,6 +325,7 @@ for(const event of ['pointerover','focusin'])document.addEventListener(event,e=>
   if(mode)app.querySelectorAll('.mode-card').forEach(b=>b.classList.toggle('preselected',b===mode));
 });
 document.addEventListener('keydown', async e => {
+  if(e.key==='Escape'&&app.querySelector('[data-overlay="settings"]')){e.preventDefault();app.querySelector('[data-action="close-settings"]').click();return;}
   if (e.target.closest('input,textarea,select,form')) return;
   if(document.querySelector('.intro-screen')&&!document.querySelector('[data-overlay]')&&(e.code==='Space'||e.key==='Enter')&&(!e.target.closest('button')||e.target.closest('.intro-start'))){e.preventDefault();if(!e.repeat)renderCategories();return;}
   const categories=[...document.querySelectorAll('.category-card')];

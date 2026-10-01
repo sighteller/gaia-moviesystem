@@ -247,3 +247,5 @@ kbd { font:500 13px Inter,sans-serif; display:inline-grid; place-items:center; m
 .quote-source:hover,.quote-source:focus-visible { color:var(--accent); }
 
 .intro-quotes{display:block;margin:18px auto;color:var(--muted);font-size:14px;text-decoration:none}.intro-quotes:hover,.intro-quotes:focus-visible{color:var(--accent)}
+
+.settings-box{max-height:85vh;overflow:auto}.settings-box h3{margin-top:28px}.settings-box #jellyfin-sync-panel{padding:8px 0 28px}
