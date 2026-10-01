@@ -60,7 +60,7 @@ body { min-height: 100vh; }
 .movie-navigation { display:grid; justify-items:start; gap:12px; }
 .navigation-arrows { display:flex; gap:14px; }
 .arrow-btn { min-width:80px; font-size:32px; line-height:1; }
-.watch-btn { padding:8px 0; background:transparent; color:var(--text); border:0; font-size:22px; cursor:pointer; }
+.watch-btn { padding:12px 16px; background:#1a1e17; color:var(--text); border:1px solid #363c30; border-radius:14px; font-size:22px; cursor:pointer; }
 .watch-btn span { margin-left:8px; color:var(--accent); font-size:28px; }
 .new-title-layout { display:grid; grid-template-columns:minmax(250px,400px) 1fr; gap:40px; align-items:start; }
 .movie-meta { color: var(--muted); font-size: 20px; margin-bottom: 32px; }
@@ -113,3 +113,40 @@ button:disabled { opacity:.5; cursor:not-allowed; }
   .poster-wrap { height: min(48vh, 620px); width: auto; max-width: 100%; margin: 0 auto; }
   .movie-info h1 { font-size: clamp(44px, 12vw, 72px); }
 }
+
+/* Homepage: five decorative posters rotating between the words. */
+.small-actions button { font-weight:500; }
+.small-actions .icon-btn { padding:0; flex:0 0 48px; }
+.icon-btn svg { display:block; }
+.home-hero { display:flex; flex-direction:column; justify-content:center; gap:clamp(40px,8vh,90px); padding:24px 0 60px; }
+.home-greeting { text-align:center; font-size:clamp(42px,6vw,76px); font-weight:700; letter-spacing:-.05em; line-height:1; }
+.home-greeting h1 { font:inherit; margin:0 0 20px; }
+.home-question { display:flex; align-items:center; justify-content:center; gap:clamp(16px,2vw,32px); }
+.home-question > span { white-space:nowrap; }
+.home-carousel { position:relative; width:clamp(100px,12vw,180px); height:clamp(120px,13vw,190px); perspective:700px; flex-shrink:0; }
+.home-carousel-card { position:absolute; top:0; left:18%; width:64%; height:100%; border-radius:12px; overflow:hidden; background:var(--panel); animation:home-posters 20s infinite; animation-delay:calc(var(--slot) * -4s); box-shadow:0 8px 24px #0004; }
+.home-carousel-card img { width:100%; height:100%; object-fit:cover; display:block; }
+.home-carousel:hover .home-carousel-card { animation-play-state:paused; }
+@keyframes home-posters {
+  0%,14%,100% { transform:translateX(0) rotateY(0) scale(1); opacity:1; z-index:5; }
+  20%,34% { transform:translateX(55%) rotateY(-35deg) scale(.86); opacity:1; z-index:3; }
+  40%,54% { transform:translateX(65%) rotateY(-45deg) scale(.75); opacity:0; z-index:1; }
+  60%,74% { transform:translateX(-65%) rotateY(45deg) scale(.75); opacity:0; z-index:1; }
+  80%,94% { transform:translateX(-55%) rotateY(35deg) scale(.86); opacity:1; z-index:3; }
+}
+.cover-change { position:absolute; bottom:14px; left:50%; transform:translateX(-50%); z-index:2; opacity:0; pointer-events:none; white-space:nowrap; }
+.poster-wrap:hover .cover-change,.poster-wrap:focus-within .cover-change { opacity:1; pointer-events:auto; }
+.cover-change:focus-visible { opacity:1; pointer-events:auto; }
+@media (hover:none) { .cover-change { opacity:1; pointer-events:auto; } }
+@media (prefers-reduced-motion:reduce) { .home-carousel-card { animation:none; opacity:0; } .home-carousel-card:first-child { opacity:1; } }
+@media(max-width:600px) {
+  .home-hero { gap:32px; padding-top:12px; }
+  .home-greeting { font-size:clamp(28px,7vw,42px); }
+  .home-question { gap:10px; }
+  .home-carousel { width:84px; height:110px; }
+  .home-hero .category-card { min-height:180px; }
+}
+.home-hero { gap:clamp(24px,5vh,56px); padding:12px 0 24px; }
+.home-hero .category-grid { width:min(980px,100%); }
+.home-hero .category-card { min-height:clamp(180px,27vh,260px); padding:28px; }
+.home-carousel { height:auto; aspect-ratio:10/9; }

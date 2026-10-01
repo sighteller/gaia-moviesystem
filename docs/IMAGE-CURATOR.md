@@ -117,3 +117,19 @@ fallback provider, import, salvataggio esplicito e assenza iniziale del pulsante
 rewatch/cold start. Il collegamento TMDb e la raccolta sono verificati live.
 Le RPC di import e cambio cover sono verificate nel database reale in una
 transazione con rollback, senza lasciare titoli di prova o cambiare le cover scelte.
+
+## Homepage e copertine confermate — 1 ottobre 2026
+
+La home mostra “Ciao Gaia!” e “che film [carosello] vediamo?”, con lo stesso stile
+ tipografico delle categorie. Il carosello usa solo i primi cinque film con una
+copertina del catalogo, senza link o controlli cliccabili. Rotazione ogni quattro
+secondi; pausa al passaggio del mouse e immagine statica con riduzione movimento
+attiva. Il contenuto decorativo è escluso dalla lettura degli screen reader.
+
+Dopo Salva copertina la galleria si chiude. Quando l'URL della cover principale
+corrisponde a una candidata raccolta, anche alla riapertura del titolo le miniature
+restano chiuse e non vengono caricate. “Cambia copertina” compare sulla cover con
+hover o focus da tastiera; su dispositivi touch è visibile. Il clic riapre la
+raccolta già letta, senza nuove ricerche. Le alternative rimangono in Supabase come
+URL e metadati per consentire cambi successivi. I titoli con cover iniziali esterne
+mantengono le miniature aperte finché non viene scelta una candidata.

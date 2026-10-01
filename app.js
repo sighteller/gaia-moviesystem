@@ -1,5 +1,5 @@
-import { mountCoverPicker } from './cover-picker.js?v=20261001c';
-import { initFeatures } from './features.js?v=20261001c';
+import { mountCoverPicker } from './cover-picker.js?v=20261001d';
+import { initFeatures } from './features.js?v=20261001d';
 const API_URL = 'https://mahjewznwqvdgtdjtekc.supabase.co/functions/v1/gaia-api';
 
 const app = document.querySelector('#app');
@@ -67,10 +67,15 @@ async function resumeSessionIfAny() {
   return true;
 }
 
+function homeCarousel(){
+  const films=state.titles.filter(t=>t.media_type==='movie'&&/^https:\/\//.test(titleImage(t))).slice(0,5);
+  return `<div class="home-carousel" aria-hidden="true">${films.map((t,i)=>`<div class="home-carousel-card" style="--slot:${i}"><img src="${escapeHtml(titleImage(t))}" alt="" draggable="false"></div>`).join('')}</div>`;
+}
+
 function renderCategories(){
   state.category = null; state.session = null;
   if (state.currentAudio) { state.currentAudio.pause(); state.currentAudio = null; }
-  app.innerHTML = `<div class="shell">${topbar('<button class="ghost-btn" data-action="discover">Scopri</button><button class="ghost-btn" data-action="add-title">Aggiungi titolo</button>')}<div class="hero-center"><div class="category-grid">
+  app.innerHTML = `<div class="shell">${topbar('<button class="ghost-btn" data-action="discover">Scopri</button><button class="ghost-btn" data-action="add-title">Aggiungi titolo</button>')}<div class="hero-center home-hero"><div class="home-greeting"><h1>Ciao Gaia!</h1><div class="home-question"><span>che film</span>${homeCarousel()}<span>vediamo?</span></div></div><div class="category-grid">
     <button class="category-card" data-category="animation"><h2>Animazione</h2><p>Film e serie animate</p></button>
     <button class="category-card" data-category="film"><h2>Film</h2><p>Film e serie con persone reali</p></button>
   </div></div></div>`;
