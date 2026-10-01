@@ -1,5 +1,5 @@
-import { mountCoverPicker } from './cover-picker.js?v=20261001d';
-import { initFeatures } from './features.js?v=20261001d';
+import { mountCoverPicker } from './cover-picker.js?v=20261001e';
+import { initFeatures } from './features.js?v=20261001e';
 const API_URL = 'https://mahjewznwqvdgtdjtekc.supabase.co/functions/v1/gaia-api';
 
 const app = document.querySelector('#app');
@@ -30,7 +30,7 @@ async function call(action, payload = {}) {
 
 function escapeHtml(x) { return String(x ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function svgIcon(paths) { return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`; }
-function logo() { return `<button class="brand" data-action="categories" aria-label="Home">Gaia <span>| Movie System</span></button>`; }
+function logo() { return `<button class="brand" data-action="categories" aria-label="Home"><img src="assets/gaia-logo.svg" alt="Gaia · Movie System" width="235" height="30"></button>`; }
 function muteButton() { return `<button class="icon-btn ${state.muted?'active':''}" data-action="mute" aria-label="${state.muted?'Attiva audio':'Disattiva audio'}" aria-pressed="${state.muted}">${svgIcon('<path d="M11 5 6 9H3v6h3l5 4z"/>'+(state.muted?'<path d="m16 9 5 6m0-6-5 6"/>':'<path d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/>'))}</button>`; }
 function topbar(extra='') { return `<div class="topbar">${logo()}<div class="small-actions">${extra}<button class="icon-btn" data-action="stats" aria-label="Statistiche">${svgIcon('<path d="M4 20V10m8 10V4m8 16v-7M2 20h20"/>')}</button><button class="ghost-btn" data-action="filters">Filtri</button>${muteButton()}</div></div>`; }
 
@@ -72,10 +72,19 @@ function homeCarousel(){
   return `<div class="home-carousel" aria-hidden="true">${films.map((t,i)=>`<div class="home-carousel-card" style="--slot:${i}"><img src="${escapeHtml(titleImage(t))}" alt="" draggable="false"></div>`).join('')}</div>`;
 }
 
+function homeActions(){return '<button class="ghost-btn" data-action="discover">Scopri</button><button class="ghost-btn" data-action="add-title">Aggiungi titolo</button>';}
+
+function renderIntro(){
+  state.category=null;state.session=null;
+  if(state.currentAudio){state.currentAudio.pause();state.currentAudio=null;}
+  app.innerHTML=`<div class="shell">${topbar(homeActions())}<section class="intro-screen"><h1 class="intro-greeting"><span>Ciao Gaia!</span><span class="intro-question"><span>che</span>${homeCarousel()}<span>film</span></span><span>vediamo oggi?</span></h1><button class="intro-start" data-action="categories">Cominciamo <kbd aria-label="barra spaziatrice">␣</kbd></button></section></div>`;
+  app.querySelector('.intro-start').focus({preventScroll:true});
+}
+
 function renderCategories(){
   state.category = null; state.session = null;
   if (state.currentAudio) { state.currentAudio.pause(); state.currentAudio = null; }
-  app.innerHTML = `<div class="shell">${topbar('<button class="ghost-btn" data-action="discover">Scopri</button><button class="ghost-btn" data-action="add-title">Aggiungi titolo</button>')}<div class="hero-center home-hero"><div class="home-greeting"><h1>Ciao Gaia!</h1><div class="home-question"><span>che film</span>${homeCarousel()}<span>vediamo?</span></div></div><div class="category-grid">
+  app.innerHTML = `<div class="shell">${topbar(homeActions())}<div class="hero-center category-screen"><div class="category-grid">
     <button class="category-card" data-category="animation"><h2>Animazione</h2><p>Film e serie animate</p></button>
     <button class="category-card" data-category="film"><h2>Film</h2><p>Film e serie con persone reali</p></button>
   </div></div></div>`;
@@ -241,6 +250,7 @@ app.addEventListener('click', async e => {
 
 document.addEventListener('keydown', async e => {
   if (e.target.closest('input,textarea,select,form')) return;
+  if(document.querySelector('.intro-screen')&&!document.querySelector('[data-overlay]')&&e.code==='Space'&&(!e.target.closest('button')||e.target.closest('.intro-start'))){e.preventDefault();if(!e.repeat)renderCategories();return;}
   const categories=[...document.querySelectorAll('.category-card')];
   if(categories.length&&!document.querySelector('[data-overlay]')){
     const selected=categories.findIndex(b=>b.classList.contains('preselected'));
@@ -277,7 +287,7 @@ document.addEventListener('gaia-render-movie', renderMovie);
   try {
     await loadData();
     await checkInterruptedViewing();
-    if (!(await resumeSessionIfAny())) renderCategories();
+    renderIntro();
   } catch (err) {
     console.error(err);
     app.innerHTML = `<div class="shell"><div class="empty"><h2>Errore di connessione</h2><p>Gaia non riesce a leggere il catalogo in questo momento.</p></div></div>`;

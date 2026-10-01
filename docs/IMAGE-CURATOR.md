@@ -133,3 +133,12 @@ hover o focus da tastiera; su dispositivi touch è visibile. Il clic riapre la
 raccolta già letta, senza nuove ricerche. Le alternative rimangono in Supabase come
 URL e metadati per consentire cambi successivi. I titoli con cover iniziali esterne
 mantengono le miniature aperte finché non viene scelta una candidata.
+
+## Ingresso separato e logo vettoriale
+
+Ogni apertura del sito mostra l'intro “Ciao Gaia! che [carosello] film vediamo
+oggi?”. Spazio o il clic su Cominciamo apre la scelta delle categorie; Invio sul
+pulsante funziona come azione nativa. I cinque poster decorativi rimangono soltanto
+nell'intro. Animazione è preselezionata nella seconda pagina. Il logo SVG fornito
+è in assets/gaia-logo.svg e riporta alla scelta delle categorie. L'intro ha priorità
+sul precedente ripristino automatico di una sessione durante il caricamento.
