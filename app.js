@@ -1,3 +1,4 @@
+import { titleQuote } from './title-quotes.js?v=20261001quotes';
 import { recordConsultation, choiceMessage, platformUrl } from './choice-summary.js?v=20261001i';
 import { mountCoverPicker } from './cover-picker.js?v=20261001i';
 import { initFeatures } from './features.js?v=20261001i';
@@ -232,7 +233,8 @@ function renderPlatformSummary(mode,savedPlatform=null){
   const t=currentTitle();const ps=availablePlatformsForTitle(t);const count=state.consultation.titleIds.length;
   const link=savedPlatform?state.links.find(l=>l.title_id===t.id&&l.platform_id===savedPlatform.id):null;
   const url=platformUrl(link?.url);
-  app.innerHTML=`<div class="shell">${topbar()}<div class="hero-center"><div class="empty choice-result"><h2>${escapeHtml(choiceMessage(count))}</h2><p>${escapeHtml(t.name)}</p><p class="choice-counter">${count} ${count===1?'titolo consultato':'titoli consultati'} prima della scelta.</p><h3>Dove lo guardiamo?</h3><div class="platform-list">${ps.map((p,i)=>`<button class="platform-option ${savedPlatform?.id===p.id?'selected':''}" data-choice-platform="${p.id}" ${savedPlatform?'disabled':''}>${escapeHtml(p.name)} <kbd>${i+1}</kbd></button>`).join('')}</div><p class="choice-status" role="status"></p>${savedPlatform?(url?`<a class="ghost-btn platform-launch" href="${escapeHtml(url)}">Apri su ${escapeHtml(savedPlatform.name)} ⏎</a>`:'<p>Il collegamento diretto a questa piattaforma non è ancora configurato.</p>'):''}<button class="ghost-btn" data-action="home">Torna a Gaia</button></div></div></div>`;
+  const quote=titleQuote(t);
+  app.innerHTML=`<div class="shell">${topbar()}<div class="hero-center"><div class="empty choice-result"><h2 class="film-quote">${quote?`«${escapeHtml(quote.text)}»`:escapeHtml(t.name)}</h2><p class="quote-attribution">${quote?.speaker?`${escapeHtml(quote.speaker)} · `:''}${escapeHtml(t.name)}${quote?` <a class="quote-source" href="${escapeHtml(quote.source)}" target="_blank" rel="noopener noreferrer" aria-label="Fonte della citazione">↗</a>`:''}</p><p class="choice-counter">${escapeHtml(choiceMessage(count))}</p><h3>Dove lo guardiamo?</h3><div class="platform-list">${ps.map((p,i)=>`<button class="platform-option ${savedPlatform?.id===p.id?'selected':''}" data-choice-platform="${p.id}" ${savedPlatform?'disabled':''}>${escapeHtml(p.name)} <kbd>${i+1}</kbd></button>`).join('')}</div><p class="choice-status" role="status"></p>${savedPlatform?(url?`<a class="ghost-btn platform-launch" href="${escapeHtml(url)}">Apri su ${escapeHtml(savedPlatform.name)} ⏎</a>`:'<p>Il collegamento diretto a questa piattaforma non è ancora configurato.</p>'):''}<button class="ghost-btn" data-action="home">Torna a Gaia</button></div></div></div>`;
 }
 
 function renderMode(){
