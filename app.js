@@ -1,6 +1,7 @@
 import { recordConsultation, choiceMessage, platformUrl } from './choice-summary.js?v=20261001i';
 import { mountCoverPicker } from './cover-picker.js?v=20261001i';
 import { initFeatures } from './features.js?v=20261001i';
+import { mountJellyfinSync } from './jellyfin-sync.js?v=20261001j';
 const API_URL = 'https://mahjewznwqvdgtdjtekc.supabase.co/functions/v1/gaia-api';
 
 const app = document.querySelector('#app');
@@ -108,7 +109,8 @@ app.addEventListener('focusin',e=>{const b=e.target.closest('.category-card');if
 
 function renderFilters(){
   const chips = state.platforms.map(p => `<button class="chip ${state.selectedPlatformIds.includes(p.id)?'selected':''}" data-platform-filter="${p.id}">${escapeHtml(p.name)}</button>`).join('');
-  app.insertAdjacentHTML('beforeend', `<div class="platform-panel" data-overlay="filters"><div class="platform-box"><h2>Filtri</h2><p>Mostra solo i titoli disponibili su almeno una delle piattaforme selezionate.</p><div class="chips">${chips}</div><button class="ghost-btn" data-action="close-filters">Fatto</button></div></div>`);
+  app.insertAdjacentHTML('beforeend', `<div class="platform-panel" data-overlay="filters"><div class="platform-box"><h2>Filtri</h2><p>Mostra solo i titoli disponibili su almeno una delle piattaforme selezionate.</p><div class="chips">${chips}</div><div id="jellyfin-sync-panel"></div><button class="ghost-btn" data-action="close-filters">Fatto</button></div></div>`);
+  mountJellyfinSync(app.querySelector('#jellyfin-sync-panel'),loadData);
 }
 
 function buildFilteredTitles(){

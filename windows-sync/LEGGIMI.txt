@@ -1,0 +1,68 @@
+GAIA + JELLYFIN - INSTALLAZIONE SU WINDOWS
+
+1. Copia lo ZIP sul computer di casa su cui gira Jellyfin.
+2. Tasto destro sullo ZIP > Estrai tutto. Apri la cartella estratta.
+3. Assicurati che Jellyfin sia avviato e che Internet funzioni.
+4. Doppio clic su Configura.cmd.
+5. Incolla la chiave API Jellyfin e premi Invio. La chiave non compare
+   mentre scrivi: e normale. Se Ctrl+V non funziona, usa il tasto destro.
+6. Attendi 'Collegamento riuscito' e il numero dei film e delle serie.
+7. Scegli S per attivare gli aggiornamenti automatici.
+8. Doppio clic su Aggiorna adesso.cmd per la prima sincronizzazione.
+   Lascia aperta la finestra e attendi 'Aggiornamento riuscito'.
+
+Se Windows mostra una finestra di protezione, controlla che il pacchetto
+sia quello ricevuto in questa chat e leggi l'avviso prima di procedere.
+Questo pacchetto contiene script leggibili, non un eseguibile firmato.
+
+DOPO L'INSTALLAZIONE
+
+- Gaia > Filtri > Aggiorna Jellyfin permette di richiedere l'aggiornamento.
+- Se il computer e spento, la richiesta resta in attesa.
+- Il controllo delle richieste avviene ogni 15 minuti mentre il computer
+  e acceso e QUESTO UTENTE WINDOWS e collegato (anche con schermo bloccato).
+- La sincronizzazione completa avviene solo ogni 7 giorni dall'ultimo
+  aggiornamento riuscito, oppure su richiesta manuale. Un aggiornamento
+  manuale fa ripartire il conteggio dei 7 giorni.
+- Se il computer e spento alla scadenza, recupera al controllo successivo.
+- Per partire subito da Windows usa Aggiorna adesso.cmd.
+- Per controllare il collegamento senza cambiare il catalogo usa
+  Verifica collegamento.cmd.
+- Disattiva automatico.cmd rimuove la programmazione, senza toccare Gaia.
+- Ripristina configurazione.cmd permette di reinserire la chiave.
+- L'ultimo esito e salvato in %LOCALAPPDATA%\GaiaSync\ultimo-esito.txt.
+
+DATI E COPERTINE
+
+Importa tutti i film e le serie delle librerie Jellyfin, con metadati,
+locandine e nomi delle raccolte. Le raccolte sono conservate come metadati:
+non vengono create nuove schermate o filtri per le raccolte in Gaia.
+Gli episodi non diventano singole schede. Non trasferisce video, percorsi
+dei file, utenti o cronologia di visione. I segnaposto non sono inclusi.
+Le locandine vengono copiate in Gaia per essere visibili fuori casa.
+Se una locandina manca in Jellyfin, la scheda viene comunque importata:
+le alternative TMDb si possono recuperare dal selettore gia presente in
+Gaia, quando e disponibile un identificativo TMDb. Non viene avviata
+una ricerca estesa di nuove copertine per tutto il catalogo ogni settimana.
+Le copertine gia scelte in Gaia vengono conservate.
+
+SICUREZZA E LIMITI
+
+La chiave Jellyfin resta cifrata sul computer Windows per il tuo utente;
+non viene inviata a Gaia. Il file collegamento-gaia.txt contiene invece
+la credenziale dedicata a questo connettore: conserva lo ZIP privatamente
+e non pubblicarlo. Non contiene chiavi amministrative Supabase.
+Non servono modifiche al router o accesso esterno a Jellyfin.
+Le copertine copiate sono pubbliche, come il catalogo della webapp Gaia.
+Un trasferimento incompleto non modifica la disponibilita dei titoli.
+Una riduzione del catalogo superiore al 30% blocca l'aggiornamento per
+evitare rimozioni causate da dischi o librerie temporaneamente assenti.
+In caso di blocco, controlla prima che Jellyfin veda tutte le librerie.
+
+VERIFICA
+
+Il servizio Gaia e la logica di importazione sono stati verificati con
+test automatici e transazioni annullate: nessun titolo di prova rimane.
+Questo script non e stato eseguito sul tuo Windows o sul tuo Jellyfin.
+La prima verifica reale avviene al punto 6. Se fallisce, comunicami
+il messaggio mostrato e il passaggio; non inviare le chiavi.

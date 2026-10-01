@@ -15,3 +15,7 @@ navigazione da tastiera e pulsanti, statistiche e storico Supabase.
 
 Test (Node 24): `node --test tests/*.test.mjs`.
 Le credenziali provider sono custodite lato server; non aggiungerle al repository.
+
+Sincronizzazione Jellyfin: [installazione Windows](windows-sync/LEGGIMI.txt) e
+[funzionamento e verifiche](docs/JELLYFIN-SYNC.md). Il file di collegamento privato
+viene fornito nel pacchetto personale, non nel repository pubblico.

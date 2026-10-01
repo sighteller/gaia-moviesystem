@@ -3,3 +3,6 @@ verify_jwt = false
 
 [functions.image-curator]
 verify_jwt = false
+
+[functions.jellyfin-sync]
+verify_jwt = false
