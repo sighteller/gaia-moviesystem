@@ -81,7 +81,6 @@ Proposte disponibili per 128 titoli. I casi senza una frase utilizzabile restano
 - Chicken Little - Amici per le penne (2005): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - Chitty Chitty Bang Bang (1968): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - Come cani e gatti (2001): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
-- Crudelia (2021): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - Descendants: Wicked Wonderland (2026): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - Dilili a Parigi (2018): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - Doraemon – Nobita e l’isola del tesoro (2018): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
@@ -90,7 +89,6 @@ Proposte disponibili per 128 titoli. I casi senza una frase utilizzabile restano
 - Ernest & Celestine (2012): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - Fata madrina cercasi (2020): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - Footloose (2011): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
-- Frankenweenie (2012): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - Garfield 2 - Il Film (2006): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - Garfield Cartoon (2026): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - Gatta Cenerentola (2017): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
@@ -98,13 +96,11 @@ Proposte disponibili per 128 titoli. I casi senza una frase utilizzabile restano
 - Heidi (1974): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - High School Musical: The Musical: La Serie (2019): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - I Simspson Film Festival (3) (2026): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
-- Il GGG - Il Grande Gigante Gentile (2016): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - Il giardino segreto (2020): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - Il Magico Mondo di Winnie The Pooh: Tanti amici e il primo amore (2003): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - Il mio amico Nanuk (2014): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - Il vento tra i salici (1949): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - Jimmy Neutron - Ragazzo prodigio (2001): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
-- Jungle Cruise (2021): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - Kirikù e gli animali selvaggi (2005): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - Kirikù e la strega Karabà (1998): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - Kubo e la spada magica (2016): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
@@ -170,7 +166,18 @@ Proposte disponibili per 128 titoli. I casi senza una frase utilizzabile restano
 - Winnie the Pooh - Ro e la magia della primavera (2004): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - Winnie the Pooh e gli Efelanti (2005): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - Wonder Park (2019): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
-- Wonder Woman (2017): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - Zathura - Un'avventura spaziale (2005): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - Zootropolis 2 (2025): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
 - 降龙大师之捉妖榜 (2020): nessuna frase autonoma italiana con attribuzione sufficiente trovata in questa ricerca; non significa che non esista.
+
+## Schede revisionate e nuova ricerca
+
+Le alternative delle citazioni revisionate sono nascoste. Modificare la citazione riapre le proposte. Le frecce ignorano le alternative nascoste.
+
+Cinque nuove frasi autonome, per un totale di 133 titoli con proposte. Frankenweenie è un estratto di una singola battuta.
+
+- Il GGG - Il Grande Gigante Gentile (2016): https://aforismi.meglio.it/frasi-film.htm?n=Il+GGG+-+Il+Grande+Gigante+Gentile
+- Wonder Woman (2017): https://it.wikiquote.org/wiki/Wonder_Woman_(film_2017)
+- Frankenweenie (2012): https://www.mymovies.it/film/2012/frankenweenie/frasi/
+- Jungle Cruise (2021): https://www.comingsoon.it/film/jungle-cruise/55400/scheda/
+- Crudelia (2021): https://www.comingsoon.it/film/crudelia/58230/scheda/

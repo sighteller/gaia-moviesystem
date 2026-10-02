@@ -2765,6 +2765,76 @@ export const quoteProposals = [
         "excerpt": false
       }
     ]
+  },
+  {
+    "names": [
+      "Il GGG - Il Grande Gigante Gentile"
+    ],
+    "year": 2016,
+    "options": [
+      {
+        "text": "Sogni è una cosa molto molto misteriosa. Loro sempre cerca di gente addormentata.",
+        "speaker": "GGG",
+        "source": "https://aforismi.meglio.it/frasi-film.htm?n=Il+GGG+-+Il+Grande+Gigante+Gentile",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Wonder Woman"
+    ],
+    "year": 2017,
+    "options": [
+      {
+        "text": "Qui il merito non c'entra, l'importante è ciò in cui credi. E io credo nell'amore.",
+        "speaker": "Diana / Wonder Woman",
+        "source": "https://it.wikiquote.org/wiki/Wonder_Woman_(film_2017)",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Frankenweenie"
+    ],
+    "year": 2012,
+    "options": [
+      {
+        "text": "La scienza non è né buona né cattiva, Victor, ma può essere usata in entrambe le maniere.",
+        "speaker": "Il signor Rzykruski",
+        "source": "https://www.mymovies.it/film/2012/frankenweenie/frasi/",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Jungle Cruise"
+    ],
+    "year": 2021,
+    "options": [
+      {
+        "text": "So questo della giungla: tutto quello che vedi vuole ucciderti e può farlo!",
+        "speaker": "Frank",
+        "source": "https://www.comingsoon.it/film/jungle-cruise/55400/scheda/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Crudelia"
+    ],
+    "year": 2021,
+    "options": [
+      {
+        "text": "La verità è: sono nata geniale, sono nata perfida... Un po' folle! Sono Crudelia.",
+        "speaker": "Crudelia De Mon",
+        "source": "https://www.comingsoon.it/film/crudelia/58230/scheda/",
+        "excerpt": false
+      }
+    ]
   }
 ];
 const normalize = value => String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
