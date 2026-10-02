@@ -3,3 +3,5 @@
 .quote-proposals{margin:24px 0}.quote-option{margin:12px 0}.quote-option button{display:block;width:100%;text-align:left;border:1px solid #48523b;border-radius:12px;padding:16px;background:#11170f;color:#f5f5ef;font:inherit;cursor:pointer}.quote-option small{display:block;margin-top:8px}.quote-option button:hover,.quote-option button:focus-visible,.quote-option button[aria-pressed=true]{background:var(--accent);color:#17210b}.quote-option a{display:inline-block;margin-top:6px}
 
 .review-label{display:flex!important;align-items:center;gap:10px;margin:14px 0}.review-label input{width:auto;margin:0}#review-status{display:block;margin:12px 0}
+
+.quote-card button:focus-visible{background:var(--accent);color:#17210b;outline:2px solid var(--accent);outline-offset:3px}.keyboard-help{font-size:14px}
