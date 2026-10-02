@@ -31,7 +31,12 @@ document.addEventListener('keydown',e=>{
  if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)){
   e.preventDefault();if(!form){focusQuote(cards[0]);return;}
   if(e.key==='ArrowLeft'||e.key==='ArrowRight'){focusQuote(cards[Math.min(Math.max(cards.indexOf(form)+(e.key==='ArrowRight'?1:-1),0),cards.length-1)]);}
-  else{focusQuote(form,quoteStops(form).indexOf(e.target)+(e.key==='ArrowDown'?1:-1));}
+  else{
+   const stops=quoteStops(form),next=stops.indexOf(e.target)+(e.key==='ArrowDown'?1:-1),cardIndex=cards.indexOf(form);
+   if(next>=stops.length&&cardIndex<cards.length-1)focusQuote(cards[cardIndex+1]);
+   else if(next<0&&cardIndex>0){const previous=cards[cardIndex-1];focusQuote(previous,quoteStops(previous).length-1);}
+   else focusQuote(form,next);
+  }
  }else if(e.key==='Enter'&&form&&e.target.matches('[data-proposal],button[type=submit]')){
   e.preventDefault();if(e.repeat)return;if(e.target.matches('[data-proposal]'))e.target.click();form.elements.reviewed.checked=true;form.requestSubmit(form.querySelector('button[type=submit]'));
  }
