@@ -1,4 +1,4 @@
-import {proposalsFor} from './quote-proposals.js?v=20261002chosen';
+import {proposalsFor} from './quote-proposals.js?v=20261002alternatives';
 import {effectiveQuote,standardQuote} from './title-quotes.js?v=20261002editor';
 const endpoint='https://mahjewznwqvdgtdjtekc.supabase.co/functions/v1/gaia-api';
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));

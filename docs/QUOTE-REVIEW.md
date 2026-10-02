@@ -181,3 +181,63 @@ Cinque nuove frasi autonome, per un totale di 133 titoli con proposte. Frankenwe
 - Frankenweenie (2012): https://www.mymovies.it/film/2012/frankenweenie/frasi/
 - Jungle Cruise (2021): https://www.comingsoon.it/film/jungle-cruise/55400/scheda/
 - Crudelia (2021): https://www.comingsoon.it/film/crudelia/58230/scheda/
+
+## Due alternative alle schede con una sola proposta — 2 ottobre 2026
+
+Aggiunte 72 frasi autonome a 36 titoli (ora tre proposte). Nessuna scelta o revisione personale viene sovrascritta: le alternative restano nascoste nelle schede revisionate. Personaggio e fonte sono inclusi; gli estratti sono indicati.
+
+Completati:
+
+- La La Land (2016)
+- Dumbo (2019)
+- Fame - Saranno famosi (2009)
+- Ferdinand (2017)
+- Chiamatemi Anna (2017)
+- Garfield - Il film (2004)
+- Hairspray - Grasso è bello (2007)
+- Glee (2009)
+- I pinguini di Madagascar (2014)
+- Il gatto con gli stivali (2011)
+- I Simpson (1989)
+- Il libro della giungla (2016)
+- Il richiamo della foresta (2020)
+- Il ritorno di Mary Poppins (2018)
+- Innamorarsi a Manhattan (2005)
+- Jumanji - The Next Level (2019)
+- My Fair Lady (1964)
+- Minions (2015)
+- Lilo & Stitch (2025)
+- Pan - Viaggio sull'isola che non c'è (2015)
+- Peter Pan (2003)
+- Pets - Vita da animali (2016)
+- Piccole donne (1994)
+- Sing 2 - Sempre più forte (2021)
+- Smallfoot - Il mio amico delle nevi (2018)
+- Step Up All In (2014)
+- Step Up 3D (2010)
+- Step Up 4 - Revolution (2012)
+- Surf's Up - I re delle onde (2007)
+- Vi presento Christopher Robin (2017)
+- Sing (2016)
+- Red e Toby nemiciamici (1981)
+- Il GGG - Il Grande Gigante Gentile (2016)
+- Wonder Woman (2017)
+- Jungle Cruise (2021)
+- Crudelia (2021)
+
+Per questi 14 titoli non sono state trovate due ulteriori frasi italiane autonome con attribuzione verificabile nelle fonti consultate. Sono state escluse traduzioni automatiche di IMDb, dialoghi completi e frasi di remake/sequel diversi. La singola proposta esistente rimane disponibile:
+
+- Arthur e il popolo dei Minimei (2006)
+- Footloose (1984)
+- G-Force - Superspie in missione (2009)
+- Hotel Transylvania 3 - Una vacanza mostruosa (2018)
+- Il drago invisibile (2016)
+- Mary e il fiore della strega (2017)
+- Oceania (2016)
+- Peter Rabbit (2018)
+- Pocahontas II - Viaggio nel nuovo mondo (1998)
+- Rio 2 - Missione Amazzonia (2014)
+- Sette spose per sette fratelli (1954)
+- Sing Street (2016)
+- Tata Matilda (2005)
+- Frankenweenie (2012)

@@ -817,6 +817,18 @@ export const quoteProposals = [
         "speaker": "Keith",
         "excerpt": true,
         "source": "https://it.wikiquote.org/wiki/La_La_Land"
+      },
+      {
+        "speaker": "Sebastian Wilder",
+        "source": "https://aforismi.meglio.it/frasi-film.htm?n=La+La+Land",
+        "text": "E' questo il sogno!",
+        "excerpt": true
+      },
+      {
+        "speaker": "Keith",
+        "source": "https://aforismi.meglio.it/frasi-film.htm?n=La+La+Land",
+        "text": "Come puoi essere un rivoluzionario se sei così tradizionalista?",
+        "excerpt": false
       }
     ]
   },
@@ -2135,6 +2147,18 @@ export const quoteProposals = [
         "speaker": "Medici",
         "source": "https://www.mymovies.it/film/2019/dumbo/",
         "excerpt": false
+      },
+      {
+        "speaker": "Colette Marchant",
+        "source": "https://aforismi.meglio.it/frasi-film.htm?n=Dumbo+2019",
+        "text": "I tuoi figli hanno bisogno che tu creda in loro.",
+        "excerpt": false
+      },
+      {
+        "speaker": "V. A. Vandevere",
+        "source": "https://aforismi.meglio.it/frasi-film.htm?n=Dumbo+2019",
+        "text": "Insieme spiccheremo il volo sulle ali di quell'elefante.",
+        "excerpt": false
       }
     ]
   },
@@ -2149,6 +2173,18 @@ export const quoteProposals = [
         "speaker": "Denise",
         "source": "https://www.mymovies.it/film/2009/famesarannofamosi/frasi/",
         "excerpt": false
+      },
+      {
+        "speaker": "Jenny",
+        "source": "https://www.mymovies.it/film/2009/famesarannofamosi/frasi/",
+        "text": "Il successo è gioia, libertà e amicizia e il successo è amore!",
+        "excerpt": true
+      },
+      {
+        "speaker": "Denise Dupree",
+        "source": "https://www.pensieriparole.it/frasi-film/fame-saranno-famosi-%282009%29/citazione-164995",
+        "text": "Se si vuole affogare ti porterà giù con lui.",
+        "excerpt": true
       }
     ]
   },
@@ -2163,6 +2199,18 @@ export const quoteProposals = [
         "speaker": "Ferdinand",
         "source": "https://www.comingsoon.it/film/ferdinand/53726/scheda/",
         "excerpt": false
+      },
+      {
+        "speaker": "Ferdinand",
+        "source": "https://www.mymovies.it/film/2017/thestoryofferdinand/frasi/",
+        "text": "Io sono un tantino più complesso.",
+        "excerpt": true
+      },
+      {
+        "speaker": "Ferdinand",
+        "source": "https://www.mymovies.it/film/2017/thestoryofferdinand/frasi/",
+        "text": "Io sono Ferdinando. Mi guardi e pensi grosso, spaventoso...",
+        "excerpt": true
       }
     ]
   },
@@ -2190,6 +2238,18 @@ export const quoteProposals = [
         "text": "Preferisco immaginare che ricordare.",
         "speaker": "Anne Shirley",
         "source": "https://www.mymovies.it/film/2017/anna/frasi/",
+        "excerpt": false
+      },
+      {
+        "speaker": "Miss Stacy",
+        "source": "https://www.frasicelebri.it/s-serie-tv/-2566/",
+        "text": "I sognatori cambiano il mondo, le menti curiose sono la forza del progresso.",
+        "excerpt": false
+      },
+      {
+        "speaker": "Anne Shirley-Cuthbert",
+        "source": "https://www.frasicelebri.it/s-serie-tv/-2566/",
+        "text": "Diverso non è un male, solo non è lo stesso.",
         "excerpt": false
       }
     ]
@@ -2219,6 +2279,18 @@ export const quoteProposals = [
         "speaker": "Garfield",
         "source": "https://www.mymovies.it/film/2004/garfieldilfilm/frasi/",
         "excerpt": false
+      },
+      {
+        "speaker": "Garfield",
+        "source": "https://www.mymovies.it/film/2004/garfieldilfilm/frasi/",
+        "text": "Il segnale che il serbatoio è pieno!!",
+        "excerpt": false
+      },
+      {
+        "speaker": "Garfield",
+        "source": "https://www.mymovies.it/film/2004/garfieldilfilm/frasi/",
+        "text": "Ma non se ne può più!",
+        "excerpt": false
       }
     ]
   },
@@ -2232,6 +2304,18 @@ export const quoteProposals = [
         "text": "Per fare qualcosa di grande devi pensare in grande",
         "speaker": "Wilbur Turnblad",
         "source": "https://www.mymovies.it/film/2007/hairspray-grasso-e-bello/frasi/",
+        "excerpt": false
+      },
+      {
+        "speaker": "Edna Turnblad",
+        "source": "https://www.donnaglamour.it/frasi-film-hairspray-grasso-e-bello/spettacolo/",
+        "text": "Questa è l'America: devi avere peso per essere grande!",
+        "excerpt": false
+      },
+      {
+        "speaker": "Link Larkin",
+        "source": "https://www.donnaglamour.it/frasi-film-hairspray-grasso-e-bello/spettacolo/",
+        "text": "Credo che conoscerti sia l'inizio di un'avventura.",
         "excerpt": false
       }
     ]
@@ -2247,6 +2331,18 @@ export const quoteProposals = [
         "speaker": "Rachel Berry",
         "source": "https://www.mymovies.it/film/2009/glee/frasi/",
         "excerpt": false
+      },
+      {
+        "speaker": "Emma Pillsbury",
+        "source": "https://www.mymovies.it/film/2009/glee/frasi/",
+        "text": "L'unica vita degna di essere vissuta è quella che ti fa battere il cuore...",
+        "excerpt": false
+      },
+      {
+        "speaker": "Kurt Hummel",
+        "source": "https://www.mymovies.it/film/2009/glee/frasi/",
+        "text": "Io sono gay, Mercedes è nera... Facciamo tendenza!",
+        "excerpt": false
       }
     ]
   },
@@ -2260,6 +2356,18 @@ export const quoteProposals = [
         "text": "Te la sei presa con gli uccelli sbagliati!",
         "speaker": "Skipper",
         "source": "https://www.frasicelebri.it/s-film/i-pinguini-di-madagascar/",
+        "excerpt": false
+      },
+      {
+        "speaker": "Skipper",
+        "source": "https://it.wikiquote.org/wiki/I_pinguini_di_Madagascar_(film)",
+        "text": "Ci porteremo questa vergogna nella tomba!",
+        "excerpt": false
+      },
+      {
+        "speaker": "Skipper",
+        "source": "https://it.wikiquote.org/wiki/I_pinguini_di_Madagascar_(film)",
+        "text": "Le possibilità io me le creo da solo.",
         "excerpt": false
       }
     ]
@@ -2289,6 +2397,18 @@ export const quoteProposals = [
         "speaker": "Il Gatto con gli stivali",
         "source": "https://www.mymovies.it/film/2011/pussinboots/frasi/",
         "excerpt": false
+      },
+      {
+        "speaker": "Il Gatto con gli stivali",
+        "source": "https://www.mymovies.it/film/2011/pussinboots/frasi/",
+        "text": "Tutto quello che mi serve sono ... gli stivali",
+        "excerpt": false
+      },
+      {
+        "speaker": "Il Gatto con gli stivali",
+        "source": "https://www.mymovies.it/film/2011/pussinboots/frasi/",
+        "text": "Forse conoscete il mio nome ma non conoscete la leggenda!",
+        "excerpt": false
       }
     ]
   },
@@ -2317,6 +2437,18 @@ export const quoteProposals = [
         "speaker": "Ned Flanders",
         "source": "https://www.mymovies.it/film/1989/isimpson/frasi/",
         "excerpt": false
+      },
+      {
+        "speaker": "Homer Simpson",
+        "source": "https://www.frasicelebri.it/s-cartone/i-simpson/",
+        "text": "Marge, bisogna essere in due per mentire: uno che mente e l'altro che sente.",
+        "excerpt": false
+      },
+      {
+        "speaker": "Bart Simpson",
+        "source": "https://www.frasicelebri.it/s-cartone/i-simpson/",
+        "text": "Non venderò biglietti d'ingresso alla toilette.",
+        "excerpt": false
       }
     ]
   },
@@ -2330,6 +2462,18 @@ export const quoteProposals = [
         "text": "Io non vado in letargo, è che faccio molti pisolini",
         "speaker": "Baloo",
         "source": "https://www.mymovies.it/film/2016/junglebook/frasi/",
+        "excerpt": false
+      },
+      {
+        "speaker": "Raksha",
+        "source": "https://it.wikiquote.org/wiki/Il_libro_della_giungla_(film_2016)",
+        "text": "Dovunque andrai, o comunque ti chiameranno, tu sarai per sempre mio figlio.",
+        "excerpt": true
+      },
+      {
+        "speaker": "Mowgli",
+        "source": "https://it.wikiquote.org/wiki/Il_libro_della_giungla_(film_2016)",
+        "text": "Io sono Mowgli del Sioni, e questa è casa mia!!",
         "excerpt": false
       }
     ]
@@ -2345,6 +2489,18 @@ export const quoteProposals = [
         "speaker": "John Thornton",
         "source": "https://www.mymovies.it/film/2020/il-richiamo-della-foresta/frasi/",
         "excerpt": false
+      },
+      {
+        "speaker": "John Thornton",
+        "source": "https://www.mymovies.it/film/2020/il-richiamo-della-foresta/frasi/",
+        "text": "Sono venuto fin quassù perché non volevo stare con nessuno e poi ho incontrato Buck...",
+        "excerpt": false
+      },
+      {
+        "speaker": "John Thornton",
+        "source": "https://www.mymovies.it/film/2020/il-richiamo-della-foresta/frasi/",
+        "text": "Lui non era un cane come gli altri...",
+        "excerpt": false
       }
     ]
   },
@@ -2359,6 +2515,18 @@ export const quoteProposals = [
         "speaker": "La donna dei palloncini",
         "source": "https://www.mymovies.it/film/2018/marypoppins/frasi/",
         "excerpt": false
+      },
+      {
+        "speaker": "Mary Poppins",
+        "source": "https://coccinema.com/2018/12/29/le-migliori-frasi-e-citazioni-de-il-ritorno-di-mary-poppins/",
+        "text": "Tutto è possibile! Persino l'impossibile.",
+        "excerpt": true
+      },
+      {
+        "speaker": "Mary Poppins",
+        "source": "https://coccinema.com/2018/12/29/le-migliori-frasi-e-citazioni-de-il-ritorno-di-mary-poppins/",
+        "text": "Non si parla mai dell'età di una donna, Michael!",
+        "excerpt": true
       }
     ]
   },
@@ -2372,6 +2540,18 @@ export const quoteProposals = [
         "text": "L'amore sta nel trovare la forza che non sapevi nemmeno di avere!",
         "speaker": "Rosemary",
         "source": "https://www.mymovies.it/film/2005/innamorarsiamanhattan/frasi/",
+        "excerpt": false
+      },
+      {
+        "speaker": "Gabe",
+        "source": "https://www.mymovies.it/film/2005/innamorarsiamanhattan/frasi/",
+        "text": "L'amore non è fatto di paroline ridicole. L'amore è fatto di gesti eclatanti.",
+        "excerpt": true
+      },
+      {
+        "speaker": "Rosemary",
+        "source": "https://www.mymovies.it/film/2005/innamorarsiamanhattan/frasi/",
+        "text": "Mi dispiace ma sono troppo piccola per l'amore!",
         "excerpt": false
       }
     ]
@@ -2387,6 +2567,18 @@ export const quoteProposals = [
         "speaker": "Sheldon \"Shelly\" Oberon",
         "source": "https://www.frasicelebri.it/s-film/jumanji-the-next-level/",
         "excerpt": false
+      },
+      {
+        "speaker": "Eddie / Dott. Smolder Bravestone",
+        "source": "https://www.comingsoon.it/film/jumanji-the-next-level/56697/scheda/",
+        "text": "L'anca non mi fa male adesso!",
+        "excerpt": false
+      },
+      {
+        "speaker": "Nigel",
+        "source": "https://www.comingsoon.it/film/jumanji-the-next-level/56697/scheda/",
+        "text": "La prossima avventura è più impegnativa e ricordate il futuro di Jumanji è nelle vostre mani!",
+        "excerpt": false
       }
     ]
   },
@@ -2400,6 +2592,18 @@ export const quoteProposals = [
         "text": "La differenza tra una dama e una fioraia non sta nel come si comportano, ma nel come vengono trattate...",
         "speaker": "Eliza Doolittle",
         "source": "https://www.frasicelebri.it/s-film/my-fair-lady/",
+        "excerpt": false
+      },
+      {
+        "speaker": "Eliza Doolittle",
+        "source": "https://www.mymovies.it/film/1964/myfairlady/frasi/",
+        "text": "Io vendevo fiori, non il mio corpo.",
+        "excerpt": true
+      },
+      {
+        "speaker": "Professor Henry Higgins",
+        "source": "https://www.mymovies.it/film/1964/myfairlady/frasi/",
+        "text": "Non prendere questo atteggiamento con me: te l'ho insegnato io.",
         "excerpt": false
       }
     ]
@@ -2429,6 +2633,18 @@ export const quoteProposals = [
         "speaker": "Regina Elisabetta II",
         "source": "https://www.frasicelebri.it/s-film/minions/",
         "excerpt": false
+      },
+      {
+        "speaker": "Walter Nelson",
+        "source": "https://www.frasicelebri.it/s-film/minions/",
+        "text": "Chi ha voglia di sgranchirsi le gambe?",
+        "excerpt": false
+      },
+      {
+        "speaker": "Voce narrante",
+        "source": "https://www.frasicelebri.it/s-film/minions/",
+        "text": "Trovare un padrone era facile, tenersi un padrone era piuttosto... Complicato.",
+        "excerpt": false
       }
     ]
   },
@@ -2442,6 +2658,18 @@ export const quoteProposals = [
         "text": "Non ho bisogno di un amico, ho bisogno di te.",
         "speaker": "Lilo",
         "source": "https://www.frasicelebri.it/s-film/-2704/",
+        "excerpt": false
+      },
+      {
+        "speaker": "Lilo",
+        "source": "https://www.frasicelebri.it/s-film/-2704/",
+        "text": "Ohana vuol dire famiglia, famiglia vuol dire che nessuno viene abbandonato.",
+        "excerpt": false
+      },
+      {
+        "speaker": "Lilo",
+        "source": "https://www.frasicelebri.it/s-film/-2704/",
+        "text": "Una stella cadente! Io vorrei un amico, un amico del cuore.",
         "excerpt": false
       }
     ]
@@ -2471,6 +2699,18 @@ export const quoteProposals = [
         "speaker": "Peter Pan",
         "source": "https://www.mymovies.it/film/2015/pan/",
         "excerpt": false
+      },
+      {
+        "speaker": "Mary",
+        "source": "https://www.poesie.reportonline.it/frasi-dei-film/frasi-del-film-pan-viaggio-sull-isola-che-non-c-e",
+        "text": "Sei straordinario, più di quanto tu possa immaginare.",
+        "excerpt": true
+      },
+      {
+        "speaker": "Giglio Tigrato",
+        "source": "https://www.poesie.reportonline.it/frasi-dei-film/frasi-del-film-pan-viaggio-sull-isola-che-non-c-e",
+        "text": "Se tu non ci credi, nemmeno loro ci crederanno.",
+        "excerpt": false
       }
     ]
   },
@@ -2499,6 +2739,18 @@ export const quoteProposals = [
         "speaker": "Peter Pan",
         "source": "https://www.mymovies.it/film/2003/peter-pan/frasi/",
         "excerpt": false
+      },
+      {
+        "speaker": "Peter Pan",
+        "source": "https://www.mymovies.it/film/2003/peter-pan/frasi/",
+        "text": "Io credo nelle fate, lo giuro, lo giuro!",
+        "excerpt": false
+      },
+      {
+        "speaker": "Peter Pan",
+        "source": "https://www.mymovies.it/film/2003/peter-pan/frasi/",
+        "text": "Anche la vita può essere una grandiosa avventura.",
+        "excerpt": false
       }
     ]
   },
@@ -2513,6 +2765,18 @@ export const quoteProposals = [
         "speaker": "Max",
         "source": "https://www.comingsoon.it/film/pets-vita-da-animali/52610/scheda/",
         "excerpt": false
+      },
+      {
+        "speaker": "Max",
+        "source": "https://www.frasicelebri.it/s-film/-tt2709768/",
+        "text": "Dormo sul pavimento, come un cane.",
+        "excerpt": false
+      },
+      {
+        "speaker": "Max",
+        "source": "https://www.frasicelebri.it/s-film/-tt2709768/",
+        "text": "Abbiamo crudi istinti primordiali che sono a un passo per condurci a casa.",
+        "excerpt": false
       }
     ]
   },
@@ -2526,6 +2790,18 @@ export const quoteProposals = [
         "text": "Oh Jo, un nome così piccolo per una persona così grande!",
         "speaker": "Friedrich Baher",
         "source": "https://www.mymovies.it/film/1994/piccole-donne-3/frasi/",
+        "excerpt": false
+      },
+      {
+        "speaker": "Friedrich Bhaer",
+        "source": "https://www.mymovies.it/film/1994/piccole-donne-3/frasi/",
+        "text": "Jo, c'è molto di più dentro di te, se troverai il coraggio di scriverlo!",
+        "excerpt": false
+      },
+      {
+        "speaker": "Amy March",
+        "source": "https://www.nanopress.it/articolo/piccole-donne-il-riassunto-del-libro-di-louisa-may-alcott/87517/amp/",
+        "text": "Il Signor Davis dice che dare istruzione ad una donna è utile quanto dare istruzione ad una gatta…",
         "excerpt": false
       }
     ]
@@ -2583,6 +2859,18 @@ export const quoteProposals = [
         "speaker": "Buster Moon",
         "source": "https://www.comingsoon.it/film/sing-2-sempre-piu-forte/58316/scheda/",
         "excerpt": false
+      },
+      {
+        "speaker": "Buster Moon",
+        "source": "https://www.comingsoon.it/film/sing-2-sempre-piu-forte/58316/scheda/",
+        "text": "Ragazzi, questa è la capitale mondiale dell'intrattenimento!",
+        "excerpt": false
+      },
+      {
+        "speaker": "Buster Moon",
+        "source": "https://www.comingsoon.it/film/sing-2-sempre-piu-forte/58316/scheda/",
+        "text": "Johnny, lavorerai con il miglior coreografo di Redshore City!",
+        "excerpt": false
       }
     ]
   },
@@ -2596,6 +2884,18 @@ export const quoteProposals = [
         "text": "So cosa ho visto e lo dimostrerò!",
         "speaker": "Migo",
         "source": "https://www.comingsoon.it/film/smallfoot-il-mio-amico-delle-nevi/54532/scheda/",
+        "excerpt": false
+      },
+      {
+        "speaker": "Meechee",
+        "source": "https://www.comingsoon.it/film/smallfoot-il-mio-amico-delle-nevi/54532/scheda/",
+        "text": "Benvenuto nel quartier generale segreto della SS",
+        "excerpt": false
+      },
+      {
+        "speaker": "Fleem",
+        "source": "https://www.comingsoon.it/film/smallfoot-il-mio-amico-delle-nevi/54532/scheda/",
+        "text": "Migo, se muori, posso avere tutti i tuoi beni terreni?",
         "excerpt": false
       }
     ]
@@ -2625,6 +2925,18 @@ export const quoteProposals = [
         "speaker": "Sean",
         "source": "https://www.mymovies.it/film/2014/stepup5/frasi/",
         "excerpt": false
+      },
+      {
+        "speaker": "Moose",
+        "source": "https://www.mymovies.it/film/2014/stepup5/frasi/",
+        "text": "Non dobbiamo ballare con i piedi ma con il cuore e adesso prepariamoci per la vittoria",
+        "excerpt": false
+      },
+      {
+        "speaker": "Andie",
+        "source": "https://www.mymovies.it/film/2014/stepup5/frasi/",
+        "text": "Tu non sai niente di me!",
+        "excerpt": false
       }
     ]
   },
@@ -2638,6 +2950,18 @@ export const quoteProposals = [
         "text": "Le più importanti decisioni della vita non sono facili!",
         "speaker": "Jacob",
         "source": "https://www.mymovies.it/film/2010/stepup3d/frasi/",
+        "excerpt": false
+      },
+      {
+        "speaker": "Luke",
+        "source": "https://www.mymovies.it/film/2010/stepup3d/frasi/",
+        "text": "Molti imparano a ballare... altri sono nati per farlo",
+        "excerpt": false
+      },
+      {
+        "speaker": "Natalie",
+        "source": "https://www.mymovies.it/film/2010/stepup3d/frasi/",
+        "text": "Guardami ballare e capirai tutto",
         "excerpt": false
       }
     ]
@@ -2653,6 +2977,18 @@ export const quoteProposals = [
         "speaker": "Jason",
         "source": "https://www.mymovies.it/film/2012/stepup4ever3d/frasi/",
         "excerpt": false
+      },
+      {
+        "speaker": "Emily",
+        "source": "https://www.mymovies.it/film/2012/stepup4ever3d/frasi/",
+        "text": "Non siamo in vendita. Possiamo cambiarle le cose!",
+        "excerpt": true
+      },
+      {
+        "speaker": "Sean",
+        "source": "https://www.mymovies.it/film/2012/stepup4ever3d/frasi/",
+        "text": "La verità è che tutti hanno voglia di farsi sentire.",
+        "excerpt": false
       }
     ]
   },
@@ -2667,6 +3003,18 @@ export const quoteProposals = [
         "speaker": "Cody Maverick",
         "source": "https://www.mymovies.it/film/2007/surfsup/frasi/",
         "excerpt": false
+      },
+      {
+        "speaker": "Cody Maverick",
+        "source": "https://www.nonsonsolofilm.it/surfs-up-i-re-delle-onde/",
+        "text": "Spero che le telecamere stiano girando perché vorrai guardarlo ancora e ancora e ancora.",
+        "excerpt": false
+      },
+      {
+        "speaker": "Mikey",
+        "source": "https://www.nonsonsolofilm.it/surfs-up-i-re-delle-onde/",
+        "text": "Vedono il loro obiettivo. Ci provano e basta!",
+        "excerpt": true
       }
     ]
   },
@@ -2694,6 +3042,18 @@ export const quoteProposals = [
         "text": "Quello che conta è trovare qualcosa per cui essere felici e tenersela stretta.",
         "speaker": "Daphne Milne",
         "source": "https://www.comingsoon.it/film/vi-presento-christopher-robin/54012/scheda/",
+        "excerpt": false
+      },
+      {
+        "speaker": "Christopher Robin",
+        "source": "https://www.comingsoon.it/film/vi-presento-christopher-robin/54012/scheda/",
+        "text": "Vorrei che scrivessi un libro per me.",
+        "excerpt": false
+      },
+      {
+        "speaker": "Olive",
+        "source": "https://www.comingsoon.it/film/vi-presento-christopher-robin/54012/scheda/",
+        "text": "Dopo la guerra c'era talmente tanta tristezza... poi è arrivato Winnie the Pooh.",
         "excerpt": false
       }
     ]
@@ -2729,6 +3089,18 @@ export const quoteProposals = [
         "speaker": "Buster Moon",
         "source": "https://www.mymovies.it/cinemanews/amp/?news=154617",
         "excerpt": false
+      },
+      {
+        "speaker": "Johnny",
+        "source": "https://www.comingsoon.it/film/sing/53152/scheda/",
+        "text": "La paura non deve impedirti di fare ciò che ami!",
+        "excerpt": false
+      },
+      {
+        "speaker": "Buster Moon",
+        "source": "https://www.comingsoon.it/film/sing/53152/scheda/",
+        "text": "Vero talento dalla vita vera!",
+        "excerpt": true
       }
     ]
   },
@@ -2763,6 +3135,18 @@ export const quoteProposals = [
         "speaker": "Gran Ma'",
         "source": "https://it.wikiquote.org/wiki/Red_e_Toby_-_Nemiciamici",
         "excerpt": false
+      },
+      {
+        "speaker": "Signora Tweed",
+        "source": "https://it.wikiquote.org/wiki/Red_e_Toby_-_Nemiciamici",
+        "text": "Amos Slade, pazzoide dal grilletto facile, dammi quel fucile!",
+        "excerpt": false
+      },
+      {
+        "speaker": "Fiuto",
+        "source": "https://it.wikiquote.org/wiki/Red_e_Toby_-_Nemiciamici",
+        "text": "Fiutare e scovare non è sufficiente! Devi essere cattivo!",
+        "excerpt": false
       }
     ]
   },
@@ -2776,6 +3160,18 @@ export const quoteProposals = [
         "text": "Sogni è una cosa molto molto misteriosa. Loro sempre cerca di gente addormentata.",
         "speaker": "GGG",
         "source": "https://aforismi.meglio.it/frasi-film.htm?n=Il+GGG+-+Il+Grande+Gigante+Gentile",
+        "excerpt": false
+      },
+      {
+        "speaker": "GGG",
+        "source": "https://it.wikiquote.org/wiki/Il_GGG_-_Il_grande_gigante_gentile",
+        "text": "I miei sette metri eventi? Sputazzoli in paese di giganti.",
+        "excerpt": false
+      },
+      {
+        "speaker": "Sofia",
+        "source": "https://it.wikiquote.org/wiki/Il_GGG_-_Il_grande_gigante_gentile",
+        "text": "Mai scendere dal letto. Mai andare alla finestra. E mai guardare dietro la tenda.",
         "excerpt": false
       }
     ]
@@ -2791,6 +3187,18 @@ export const quoteProposals = [
         "speaker": "Diana / Wonder Woman",
         "source": "https://it.wikiquote.org/wiki/Wonder_Woman_(film_2017)",
         "excerpt": false
+      },
+      {
+        "speaker": "Generale Antiope",
+        "source": "https://it.wikiquote.org/wiki/Wonder_Woman_(film_2017)",
+        "text": "Una battaglia non è mai leale!",
+        "excerpt": true
+      },
+      {
+        "speaker": "Diana Prince",
+        "source": "https://it.wikiquote.org/wiki/Wonder_Woman_(film_2017)",
+        "text": "E ora so che solo l'amore può davvero salvare il mondo.",
+        "excerpt": true
       }
     ]
   },
@@ -2819,6 +3227,18 @@ export const quoteProposals = [
         "speaker": "Frank",
         "source": "https://www.comingsoon.it/film/jungle-cruise/55400/scheda/",
         "excerpt": false
+      },
+      {
+        "speaker": "Frank",
+        "source": "https://www.mymovies.it/film/2021/junglecruise/frasi/",
+        "text": "Avevo una ragazza strabica non la vedevamo con lo stesso punto di vista",
+        "excerpt": false
+      },
+      {
+        "speaker": "Frank",
+        "source": "https://www.paginainizio.com/frasi/dwayne-johnson.html",
+        "text": "Se credi nelle leggende, dovresti credere anche alle maledizioni.",
+        "excerpt": false
       }
     ]
   },
@@ -2833,6 +3253,18 @@ export const quoteProposals = [
         "speaker": "Crudelia De Mon",
         "source": "https://www.comingsoon.it/film/crudelia/58230/scheda/",
         "excerpt": false
+      },
+      {
+        "speaker": "Crudelia De Mon",
+        "source": "https://www.comingsoon.it/film/crudelia/58230/scheda/",
+        "text": "Fin dall'inizio sapevo di vedere il mondo diversamente da tutti gli altri.",
+        "excerpt": true
+      },
+      {
+        "speaker": "Crudelia De Mon",
+        "source": "https://www.comingsoon.it/film/crudelia/58230/scheda/",
+        "text": "Ma io non ero per tutti!",
+        "excerpt": true
       }
     ]
   }
