@@ -2069,6 +2069,702 @@ export const quoteProposals = [
         "source": "https://www.mymovies.it/film/2021/encanto/frasi/"
       }
     ]
+  },
+  {
+    "names": [
+      "Toy Story 4"
+    ],
+    "year": 2019,
+    "options": [
+      {
+        "text": "Difficile che un vecchio giocattolo cambi abitudini.",
+        "speaker": "Woody",
+        "source": "https://coccinema.com/2019/06/30/le-migliori-frasi-e-citazioni-di-toy-story-4/",
+        "excerpt": false
+      },
+      {
+        "text": "È così che siamo fatti nel profondo… un mucchio di fuffa.",
+        "speaker": "Bunny",
+        "source": "https://coccinema.com/2019/06/30/le-migliori-frasi-e-citazioni-di-toy-story-4/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Arthur e il popolo dei Minimei"
+    ],
+    "year": 2006,
+    "options": [
+      {
+        "text": "Il tuo cuore è la più forte delle armi.",
+        "speaker": "Il capo dei Massai",
+        "source": "https://www.mymovies.it/film/2006/arthureilpopolodeiminimei/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Raya e l'ultimo drago"
+    ],
+    "year": 2021,
+    "options": [
+      {
+        "text": "Devi fare tu il primo passo!",
+        "speaker": "Sisu",
+        "source": "https://www.comingsoon.it/film/raya-e-l-ultimo-drago/59260/scheda/",
+        "excerpt": false
+      },
+      {
+        "text": "Ora, per ristabilire la pace, dobbiamo trovare l'ultimo drago!",
+        "speaker": "Raya",
+        "source": "https://www.comingsoon.it/film/raya-e-l-ultimo-drago/59260/scheda/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Dumbo"
+    ],
+    "year": 2019,
+    "options": [
+      {
+        "text": "Quelle orecchie devono sparire!",
+        "speaker": "Medici",
+        "source": "https://www.mymovies.it/film/2019/dumbo/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Fame - Saranno famosi"
+    ],
+    "year": 2009,
+    "options": [
+      {
+        "text": "Sii te stesso e gridalo al mondo.",
+        "speaker": "Denise",
+        "source": "https://www.mymovies.it/film/2009/famesarannofamosi/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Ferdinand"
+    ],
+    "year": 2017,
+    "options": [
+      {
+        "text": "Non sono un toro da corrida!",
+        "speaker": "Ferdinand",
+        "source": "https://www.comingsoon.it/film/ferdinand/53726/scheda/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Footloose"
+    ],
+    "year": 1984,
+    "options": [
+      {
+        "text": "Questo è il nostro tempo per danzare, il nostro modo per festeggiare la vita",
+        "speaker": "Ren McCormack",
+        "source": "https://www.comingsoon.it/film/footloose/14686/scheda/",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Chiamatemi Anna"
+    ],
+    "year": 2017,
+    "options": [
+      {
+        "text": "Preferisco immaginare che ricordare.",
+        "speaker": "Anne Shirley",
+        "source": "https://www.mymovies.it/film/2017/anna/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "G-Force - Superspie in missione"
+    ],
+    "year": 2009,
+    "options": [
+      {
+        "text": "Ho appena addocchiato la mia futura exmoglie.",
+        "speaker": "Darwin",
+        "source": "https://www.mymovies.it/film/2009/gforce/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Garfield - Il film"
+    ],
+    "year": 2004,
+    "options": [
+      {
+        "text": "Bevete più latte...",
+        "speaker": "Garfield",
+        "source": "https://www.mymovies.it/film/2004/garfieldilfilm/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Hairspray - Grasso è bello"
+    ],
+    "year": 2007,
+    "options": [
+      {
+        "text": "Per fare qualcosa di grande devi pensare in grande",
+        "speaker": "Wilbur Turnblad",
+        "source": "https://www.mymovies.it/film/2007/hairspray-grasso-e-bello/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Glee"
+    ],
+    "year": 2009,
+    "options": [
+      {
+        "text": "Far parte di qualcosa di speciale rende speciali…",
+        "speaker": "Rachel Berry",
+        "source": "https://www.mymovies.it/film/2009/glee/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "I pinguini di Madagascar"
+    ],
+    "year": 2014,
+    "options": [
+      {
+        "text": "Te la sei presa con gli uccelli sbagliati!",
+        "speaker": "Skipper",
+        "source": "https://www.frasicelebri.it/s-film/i-pinguini-di-madagascar/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Hotel Transylvania 3 - Una vacanza mostruosa"
+    ],
+    "year": 2018,
+    "options": [
+      {
+        "text": "Non è \"Love Boat\", Frank!",
+        "speaker": "Dracula",
+        "source": "https://www.comingsoon.it/film/hotel-transylvania-3-una-vacanza-mostruosa/54497/scheda/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Il gatto con gli stivali"
+    ],
+    "year": 2011,
+    "options": [
+      {
+        "text": "Non è mai tardi per fare la cosa giusta!",
+        "speaker": "Il Gatto con gli stivali",
+        "source": "https://www.mymovies.it/film/2011/pussinboots/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Il drago invisibile"
+    ],
+    "year": 2016,
+    "options": [
+      {
+        "text": "Se tu una cosa non la vedi non è detto che non ci sia.",
+        "speaker": "Il padre di Grace",
+        "source": "https://www.mymovies.it/film/2016/petedragon/frasi/",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "I Simpson"
+    ],
+    "year": 1989,
+    "options": [
+      {
+        "text": "Certo, certosino...",
+        "speaker": "Ned Flanders",
+        "source": "https://www.mymovies.it/film/1989/isimpson/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Il libro della giungla"
+    ],
+    "year": 2016,
+    "options": [
+      {
+        "text": "Io non vado in letargo, è che faccio molti pisolini",
+        "speaker": "Baloo",
+        "source": "https://www.mymovies.it/film/2016/junglebook/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Il richiamo della foresta"
+    ],
+    "year": 2020,
+    "options": [
+      {
+        "text": "Che ne pensi di un'avventura al di là dei confini conosciuti?",
+        "speaker": "John Thornton",
+        "source": "https://www.mymovies.it/film/2020/il-richiamo-della-foresta/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Il ritorno di Mary Poppins"
+    ],
+    "year": 2018,
+    "options": [
+      {
+        "text": "Hai dimenticato come ci si sente ad essere piccoli!",
+        "speaker": "La donna dei palloncini",
+        "source": "https://www.mymovies.it/film/2018/marypoppins/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Innamorarsi a Manhattan"
+    ],
+    "year": 2005,
+    "options": [
+      {
+        "text": "L'amore sta nel trovare la forza che non sapevi nemmeno di avere!",
+        "speaker": "Rosemary",
+        "source": "https://www.mymovies.it/film/2005/innamorarsiamanhattan/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Jumanji - The Next Level"
+    ],
+    "year": 2019,
+    "options": [
+      {
+        "text": "Dov'è la giungla? Questa è un'altra cosa!",
+        "speaker": "Sheldon \"Shelly\" Oberon",
+        "source": "https://www.frasicelebri.it/s-film/jumanji-the-next-level/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "My Fair Lady"
+    ],
+    "year": 1964,
+    "options": [
+      {
+        "text": "La differenza tra una dama e una fioraia non sta nel come si comportano, ma nel come vengono trattate...",
+        "speaker": "Eliza Doolittle",
+        "source": "https://www.frasicelebri.it/s-film/my-fair-lady/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Mary e il fiore della strega"
+    ],
+    "year": 2017,
+    "options": [
+      {
+        "text": "Non posso tornare a casa, non da sola! ho fatto una promessa, torneremo a casa insieme!",
+        "speaker": "Mary",
+        "source": "https://www.comingsoon.it/film/mary-e-il-fiore-della-strega/54542/scheda/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Minions"
+    ],
+    "year": 2015,
+    "options": [
+      {
+        "text": "I gentiluomini non rubano a una signora!",
+        "speaker": "Regina Elisabetta II",
+        "source": "https://www.frasicelebri.it/s-film/minions/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Lilo & Stitch"
+    ],
+    "year": 2025,
+    "options": [
+      {
+        "text": "Non ho bisogno di un amico, ho bisogno di te.",
+        "speaker": "Lilo",
+        "source": "https://www.frasicelebri.it/s-film/-2704/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Oceania"
+    ],
+    "year": 2016,
+    "options": [
+      {
+        "text": "L'Oceano ha scelto te!",
+        "speaker": "Nonna Tala",
+        "source": "https://www.mymovies.it/film/2016/moana/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Pan - Viaggio sull'isola che non c'è"
+    ],
+    "year": 2015,
+    "options": [
+      {
+        "text": "Non ho mai creduto alle favole della buonanotte.",
+        "speaker": "Peter Pan",
+        "source": "https://www.mymovies.it/film/2015/pan/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Peter Rabbit"
+    ],
+    "year": 2018,
+    "options": [
+      {
+        "text": "I conigli sono creature meravigliose. Imparerai ad amarli!",
+        "speaker": "Bea",
+        "source": "https://www.mymovies.it/film/2018/peterrabbit/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Peter Pan"
+    ],
+    "year": 2003,
+    "options": [
+      {
+        "text": "Non smettere di sognare, solo chi sogna può volare.",
+        "speaker": "Peter Pan",
+        "source": "https://www.mymovies.it/film/2003/peter-pan/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Pets - Vita da animali"
+    ],
+    "year": 2016,
+    "options": [
+      {
+        "text": "Sono Max il cane più fortunato di New York.",
+        "speaker": "Max",
+        "source": "https://www.comingsoon.it/film/pets-vita-da-animali/52610/scheda/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Piccole donne"
+    ],
+    "year": 1994,
+    "options": [
+      {
+        "text": "Oh Jo, un nome così piccolo per una persona così grande!",
+        "speaker": "Friedrich Baher",
+        "source": "https://www.mymovies.it/film/1994/piccole-donne-3/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Pocahontas II - Viaggio nel nuovo mondo"
+    ],
+    "year": 1998,
+    "options": [
+      {
+        "text": "Devo onorare ciò che il cuore mi comanda!",
+        "speaker": "John Smith",
+        "source": "https://www.mymovies.it/film/1998/pocahontas-ii-viaggio-nel-nuovo-mondo/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Rio 2 - Missione Amazzonia"
+    ],
+    "year": 2014,
+    "options": [
+      {
+        "text": "L'unità di una famiglia fa la sua felicità",
+        "speaker": "Blu",
+        "source": "https://www.mymovies.it/film/2014/rio2/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Sette spose per sette fratelli"
+    ],
+    "year": 1954,
+    "options": [
+      {
+        "text": "L'amore è come il morbillo!",
+        "speaker": "Adam Pontipee",
+        "source": "https://www.mymovies.it/film/1954/sette-spose-per-sette-fratelli/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Sing 2 - Sempre più forte"
+    ],
+    "year": 2021,
+    "options": [
+      {
+        "text": "Non possiamo permettere a quel bullo di rubarci soldi e speranze.",
+        "speaker": "Buster Moon",
+        "source": "https://www.comingsoon.it/film/sing-2-sempre-piu-forte/58316/scheda/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Smallfoot - Il mio amico delle nevi"
+    ],
+    "year": 2018,
+    "options": [
+      {
+        "text": "So cosa ho visto e lo dimostrerò!",
+        "speaker": "Migo",
+        "source": "https://www.comingsoon.it/film/smallfoot-il-mio-amico-delle-nevi/54532/scheda/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Sing Street"
+    ],
+    "year": 2016,
+    "options": [
+      {
+        "text": "Nessuna donna può amare davvero un uomo che ascolta Phil Collins!",
+        "speaker": "Brendan",
+        "source": "https://www.mymovies.it/film/2016/singstreet/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Step Up All In"
+    ],
+    "year": 2014,
+    "options": [
+      {
+        "text": "Avviene qualcosa di magico quando balliamo.",
+        "speaker": "Sean",
+        "source": "https://www.mymovies.it/film/2014/stepup5/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Step Up 3D"
+    ],
+    "year": 2010,
+    "options": [
+      {
+        "text": "Le più importanti decisioni della vita non sono facili!",
+        "speaker": "Jacob",
+        "source": "https://www.mymovies.it/film/2010/stepup3d/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Step Up 4 - Revolution"
+    ],
+    "year": 2012,
+    "options": [
+      {
+        "text": "Anche tu devi combattere per quel che vuoi!",
+        "speaker": "Jason",
+        "source": "https://www.mymovies.it/film/2012/stepup4ever3d/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Surf's Up - I re delle onde"
+    ],
+    "year": 2007,
+    "options": [
+      {
+        "text": "Io sono Cody fratello,lasciatemi essere me..quand'è che lo capirete?",
+        "speaker": "Cody Maverick",
+        "source": "https://www.mymovies.it/film/2007/surfsup/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Tata Matilda"
+    ],
+    "year": 2005,
+    "options": [
+      {
+        "text": "Finché ci sarà bisogno di me ma voi non mi vorrete, dovrò rimanere.",
+        "speaker": "Tata Matilda",
+        "source": "https://www.pensieriparole.it/frasi-film/nanny-mcphee-tata-matilda-%282005%29/pag1",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Vi presento Christopher Robin"
+    ],
+    "year": 2017,
+    "options": [
+      {
+        "text": "Quello che conta è trovare qualcosa per cui essere felici e tenersela stretta.",
+        "speaker": "Daphne Milne",
+        "source": "https://www.comingsoon.it/film/vi-presento-christopher-robin/54012/scheda/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Soul"
+    ],
+    "year": 2020,
+    "options": [
+      {
+        "text": "La vita offre mille opportunità, basta sapere dove guardare!",
+        "speaker": "Joe Gardner",
+        "source": "https://aforismi.meglio.it/frasi-film/soul",
+        "excerpt": false
+      },
+      {
+        "text": "Libera la tua essenza! Quella passionale, travolgente!",
+        "speaker": "Joe Gardner",
+        "source": "https://aforismi.meglio.it/frasi-film/soul",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Sing"
+    ],
+    "year": 2016,
+    "options": [
+      {
+        "text": "Quando hai toccato il fondo, l'unica cosa che puoi fare è puntare in alto",
+        "speaker": "Buster Moon",
+        "source": "https://www.mymovies.it/cinemanews/amp/?news=154617",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Klaus - I segreti del Natale"
+    ],
+    "year": 2019,
+    "options": [
+      {
+        "text": "Un vero atto di bontà ne ispira sempre un altro.",
+        "speaker": "Klaus",
+        "source": "https://www.frasicelebri.it/s-cartone/-2232/",
+        "excerpt": false
+      },
+      {
+        "text": "Tu sta seduto e sii magico e favoloso.",
+        "speaker": "Jesper",
+        "source": "https://www.frasicelebri.it/s-cartone/-2232/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Red e Toby nemiciamici"
+    ],
+    "year": 1981,
+    "options": [
+      {
+        "text": "Per sempre è tanto tanto tempo... e il tempo tende sempre a cambiare le cose.",
+        "speaker": "Gran Ma'",
+        "source": "https://it.wikiquote.org/wiki/Red_e_Toby_-_Nemiciamici",
+        "excerpt": false
+      }
+    ]
   }
 ];
 const normalize = value => String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
