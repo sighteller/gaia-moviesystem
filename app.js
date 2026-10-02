@@ -1,5 +1,5 @@
 import { effectiveQuote, standardQuote } from './title-quotes.js?v=20261002editor';
-import { recordConsultation, choiceMessage, platformUrl } from './choice-summary.js?v=20261001i';
+import { recordConsultation, choiceMessageHtml, platformUrl } from './choice-summary.js?v=20261002proposals';
 import { mountCoverPicker } from './cover-picker.js?v=20261001i';
 import { initFeatures } from './features.js?v=20261001i';
 import { mountJellyfinSync } from './jellyfin-sync.js?v=20261002settings';
@@ -241,7 +241,7 @@ function renderPlatformSummary(mode,savedPlatform=null){
   const link=savedPlatform?state.links.find(l=>l.title_id===t.id&&l.platform_id===savedPlatform.id):null;
   const url=platformUrl(link?.url);
   const quote=effectiveQuote(t,state.quotes);
-  app.innerHTML=`<div class="shell">${topbar()}<div class="hero-center"><div class="empty choice-result"><h2 class="film-quote">${quote?`«${escapeHtml(quote.text)}»`:escapeHtml(standardQuote)}</h2><p class="quote-attribution">${quote?.speaker?`${escapeHtml(quote.speaker)} · `:''}${escapeHtml(t.name)}${quote?.source?` <a class="quote-source" href="${escapeHtml(quote.source)}" target="_blank" rel="noopener noreferrer" aria-label="Fonte della citazione">↗</a>`:''}</p><p class="choice-counter">${escapeHtml(choiceMessage(count))}</p><h3>Dove lo guardiamo?</h3><div class="platform-list">${ps.map((p,i)=>`<button class="platform-option ${savedPlatform?.id===p.id?'selected':''}" data-choice-platform="${p.id}" ${savedPlatform?'disabled':''}>${escapeHtml(p.name)} <kbd>${i+1}</kbd></button>`).join('')}</div><p class="choice-status" role="status"></p>${savedPlatform?(url?`<a class="ghost-btn platform-launch" href="${escapeHtml(url)}">Apri su ${escapeHtml(savedPlatform.name)} ⏎</a>`:'<p>Il collegamento diretto a questa piattaforma non è ancora configurato.</p>'):''}<button class="ghost-btn" data-action="home">Torna a Gaia</button></div></div></div>`;
+  app.innerHTML=`<div class="shell">${topbar()}<div class="hero-center"><div class="empty choice-result"><h2 class="film-quote">${quote?`«${escapeHtml(quote.text)}»`:escapeHtml(standardQuote)}</h2><p class="quote-attribution">${quote?.speaker?`${escapeHtml(quote.speaker)} · `:''}${escapeHtml(t.name)}${quote?.source?` <a class="quote-source" href="${escapeHtml(quote.source)}" target="_blank" rel="noopener noreferrer" aria-label="Fonte della citazione">↗</a>`:''}</p><p class="choice-counter">${choiceMessageHtml(count)}</p><h3>Dove lo guardiamo?</h3><div class="platform-list">${ps.map((p,i)=>`<button class="platform-option ${savedPlatform?.id===p.id?'selected':''}" data-choice-platform="${p.id}" ${savedPlatform?'disabled':''}>${escapeHtml(p.name)} <kbd>${i+1}</kbd></button>`).join('')}</div><p class="choice-status" role="status"></p>${savedPlatform?(url?`<a class="ghost-btn platform-launch" href="${escapeHtml(url)}">Apri su ${escapeHtml(savedPlatform.name)} ⏎</a>`:'<p>Il collegamento diretto a questa piattaforma non è ancora configurato.</p>'):''}<button class="ghost-btn" data-action="home">Torna a Gaia</button></div></div></div>`;
 }
 
 function renderMode(){

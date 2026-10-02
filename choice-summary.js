@@ -4,12 +4,18 @@ export function recordConsultation(summary,titleId){
 }
 export function choiceMessage(count){
   const n=Math.max(1,Math.trunc(count));
-  if(n===1)return 'Ha estratto il film al primo tentativo! Che dirà Merlino?';
-  if(n<=5)return `È arrivata Kiki! Porta il film giusto, dopo ${n} tentativi.`;
-  if(n<=10)return `Ci vogliono almeno ${n} ingredienti per fare una ratatouille spettacolare come la mia!`;
-  if(n<=30)return `La scelta è come una cipolla: ha tanti strati. Tu ne hai sfogliati ${n}.`;
-  if(n<=70)return `Nuota e nuota, zitto e nuota… ×${n}. Eccolo finalmente!`;
-  return `Hai cercato tra ${n} film. Nemo, al confronto, era dietro l’angolo.`;
+  if(n===1)return 'Buona la prima! Manco quando ti si chiede se vuoi andare da Zia Tamara sei così sicura';
+  if(n<=5)return `solo ${n}? Qui mi sa che c'è qualche film sul quale siamo davvero in fissa!`;
+  if(n<=10)return `${n} è esattamente il numero di balli che vorrei fare dopo aver visto questo film!`;
+  if(n<=30)return `${n} è esattamente il numero di balli che vorrei fare con lo zio beppe`;
+  if(n<=70)return `${n} film prima di trovare quello giusto. Poi mi chiedete perchè tengo la testa a sinistra...`;
+  return 'Ci abbiamo messo di più a sceglierlo che a vederlo. Sicuri che la Gaia non voleva dirci altro?';
+}
+export function choiceMessageHtml(count){
+  const n=Math.max(1,Math.trunc(count));
+  const text=choiceMessage(n);
+  if(n===1)return text.replace('prima','<strong>prima</strong>');
+  return n<=70?text.replace(String(n),`<strong>${n}</strong>`):text;
 }
 export function platformUrl(url){
   if(!url)return '';
