@@ -116,7 +116,7 @@ function renderFilters(){
 
 function renderSettings(){
   if(app.querySelector('[data-overlay]'))return;
-  app.insertAdjacentHTML('beforeend', `<div class="platform-panel" data-overlay="settings"><section class="platform-box settings-box" role="dialog" aria-modal="true" aria-labelledby="settings-heading"><h2 id="settings-heading">Impostazioni</h2><h3>Citazioni dei film</h3><p>Leggi le frasi scelte, aggiungi quelle che ricordi o usa la frase standard.</p><a class="ghost-btn" href="citazioni.html">Gestisci citazioni</a><div id="jellyfin-sync-panel"></div><button class="ghost-btn" data-action="close-settings">Fatto</button></section></div>`);
+  app.insertAdjacentHTML('beforeend', `<div class="platform-panel" data-overlay="settings"><section class="platform-box settings-box" role="dialog" aria-modal="true" aria-labelledby="settings-heading"><h2 id="settings-heading">Impostazioni</h2><h3>Catalogo completo</h3><p>Gestisci titoli, copertine, citazioni e piattaforme.</p><a class="ghost-btn" href="disponibilita.html">Gestisci catalogo</a><h3>Citazioni dei film</h3><p>Leggi le frasi scelte, aggiungi quelle che ricordi o usa la frase standard.</p><a class="ghost-btn" href="citazioni.html">Gestisci citazioni</a><div id="jellyfin-sync-panel"></div><button class="ghost-btn" data-action="close-settings">Fatto</button></section></div>`);
   mountJellyfinSync(app.querySelector('#jellyfin-sync-panel'),loadData);
   app.querySelector('[data-action="close-settings"]').focus({preventScroll:true});
 }
@@ -139,6 +139,7 @@ async function startSession(category,titleId=null){
 
 function currentTitle(){ return state.filteredTitles[state.index]; }
 function titleImage(t){ return t.dvd_cover_url || t.custom_image_url || t.poster_url || ''; }
+app.addEventListener('load',e=>{if(e.target.matches?.('.poster-wrap img')&&e.target.naturalWidth&&e.target.naturalHeight)e.target.parentElement.style.setProperty('--poster-ratio',`${e.target.naturalWidth} / ${e.target.naturalHeight}`);},true);
 function renderPoster(t){ const url = titleImage(t); return url ? `<img src="${escapeHtml(url)}" alt="${escapeHtml(t.name)}">` : `<div class="poster-placeholder">${escapeHtml(t.name)}</div>`; }
 
 function movieCopy(t){return `<h1>${escapeHtml(t.name)}</h1><div class="movie-meta">${t.media_type==='series'?'Serie TV':'Film'}${t.release_year?' · '+t.release_year:''}</div>`;}
