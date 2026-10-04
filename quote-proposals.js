@@ -3709,6 +3709,32 @@ export const quoteProposals = [
         "excerpt": false
       }
     ]
+  },
+  {
+    "names": [
+      "Biancaneve e i sette nani"
+    ],
+    "year": 1938,
+    "options": [
+      {
+        "text": "Specchio, servo delle mie brame, chi è la più bella del reame?",
+        "speaker": "Regina Grimilde",
+        "source": "https://it.wikiquote.org/wiki/Biancaneve_e_i_sette_nani_(film_1937)",
+        "excerpt": true
+      },
+      {
+        "text": "E adesso, filtro, compi la tua magia.",
+        "speaker": "Regina Grimilde",
+        "source": "https://it.wikiquote.org/wiki/Biancaneve_e_i_sette_nani_(film_1937)",
+        "excerpt": true
+      },
+      {
+        "text": "Vi schiaccerò come formiche!",
+        "speaker": "Regina Grimilde / Strega",
+        "source": "https://it.wikiquote.org/wiki/Biancaneve_e_i_sette_nani_(film_1937)",
+        "excerpt": false
+      }
+    ]
   }
 ];
 const normalize = value => String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
