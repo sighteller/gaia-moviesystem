@@ -37,4 +37,5 @@ assert.equal(buildSeriesIndex([orphan]).parents.size,0);
 assert.equal(catalogEntries([orphan],{filter:'all'}).entries.length,1);
 const duplicateSeries={...series,id:'other-series',name:'Saranno famosi'};
 assert.equal(buildSeriesIndex([series,duplicateSeries,episodes[0]]).parents.size,0);
+assert.equal(catalogEntries([{...series,name:'Perché?' }],{query:'perche'}).entries.length,1);
 console.log('Series catalog grouping tests passed.');
