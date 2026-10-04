@@ -733,5 +733,5 @@ export function titleQuote(title){
 export const standardQuote = 'La scelta è fatta. Buona visione!';
 export function effectiveQuote(title, overrides = []) {
   const override = overrides.find(q => q.title_id === title.id);
-  return override ? (override.text ? override : null) : titleQuote(title);
+  return override ? (override.text ? override : null) : title.quote_override ? (title.quote_override.text ? title.quote_override : null) : titleQuote(title);
 }
