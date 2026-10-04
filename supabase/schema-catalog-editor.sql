@@ -9,6 +9,7 @@ create policy "catalog all links readable" on public.title_platforms for select 
 create policy "catalog allowed links insert" on public.title_platforms for insert to anon with check(exists(select 1 from public.platforms p where p.id=platform_id and p.slug in ('jellyfin','netflix','disney-plus','prime-video','rai-play')));
 create policy "catalog allowed links edit" on public.title_platforms for update to anon using(exists(select 1 from public.platforms p where p.id=platform_id and p.slug in ('jellyfin','netflix','disney-plus','prime-video','rai-play'))) with check(exists(select 1 from public.platforms p where p.id=platform_id and p.slug in ('jellyfin','netflix','disney-plus','prime-video','rai-play')));
 
+
 create or replace function public.gaia_catalog_editor() returns jsonb language sql security invoker set search_path='' as $$
 select jsonb_build_object('titles',(select coalesce(jsonb_agg(to_jsonb(t)||jsonb_build_object('revision',md5(t::text||coalesce((select string_agg(l::text,',' order by l.platform_id) from public.title_platforms l where l.title_id=t.id),''))) order by t.name),'[]'::jsonb) from public.titles t),'platforms',(select coalesce(jsonb_agg(p order by p.name),'[]'::jsonb) from public.platforms p where p.active and p.slug in ('jellyfin','netflix','disney-plus','prime-video','rai-play')),'links',(select coalesce(jsonb_agg(l),'[]'::jsonb) from public.title_platforms l));
 $$;
@@ -40,7 +41,7 @@ begin
    if not exists(select 1 from public.platforms where id=pid and active and slug in ('jellyfin','netflix','disney-plus','prime-video','rai-play')) or jsonb_typeof(l->'active') is distinct from 'boolean' then raise exception 'Piattaforma non valida'; end if;
    u=nullif(l->>'url','');
    if u is not null and (u !~ '^https?://' or length(u)>2000) then raise exception 'Link della piattaforma non valido'; end if;
-   insert into public.title_platforms(title_id,platform_id,url,active,last_verified_at) values(t.id,pid,u,(l->>'active')::boolean,clock_timestamp()) on conflict(title_id,platform_id) do update set url=excluded.url,active=excluded.active,last_verified_at=case when public.title_platforms.url is distinct from excluded.url or public.title_platforms.active is distinct from excluded.active then excluded.last_verified_at else public.title_platforms.last_verified_at end;
+   insert into public.title_platforms(title_id,platform_id,url,active,last_verified_at) values(t.id,pid,u,(l->>'active')::boolean,case when (l->>'active')::boolean then clock_timestamp() else null end) on conflict(title_id,platform_id) do update set url=excluded.url,active=excluded.active,last_verified_at=case when public.title_platforms.url is distinct from excluded.url or public.title_platforms.active is distinct from excluded.active then excluded.last_verified_at else public.title_platforms.last_verified_at end;
   end loop;
   n=n+1;
  end loop;
