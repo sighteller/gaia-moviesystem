@@ -102,17 +102,10 @@ Deno.serve(async (req) => {
     }
 
     if (action === "checkViewing") {
-      const now = new Date().toISOString();
-      const rows = await api("selections?select=id,expected_end_at&device_id=eq." + payload.deviceId + "&viewing_status=eq.in_progress");
-      for (const row of rows || []) {
-        if (!row.expected_end_at) continue;
-        const status = new Date(row.expected_end_at) > new Date(now) ? "changed" : "presumed_completed";
-        await api("selections?id=eq." + row.id, {
-          method: "PATCH",
-          body: JSON.stringify({ viewing_status: status, status_updated_at: now }),
-        });
-      }
-      return response({ ok: true });
+      if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(payload.deviceId || "")) return response({ error: "Invalid device" }, 400);
+      return response(await api("rpc/gaia_check_viewing", {
+        method: "POST", body: JSON.stringify({ target_device: payload.deviceId }),
+      }));
     }
 
     if (action === "finalize") {
@@ -160,6 +153,8 @@ Deno.serve(async (req) => {
           no: rs.length,
           limited: ss.filter((x) => x.selection_mode === "limited").length,
           unlimited: ss.filter((x) => x.selection_mode === "unlimited").length,
+          completed: ss.filter((x) => x.viewing_status === "presumed_completed").length,
+          interrupted: ss.filter((x) => x.viewing_status === "interrupted").length,
           changed: ss.filter((x) => x.viewing_status === "changed").length,
         };
       }).sort((a,b) => b.chosen - a.chosen || a.title.name.localeCompare(b.title.name));
