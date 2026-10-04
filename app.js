@@ -2,7 +2,7 @@ import {buildSeriesIndex} from './series-catalog.js?v=20261004series';
 import { effectiveQuote, standardQuote } from './title-quotes.js?v=20261004catalog';
 import { recordConsultation, choiceMessageHtml, platformUrl } from './choice-summary.js?v=20261002proposals';
 import { mountCoverPicker } from './cover-picker.js?v=20261001i';
-import { initFeatures } from './features.js?v=20261001i';
+import { initFeatures } from './features.js?v=20261004requests1';
 import { mountJellyfinSync } from './jellyfin-sync.js?v=20261002settings';
 const API_URL = 'https://mahjewznwqvdgtdjtekc.supabase.co/functions/v1/gaia-api';
 
@@ -57,9 +57,18 @@ async function loadData() {
 
 function savePlatformFilter(){ localStorage.setItem('gaia_platforms', JSON.stringify(state.selectedPlatformIds)); }
 
+let viewingCheck=null, viewingReturnPending=false;
 async function checkInterruptedViewing() {
-  await call('checkViewing', { deviceId: deviceId() });
+  if(savingChoice){viewingReturnPending=true;return;}
+  if(viewingCheck)return viewingCheck;
+  viewingCheck=call('checkViewing',{deviceId:deviceId()});
+  try{return await viewingCheck;}finally{viewingCheck=null;}
 }
+function handleViewingReturn(){
+  if(document.visibilityState==='visible')checkInterruptedViewing().catch(console.error);
+}
+window.addEventListener('focus',handleViewingReturn);
+document.addEventListener('visibilitychange',handleViewingReturn);
 
 async function resumeSessionIfAny() {
   const { session } = await call('resume', { deviceId: deviceId() });
@@ -277,7 +286,7 @@ async function finalize(mode){
 
 async function renderStats(){
   const { rows } = await call('stats');
-  app.innerHTML = `<div class="shell">${topbar()}<div style="width:min(1100px,100%);margin:0 auto"><h1 style="font-size:clamp(44px,6vw,76px);letter-spacing:-.05em;margin:10px 0 26px">Statistiche</h1><div style="display:grid;gap:12px">${rows.map(r => `<div style="display:grid;grid-template-columns:minmax(220px,2fr) repeat(5,minmax(80px,1fr));gap:12px;align-items:center;padding:18px 20px;border:1px solid #30362b;border-radius:16px;background:#1a1d17"><strong>${escapeHtml(r.title.name)}</strong><span>Scelto ${r.chosen}</span><span>No ${r.no}</span><span>Limitata ${r.limited}</span><span>Illimitata ${r.unlimited}</span><span>Cambiato ${r.changed}</span></div>`).join('')}</div></div></div>`;
+  app.innerHTML = `<div class="shell">${topbar()}<div style="width:min(1100px,100%);margin:0 auto"><h1 style="font-size:clamp(44px,6vw,76px);letter-spacing:-.05em;margin:10px 0 26px">Statistiche</h1><div style="display:grid;gap:12px">${rows.map(r => `<div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:18px 20px;border:1px solid #30362b;border-radius:16px;background:#1a1d17"><strong>${escapeHtml(r.title.name)}</strong><span>Scelto ${r.chosen}</span><span>No ${r.no}</span><span>Limitata ${r.limited}</span><span>Illimitata ${r.unlimited}</span><span>Completati (≥80%) ${r.completed||0}</span><span>Interrotti ${r.interrupted||0}</span><span>Cambiato ${r.changed}</span></div>`).join('')}</div></div></div>`;
 }
 
 function renderEmpty(){
@@ -302,7 +311,7 @@ app.addEventListener('click', async e => {
     savingChoice=true;
     platform.setAttribute('aria-busy','true');
     try{await finalize(state.pendingMode);}catch(err){const status=app.querySelector('.choice-status');if(status)status.textContent='Non riesco a salvare la scelta. Riprova.';console.error(err);}
-    finally{savingChoice=false;platform.removeAttribute('aria-busy');}
+    finally{savingChoice=false;if(viewingReturnPending){viewingReturnPending=false;handleViewingReturn();}platform.removeAttribute('aria-busy');}
     return;
   }
   const b = e.target.closest('button'); if (!b) return;
