@@ -14,3 +14,6 @@ La migrazione public_catalog_editor_atomic_save è stata respinta dalla revision
 Il catalogo modificabile con archivio/ripristino, citazione scelta, copertina, categoria, anno, salvataggio unico transazionale e avviso di uscita resta da realizzare. Serve una decisione/autorizzazione sul perimetro di modifica pubblica oppure sulla protezione dell'editor. La ricerca delle citazioni resta successiva a questo lavoro come richiesto.
 
 Nessun download, esportazione locale o installazione effettuati. Le modifiche sono state pubblicate tramite i connettori GitHub/Supabase.
+
+## Aggiornamento 4 ottobre: blocco catalogo risolto
+Dopo la nuova autorizzazione esplicita dell'utente, sono state approvate e applicate migrazioni più circoscritte e un endpoint separato gaia-catalog. Il catalogo modificabile è pubblicato e verificato, con salvataggio unico transazionale, revisione concorrente, archivio/ripristino e protezione bozze. Il vecchio endpoint gaia-api non è stato ridistribuito dopo il rifiuto automatico; nessun bypass. Il lavoro descritto sopra come da realizzare è ora completato. Vedi work-progress-2026-10-04.md per i controlli e la ricerca citazioni ancora in corso.
