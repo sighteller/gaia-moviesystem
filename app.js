@@ -1,4 +1,4 @@
-import { effectiveQuote, standardQuote } from './title-quotes.js?v=20261002editor';
+import { effectiveQuote, standardQuote } from './title-quotes.js?v=20261004catalog';
 import { recordConsultation, choiceMessageHtml, platformUrl } from './choice-summary.js?v=20261002proposals';
 import { mountCoverPicker } from './cover-picker.js?v=20261001i';
 import { initFeatures } from './features.js?v=20261001i';
