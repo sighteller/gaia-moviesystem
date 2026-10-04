@@ -2761,6 +2761,12 @@ export const quoteProposals = [
         "speaker": "Bea",
         "source": "https://www.mymovies.it/film/2018/peterrabbit/frasi/",
         "excerpt": false
+      },
+      {
+        "text": "Questo tizio chi si crede di essere? Questa terra è nostra!",
+        "speaker": "Peter Rabbit",
+        "source": "https://www.mymovies.it/film/2018/peterrabbit/frasi/",
+        "excerpt": false
       }
     ]
   },
@@ -3077,6 +3083,18 @@ export const quoteProposals = [
         "speaker": "Tata Matilda",
         "source": "https://www.pensieriparole.it/frasi-film/nanny-mcphee-tata-matilda-%282005%29/pag1",
         "excerpt": true
+      },
+      {
+        "text": "Io ci sarò.",
+        "speaker": "Tata Matilda",
+        "source": "https://www.mymovies.it/film/2005/nannymcphee/frasi/",
+        "excerpt": false
+      },
+      {
+        "text": "Deve nevicare in agosto prima che questa famiglia si raddrizza",
+        "speaker": "Signora Blatherwick (la cuoca)",
+        "source": "https://www.sas.bg.it/documents/b4c9ff93-c65a-4959-8414-44826719eab2",
+        "excerpt": false
       }
     ]
   },
