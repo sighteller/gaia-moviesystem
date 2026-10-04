@@ -2265,6 +2265,18 @@ export const quoteProposals = [
         "speaker": "Darwin",
         "source": "https://www.mymovies.it/film/2009/gforce/",
         "excerpt": false
+      },
+      {
+        "text": "Il destino del mondo è tutto sulle mie spalle",
+        "speaker": "Darwin",
+        "source": "https://web.persinsala.it/i-personaggi-di-g-force-superspie-in-missione-179.html",
+        "excerpt": false
+      },
+      {
+        "text": "Non sono grasso, sono rotondo",
+        "speaker": "Hurley",
+        "source": "https://web.persinsala.it/i-personaggi-di-g-force-superspie-in-missione-179.html",
+        "excerpt": false
       }
     ]
   },
@@ -2684,6 +2696,18 @@ export const quoteProposals = [
         "text": "L'Oceano ha scelto te!",
         "speaker": "Nonna Tala",
         "source": "https://www.mymovies.it/film/2016/moana/frasi/",
+        "excerpt": false
+      },
+      {
+        "text": "Stanne fuori o ti sposto sotto l'ascella!",
+        "speaker": "Maui",
+        "source": "https://img.frasesfamosas.com.br/s-film/-tt3521164/",
+        "excerpt": false
+      },
+      {
+        "text": "Se mi fossi chiamato Sebastian e avessi avuto l’accento giamaicano avreste fatto a gara per aiutarmi",
+        "speaker": "Tamatoa",
+        "source": "https://coccinema.com/2016/12/25/oceania-disney/",
         "excerpt": false
       }
     ]
@@ -3383,6 +3407,110 @@ export const quoteProposals = [
         "speaker": "Capo Bogo",
         "excerpt": false,
         "source": "https://www.comingsoon.it/film/zootropolis-2/65874/scheda/"
+      }
+    ]
+  },
+  {
+    "names": [
+      "Wonder Park"
+    ],
+    "year": 2019,
+    "options": [
+      {
+        "text": "Non avete fatto niente di male, siete tutti stupendi.",
+        "speaker": "Cameron \"June\" Bailey",
+        "source": "https://frasix.it/2021/04/08/wonder-park-frasi",
+        "excerpt": false
+      },
+      {
+        "text": "Quindi Meraviglianda è solo un prodotto della tua immaginazione…",
+        "speaker": "Greta",
+        "source": "https://frasix.it/2021/04/08/wonder-park-frasi",
+        "excerpt": false
+      },
+      {
+        "text": "Peanut? Sembra che sia… Meraviglianda!",
+        "speaker": "Cameron \"June\" Bailey",
+        "source": "https://frasix.it/2021/04/08/wonder-park-frasi",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Mamma Mia!"
+    ],
+    "year": 2008,
+    "options": [
+      {
+        "text": "Hai sempre saputo come fare un'entrata!!!",
+        "speaker": "Sam Carmichael",
+        "source": "https://www.mymovies.it/film/2008/mammamia/frasi/",
+        "excerpt": false
+      },
+      {
+        "text": "Ragazze.....siamo troppo forti!",
+        "speaker": "Tanya",
+        "source": "https://www.mymovies.it/film/2008/mammamia/frasi/",
+        "excerpt": false
+      },
+      {
+        "text": "È la fonte di Afrodite!!",
+        "speaker": "Donna",
+        "source": "https://www.mymovies.it/film/2008/mammamia/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Step Up"
+    ],
+    "year": 2006,
+    "options": [
+      {
+        "text": "Spesso il successo è a un passo.",
+        "speaker": "Tyler Gage",
+        "source": "https://aforismi.meglio.it/frasi-film/step-up",
+        "excerpt": false
+      },
+      {
+        "text": "Se vuoi una cosa te la devi conquistare.",
+        "speaker": "Tyler Gage",
+        "source": "https://aforismi.meglio.it/frasi-film/step-up",
+        "excerpt": false
+      },
+      {
+        "text": "State parlando del ballo come se fosse il lancio di una capsula spaziale.",
+        "speaker": "Tyler Gage",
+        "source": "https://www.mymovies.it/film/2006/stepup/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "La bella e la bestia"
+    ],
+    "year": 2017,
+    "options": [
+      {
+        "text": "Pensa alla cosa che hai sempre desiderato…",
+        "speaker": "Bestia",
+        "source": "https://aforismi.meglio.it/frasi-film/la-bella-e-la-bestia-2017",
+        "excerpt": true
+      },
+      {
+        "text": "Il padrone non è terribile come sembra…",
+        "speaker": "Mrs. Bric",
+        "source": "https://aforismi.meglio.it/frasi-film/la-bella-e-la-bestia-2017",
+        "excerpt": false
+      },
+      {
+        "text": "Sei la cosa più bella che abbia mai visto.",
+        "speaker": "Gaston",
+        "source": "https://aforismi.meglio.it/frasi-film/la-bella-e-la-bestia-2017",
+        "excerpt": true
       }
     ]
   }
