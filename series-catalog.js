@@ -41,8 +41,9 @@ export function episodeLabel(title) {
 
 export function catalogEntries(titles, { query = '', filter = 'active', dirtyIds = new Set() } = {}) {
   const index = buildSeriesIndex(titles);
-  const search = normalized(query);
-  const matchesName = title => normalized(title.name).includes(search);
+  const searchable = value => normalized(value).normalize('NFD').replace(/\p{M}/gu, '');
+  const search = searchable(query);
+  const matchesName = title => searchable(title.name).includes(search);
   const matchesFilter = title => filter === 'all' ||
     filter === 'active' && title.active ||
     filter === 'archived' && !title.active ||
