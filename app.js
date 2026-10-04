@@ -1,3 +1,4 @@
+import {buildSeriesIndex} from './series-catalog.js?v=20261004series';
 import { effectiveQuote, standardQuote } from './title-quotes.js?v=20261004catalog';
 import { recordConsultation, choiceMessageHtml, platformUrl } from './choice-summary.js?v=20261002proposals';
 import { mountCoverPicker } from './cover-picker.js?v=20261001i';
@@ -40,7 +41,9 @@ function topbar() { return `<div class="topbar">${logo()}<div class="small-actio
 
 async function loadData() {
   const data = await call('catalog');
-  state.titles = data.titles || [];
+  const titles = data.titles || [];
+  const seriesIndex = buildSeriesIndex(titles);
+  state.titles = titles.filter(t => !seriesIndex.parents.has(t.id));
   try { state.quotes = JSON.parse(localStorage.getItem('gaia_quote_edits') || '[]'); } catch { state.quotes = []; }
   state.platforms = (data.platforms || []).filter(p => ['jellyfin','netflix','disney-plus','prime-video','rai-play'].includes(p.slug));
   const allowedIds = new Set(state.platforms.map(p=>p.id));
