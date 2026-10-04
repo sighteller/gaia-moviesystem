@@ -3555,7 +3555,8 @@ export const quoteProposals = [
   },
   {
     "names": [
-      "Nel paese delle creature selvagge"
+      "Nel paese delle creature selvagge",
+      "Nel paese delle creture selvagge"
     ],
     "year": 2009,
     "options": [
@@ -3679,6 +3680,32 @@ export const quoteProposals = [
         "text": "Nonno, sono tornata!",
         "speaker": "Heidi",
         "source": "https://www.comingsoon.it/film/heidi/52986/scheda/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Balto 2 - Il mistero del lupo"
+    ],
+    "year": 2002,
+    "options": [
+      {
+        "text": "So soltanto cosa sono e non chi sono davvero!",
+        "speaker": "Aleu",
+        "source": "https://it.wikiquote.org/wiki/Balto_-_Il_mistero_del_lupo",
+        "excerpt": false
+      },
+      {
+        "text": "Siamo tutti parte del gran disegno!",
+        "speaker": "Nava",
+        "source": "https://it.wikiquote.org/wiki/Balto_-_Il_mistero_del_lupo",
+        "excerpt": false
+      },
+      {
+        "text": "Siamo noi i padroni del nostro destino!",
+        "speaker": "Niju",
+        "source": "https://it.wikiquote.org/wiki/Balto_-_Il_mistero_del_lupo",
         "excerpt": false
       }
     ]
