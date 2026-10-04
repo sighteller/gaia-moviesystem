@@ -3630,9 +3630,61 @@ export const quoteProposals = [
         "excerpt": true
       }
     ]
+  },
+  {
+    "names": [
+      "Pinocchio - La grande avventura di una vita"
+    ],
+    "year": 2002,
+    "options": [
+      {
+        "text": "Se del perdono non sarai degno, tutta la vita sarai un legno.",
+        "speaker": "Fata Turchina",
+        "source": "https://www.mymovies.it/film/2002/pinocchio/frasi/",
+        "excerpt": false
+      },
+      {
+        "text": "La farfalla, si dice, non sa cos'è il dolore.",
+        "speaker": "Medoro",
+        "source": "https://www.frasicelebri.it/s-film/pinocchio-1/",
+        "excerpt": true
+      },
+      {
+        "text": "Burattino mettiti in chiaro una cosa: quello che devo fare io, lo decide solo Lucignolo!",
+        "speaker": "Lucignolo",
+        "source": "https://www.frasicelebri.it/s-film/pinocchio-1/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Heidi"
+    ],
+    "year": 2015,
+    "options": [
+      {
+        "text": "Ciao, io mi chiamo Heidi!",
+        "speaker": "Heidi",
+        "source": "https://www.comingsoon.it/film/heidi/52986/scheda/",
+        "excerpt": false
+      },
+      {
+        "text": "Ci hanno portato in casa una creatura completamente selvatica e per giunta ignorante!",
+        "speaker": "Fräulein Rottenmeier",
+        "source": "https://www.comingsoon.it/film/heidi/52986/scheda/",
+        "excerpt": false
+      },
+      {
+        "text": "Nonno, sono tornata!",
+        "speaker": "Heidi",
+        "source": "https://www.comingsoon.it/film/heidi/52986/scheda/",
+        "excerpt": false
+      }
+    ]
   }
 ];
 const normalize = value => String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
 export function proposalsFor(title) {
- return quoteProposals.find(row => Number(title.release_year) === row.year && row.names.some(name => normalize(name) === normalize(title.name)))?.options || [];
+ return quoteProposals.find(row => (row.year == null ? title.release_year == null : Number(title.release_year) === row.year) && row.names.some(name => normalize(name) === normalize(title.name)))?.options || [];
 }
