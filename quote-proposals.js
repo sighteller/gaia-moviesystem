@@ -2869,6 +2869,18 @@ export const quoteProposals = [
         "speaker": "Adam Pontipee",
         "source": "https://www.mymovies.it/film/1954/sette-spose-per-sette-fratelli/frasi/",
         "excerpt": false
+      },
+      {
+        "text": "Vuole ciccare signorina?",
+        "speaker": "Benjamin Pontipee",
+        "source": "https://www.mymovies.it/film/1954/sette-spose-per-sette-fratelli/frasi/",
+        "excerpt": false
+      },
+      {
+        "text": "Non farla così tragica Milly, tutto si sistemerà, troveremo il modo di far venire il Pastore.",
+        "speaker": "Adamo",
+        "source": "https://www.blogfrivolopergenteseria.it/2016/12/langolo-dei-film-sette-spose-per-sette.html",
+        "excerpt": false
       }
     ]
   },
@@ -3510,6 +3522,111 @@ export const quoteProposals = [
         "text": "Sei la cosa più bella che abbia mai visto.",
         "speaker": "Gaston",
         "source": "https://aforismi.meglio.it/frasi-film/la-bella-e-la-bestia-2017",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "II gigante di ferro",
+      "Il gigante di ferro"
+    ],
+    "year": null,
+    "options": [
+      {
+        "text": "Tu sei chi scegli e cerchi di essere.",
+        "speaker": "Dean",
+        "source": "https://it.wikiquote.org/wiki/Il_gigante_di_ferro",
+        "excerpt": false
+      },
+      {
+        "text": "Io non sono un'arma.",
+        "speaker": "Gigante di ferro",
+        "source": "https://it.wikiquote.org/wiki/Il_gigante_di_ferro",
+        "excerpt": false
+      },
+      {
+        "text": "Le anime... non muoiono.",
+        "speaker": "Gigante di ferro",
+        "source": "https://it.wikiquote.org/wiki/Il_gigante_di_ferro",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Nel paese delle creature selvagge"
+    ],
+    "year": 2009,
+    "options": [
+      {
+        "text": "Ti mangerei per quanto ti amo.",
+        "speaker": "KW",
+        "source": "https://www.mymovies.it/film/2009/nelpaesedellecreatureselvagge/frasi/",
+        "excerpt": false
+      },
+      {
+        "text": "Cominciamo il putiferio!",
+        "speaker": "Max",
+        "source": "https://www.mymovies.it/film/2009/nelpaesedellecreatureselvagge/frasi/",
+        "excerpt": false
+      },
+      {
+        "text": "Sai come dico io, se hai un problema...mangiatelo!",
+        "speaker": "Judith",
+        "source": "https://www.mymovies.it/film/2009/nelpaesedellecreatureselvagge/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Gatta Cenerentola"
+    ],
+    "year": 2017,
+    "options": [
+      {
+        "text": "Il meglio deve ancora venire…",
+        "speaker": "Vittorio Basile",
+        "source": "https://www.mymovies.it/film/2017/lagattacenerentola/frasi/",
+        "excerpt": true
+      },
+      {
+        "text": "Il matrimonio è l'unico vero strumento di rivoluzione sociale!",
+        "speaker": "Salvatore Lo Giusto",
+        "source": "https://www.mymovies.it/film/2017/lagattacenerentola/frasi/",
+        "excerpt": false
+      },
+      {
+        "text": "Dare la forchetta d'argento ai morti di fame",
+        "speaker": "Salvatore Lo Giusto",
+        "source": "https://www.mymovies.it/film/2017/lagattacenerentola/rassegnastampa/768720/",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Una notte al museo 3 - Il segreto del faraone"
+    ],
+    "year": 2014,
+    "options": [
+      {
+        "text": "Sorridi amico mio, è l'alba!",
+        "speaker": "Theodore Roosevelt",
+        "source": "https://www.frasicelebri.it/s-film/una-notte-al-museo-il-segreto-del-faraone/",
+        "excerpt": false
+      },
+      {
+        "text": "Gli dei egizi sono gli unici veri dei!",
+        "speaker": "Merenkahre",
+        "source": "https://www.frasicelebri.it/s-film/una-notte-al-museo-il-segreto-del-faraone/",
+        "excerpt": true
+      },
+      {
+        "text": "Il sole tramonta, la tavola comincia a brillare, e tutto prende vita.",
+        "speaker": "Larry",
+        "source": "https://www.aforismicitazioni.it/frase.php?id=79346",
         "excerpt": true
       }
     ]
