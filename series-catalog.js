@@ -45,8 +45,9 @@ export function catalogEntries(titles, { query = '', filter = 'active', dirtyIds
   const search = searchable(query);
   const matchesName = title => searchable(title.name).includes(search);
   const matchesFilter = title => filter === 'all' ||
-    filter === 'active' && title.active ||
-    filter === 'archived' && !title.active ||
+    filter === 'active' && (title.active || title.request_status === 'pending') ||
+    filter === 'requested' && title.request_status === 'pending' ||
+    filter === 'archived' && !title.active && title.request_status !== 'pending' ||
     filter === 'dirty' && dirtyIds.has(title.id) ||
     filter === 'no-quote' && !title.quote_override?.text;
   const entries = [];
@@ -60,6 +61,6 @@ export function catalogEntries(titles, { query = '', filter = 'active', dirtyIds
     if (!rootHit && !childHits.length) continue;
     entries.push({ title, children: rootHit ? children : childHits });
   }
-  entries.sort((a, b) => a.title.name.localeCompare(b.title.name, 'it'));
+  entries.sort((a,b) => Number(b.title.request_status==='pending')-Number(a.title.request_status==='pending') || (a.title.request_status==='pending'&&b.title.request_status==='pending'?String(b.title.requested_at).localeCompare(String(a.title.requested_at)):a.title.name.localeCompare(b.title.name,'it')));
   return { entries, index };
 }
