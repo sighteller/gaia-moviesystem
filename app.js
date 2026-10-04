@@ -242,7 +242,7 @@ function renderPlatformSummary(mode,savedPlatform=null){
   const link=savedPlatform?state.links.find(l=>l.title_id===t.id&&l.platform_id===savedPlatform.id):null;
   const url=platformUrl(link?.url);
   const quote=effectiveQuote(t,state.quotes);
-  app.innerHTML=`<div class="shell">${topbar()}<div class="hero-center"><div class="empty choice-result"><h2 class="film-quote">${quote?`«${escapeHtml(quote.text)}»`:escapeHtml(standardQuote)}</h2><p class="quote-attribution">${quote?.speaker?`${escapeHtml(quote.speaker)} · `:''}${escapeHtml(t.name)}${quote?.source?` <a class="quote-source" href="${escapeHtml(quote.source)}" target="_blank" rel="noopener noreferrer" aria-label="Fonte della citazione">↗</a>`:''}</p><p class="choice-counter">${choiceMessageHtml(count)}</p><h3>Dove lo guardiamo?</h3><div class="platform-list">${ps.map((p,i)=>`<button class="platform-option ${savedPlatform?.id===p.id?'selected':''}" data-choice-platform="${p.id}" ${savedPlatform?'disabled':''}>${escapeHtml(p.name)} <kbd>${i+1}</kbd></button>`).join('')}</div><p class="choice-status" role="status"></p>${savedPlatform?(url?`<a class="ghost-btn platform-launch" href="${escapeHtml(url)}">Apri su ${escapeHtml(savedPlatform.name)} ⏎</a>`:'<p>Il collegamento diretto a questa piattaforma non è ancora configurato.</p>'):''}<button class="ghost-btn" data-action="home">Torna a Gaia</button></div></div></div>`;
+  app.innerHTML=`<div class="shell">${topbar()}<div class="hero-center"><div class="empty choice-result"><h2 class="film-quote">${quote?`«${escapeHtml(quote.text)}»`:escapeHtml(standardQuote)}</h2><p class="quote-attribution">${quote?.speaker?`${escapeHtml(quote.speaker)} · `:''}${escapeHtml(t.name)}${quote?.source?` <a class="quote-source" href="${escapeHtml(quote.source)}" target="_blank" rel="noopener noreferrer" aria-label="Fonte della citazione">↗</a>`:''}</p><p class="choice-counter">${choiceMessageHtml(count)}</p><h3>Dove lo guardiamo?</h3><div class="platform-list">${ps.map((p,i)=>{const href=platformUrl(state.links.find(l=>l.title_id===t.id&&l.platform_id===p.id)?.url);const chosen=savedPlatform?.id===p.id;const label=`${escapeHtml(p.name)} <kbd>${i+1}</kbd>`;return href&&(!savedPlatform||chosen)?`<a class="platform-option ${chosen?'selected':''}" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none" data-choice-platform="${p.id}" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${label}</a>`:`<button class="platform-option ${chosen?'selected':''}" data-choice-platform="${p.id}" ${savedPlatform?'disabled':''}>${label}</button>`;}).join('')}</div><p class="choice-status" role="status"></p>${savedPlatform&&!url?'<p>Il collegamento diretto a questa piattaforma non è ancora configurato.</p>':''}<button class="ghost-btn" data-action="home">Torna a Gaia</button></div></div></div>`;
 }
 
 function renderMode(){
@@ -289,7 +289,19 @@ function toggleMute(){
   if (!state.muted && document.querySelector('.movie-stage')) playAudio(currentTitle());
 }
 
+let savingChoice=false;
 app.addEventListener('click', async e => {
+  const platform=e.target.closest('[data-choice-platform]');
+  if(platform){
+    if(savingChoice||platform.disabled){e.preventDefault();return;}
+    if(!state.session)return;
+    state.confirmPlatform=platform.dataset.choicePlatform;
+    savingChoice=true;
+    platform.setAttribute('aria-busy','true');
+    try{await finalize(state.pendingMode);}catch(err){const status=app.querySelector('.choice-status');if(status)status.textContent='Non riesco a salvare la scelta. Riprova.';console.error(err);}
+    finally{savingChoice=false;platform.removeAttribute('aria-busy');}
+    return;
+  }
   const b = e.target.closest('button'); if (!b) return;
   if (b.disabled) return;
   if (b.dataset.action === 'previous') return previousMovie();
@@ -313,12 +325,7 @@ app.addEventListener('click', async e => {
   if (b.dataset.category) return startSession(b.dataset.category);
   if (b.dataset.action === 'categories') return renderCategories();
   if(b.dataset.mode)return renderPlatformSummary(b.dataset.mode);
-  if(b.dataset.choicePlatform&&state.session){
-    state.confirmPlatform=b.dataset.choicePlatform;
-    app.querySelectorAll('[data-choice-platform]').forEach(x=>x.disabled=true);
-    try{await finalize(state.pendingMode);}catch(err){app.querySelectorAll('[data-choice-platform]').forEach(x=>x.disabled=false);const status=app.querySelector('.choice-status');if(status)status.textContent='Non riesco a salvare la scelta. Riprova.';console.error(err);}
-    return;
-  }
+
 });
 
 for(const event of ['pointerover','focusin'])document.addEventListener(event,e=>{
