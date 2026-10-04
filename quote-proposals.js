@@ -2099,6 +2099,12 @@ export const quoteProposals = [
         "speaker": "Bunny",
         "source": "https://coccinema.com/2019/06/30/le-migliori-frasi-e-citazioni-di-toy-story-4/",
         "excerpt": false
+      },
+      {
+        "text": "Onore vittoria baldoria baldoria.",
+        "speaker": "Duckie",
+        "source": "https://coccinema.com/2019/06/30/le-migliori-frasi-e-citazioni-di-toy-story-4/",
+        "excerpt": false
       }
     ]
   },
@@ -3116,6 +3122,12 @@ export const quoteProposals = [
         "text": "Libera la tua essenza! Quella passionale, travolgente!",
         "speaker": "Joe Gardner",
         "source": "https://aforismi.meglio.it/frasi-film/soul",
+        "excerpt": false
+      },
+      {
+        "text": "Per che cosa vorresti essere ricordato al mondo?",
+        "speaker": "Joe Gardner",
+        "source": "https://www.frasicelebri.it/s-cartone/-2312/",
         "excerpt": false
       }
     ]
