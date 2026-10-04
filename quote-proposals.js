@@ -3267,6 +3267,124 @@ export const quoteProposals = [
         "excerpt": true
       }
     ]
+  },
+  {
+    "names": [
+      "I Simpson - Il film"
+    ],
+    "year": 2007,
+    "options": [
+      {
+        "text": "Perché tutto quello che frusto mi abbandona?",
+        "speaker": "Homer Simpson",
+        "source": "https://it.wikiquote.org/wiki/I_Simpson_-_Il_film"
+      },
+      {
+        "text": "Sei una donna, puoi serbare rancore per sempre!",
+        "speaker": "Marge Simpson",
+        "source": "https://it.wikiquote.org/wiki/I_Simpson_-_Il_film"
+      },
+      {
+        "text": "Non scaricherò illegalmente questo film.",
+        "speaker": "Bart Simpson (scritta alla lavagna)",
+        "source": "https://it.wikiquote.org/wiki/I_Simpson_-_Il_film"
+      }
+    ]
+  },
+  {
+    "names": [
+      "Pets 2 - Vita da animali"
+    ],
+    "year": 2019,
+    "options": [
+      {
+        "text": "Ma io non ho disturbi del comportamento!",
+        "speaker": "Max",
+        "source": "https://www.comingsoon.it/film/pets-2-vita-da-animali/55614/scheda/"
+      },
+      {
+        "text": "Ragazzi, quanti dolcetti!",
+        "speaker": "Mel",
+        "source": "https://www.comingsoon.it/film/pets-2-vita-da-animali/55614/scheda/"
+      },
+      {
+        "text": "C'è qualcuno nella mia lettiera!",
+        "speaker": "Chloe",
+        "source": "https://www.comingsoon.it/film/pets-2-vita-da-animali/55614/scheda/"
+      }
+    ]
+  },
+  {
+    "names": [
+      "Cattivissimo me 3"
+    ],
+    "year": 2017,
+    "options": [
+      {
+        "text": "Io portato qui per continuare attività di famiglia, cattiveria è in tuo sangue!",
+        "speaker": "Dru",
+        "source": "https://www.comingsoon.it/film/cattivissimo-me-3/53648/scheda/"
+      },
+      {
+        "text": "Dai, torna a essere cattivo!",
+        "speaker": "Dru",
+        "source": "https://www.comingsoon.it/film/cattivissimo-me-3/53648/scheda/"
+      },
+      {
+        "text": "Guarda, il corno di un unicorno!",
+        "speaker": "Agnes",
+        "source": "https://www.comingsoon.it/film/cattivissimo-me-3/53648/scheda/"
+      }
+    ]
+  },
+  {
+    "names": [
+      "L'isola dei cani"
+    ],
+    "year": 2018,
+    "options": [
+      {
+        "text": "Nessuno si arrende da queste parti. Non lo dimenticare, mai!",
+        "speaker": "Capo",
+        "source": "https://www.comingsoon.it/film/l-isola-dei-cani/54384/scheda/"
+      },
+      {
+        "text": "Non credo di poter tollerare altra immondizia",
+        "speaker": "Rex",
+        "source": "https://www.comingsoon.it/film/l-isola-dei-cani/54384/scheda/"
+      },
+      {
+        "text": "Qualcuno sta tramando qualcosa!",
+        "speaker": "Tracy Walker",
+        "source": "https://www.comingsoon.it/film/l-isola-dei-cani/54384/scheda/"
+      }
+    ]
+  },
+  {
+    "names": [
+      "Zootropolis 2"
+    ],
+    "year": 2025,
+    "options": [
+      {
+        "text": "Nessun serpente è mai entrato a Zootropolis.",
+        "speaker": "Nick Wilde",
+        "excerpt": false,
+        "source": "https://www.comingsoon.it/film/zootropolis-2/65874/scheda/"
+      },
+      {
+        "text": "Mai tirare le orecchie a un coniglio.",
+        "speaker": "Judy Hopps",
+        "excerpt": true,
+        "source": "https://www.comingsoon.it/film/zootropolis-2/65874/scheda/"
+      },
+      {
+        "text": "Coniglietta! Volpe! È una missione cruciale, fallite e io vi separerò.",
+        "speaker": "Capo Bogo",
+        "excerpt": false,
+        "source": "https://www.comingsoon.it/film/zootropolis-2/65874/scheda/"
+      }
+    ]
   }
 ];
 const normalize = value => String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
