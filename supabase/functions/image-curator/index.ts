@@ -32,6 +32,13 @@ function checkRate(req:Request){
   if(++bucket.count>60)throw new HttpError(429,'Troppe richieste. Riprova fra un minuto.');
   if(requests.size>1000)for(const [k,b] of requests)if(now-b.start>60000)requests.delete(k);
 }
+const filmRequestRates=new Map<string,{start:number,count:number}>();
+function checkFilmRequestRate(req:Request){
+ const source=req.headers.get('x-forwarded-for')?.split(',')[0]||'shared',now=Date.now();
+ let b=filmRequestRates.get(source);if(!b||now-b.start>600000){b={start:now,count:0};filmRequestRates.set(source,b);}
+ if(++b.count>5)throw new HttpError(429,'Hai già inviato diverse richieste. Riprova tra qualche minuto.');
+ if(filmRequestRates.size>1000)for(const [k,v] of filmRequestRates)if(now-v.start>600000)filmRequestRates.delete(k);
+}
 const coverFields='id,title_id,tmdb_id,media_type,provider,url,preview_url,width,height,language';
 Deno.serve(async req=>{
   if(req.method==='OPTIONS')return new Response('ok',{headers:cors});
@@ -44,7 +51,7 @@ Deno.serve(async req=>{
       const rows=await remote('cover_candidates?select='+coverFields+'&title_id=eq.'+payload.titleId+'&expires_at=gt.'+encodeURIComponent(new Date().toISOString())+'&order=created_at.asc&limit=24');
       return reply({candidates:rows});
     }
-    if(!['search','candidates','import','saveCover'].includes(action))return reply({error:'Unknown action'},400);
+    if(!['search','candidates','import','saveCover','request'].includes(action))return reply({error:'Unknown action'},400);
     checkRate(req);
     if(action==='search'){
       const q=String(payload.query||'').trim(),page=Number(payload.page||1);
@@ -85,6 +92,26 @@ Deno.serve(async req=>{
       if(!validId(payload.titleId)||!(payload.expectedUrl===null||typeof payload.expectedUrl==='string'))throw new HttpError(400,'Titolo non valido.');
       const saved=await remote('rpc/choose_curated_cover',{method:'POST',body:JSON.stringify({target_title_id:payload.titleId,candidate_id:payload.candidateId,expected_url:payload.expectedUrl})});
       return reply({url:saved});
+    }
+    if(action==='request'){
+      checkFilmRequestRate(req);
+      if(!['animation','film'].includes(payload.category))throw new HttpError(400,'Scegli una categoria.');
+      const saved=await remote('rpc/request_public_curated_title',{method:'POST',body:JSON.stringify({candidate_id:payload.candidateId,title_category:payload.category})});
+      let notification='not_configured';
+      const key=Deno.env.get('RESEND_API_KEY'),from=Deno.env.get('FILM_REQUEST_EMAIL_FROM'),to=Deno.env.get('FILM_REQUEST_EMAIL_TO');
+      if(saved.created&&key&&from&&to){
+        try{
+          const title=(await remote('titles?id=eq.'+saved.titleId+'&select=name'))[0];
+          const mail=await fetch('https://api.resend.com/emails',{method:'POST',headers:{Authorization:'Bearer '+key,'Content-Type':'application/json','Idempotency-Key':'gaia-request-'+saved.titleId},body:JSON.stringify({from,to:[to],subject:'Gaia: nuovo titolo richiesto',text:'È stato richiesto: '+title.name+'\n\nApri il catalogo: https://sighteller.github.io/gaia-moviesystem/disponibilita.html'}),signal:AbortSignal.timeout(10000)});
+          if(!mail.ok)throw Error('Invio email non riuscito');
+          notification='sent';
+          await remote('film_request_notifications?title_id=eq.'+saved.titleId,{method:'PATCH',body:JSON.stringify({status:'sent',sent_at:new Date().toISOString(),last_error:null})});
+        }catch{
+          notification='pending';
+          await remote('film_request_notifications?title_id=eq.'+saved.titleId,{method:'PATCH',body:JSON.stringify({status:'failed',last_error:'Invio da riprovare'})}).catch(()=>{});
+        }
+      }
+      return reply({...saved,notification});
     }
     if(!['animation','film'].includes(payload.category)||!Array.isArray(payload.platformIds)||!payload.platformIds.length||payload.platformIds.length>5||!payload.platformIds.every(validId))throw new HttpError(400,'Scegli categoria e piattaforme.');
     const saved=await remote('rpc/add_public_curated_title',{method:'POST',body:JSON.stringify({candidate_id:payload.candidateId,title_category:payload.category,platform_ids:payload.platformIds})});
