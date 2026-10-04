@@ -2133,6 +2133,12 @@ export const quoteProposals = [
         "speaker": "Raya",
         "source": "https://www.comingsoon.it/film/raya-e-l-ultimo-drago/59260/scheda/",
         "excerpt": false
+      },
+      {
+        "text": "Qualcuno deve fare il primo passo.",
+        "speaker": "Benja",
+        "source": "https://www.comingsoon.it/film/raya-e-l-ultimo-drago/59260/scheda/",
+        "excerpt": true
       }
     ]
   },
@@ -3157,6 +3163,12 @@ export const quoteProposals = [
         "speaker": "Jesper",
         "source": "https://www.frasicelebri.it/s-cartone/-2232/",
         "excerpt": false
+      },
+      {
+        "text": "Lei è nato per fare giocattoli.",
+        "speaker": "Jesper",
+        "source": "https://www.frasicelebri.it/s-cartone/-2232/",
+        "excerpt": true
       }
     ]
   },
