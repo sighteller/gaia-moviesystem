@@ -1,0 +1,966 @@
+{
+  "date": "2026-10-04",
+  "status": "incomplete",
+  "counts": {
+    "active": 316,
+    "withAtLeastOnePublishedAssociation": 164,
+    "withoutPublishedAssociation": 152,
+    "deferredByUser": 10
+  },
+  "rules": [
+    "Preserve chosen/reviewed quotes.",
+    "Three standalone verified Italian proposals with speaker/source; no invented translations or dialogue exchanges.",
+    "No local downloads.",
+    "B1 and I Simpson Classici deferred by user; no identity or quote assignment."
+  ],
+  "missing": [
+    {
+      "id": "20e9187e-caa6-46e2-a936-313dcade0ce8",
+      "name": "Alvin Superstar",
+      "year": 2007,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "06940866-5a46-4bbd-bce9-944b9b42da34",
+      "name": "Alvin Superstar 2",
+      "year": 2009,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "0259a683-349e-482f-a25d-7ed990587c97",
+      "name": "Amicinemici - Le avventure di Gav e Mei",
+      "year": 2005,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "adb2bb97-d633-405e-857e-c6a798ca59c1",
+      "name": "Arctic - Un'avventura glaciale",
+      "year": 2019,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "875f0707-1f2c-4708-99f9-f0d5327615d5",
+      "name": "Arthur e la guerra dei due mondi",
+      "year": 2010,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "20cbe1fb-4236-48df-865d-6f3006d9c007",
+      "name": "Arthur e la vendetta di Maltazard",
+      "year": 2009,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "76544940-52d1-4c2c-911f-80b440e9715c",
+      "name": "Azur e Asmar",
+      "year": 2006,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "d3ce566d-a322-46da-8b8f-aecb522664b9",
+      "name": "B1_t00",
+      "year": 2026,
+      "status": "deferred_by_user"
+    },
+    {
+      "id": "c20bdc29-08a4-4889-b4ad-fcd56020ab79",
+      "name": "B1_t01",
+      "year": 2026,
+      "status": "deferred_by_user"
+    },
+    {
+      "id": "f23439ce-19ce-41be-bed6-d33dfa2a7f7b",
+      "name": "B1_t02",
+      "year": 2026,
+      "status": "deferred_by_user"
+    },
+    {
+      "id": "ef8a0572-4c29-491f-854a-2e52e58f9877",
+      "name": "B1_t03",
+      "year": 2026,
+      "status": "deferred_by_user"
+    },
+    {
+      "id": "198d6764-c776-40af-9562-6dbe9d749f99",
+      "name": "B1_t04",
+      "year": 2026,
+      "status": "deferred_by_user"
+    },
+    {
+      "id": "fecef226-2c09-47a1-b589-176e0e582840",
+      "name": "B1_t05",
+      "year": 2026,
+      "status": "deferred_by_user"
+    },
+    {
+      "id": "fa3fc8dd-7021-420a-ba57-850b2f72d97d",
+      "name": "Ballerina",
+      "year": 2016,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "db5af2ba-e13c-4c8a-bfab-46628853ff3c",
+      "name": "Balto - Sulle ali dell'avventura",
+      "year": 2004,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "cacd0a97-ed86-47a7-be33-a752e2b14a31",
+      "name": "Balto e Togo - La leggenda",
+      "year": 2019,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "2d40ee77-650d-4c7a-9a64-beebbc5b42a4",
+      "name": "Bee Movie",
+      "year": 2007,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "f0bbd43b-1fa2-4e11-a3e1-4186b7be27e2",
+      "name": "Big Fish e Begonia",
+      "year": null,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "2679e7df-8e19-44e1-9f25-8d690d761f4c",
+      "name": "Bigfoot junior",
+      "year": 2017,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "2211f17b-4c60-41c2-83ce-7f559edb9a32",
+      "name": "C'era una volta nella foresta",
+      "year": 1993,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "79481e57-ace6-4f22-ad4b-285612ef6b8e",
+      "name": "Cani e gatti - La vendetta di Kitty",
+      "year": 2010,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "3e3d3b0a-41c0-45b3-97f1-cb615ee9be67",
+      "name": "Chicken Little - Amici per le penne",
+      "year": 2005,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "2d2c004f-5a06-4d83-8507-678a5b0eda2f",
+      "name": "Chitty Chitty Bang Bang",
+      "year": 1968,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "542caefe-e1dd-4146-954f-c3815b79c3fe",
+      "name": "Come cani e gatti",
+      "year": 2001,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "6560e5d2-b2f1-4045-bbdc-2c980afb4aa1",
+      "name": "Descendants: Wicked Wonderland",
+      "year": 2026,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "56c4edfd-9dc6-4148-83e3-1d84fc4376e2",
+      "name": "Dilili a Parigi",
+      "year": 2018,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "26cc29d3-d519-4055-b344-05592de92d73",
+      "name": "Doraemon – Nobita e l’isola del tesoro",
+      "year": 2018,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "dc5c501e-ff09-439b-80c4-e100636e2ab5",
+      "name": "Doraemon: Il film - Nobita e la nascita del Giappone",
+      "year": 2016,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "f6fd1d17-8b60-4043-9978-b2417044cced",
+      "name": "Elliott, il drago invisibile",
+      "year": 1977,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "c9e33db7-91eb-4aef-a726-4f382bffbb44",
+      "name": "Ernest & Celestine",
+      "year": 2012,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "c379f212-f9ff-4311-92c0-1ec6197105c5",
+      "name": "Fata madrina cercasi",
+      "year": 2020,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "c2aa8536-85ff-4a0c-9556-1baf8b9debc7",
+      "name": "Footloose",
+      "year": 2011,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "f27d3261-9416-43f0-a53e-4b07d3a73dae",
+      "name": "Garfield 2 - Il Film",
+      "year": 2006,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "5bc49e76-2481-48d4-8902-b73fe602eb3e",
+      "name": "Garfield Cartoon",
+      "year": null,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "0101b120-fed3-4253-9335-276b540b7bae",
+      "name": "Garfield Cartoon",
+      "year": 2026,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "0154ad44-cf56-4d90-895e-98c40e8f1228",
+      "name": "Heidi",
+      "year": 1974,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "6a57ae37-a802-426f-a597-d9bb0f473b02",
+      "name": "High School Musical: The Musical: La Serie",
+      "year": 2019,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "65618f1e-0ca3-4c7f-910e-1e4e1a7cc76a",
+      "name": "I Simpson Backstage Pass (1)",
+      "year": 2026,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "5ad61dba-20a3-497b-a54c-53cb5b6ec799",
+      "name": "I Simpson Backstage Pass (2)",
+      "year": 2026,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "7240c6fd-6c8c-4425-bf76-610e79a84ddd",
+      "name": "I Simpson Backstage Pass (3)",
+      "year": 2026,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "2f2f50f3-6db5-457a-aa8d-08c4c4297f68",
+      "name": "I Simpson Backstage Pass (4)",
+      "year": 2026,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "5ab7d999-43ab-4efe-9613-6f4ab46b62af",
+      "name": "I Simpson Classici (1)",
+      "year": 2026,
+      "status": "deferred_by_user"
+    },
+    {
+      "id": "bb606a6b-4c09-4d5f-86ee-dbfda8d44f73",
+      "name": "I Simpson Classici (2)",
+      "year": 2026,
+      "status": "deferred_by_user"
+    },
+    {
+      "id": "13f46a70-c5e2-4f13-a9f0-5c4bf10c4ee1",
+      "name": "I Simpson Classici (3)",
+      "year": 2026,
+      "status": "deferred_by_user"
+    },
+    {
+      "id": "6f56e423-f6c4-4a69-89d6-011cfd4edd0f",
+      "name": "I Simpson Classici (4)",
+      "year": 2026,
+      "status": "deferred_by_user"
+    },
+    {
+      "id": "fe02c58c-89bf-41c7-9e70-fe91d0a4d2c6",
+      "name": "I Simpson Film Festival (1)",
+      "year": 2026,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "f9e2a315-af0f-4518-8213-a1b1c5198f5e",
+      "name": "I Simpson Film Festival (2)",
+      "year": 2026,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "0946a4a6-a2a9-42a2-8c63-8d2aa54f2a82",
+      "name": "I Simspson Film Festival (3)",
+      "year": 2026,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "7cb9c267-e3df-4a09-94a2-61f8d280a82b",
+      "name": "Il giardino segreto",
+      "year": 2020,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "04ef117b-1205-4b26-aa64-7ee03f843148",
+      "name": "Il libro della giungla Special Edition",
+      "year": null,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "6365ad22-b9c4-4515-8b0b-4a546f895f6c",
+      "name": "Il Magico Mondo di Winnie The Pooh: Tanti amici e il primo amore",
+      "year": 2003,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "59c57438-6795-4b0d-a053-8b71def43c53",
+      "name": "Il mio amico Nanuk",
+      "year": 2014,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "bdcfc158-b0a9-4f92-8e56-c0bffbd5c797",
+      "name": "Il vento tra i salici",
+      "year": 1949,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "33f9873f-15f0-46f4-8a3c-88f86fd98701",
+      "name": "Jimmy Neutron - Ragazzo prodigio",
+      "year": 2001,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "798b8245-5322-4e68-95dd-b1a61d7f2bf0",
+      "name": "Kirikù e gli animali selvaggi",
+      "year": 2005,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "ffd7fc85-18bb-452b-a186-faa75fa7b82c",
+      "name": "Kirikù e la strega Karabà",
+      "year": 1998,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "8afb9760-4084-4653-be61-65a90f3302df",
+      "name": "Kubo e la spada magica",
+      "year": 2016,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "f1fe3fa0-2aad-4bb4-9427-ff2e2cf4f395",
+      "name": "L'era glaciale - In rotta di collisione",
+      "year": 2016,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "c5ed940f-8b8a-45dc-8d81-a44c1f8f68e6",
+      "name": "L'Era Glaciale - Un continente di risate - Parte 1",
+      "year": 2010,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "a7411a33-7896-4752-928b-1dee79157caa",
+      "name": "L'illusionista",
+      "year": 2010,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "a3453c1a-74f2-4f06-bec8-e3e3e4216d95",
+      "name": "L'incredibile storia di Winter il delfino",
+      "year": 2011,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "e5b74fc1-5d20-48e3-a247-36a22273d063",
+      "name": "L'unico e insuperabile Ivan",
+      "year": 2020,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "9909767f-1d47-42d9-9410-b3fe9cd9e686",
+      "name": "La canzone del mare",
+      "year": 2014,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "5bcdcb84-ea2d-4663-bc00-31df5f929aca",
+      "name": "La carica dei 101 II - Macchia, un eroe a Londra",
+      "year": 2003,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "1e5c7f6a-0e05-44da-aafd-3ea68da16d42",
+      "name": "La freccia azzurra",
+      "year": 1996,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "918fb025-0d67-4f8d-b233-dba3ee9a0ef1",
+      "name": "La profezia delle ranocchie",
+      "year": 2003,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "095df8da-8bdc-4b51-ad98-4e117f4ba470",
+      "name": "La sirenetta - Quando tutto ebbe inizio",
+      "year": 2008,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "94f932e1-d213-4a7d-abad-15eb86b8e777",
+      "name": "La società segreta dei principi minori",
+      "year": 2020,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "813c4002-8e2a-4b65-ad33-62d56b0ac37a",
+      "name": "La tartaruga rossa",
+      "year": 2016,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "e3a684ef-daff-4203-8222-c5fdb60ab00c",
+      "name": "La voce del cigno",
+      "year": 2001,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "79ff2065-f166-48aa-bb7b-50e7df21fe13",
+      "name": "Lassie",
+      "year": 2005,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "7e2740e4-99c0-4424-a914-559cf2cd3f95",
+      "name": "Lassie torna a casa",
+      "year": 2020,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "2848c524-4c61-4100-9034-d7c73e570400",
+      "name": "Le avventure del topino Despereaux",
+      "year": 2008,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "388507d6-42d8-42c9-86fe-d6d90c7bd938",
+      "name": "Le avventure di Pocahontas, principessa indiana",
+      "year": 1994,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "27c92536-4963-46d0-a358-5a63971f562c",
+      "name": "Le avventure di Winnie the Pooh",
+      "year": 1977,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "a45ace43-366b-4f87-949d-8cf53b40bf13",
+      "name": "Lilli e il vagabondo",
+      "year": 2019,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "96fd44cf-3763-4885-b83c-e6a01cf37fca",
+      "name": "Lilo & Stitch's Island of Adventures",
+      "year": 2003,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "85baf895-30c6-4994-8c6c-4e1c969db383",
+      "name": "Lilo.&.Stitch.II.Che.disastro.Stitch",
+      "year": null,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "474ac8ff-df94-4e01-ad72-d8322e7d6d27",
+      "name": "Lilo.&.Stitch.III.Leroy.&.Stitch",
+      "year": null,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "3b446bef-5451-43b9-82b2-ab2f39808f5e",
+      "name": "Lilo.&.Stitch.IV.Provaci.ancora.Stitch",
+      "year": null,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "d94876fe-be23-4557-9c6c-f1cc4fc2d154",
+      "name": "Looney Tunes: Canto di Natale",
+      "year": 2006,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "1ee4c281-08d6-47dc-ad4e-1d03d6ea71b1",
+      "name": "Magic Camp",
+      "year": 2020,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "20928f99-dcf4-4639-9477-bb43a76f3b3c",
+      "name": "Momo alla conquista del tempo",
+      "year": 2001,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "a0def64a-e99c-4a87-bc11-54f90ebf9566",
+      "name": "New York Academy - Freedance",
+      "year": 2018,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "dff72336-01a4-41e9-b038-a65c08bf37f2",
+      "name": "Opopomoz",
+      "year": 2003,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "7e792fc7-3226-43a2-bc15-ff774f56b7b7",
+      "name": "Palla.di.neve",
+      "year": 2015,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "6292b47b-27da-4a0f-acee-7ff521b47826",
+      "name": "Pattini d'argento",
+      "year": 2020,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "442326a0-c788-414b-af7f-4b1c32178c99",
+      "name": "Peng e i due anatroccoli",
+      "year": 2018,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "3c68b6f7-514a-4cec-b0b7-18b94766b9a4",
+      "name": "Peter.Rabbit.2.Un.Birbante.In.Fuga",
+      "year": 2020,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "ae8618e3-ab3f-456d-8b5e-ed293918b8b9",
+      "name": "Pimpi, piccolo grande eroe",
+      "year": 2003,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "784f1260-68bf-424b-a5bf-bb6863e6c17f",
+      "name": "Pingu Innamorato",
+      "year": 2009,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "2ca86050-770d-4177-9668-453843936830",
+      "name": "Poly",
+      "year": 2020,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "208b1133-cba4-4865-8a9a-259a8c560260",
+      "name": "Principi e principesse",
+      "year": 2000,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "ca862597-488b-4371-b2d6-16f3fe7eba85",
+      "name": "Racconti incantati",
+      "year": 2008,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "7f065f5e-3887-4005-b2bf-d91f164dd921",
+      "name": "Red e Toby nemiciamici 2",
+      "year": 2006,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "08275496-4eee-4407-8572-3cfa1fd44cfe",
+      "name": "Ritorno all'isola che non c'è",
+      "year": 2002,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "659f1cc5-7e0c-4a81-862e-9186cc2933d1",
+      "name": "Rock Dog",
+      "year": 2016,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "acef7b16-92f6-429f-9de4-d3a28053ced1",
+      "name": "S01E00.Lo.Speciale",
+      "year": 2021,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "7373016d-72c1-4bc9-ab41-9cc8bd4c58fd",
+      "name": "S01E01.Le.Audizioni.Canta.Con.Noi",
+      "year": 2021,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "1c317342-f200-49cc-a0e5-24d934733842",
+      "name": "S01E02.La.Prima.Lettura.Canta.Con.Noi",
+      "year": 2021,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "09b12d87-b671-4512-8daf-128f5b6a7969",
+      "name": "S01E03.Canta.Con.Noi",
+      "year": 2021,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "1c6efd6a-2c74-47e1-a92f-b20f687dd63b",
+      "name": "S01E04.In.Ritardo.Alle.Prove",
+      "year": 2021,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "41a48f61-60fe-45d0-907f-fe85b6f1a41e",
+      "name": "S01E05.Una.Serata.Speciale",
+      "year": 2021,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "c8efac15-69c5-4624-9755-771351293c48",
+      "name": "S01E06.Chi.Vince",
+      "year": 2021,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "a178ccab-d10b-4157-a6a3-0ebb95cfb0a0",
+      "name": "S01E07.Il.Giorno.Del.Ringraziamento",
+      "year": 2021,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "56d999df-0e9b-4d89-8470-171a462e5c40",
+      "name": "S01E08.Prove.Tecniche",
+      "year": 2021,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "c5be5c19-d8ce-4842-86fa-847806e7fe53",
+      "name": "S01E09.Il.Debutto",
+      "year": 2021,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "01ca22b6-8856-45c2-99af-429ab15c91cc",
+      "name": "S01E10.Secondo.Atto",
+      "year": 2021,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "f396b3a6-7312-48c4-bfb8-632b2febbc44",
+      "name": "S01E11.Lo.Speciale.Di.Natale",
+      "year": 2021,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "efdc05ed-8744-4d0e-b39c-ba1779a49050",
+      "name": "Saranno famosi",
+      "year": 1982,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "0da3f9d3-cb44-48f0-b525-90d640743320",
+      "name": "Saranno Famosi   3x01   Imparerò a volare",
+      "year": 2014,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "6ba3becc-30f6-4125-84b4-62cabd007d12",
+      "name": "Saranno Famosi   3x02   Impare a volare 2",
+      "year": 2014,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "ce936746-3b07-4182-9320-c979c59cb994",
+      "name": "Saranno Famosi   3x03   Viva il gran capo",
+      "year": 2014,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "9564fe69-ab88-4dff-8d1a-0d67d9984983",
+      "name": "Saranno Famosi   3x06   Regole",
+      "year": 2014,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "653373b5-3144-4824-9228-2a0cc332d875",
+      "name": "Saranno Famosi   3x07   Conseguenze",
+      "year": 2014,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "fd22da87-2233-4277-bf25-069eae1db621",
+      "name": "Saranno Famosi   3x08   Breakdance",
+      "year": 2014,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "9c13e98b-f977-4a8c-b729-cd8e90b14dd3",
+      "name": "Saranno Famosi   3x09   Segreti",
+      "year": 2014,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "9b48098d-0190-4bfc-aca4-ed61c3c16680",
+      "name": "Saranno Famosi   3x12   Apparenze",
+      "year": 2014,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "a73fb9ef-bcce-42aa-ad1a-8a3b40800a1e",
+      "name": "Saranno Famosi   3x13   Bottiglia piena di tristezza",
+      "year": 2014,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "e0edb13d-0083-415e-8801-7f4234036e79",
+      "name": "Saranno Famosi   3x14   La canzone di Lisa",
+      "year": 2014,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "f8b38e94-a0ac-4bf9-b177-3136d27c9a84",
+      "name": "Saranno Famosi   3x15   Un modo di vincere",
+      "year": 2014,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "39d508b3-99b7-4e88-84bc-98e60970c61a",
+      "name": "Saranno Famosi   3x16   Il palcoscenico della vita",
+      "year": 2014,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "8b594160-f9a6-4b8b-a84e-321d0e46ca3f",
+      "name": "Saranno Famosi   3x17   Forza di volontà",
+      "year": 2014,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "b2ec07e6-f727-4686-a635-3d13b3a84c36",
+      "name": "Saranno Famosi   3x18   Una stella cadente",
+      "year": 2014,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "2b630e81-9245-4284-bc1c-53213d65a7ee",
+      "name": "Saranno Famosi   3x19   Un amico in difficoltà",
+      "year": 2014,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "1af84dd8-3f54-464a-b248-0c06cd87cbbc",
+      "name": "Saranno Famosi   3x20   L'accordo",
+      "year": 2014,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "fa89378e-ea00-4fe3-b40d-999793445095",
+      "name": "Saranno Famosi   3x23   Origini",
+      "year": 2014,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "a93a75e9-7805-453c-99b7-247e21cac1f5",
+      "name": "Saranno Famosi 3x05 Programma",
+      "year": 2014,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "64e987ac-9900-4ef0-8bb9-c9cab375359d",
+      "name": "Saranno Famosi 3x22 Segnali",
+      "year": 2014,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "21d279bf-aebe-446d-a9a5-affa78e592c4",
+      "name": "Shaun, vita da pecora - Il film",
+      "year": 2015,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "b8ee365a-847c-4952-9899-ae4055c9e4d9",
+      "name": "Shrek 1 - \"Alheyuya\" (Josan)",
+      "year": null,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "c13261e1-5423-4a37-9699-edfb090bf32d",
+      "name": "Snoopy & Friends - Il film dei Peanuts",
+      "year": 2015,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "b63099f2-b47f-4a75-9981-384677a84c8b",
+      "name": "Stargirl",
+      "year": 2020,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "fe1da191-5554-4d7e-8d89-2f3458250d41",
+      "name": "Stepping - Dalla strada al palcoscenico",
+      "year": 2007,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "1e91916f-3ae5-4136-be77-3212c1d3436d",
+      "name": "Stepping 2 - La strada del successo",
+      "year": 2010,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "3282d0b1-97bb-4460-88e7-e22628426cac",
+      "name": "StreetDance 3D",
+      "year": 2010,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "4d04f373-c0dd-4fe5-aed2-7baa16af5040",
+      "name": "This is Beat - Sfida di ballo",
+      "year": 2011,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "7612ecbd-4ad5-4feb-9ccd-ac4245b40304",
+      "name": "Togo - Una grande amicizia",
+      "year": 2019,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "e37db25a-73af-40ff-8f8a-5e836d66412e",
+      "name": "Topolino- sole Sale e Sport",
+      "year": null,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "d526d75c-4de7-4bf7-bb6a-9781bb17dd2e",
+      "name": "Tutti assieme appassionatamente",
+      "year": null,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "ba0fdc3c-bb7c-4c0f-8737-de6356af3c0c",
+      "name": "Un delfino per amico",
+      "year": 2006,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "154bd399-4791-4085-a4c7-14e172d6a2fd",
+      "name": "Una notte al museo 1 parte 1",
+      "year": null,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "87d35083-6eca-45f2-9db3-4521bb669eac",
+      "name": "Una notte al museo 1 parte 2",
+      "year": null,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "640871c7-dadd-4563-9e29-a2b20c2bc064",
+      "name": "Valzer con Bashir",
+      "year": 2008,
+      "status": "identity_or_episode_verification_pending"
+    },
+    {
+      "id": "a922a7a6-d397-4dfc-a243-9a57bc71cfd3",
+      "name": "Walking on Sunshine",
+      "year": 2014,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "85afe1c8-ec12-4180-82d2-d5034fc546f0",
+      "name": "West Side Story",
+      "year": 1961,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "88ab9f39-de65-430f-a18e-274be048155b",
+      "name": "Winnie the Pooh - Il Musical Di Tigro E.Pooh",
+      "year": null,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "e35a2788-37e7-4eb3-971c-448bfd780f7f",
+      "name": "Winnie the Pooh - Nuove avventure nel Bosco dei Cento Acri",
+      "year": 2011,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "2064cbd3-7af9-46b4-8e6a-e5d51b91a165",
+      "name": "Winnie the Pooh - Ro e la magia della primavera",
+      "year": 2004,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "fa99cb89-f14a-4c5d-b2d6-d165f90ce1ef",
+      "name": "Winnie the Pooh e gli Efelanti",
+      "year": 2005,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "2e1cd856-4c25-44e9-a769-f0c72fcccbdb",
+      "name": "Zathura - Un'avventura spaziale",
+      "year": 2005,
+      "status": "verified_proposals_pending"
+    },
+    {
+      "id": "5deb742d-e896-4641-a637-508f5803a5c6",
+      "name": "降龙大师之捉妖榜",
+      "year": 2020,
+      "status": "verified_proposals_pending"
+    }
+  ],
+  "identityFindings": [
+    {
+      "group": "High School Musical S01E01–10",
+      "finding": "Names match first-season sing-along episodes, not second-season 2021. E03 probable Sospetti e conferme, requires confirmation. E00 and Christmas special must remain separate.",
+      "sources": [
+        "https://www.disneyplus.com/it-it/browse/entity-23ff57da-f65b-46e8-a47e-2514e9b5baff",
+        "https://tv.apple.com/it/show/high-school-musical-the-musical-la-serie/umc.cmc.6qaoqfb97kqh7z8wux2mc39my"
+      ]
+    },
+    {
+      "group": "I Simpson Backstage Pass",
+      "finding": "Collection identified, numbered file-to-episode mapping unproven. Do not infer DVD order.",
+      "sources": [
+        "https://simpsonswiki.com/wiki/The_Simpsons%3A_Backstage_Pass"
+      ]
+    },
+    {
+      "group": "I Simpson Film Festival",
+      "finding": "Collection identified but 3 catalog files versus 4 DVD episodes; mapping unproven.",
+      "sources": [
+        "https://www.antoniogenna.net/simpson/dvd/simpfilmfest.htm"
+      ]
+    },
+    {
+      "group": "Saranno famosi 3xNN",
+      "finding": "Fame series season 3, catalog year 2014 is not original season year. FilmTV guide appears offset after two-part pilot; do not assign movie quotes or infer original title from this guide alone.",
+      "sources": [
+        "https://www.filmtv.it/serie-tv/111377/saranno-famosi/stagione-3/guida-episodi/"
+      ]
+    }
+  ],
+  "latestCompleted": [
+    "Soul and Toy Story 4 brought to three proposals.",
+    "Tata Matilda brought to three proposals.",
+    "Peter Rabbit now two verified proposals, third still missing."
+  ]
+}
