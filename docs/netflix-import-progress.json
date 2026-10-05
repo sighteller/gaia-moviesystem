@@ -1,0 +1,312 @@
+{
+  "titles": [
+    {
+      "title": "A Week Away",
+      "status": "pending"
+    },
+    {
+      "title": "Alvin Superstar",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "Alvin Superstar - Nessuno ci può fermare",
+      "status": "pending"
+    },
+    {
+      "title": "Alvin Superstar 2",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "Alvin Superstar 3: Si salvi chi può",
+      "status": "pending"
+    },
+    {
+      "title": "Annie - La felicità è contagiosa",
+      "status": "pending"
+    },
+    {
+      "title": "Arrietty - Il mondo segreto sotto il pavimento",
+      "status": "pending"
+    },
+    {
+      "title": "Bee Movie",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "Cattivissimo me",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "Cattivissimo me 2",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "Cattivissimo me 3",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "Cicogne in missione",
+      "status": "pending"
+    },
+    {
+      "title": "Doraemon - Il film",
+      "status": "pending"
+    },
+    {
+      "title": "Doraemon - Il film 2",
+      "status": "pending"
+    },
+    {
+      "title": "Doraemon - Il film: Nobita e il nuovo dinosauro",
+      "status": "pending"
+    },
+    {
+      "title": "Earwig e la strega",
+      "status": "pending"
+    },
+    {
+      "title": "Feel the Beat",
+      "status": "pending"
+    },
+    {
+      "title": "Garfield: una missione gustosa",
+      "status": "pending"
+    },
+    {
+      "title": "Grease",
+      "status": "pending"
+    },
+    {
+      "title": "Harry Potter e la pietra filosofale",
+      "status": "pending"
+    },
+    {
+      "title": "Hotel Transylvania",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "Hotel Transylvania 2",
+      "status": "pending"
+    },
+    {
+      "title": "Hotel Transylvania 3 - Una vacanza mostruosa",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "I Mitchell contro le macchine",
+      "status": "added_cover_link_quote_verified"
+    },
+    {
+      "title": "I sospiri del mio cuore",
+      "status": "pending"
+    },
+    {
+      "title": "Il castello errante di Howl",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "Il drago dei desideri",
+      "status": "pending"
+    },
+    {
+      "title": "Il gatto con gli stivali",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "Il gatto con gli stivali 2 - L'ultimo desiderio",
+      "status": "pending"
+    },
+    {
+      "title": "Il mio vicino Totoro",
+      "status": "pending"
+    },
+    {
+      "title": "Il mostro dei mari",
+      "status": "pending"
+    },
+    {
+      "title": "Il richiamo della foresta",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "Il robot selvaggio",
+      "status": "pending"
+    },
+    {
+      "title": "Il talento di Mr. Crocodile",
+      "status": "pending"
+    },
+    {
+      "title": "Kiki - Consegne a domicilio",
+      "status": "pending"
+    },
+    {
+      "title": "Klaus - I segreti del Natale",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "KPop Demon Hunters",
+      "status": "pending"
+    },
+    {
+      "title": "La città incantata",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "La collina dei papaveri",
+      "status": "pending"
+    },
+    {
+      "title": "La fabbrica di cioccolato",
+      "status": "pending"
+    },
+    {
+      "title": "La strada per El Dorado",
+      "status": "pending"
+    },
+    {
+      "title": "Leo",
+      "status": "pending"
+    },
+    {
+      "title": "Madagascar",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "Mamma Mia!",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "Mamma Mia! Ci risiamo",
+      "status": "pending"
+    },
+    {
+      "title": "Nanny Mcphee - Tata Matilda",
+      "status": "pending"
+    },
+    {
+      "title": "Nimona",
+      "status": "pending"
+    },
+    {
+      "title": "Over the Moon - Il fantastico mondo di Lunaria",
+      "status": "pending"
+    },
+    {
+      "title": "Pets - Vita da animali",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "Pets 2 - Vita da animali",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "Piovono polpette",
+      "status": "pending"
+    },
+    {
+      "title": "Piovono Polpette 2 - La rivincita degli avanzi",
+      "status": "pending"
+    },
+    {
+      "title": "Ponyo sulla scogliera",
+      "status": "pending"
+    },
+    {
+      "title": "Porco Rosso",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "Quando c'era Marnie",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "Quasi amici",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "Shark Tale",
+      "status": "pending"
+    },
+    {
+      "title": "Shaun, vita da pecora: Missione Natale",
+      "status": "pending"
+    },
+    {
+      "title": "Shrek",
+      "status": "pending"
+    },
+    {
+      "title": "Shrek 2",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "Shrek Terzo",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "Si alza il vento",
+      "status": "pending"
+    },
+    {
+      "title": "Sing",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "Sing 2 - Sempre più forte",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "Spellbound - L'incantesimo",
+      "status": "pending"
+    },
+    {
+      "title": "Spirit - Cavallo selvaggio",
+      "status": "existing_identification_pending"
+    },
+    {
+      "title": "Tata Matilda e il Grande Botto",
+      "status": "pending"
+    },
+    {
+      "title": "That Christmas",
+      "status": "pending"
+    },
+    {
+      "title": "The Blind Side",
+      "status": "pending"
+    },
+    {
+      "title": "Tom & Jerry",
+      "status": "pending"
+    },
+    {
+      "title": "Tom e Jerry - Il film",
+      "status": "pending"
+    },
+    {
+      "title": "Un bambino chiamato Natale",
+      "status": "pending"
+    },
+    {
+      "title": "Vivo",
+      "status": "pending"
+    },
+    {
+      "title": "Wicked",
+      "status": "pending"
+    },
+    {
+      "title": "Willy Wonka e la fabbrica di cioccolato",
+      "status": "pending"
+    },
+    {
+      "title": "Wonka",
+      "status": "pending"
+    },
+    {
+      "title": "Your name.",
+      "status": "pending"
+    }
+  ]
+}
