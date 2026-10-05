@@ -3777,7 +3777,47 @@ export const quoteProposals = [
         "excerpt": false
       }
     ]
-  }
+  },
+{
+  "names": [
+    "I Mitchell contro le macchine"
+  ],
+  "year": 2021,
+  "options": [
+    {
+      "text": "Noi Mitchell siamo sempre stati un po’ svitati, è la nostra forza!",
+      "speaker": "Katie Mitchell",
+      "source": "https://www.comingsoon.it/film/i-mitchell-contro-le-macchine/58399/scheda/",
+      "excerpt": true
+    },
+    {
+      "text": "Prego, restate calmi, mentre vi catturiamo!",
+      "speaker": "Robot",
+      "source": "https://www.comingsoon.it/film/i-mitchell-contro-le-macchine/58399/scheda/",
+      "excerpt": false
+    },
+    {
+      "text": "Devo ritrovare quella connessione!",
+      "speaker": "Rick Mitchell",
+      "source": "https://www.comingsoon.it/film/i-mitchell-contro-le-macchine/58399/scheda/",
+      "excerpt": true
+    }
+  ]
+},
+{
+  "names": [
+    "Earwig e la strega"
+  ],
+  "year": 2020,
+  "options": [
+    {
+      "text": "Per scegliere me dovrebbero essere delle persone insolite!",
+      "speaker": "Earwig",
+      "source": "https://www.comingsoon.it/film/earwig-e-la-strega/61144/scheda/",
+      "excerpt": false
+    }
+  ]
+}
 ];
 const normalize = value => String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
 export function proposalsFor(title) {
