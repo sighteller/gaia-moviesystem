@@ -1,4 +1,4 @@
-import {proposalsFor} from './quote-proposals.js?v=20261004batch5';
+import {proposalsFor} from './quote-proposals.js?v=20261005netflix';
 import {effectiveQuote,standardQuote} from './title-quotes.js?v=20261004catalog';
 const endpoint='https://mahjewznwqvdgtdjtekc.supabase.co/functions/v1/gaia-api';
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
