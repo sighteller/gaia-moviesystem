@@ -82,7 +82,7 @@ Deno.serve(async req=>{
         if(r.ok){const f=await r.json();for(const p of (type==='movie'?f.movieposter:f.tvposter)||[]){const u=new URL(p.url);if(u.hostname!=='assets.fanart.tv')continue;u.protocol='https:';candidates.push({provider:'fanart',url:u.href,preview_url:u.href,width:1000,height:1426,language:p.lang==='00'?null:p.lang});}}
         else if(r.status!==404)warnings.push('Fanart.tv temporaneamente non disponibile.');
       }catch{warnings.push('Fanart.tv non ha risposto; puoi scegliere le cover TMDb.');}}
-      const selected=curate(candidates);
+      const selected=curate(candidates,title?24:4);
       await remote('cover_candidates?title_id=is.null&expires_at=lt.'+encodeURIComponent(new Date().toISOString()),{method:'DELETE'});
       const rows=selected.length?await remote('cover_candidates'+(title?'?on_conflict=title_id,url':''),{method:'POST',headers:{Prefer:'return=representation'+(title?',resolution=merge-duplicates':'')},body:JSON.stringify(selected.map(c=>({...c,tmdb_id:id,media_type:type,metadata,created_by:null,title_id:title?.id||null,expires_at:new Date(Date.now()+(title?365:1)*86400000).toISOString()})))}):[];
       return reply({metadata,candidates:rows,warnings});

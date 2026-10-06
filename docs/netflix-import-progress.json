@@ -2,7 +2,7 @@
   "titles": [
     {
       "title": "A Week Away",
-      "status": "pending"
+      "status": "aggiunto_dati_cover_link_verificati_citazioni_in_pausa"
     },
     {
       "title": "Alvin Superstar",
@@ -26,7 +26,7 @@
     },
     {
       "title": "Arrietty - Il mondo segreto sotto il pavimento",
-      "status": "disponibilita_incerta_fonti_contraddittorie_da_verificare"
+      "status": "aggiunto_dati_cover_link_verificati_utente_citazioni_in_pausa"
     },
     {
       "title": "Bee Movie",
@@ -45,8 +45,16 @@
       "status": "existing_identification_pending"
     },
     {
+      "title": "Chiamatemi Anna",
+      "status": "serie_gia_presente_versione_piattaforme_da_verificare"
+    },
+    {
       "title": "Cicogne in missione",
       "status": "pending"
+    },
+    {
+      "title": "Daniel Tiger",
+      "status": "serie_da_identificare_importare"
     },
     {
       "title": "Doraemon - Il film",
@@ -61,12 +69,16 @@
       "status": "pending"
     },
     {
+      "title": "Due Fantagenitori",
+      "status": "serie_da_identificare_importare"
+    },
+    {
       "title": "Earwig e la strega",
       "status": "aggiunto_cover_link_citazione_verificati_altre_proposte_da_cercare"
     },
     {
       "title": "Feel the Beat",
-      "status": "pending"
+      "status": "aggiunto_dati_cover_link_verificati_citazioni_in_pausa"
     },
     {
       "title": "Garfield: una missione gustosa",
@@ -79,6 +91,10 @@
     {
       "title": "Harry Potter e la pietra filosofale",
       "status": "pending"
+    },
+    {
+      "title": "Heidi",
+      "status": "serie_gia_presente_versione_piattaforme_da_verificare"
     },
     {
       "title": "Hotel Transylvania",
@@ -118,7 +134,7 @@
     },
     {
       "title": "Il mio vicino Totoro",
-      "status": "pending"
+      "status": "disponibilita_confermata_utente_da_importare"
     },
     {
       "title": "Il mostro dei mari",
@@ -138,7 +154,7 @@
     },
     {
       "title": "Kiki - Consegne a domicilio",
-      "status": "pending"
+      "status": "disponibilita_confermata_utente_da_importare"
     },
     {
       "title": "Klaus - I segreti del Natale",
@@ -146,7 +162,7 @@
     },
     {
       "title": "KPop Demon Hunters",
-      "status": "pending"
+      "status": "aggiunto_dati_cover_link_verificati_citazioni_in_pausa"
     },
     {
       "title": "La città incantata",
@@ -193,12 +209,24 @@
       "status": "aggiunto_cover_link_verificati_citazione_da_cercare"
     },
     {
+      "title": "Peppa Pig",
+      "status": "serie_da_identificare_importare"
+    },
+    {
+      "title": "Pernille",
+      "status": "serie_da_identificare_importare"
+    },
+    {
       "title": "Pets - Vita da animali",
       "status": "existing_identification_pending"
     },
     {
       "title": "Pets 2 - Vita da animali",
       "status": "existing_identification_pending"
+    },
+    {
+      "title": "Pimpa",
+      "status": "serie_da_identificare_importare"
     },
     {
       "title": "Piovono polpette",
@@ -210,7 +238,7 @@
     },
     {
       "title": "Ponyo sulla scogliera",
-      "status": "pending"
+      "status": "disponibilita_confermata_utente_da_importare"
     },
     {
       "title": "Porco Rosso",
@@ -258,7 +286,7 @@
     },
     {
       "title": "Spellbound - L'incantesimo",
-      "status": "pending"
+      "status": "aggiunto_dati_cover_link_verificati_citazioni_in_pausa"
     },
     {
       "title": "Spirit - Cavallo selvaggio",
@@ -270,7 +298,7 @@
     },
     {
       "title": "That Christmas",
-      "status": "pending"
+      "status": "aggiunto_dati_cover_link_verificati_citazioni_in_pausa"
     },
     {
       "title": "The Blind Side",
@@ -286,7 +314,7 @@
     },
     {
       "title": "Un bambino chiamato Natale",
-      "status": "pending"
+      "status": "aggiunto_dati_cover_link_verificati_citazioni_in_pausa"
     },
     {
       "title": "Vivo",
@@ -306,7 +334,7 @@
     },
     {
       "title": "Your name.",
-      "status": "disponibilita_incerta_fonti_contraddittorie_da_verificare"
+      "status": "aggiunto_dati_cover_link_verificati_utente_citazioni_in_pausa"
     }
   ]
 }

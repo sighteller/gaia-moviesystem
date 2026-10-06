@@ -1,3 +1,4 @@
+import {createCentralHandler} from './central.js';
 
 const cors = {
   "Access-Control-Allow-Origin": "*",
@@ -27,12 +28,29 @@ async function api(path, init = {}) {
   return text ? JSON.parse(text) : null;
 }
 
+async function catalogData(){
+ const [titles,platforms,links]=await Promise.all([api('titles?select=*&active=eq.true&order=name.asc'),api('platforms?select=*&active=eq.true&order=name.asc'),api('title_platforms?select=*&active=eq.true')]);
+ return {titles,platforms,links};
+}
+const central=createCentralHandler({catalog:catalogData,rpc:async(name,payload)=>{
+ const key=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+ if(!key)throw new Error('Central recommendations unavailable');
+ return await api('rpc/'+name,{method:'POST',headers:{apikey:key,Authorization:'Bearer '+key},body:JSON.stringify(payload)});
+}});
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
   if (req.method !== "POST") return response({ error: "Method not allowed" }, 405);
 
   try {
     const { action, payload = {} } = await req.json();
+    if(action==='recommendationStats')return response({error:'Historical statistics are private'},403);
+    if(String(action).startsWith('recommendation')||(action==='finalize'&&payload.central===true)){
+      const result=await central(action,payload);
+      // Public UI receives catalog identifiers/badges, never scores, history or model data.
+      if(result.proposal)result.proposal={titleId:result.proposal.titleId,kind:result.proposal.kind};
+      return response(result);
+    }
 
     if (action === "catalog") {
       const [titles, platforms, links] = await Promise.all([
@@ -163,7 +181,7 @@ Deno.serve(async (req) => {
 
     return response({ error: "Unknown action" }, 400);
   } catch (e) {
-    return response({ error: e instanceof Error ? e.message : "Unknown error" }, 500);
+    return response({ error: e instanceof Error ? e.message : "Unknown error" }, e.status || 500);
   }
 });
 

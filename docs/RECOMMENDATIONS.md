@@ -1,45 +1,46 @@
-# Ordinamento dei film — prima versione
+# Consigli centrali per Gaia
 
-## Scopo e candidati
+Il motore viene eseguito nel backend gaia-api; il browser conserva solo ID del dispositivo, filtri e la sequenza della sessione in memoria. Non legge né importa il vecchio modello localStorage o le statistiche delle prove preesistenti.
 
-Ordinare il catalogo approvato caricato nella webapp, rispettando categoria e piattaforme selezionate. Nessuna ricerca automatica di film esterni e nessuna domanda a Gaia. I titoli di Jellyfin sono già conosciuti; Netflix e Disney vengono aggiunti al catalogo dal gestore. La gestione delle serie esistente resta invariata.
+## Dati
 
-## Punteggio
+Supabase, schema privato gaia_private:
+- recommendation_profiles: soggetto e periodo di apprendimento attivo.
+- recommendation_epochs: modello, revisione atomica e modalità test/live.
+- recommendation_sessions: graduatoria e proposte congelate della singola sessione, vincolate al dispositivo.
+- recommendation_exposures: una scheda realmente mostrata per titolo/sessione, tipo, costo, esito e numero progressivo globale.
+- recommendation_choices: scelte al click verso la piattaforma; lo stesso film prima della fine prevista non crea una nuova scelta.
+- imported_playback_events e playback_history_imports: cronologie Netflix/Jellyfin; future cronologie Disney possono usare la stessa struttura.
 
-`recent + repeats + history + seed - unusedOfferPenalty`
+I dati originali importati restano privati e separati. Solo i titoli del catalogo approvato, disponibili sulle piattaforme selezionate, sono candidati. L'associazione delle cronologie mancanti viene ricalcolata automaticamente per nome italiano/originale normalizzato quando un titolo entra in catalogo; associazioni ambigue non vengono inventate. Il matching viene effettuato nel server, senza pubblicare dati grezzi. Durate zero, extra e anomalie contrassegnate non alimentano le preferenze. Le cronologie senza fuso dichiarato forniscono recenza a livello di giorno, con calendario Europe/Rome; non vengono inventati istanti di visione UTC.
 
-- Recenza: massimo 40, dimezzato ogni 3 giorni dall'ultimo click verso la piattaforma.
-- Ripetizioni: massimo 30, bonus con rendimenti decrescenti; memoria recente dimezzata ogni 7 giorni. La stessa scelta prima della fine prevista non aggiunge una visione e non rinnova il tempo precedente.
-- Preferenza storica: massimo 20, crescita logaritmica su giorni storici Netflix e nuove scelte. Le scelte interrotte da un altro film riducono il contributo recente; sono indizi, non voti.
-- Preferenza iniziale: massimo 10, dai primi 50 titoli del foglio Netflix (49 dopo Harry Potter). Conta giorni con almeno 10 minuti cumulati, non il numero di sessioni Netflix o visioni complete. Date storiche non diventano attività recente.
-- Titolo recente riproposto senza scelta: −8. Titolo non recente: −2. “No” esplicito aggiunge rispettivamente −4 o −1. “Recente” significa almeno 10 punti di recenza (circa 6 giorni). Le penalità si dimezzano ogni 14 giorni.
-- Una scheda si conta una volta per titolo/sessione quando viene renderizzata, mai quando è solo preparata. Tornare indietro non crea esposizioni. La scelta successiva dello stesso titolo in quella sessione annulla la sua penalità e rinnova l'interesse, salvo il caso di riavvio anticipato.
-- Le penalità incidono alla sessione successiva: ordine e schede già consultate restano stabili.
+## Regole iniziali
 
-Valori iniziali configurabili nel modulo puro `recommendations.js`; non sono una calibrazione validata sull'uso reale di Gaia.
+- Recenza: massimo 40, dimezzamento ogni 4 giorni.
+- Ripetizioni: massimo 30, rendimenti decrescenti, memoria recente con dimezzamento ogni 7 giorni.
+- Preferenza storica: massimo 20, crescita logaritmica; base iniziale massimo 10.
+- Scheda recente non scelta: −8; altra scheda: −2. “No” esplicito aggiunge −4 oppure −1. Penalità dimezzate ogni 14 giorni, applicate all'ordine della sessione successiva.
+- Una scelta rinnova l'interesse e cancella la penalità di esposizione per quel titolo nella sessione.
+- Ogni 4 schede nuove effettivamente mostrate: Scopri, nella metà inferiore della graduatoria.
+- Ogni 20: Ricordo, nell'ultimo quinto, al posto di Scopri; SVG Rewind fornito dall'utente, badge lilla sotto l'anno. La precedente clessidra è sostituita dal riferimento grafico più recente.
+- Rotazione ponderata per esposizioni/peso: titoli meno proposti prima; titoli con punti più bassi ritornano meno spesso, senza sparire dalla rotazione.
+- Uno spunto non scelto non ricompare nella sessione successiva. Se viene scelto può essere promosso. Le sessioni avviate ma mai mostrate non interrompono l'esclusione.
+- Avanti/indietro conserva l'ordine; rivedere la stessa scheda non incrementa il contatore. Cataloghi insufficienti usano proposte normali, senza forzare ripetizioni di spunti.
 
-## Composizione dell'ordine
+Il contatore è condiviso fra dispositivi del soggetto Gaia. Revisioni e commit sotto lock impediscono di perdere o duplicare eventi quando le richieste si sovrappongono. Il server accetta solo titoli proposti e mostrati nella sessione del dispositivo; non riceve punteggi dal browser.
 
-Ogni 4 nuove schede mostrate: spunto nella metà inferiore della graduatoria. Ogni 20: underdog nell'ultimo quinto, al posto dello spunto. Il contatore continua tra categorie e sessioni e si conserva al ricaricamento.
+## Prove e passaggio all'uso reale
 
-Rotazione ponderata: priorità alla minore esposizione totale divisa per un peso derivato dal punteggio (limitato fra 0.25 e 1); a parità, prima il meno recentemente proposto. I titoli più bassi attendono di più, mantenendo una possibilità finita di tornare. Tutte le proposte effettive, anche regolari, partecipano al conteggio.
+La modalità pubblicata inizialmente è test. Nessun vecchio dato è cancellato. Quando l'utente avvisa dell'inizio dell'uso di Gaia, un amministratore crea un nuovo recommendation_epoch in modalità live e aggiorna recommendation_profiles.active_epoch. I periodi precedenti rimangono archiviati; cronologie importate e catalogo restano intatti. Non c'è un pulsante pubblico per azzerare dati o cambiare modalità.
 
-Uno spunto/underdog effettivamente mostrato non torna nella sessione successiva, nemmeno come proposta ordinaria, salvo che sia stato scelto e promosso tra i recenti. Non si ripete lo stesso titolo nuovo nella stessa sessione. Se mancano candidati speciali, lo spazio diventa ordinario. Esaurito un catalogo piccolo, si può ripercorrere la sequenza già vista senza nuovi addebiti. In cataloghi insufficienti l'underdog è quindi “circa ogni 20”, non una ripetizione forzata.
+Le verifiche del servizio e della UI usano dispositivi registrati su un soggetto separato gaia-verification-*. Il parametro verifyDevice è accettato dalla UI solo dopo verifica del server che quel dispositivo appartenga davvero al soggetto di verifica. Nessun identificativo di verifica o dataset personale è incluso nei file pubblici.
 
-Il simbolo Scopri originale appare sotto l'anno per gli spunti; la clessidra per gli underdog. Nessun testo tecnico viene aggiunto alla scelta di Gaia.
+## Sicurezza e verifiche
 
-## Dati e controlli
+Tabelle private, RLS abilitato, accesso diretto revocato ad anon/authenticated; RPC solo service_role. La chiave service_role rimane nell'ambiente del backend. Il servizio pubblico preesistente conserva la sua configurazione JWT. I nuovi endpoint restituiscono esclusivamente identificativi del catalogo e badge; non restituiscono punteggi, statistiche delle cronologie, eventi o il modello. L'endpoint recommendationStats è esplicitamente negato. La pagina Statistiche preesistente resta invariata e non riceve cronologie importate.
 
-Prima versione su un singolo browser/dispositivo, `localStorage.gaia_recommendations_v1`. Lo storico Supabase delle prove preesistenti non è letto dal motore. Modalità iniziale “Prove”; la modalità “Uso di Gaia” parte da zero con un comando esplicito nelle impostazioni. Le preferenze iniziali Netflix restano presenti dopo l'azzeramento.
+Test Node: algoritmo centrale, duplicati, interleaving, sessioni/dispositivi, quote, catalogo e copertine. Test Python: normalizzatori Jellyfin/Netflix. Verifiche su Supabase: sequenza 4/20, contatore globale, sessione estranea rifiutata e ledger. Verifica browser: caricamento, navigazione, badge, ritorno e scelta. Lo storico importato attualmente contribuisce a 71 titoli del catalogo; altri titoli vengono associati quando diventano disponibili.
 
-Esporta/ripristina backup permettono di conservare o trasferire i dati. Non usare navigazione privata o cancellare i dati del browser senza un backup. Non esiste ancora sincronizzazione del modello tra dispositivi; più schede dell'app aperte simultaneamente possono sovrascrivere gli aggiornamenti. L'azzeramento del motore non cancella statistiche o catalogo Supabase.
+## Installazione riproducibile
 
-Il matching dello storico è conservativo: titolo italiano/originale normalizzato per accenti e punteggiatura. Nessun confronto approssimativo fra remake o sequel. I titoli storici mancanti non sono importati automaticamente; entrano nel calcolo se aggiunti in seguito con un nome corrispondente. Controllo sul catalogo del 6 ottobre: 21 corrispondenze testuali univoche dei 49 titoli. Restano da verificare eventuali nomi alternativi.
-
-## Verifiche
-
-`node --test tests/*.test.mjs`: simulazioni di recenza, ripetizioni, rapida discesa dopo proposte non scelte, rotazione, esclusione tra sessioni, contatore globale, cataloghi piccoli, reset, persistenza e icone.
-
-Verifica browser con 100 titoli simulati: ordine iniziale, schede 4 e 20, badge sotto l'anno, avanti/indietro, seconda sessione, avvio al click sulla piattaforma, reset e ricaricamento. Nessun evento di verifica viene scritto nel catalogo reale.
-
-La versione corrente pubblicata contiene già la gestione dei ritorni dalla piattaforma con soglia dell'80%: rimane invariata. Il nuovo modello usa soltanto i propri eventi di scelta al click, non interpreta come visione effettiva i dati temporali.
+Applicare schema-playback-history.sql prima di schema-central-recommendations.sql su un database nuovo. Sul database esistente usare migrazioni additive; non rieseguire la creazione del periodo iniziale. Pubblicare gaia-api con index.ts, central.js, recommendations.js e series-catalog.js. Non inserire TSV, snapshot dei fogli, modelli personali o query di importazione con dati nel repository.

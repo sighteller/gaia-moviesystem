@@ -1,12 +1,10 @@
+import {proposalBadge} from './recommendation-badges.js?v=20261007central';
 import {buildSeriesIndex} from './series-catalog.js?v=20261004series';
 import { effectiveQuote, standardQuote } from './title-quotes.js?v=20261004catalog';
 import { recordConsultation, choiceMessageHtml, platformUrl } from './choice-summary.js?v=20261002proposals';
 import { mountCoverPicker } from './cover-picker.js?v=20261001i';
-import { initFeatures } from './features.js?v=20261006recommendations';
+import { initFeatures } from './features.js?v=20261007central';
 import { mountJellyfinSync } from './jellyfin-sync.js?v=20261002settings';
-import { beginSession, nextProposal, recordExposure, recordRejection, recordChoice, proposalBadge, emptyModel } from './recommendations.js?v=20261006';
-import { loadModel, saveModel, validateModel } from './recommendation-store.js?v=20261006';
-import { preferenceSeed } from './preference-seed.js?v=20261006';
 const API_URL = 'https://mahjewznwqvdgtdjtekc.supabase.co/functions/v1/gaia-api';
 
 const app = document.querySelector('#app');
@@ -16,10 +14,12 @@ const state = {
   selectedPlatformIds: JSON.parse(localStorage.getItem('gaia_platforms') || 'null'),
   muted: localStorage.getItem('gaia_muted') === '1',
   session: null, history: [], confirmPlatform: null, currentAudio: null, navigating:false, pendingMode:null,
-  consultation:{titleIds:[],steps:0,lastTitleId:null}, recommendation:null, proposalEntries:[], launching:false
+  consultation:{titleIds:[],steps:0,lastTitleId:null}, proposalEntries:[],shownIds:new Set(),shownPromise:null,shownSignature:null,recommendationMode:'test'
 };
 
+const verificationDevice=new URL(location.href).searchParams.get('verifyDevice');
 function deviceId() {
+  if(verificationDevice)return verificationDevice;
   let id = localStorage.getItem('gaia_device_id');
   if (!id) { id = crypto.randomUUID(); localStorage.setItem('gaia_device_id', id); }
   return id;
@@ -133,8 +133,6 @@ function renderSettings(){
   if(app.querySelector('[data-overlay]'))return;
   app.insertAdjacentHTML('beforeend', `<div class="platform-panel" data-overlay="settings"><section class="platform-box settings-box" role="dialog" aria-modal="true" aria-labelledby="settings-heading"><h2 id="settings-heading">Impostazioni</h2><h3>Catalogo completo</h3><p>Gestisci titoli, copertine, citazioni e piattaforme.</p><a class="ghost-btn" href="disponibilita.html">Gestisci catalogo</a><h3>Citazioni dei film</h3><p>Leggi le frasi scelte, aggiungi quelle che ricordi o usa la frase standard.</p><a class="ghost-btn" href="citazioni.html">Gestisci citazioni</a><div id="jellyfin-sync-panel"></div><button class="ghost-btn" data-action="close-settings">Fatto</button></section></div>`);
   mountJellyfinSync(app.querySelector('#jellyfin-sync-panel'),loadData);
-  const box=app.querySelector('.settings-box');
-  box.insertAdjacentHTML('beforeend',`<h3>Consigli dei film</h3><p id="recommendation-status">${state.recommendation?.mode==='live'?'Uso di Gaia':'Prove'} · ${state.recommendation?.totalShown||0} schede mostrate su questo dispositivo.</p><p>I consigli sono salvati in questo browser. L’azzeramento conserva le preferenze iniziali Netflix.</p><button class="ghost-btn" data-action="export-recommendations">Esporta backup</button><label class="ghost-btn">Ripristina backup<input type="file" accept="application/json,.json" data-import-recommendations hidden></label><button class="ghost-btn" data-action="reset-recommendations">Azzera le prove</button><button class="ghost-btn" data-action="start-real-recommendations">Inizia uso di Gaia da zero</button>`);
   app.querySelector('[data-action="close-settings"]').focus({preventScroll:true});
 }
 
@@ -145,23 +143,31 @@ function buildFilteredTitles(){
 
 async function startSession(category,titleId=null){
   if(state.navigating)return;
-  state.category = category; buildFilteredTitles(); state.index = 0;
-  if (!state.filteredTitles.length) { renderEmpty(); return; }
+  state.category=category;buildFilteredTitles();
+  if(!state.filteredTitles.length){renderEmpty();return;}
   state.navigating=true;
-  const snapshot=structuredClone(state.recommendation);
   try{
-    beginSession(state.recommendation,crypto.randomUUID(),state.filteredTitles,preferenceSeed);
-    const first=nextProposal(state.recommendation,state.filteredTitles,Date.now(),titleId);
-    if(!first){state.recommendation=snapshot;renderEmpty();return;}
-    const {session}=await call('start',{deviceId:deviceId(),category,
-      enabledPlatformIds:state.selectedPlatformIds,currentTitleId:first.titleId});
-    state.recommendation.current.id=session.id;
-    state.session=session;state.history=[];state.consultation={titleIds:[],steps:0,lastTitleId:null};
-    state.proposalEntries=[first];state.index=state.filteredTitles.findIndex(t=>t.id===first.titleId);
-    renderMovie();
-  }catch(err){state.recommendation=snapshot;throw err;}
+    const result=await call('recommendationStart',{deviceId:deviceId(),requestId:crypto.randomUUID(),category,platformIds:state.selectedPlatformIds,preferredId:titleId});
+    if(!result.session||!result.proposal){renderEmpty();return;}
+    state.session=result.session;state.recommendationMode=result.mode;state.history=[];
+    state.proposalEntries=[result.proposal];state.shownIds=new Set();state.shownPromise=null;state.shownSignature=null;
+    state.index=state.filteredTitles.findIndex(t=>t.id===result.proposal.titleId);
+    state.consultation={titleIds:[],steps:0,lastTitleId:null};renderMovie();
+  }catch(err){console.error(err);app.innerHTML=`<div class="shell">${topbar()}<div class="empty"><h2>Non riesco a preparare i film</h2><button class="primary" data-action="categories">Riprova</button></div></div>`;}
   finally{state.navigating=false;}
 }
+
+function ensureShown(){
+  const t=currentTitle(),sessionId=state.session?.id;
+  const signature=t?.id+'|'+state.history.join(',');
+  if(!t||!sessionId||state.shownSignature===signature)return Promise.resolve();
+  if(state.shownPromise)return state.shownPromise;
+  state.shownPromise=call('recommendationShown',{deviceId:deviceId(),sessionId,titleId:t.id,history:state.history})
+    .then(()=>{if(state.session?.id===sessionId){state.shownIds.add(t.id);state.shownSignature=signature;}})
+    .finally(()=>{if(state.session?.id===sessionId)state.shownPromise=null;});
+  return state.shownPromise;
+}
+function registerShown(){ensureShown().catch(err=>{console.error(err);const el=app.querySelector('.navigation-status');if(el)el.textContent='Non riesco a registrare la scheda. Riprova con la freccia.';});}
 
 function currentTitle(){ return state.filteredTitles[state.index]; }
 function titleImage(t){ return t.dvd_cover_url || t.custom_image_url || t.poster_url || ''; }
@@ -169,10 +175,6 @@ app.addEventListener('load',e=>{if(e.target.matches?.('.poster-wrap img')&&e.tar
 function renderPoster(t){ const url = titleImage(t); return url ? `<img src="${escapeHtml(url)}" alt="${escapeHtml(t.name)}">` : `<div class="poster-placeholder">${escapeHtml(t.name)}</div>`; }
 
 function movieCopy(t){const entry=state.proposalEntries.find(e=>e.titleId===t.id);return `<h1>${escapeHtml(t.name)}</h1><div class="movie-meta">${t.media_type==='series'?'Serie TV':'Film'}${t.release_year?' · '+t.release_year:''}</div>${proposalBadge(entry?.kind)}`;}
-function recordShown(t){
-  const entry=state.proposalEntries.find(e=>e.titleId===t.id);
-  if(entry&&state.recommendation.current?.id===state.session?.id){recordExposure(state.recommendation,entry);saveModel(state.recommendation);}
-}
 function movieNavigation(){return `<div class="navigation-arrows"><button class="ghost-btn arrow-btn" data-action="previous" aria-label="Titolo precedente" ${state.history.length?'':'disabled'}>←</button><button class="ghost-btn arrow-btn" data-action="next" aria-label="No, titolo successivo">→</button></div><button class="watch-btn" data-action="watch">Guarda <span aria-hidden="true">⏎</span></button><p class="navigation-status" role="status"></p>`;}
 function renderMovie(){
   const t = currentTitle(); if (!t) return renderEmpty();
@@ -183,8 +185,7 @@ function renderMovie(){
   </div></div>`;
   mountCoverPicker(app.querySelector('.cover-options'),t);
   app.querySelector('.movie-stage').focus({preventScroll:true});
-  recordShown(t);
-  playAudio(t);
+  registerShown();playAudio(t);
 }
 async function movieMotion(stage,direction,entering){
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
@@ -203,7 +204,7 @@ async function refreshMovie(stage,direction){
   stage.querySelector('[data-action="previous"]').disabled=!state.history.length;
   state.consultation=recordConsultation(state.consultation,t.id);
   mountCoverPicker(stage.querySelector('.cover-options'),t);playAudio(t);
-  recordShown(t);
+  registerShown();
   await movieMotion(stage,direction,true);
   for(const part of [posterColumn,stage.querySelector('.movie-copy')])part.getAnimations().forEach(a=>a.cancel());
 }
@@ -224,32 +225,30 @@ async function changeMovie(direction,recordNo=true){
   const sessionId=state.session.id;
   const button=stage?.querySelector(`[data-action="${direction>0?'next':'previous'}"]`);
   button?.classList.add('navigation-flash');setTimeout(()=>button?.classList.remove('navigation-flash'),600);
-  state.navigating=true;
+  state.navigating=true;stage?.setAttribute('aria-busy','true');stage?.querySelectorAll('.arrow-btn').forEach(b=>b.disabled=true);
   try{
+    await ensureShown();
     const history=[...state.history];let index;
     if(direction>0){
-      if(recordNo)await call('reject',{sessionId,titleId:currentTitle().id});
-      if(recordNo)recordRejection(state.recommendation,currentTitle().id);
+      const rejectedId=recordNo?currentTitle().id:null;
       history.push(currentTitle().id);
-      const position=state.proposalEntries.findIndex(e=>e.titleId===currentTitle().id);
-      let entry=state.proposalEntries[position+1];
-      if(!entry){entry=nextProposal(state.recommendation,state.filteredTitles);if(entry)state.proposalEntries.push(entry);}
-      // After exhausting a small catalog, replay its stable sequence without new exposure charges.
-      entry=entry||state.proposalEntries[0];
+      const position=state.proposalEntries.findIndex(e=>e.titleId===currentTitle().id)+1;
+      const result=await call('recommendationNext',{deviceId:deviceId(),sessionId,position,rejectTitleId:rejectedId});
+      const entry=result.proposal;if(!entry)return;
+      if(!state.proposalEntries.some(e=>e.titleId===entry.titleId))state.proposalEntries.push(entry);
       index=state.filteredTitles.findIndex(t=>t.id===entry.titleId);
     }else{
       const id=history.pop();index=state.filteredTitles.findIndex(t=>t.id===id);
       if(index<0)return;
-      await call('unreject',{sessionId,titleId:id});
-      recordRejection(state.recommendation,id,false);
+      await call('recommendationUnreject',{deviceId:deviceId(),sessionId,titleId:id});
     }
     if(state.session?.id!==sessionId||!stage?.isConnected)return;
-    await touchSession(state.filteredTitles[index].id,history);
+    // The display acknowledgement stores actual navigation centrally after rendering.
     if(state.session?.id!==sessionId||!stage.isConnected)return;
     state.history=history;state.index=index;
     await refreshMovie(stage,direction);
   }catch(err){if(stage?.isConnected)stage.querySelector('.navigation-status').textContent='Non riesco a cambiare titolo. Riprova.';console.error(err);}
-  finally{state.navigating=false;}
+  finally{state.navigating=false;if(stage?.isConnected){stage.removeAttribute('aria-busy');stage.querySelector('[data-action="next"]').disabled=false;stage.querySelector('[data-action="previous"]').disabled=!state.history.length;}}
 }
 function nextMovie(recordNo=true){return changeMovie(1,recordNo);}
 function previousMovie(){return changeMovie(-1);}
@@ -293,14 +292,15 @@ function renderMode(){
 }
 
 async function finalize(mode){
-  if(state.launching)return;
-  state.launching=true;
+  const clickedAt=new Date().toISOString();
+  await ensureShown();
   const sessionId=state.session.id;
   const t = currentTitle();
   const p = state.platforms.find(x => x.id === state.confirmPlatform);
   const now = new Date();
   const expected = (t.media_type === 'movie' && t.runtime_minutes) ? new Date(now.getTime() + t.runtime_minutes * 60000) : null;
   await call('finalize', {
+    central:true,clickedAt,
     sessionId,
     deviceId: deviceId(),
     titleId: t.id,
@@ -309,7 +309,6 @@ async function finalize(mode){
     expectedEndAt: expected?.toISOString() || null
   });
   if(state.session?.id!==sessionId)return;
-  recordChoice(state.recommendation,t,now.getTime());saveModel(state.recommendation);
   state.session = null;
   renderPlatformSummary(mode,p);
 
@@ -342,7 +341,7 @@ app.addEventListener('click', async e => {
     savingChoice=true;
     platform.setAttribute('aria-busy','true');
     try{await finalize(state.pendingMode);}catch(err){const status=app.querySelector('.choice-status');if(status)status.textContent='Non riesco a salvare la scelta. Riprova.';console.error(err);}
-    finally{state.launching=false;savingChoice=false;if(viewingReturnPending){viewingReturnPending=false;handleViewingReturn();}platform.removeAttribute('aria-busy');}
+    finally{savingChoice=false;if(viewingReturnPending){viewingReturnPending=false;handleViewingReturn();}platform.removeAttribute('aria-busy');}
     return;
   }
   const b = e.target.closest('button'); if (!b) return;
@@ -355,15 +354,6 @@ app.addEventListener('click', async e => {
   if (b.dataset.action === 'watch') return renderConfirm();
   if (b.dataset.action === 'mute') return toggleMute();
   if (b.dataset.action === 'settings') return renderSettings();
-  if(b.dataset.action==='export-recommendations'){
-    const url=URL.createObjectURL(new Blob([JSON.stringify(state.recommendation,null,2)],{type:'application/json'}));
-    const a=document.createElement('a');a.href=url;a.download='gaia-consigli-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);return;
-  }
-  if(['reset-recommendations','start-real-recommendations'].includes(b.dataset.action)){
-    if(!window.confirm('Azzerare scelte e proposte dei consigli su questo dispositivo? Le preferenze iniziali Netflix restano disponibili.'))return;
-    state.recommendation=emptyModel();state.recommendation.mode=b.dataset.action==='start-real-recommendations'?'live':'test';saveModel(state.recommendation);
-    state.session=null;state.proposalEntries=[];app.querySelector('[data-overlay="settings"]')?.remove();renderIntro();return;
-  }
   if (b.dataset.action === 'close-settings') { app.querySelector('[data-overlay="settings"]')?.remove(); app.querySelector('[data-action="settings"]')?.focus({preventScroll:true}); return; }
   if (b.dataset.action === 'filters') return renderFilters();
   if (b.dataset.action === 'stats') return renderStats();
@@ -378,17 +368,6 @@ app.addEventListener('click', async e => {
   if (b.dataset.action === 'categories') return renderCategories();
   if(b.dataset.mode)return renderPlatformSummary(b.dataset.mode);
 
-});
-
-app.addEventListener('change',async e=>{
-  if(!e.target.matches('[data-import-recommendations]'))return;
-  const file=e.target.files?.[0];if(!file)return;
-  try{
-    if(file.size>10*1024*1024)throw new Error('Il backup supera 10 MB.');
-    const model=validateModel(JSON.parse(await file.text()));
-    if(!window.confirm('Ripristinare il backup dei consigli al posto dei dati di questo browser?'))return;
-    saveModel(model);state.recommendation=model;state.session=null;state.proposalEntries=[];renderIntro();
-  }catch(err){app.querySelector('#recommendation-status').textContent=err.message;}
 });
 
 for(const event of ['pointerover','focusin'])document.addEventListener(event,e=>{
@@ -435,12 +414,12 @@ document.addEventListener('keydown', async e => {
   }
 });
 
-initFeatures({ app, state, loadData, renderCategories, startSession, call, deviceId, topbar, preferenceSeed });
+initFeatures({ app, state, loadData, renderCategories, startSession, call, deviceId, topbar });
 document.addEventListener('gaia-render-movie', renderMovie);
 
 (async function init(){
   try {
-    state.recommendation=loadModel();
+    if(verificationDevice)await call('recommendationVerification',{deviceId:verificationDevice});
     await loadData();
     await checkInterruptedViewing();
     renderIntro();
