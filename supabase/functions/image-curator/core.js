@@ -9,7 +9,7 @@ export function normalizeMetadata(d, type) {
     backdrop_url: d.backdrop_path ? 'https://image.tmdb.org/t/p/original' + d.backdrop_path : null
   };
 }
-export function curate(candidates) {
+export function curate(candidates, limit = 24) {
   const seen = new Set();
   return candidates.filter(c => {
     const ratio=c.width/c.height;
@@ -19,5 +19,5 @@ export function curate(candidates) {
     const score = c => (c.language==='it'?4:c.language==='en'?2:!c.language?1:0)
       - Math.abs(c.width/c.height - 129.5/183)*10 + Math.min(c.height,4000)/4000;
     return score(b)-score(a);
-  }).slice(0,24);
+  }).slice(0,limit);
 }
