@@ -118,7 +118,7 @@
     },
     {
       "title": "Il mio vicino Totoro",
-      "status": "link_identificato_in_attesa_verifica_utente"
+      "status": "disponibilita_confermata_utente_da_importare"
     },
     {
       "title": "Il mostro dei mari",
@@ -138,7 +138,7 @@
     },
     {
       "title": "Kiki - Consegne a domicilio",
-      "status": "link_identificato_in_attesa_verifica_utente"
+      "status": "disponibilita_confermata_utente_da_importare"
     },
     {
       "title": "Klaus - I segreti del Natale",
@@ -210,7 +210,7 @@
     },
     {
       "title": "Ponyo sulla scogliera",
-      "status": "link_identificato_in_attesa_verifica_utente"
+      "status": "disponibilita_confermata_utente_da_importare"
     },
     {
       "title": "Porco Rosso",
