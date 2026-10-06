@@ -253,3 +253,6 @@ kbd { font:500 13px Inter,sans-serif; display:inline-grid; place-items:center; m
 /* Fit the container to each poster without cropping or distortion. */
 .poster-wrap { aspect-ratio:var(--poster-ratio,2 / 3); }
 @media(min-width:901px) { .movie-stage { width:min(100%,1000px); grid-template-columns:min(30vw,calc(58vh * .66667)) minmax(0,600px); justify-content:center; } }
+.recommendation-badge{margin:16px 0 0;color:var(--accent);width:32px;height:32px}
+.recommendation-badge svg{display:block;width:100%;height:100%}
+.platform-launch[aria-disabled="true"]{opacity:.65;pointer-events:none}
