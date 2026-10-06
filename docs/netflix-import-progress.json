@@ -45,8 +45,16 @@
       "status": "existing_identification_pending"
     },
     {
+      "title": "Chiamatemi Anna",
+      "status": "serie_gia_presente_versione_piattaforme_da_verificare"
+    },
+    {
       "title": "Cicogne in missione",
       "status": "pending"
+    },
+    {
+      "title": "Daniel Tiger",
+      "status": "serie_da_identificare_importare"
     },
     {
       "title": "Doraemon - Il film",
@@ -59,6 +67,10 @@
     {
       "title": "Doraemon - Il film: Nobita e il nuovo dinosauro",
       "status": "pending"
+    },
+    {
+      "title": "Due Fantagenitori",
+      "status": "serie_da_identificare_importare"
     },
     {
       "title": "Earwig e la strega",
@@ -79,6 +91,10 @@
     {
       "title": "Harry Potter e la pietra filosofale",
       "status": "pending"
+    },
+    {
+      "title": "Heidi",
+      "status": "serie_gia_presente_versione_piattaforme_da_verificare"
     },
     {
       "title": "Hotel Transylvania",
@@ -193,12 +209,24 @@
       "status": "aggiunto_cover_link_verificati_citazione_da_cercare"
     },
     {
+      "title": "Peppa Pig",
+      "status": "serie_da_identificare_importare"
+    },
+    {
+      "title": "Pernille",
+      "status": "serie_da_identificare_importare"
+    },
+    {
       "title": "Pets - Vita da animali",
       "status": "existing_identification_pending"
     },
     {
       "title": "Pets 2 - Vita da animali",
       "status": "existing_identification_pending"
+    },
+    {
+      "title": "Pimpa",
+      "status": "serie_da_identificare_importare"
     },
     {
       "title": "Piovono polpette",
