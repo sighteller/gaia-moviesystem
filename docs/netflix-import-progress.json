@@ -118,7 +118,7 @@
     },
     {
       "title": "Il mio vicino Totoro",
-      "status": "pending"
+      "status": "link_identificato_in_attesa_verifica_utente"
     },
     {
       "title": "Il mostro dei mari",
@@ -138,7 +138,7 @@
     },
     {
       "title": "Kiki - Consegne a domicilio",
-      "status": "pending"
+      "status": "link_identificato_in_attesa_verifica_utente"
     },
     {
       "title": "Klaus - I segreti del Natale",
@@ -210,7 +210,7 @@
     },
     {
       "title": "Ponyo sulla scogliera",
-      "status": "pending"
+      "status": "link_identificato_in_attesa_verifica_utente"
     },
     {
       "title": "Porco Rosso",
@@ -258,7 +258,7 @@
     },
     {
       "title": "Spellbound - L'incantesimo",
-      "status": "pending"
+      "status": "aggiunto_dati_cover_link_verificati_citazioni_in_pausa"
     },
     {
       "title": "Spirit - Cavallo selvaggio",
@@ -286,7 +286,7 @@
     },
     {
       "title": "Un bambino chiamato Natale",
-      "status": "pending"
+      "status": "aggiunto_dati_cover_link_verificati_citazioni_in_pausa"
     },
     {
       "title": "Vivo",
