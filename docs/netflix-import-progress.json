@@ -6,7 +6,7 @@
     },
     {
       "title": "Alvin Superstar",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_Netflix_non_disponibile_verificato_utente"
     },
     {
       "title": "Alvin Superstar - Nessuno ci può fermare",
@@ -14,7 +14,7 @@
     },
     {
       "title": "Alvin Superstar 2",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_Netflix_non_disponibile_verificato_utente"
     },
     {
       "title": "Alvin Superstar 3: Si salvi chi può",
@@ -22,7 +22,7 @@
     },
     {
       "title": "Annie - La felicità è contagiosa",
-      "status": "non_disponibile_su_Netflix_Italia_verificato"
+      "status": "escluso_su_richiesta_utente"
     },
     {
       "title": "Arrietty - Il mondo segreto sotto il pavimento",
@@ -30,19 +30,19 @@
     },
     {
       "title": "Bee Movie",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_identificazione_cover_piattaforme_preservate"
     },
     {
       "title": "Cattivissimo me",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_Netflix_non_disponibile_verificato_utente"
     },
     {
       "title": "Cattivissimo me 2",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_Netflix_non_disponibile_verificato_utente"
     },
     {
       "title": "Cattivissimo me 3",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_Netflix_non_disponibile_verificato_utente"
     },
     {
       "title": "Chiamatemi Anna",
@@ -58,15 +58,15 @@
     },
     {
       "title": "Doraemon - Il film",
-      "status": "pending"
+      "status": "aggiunto_dati_cover_link_verificati_utente_citazioni_in_pausa"
     },
     {
       "title": "Doraemon - Il film 2",
-      "status": "pending"
+      "status": "aggiunto_dati_cover_link_verificati_utente_citazioni_in_pausa"
     },
     {
       "title": "Doraemon - Il film: Nobita e il nuovo dinosauro",
-      "status": "pending"
+      "status": "aggiunto_dati_cover_link_verificati_utente_citazioni_in_pausa"
     },
     {
       "title": "Due Fantagenitori",
@@ -98,7 +98,7 @@
     },
     {
       "title": "Hotel Transylvania",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_Netflix_non_disponibile_verificato_utente"
     },
     {
       "title": "Hotel Transylvania 2",
@@ -106,7 +106,7 @@
     },
     {
       "title": "Hotel Transylvania 3 - Una vacanza mostruosa",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_Netflix_non_disponibile_verificato_utente"
     },
     {
       "title": "I Mitchell contro le macchine",
@@ -118,7 +118,7 @@
     },
     {
       "title": "Il castello errante di Howl",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_identificazione_cover_piattaforme_preservate"
     },
     {
       "title": "Il drago dei desideri",
@@ -126,7 +126,7 @@
     },
     {
       "title": "Il gatto con gli stivali",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_identificazione_cover_piattaforme_preservate"
     },
     {
       "title": "Il gatto con gli stivali 2 - L'ultimo desiderio",
@@ -142,7 +142,7 @@
     },
     {
       "title": "Il richiamo della foresta",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_Netflix_non_disponibile_verificato_utente"
     },
     {
       "title": "Il robot selvaggio",
@@ -158,7 +158,7 @@
     },
     {
       "title": "Klaus - I segreti del Natale",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_identificazione_cover_piattaforme_preservate"
     },
     {
       "title": "KPop Demon Hunters",
@@ -166,7 +166,7 @@
     },
     {
       "title": "La città incantata",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_identificazione_cover_piattaforme_preservate"
     },
     {
       "title": "La collina dei papaveri",
@@ -186,11 +186,11 @@
     },
     {
       "title": "Madagascar",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_Netflix_non_disponibile_verificato_utente"
     },
     {
       "title": "Mamma Mia!",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_Netflix_non_disponibile_verificato_utente"
     },
     {
       "title": "Mamma Mia! Ci risiamo",
@@ -198,7 +198,7 @@
     },
     {
       "title": "Nanny Mcphee - Tata Matilda",
-      "status": "pending"
+      "status": "gia_presente_Netflix_non_disponibile_verificato_utente"
     },
     {
       "title": "Nimona",
@@ -218,11 +218,11 @@
     },
     {
       "title": "Pets - Vita da animali",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_Netflix_non_disponibile_verificato_utente"
     },
     {
       "title": "Pets 2 - Vita da animali",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_Netflix_non_disponibile_verificato_utente"
     },
     {
       "title": "Pimpa",
@@ -242,15 +242,15 @@
     },
     {
       "title": "Porco Rosso",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_identificazione_cover_piattaforme_preservate"
     },
     {
       "title": "Quando c'era Marnie",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_identificazione_cover_piattaforme_preservate"
     },
     {
       "title": "Quasi amici",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_identificazione_cover_piattaforme_preservate"
     },
     {
       "title": "Shark Tale",
@@ -266,11 +266,11 @@
     },
     {
       "title": "Shrek 2",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_identificazione_cover_piattaforme_preservate"
     },
     {
       "title": "Shrek Terzo",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_identificazione_cover_piattaforme_preservate"
     },
     {
       "title": "Si alza il vento",
@@ -278,11 +278,11 @@
     },
     {
       "title": "Sing",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_Netflix_non_disponibile_verificato_utente"
     },
     {
       "title": "Sing 2 - Sempre più forte",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_Netflix_non_disponibile_verificato_utente"
     },
     {
       "title": "Spellbound - L'incantesimo",
@@ -290,7 +290,7 @@
     },
     {
       "title": "Spirit - Cavallo selvaggio",
-      "status": "existing_identification_pending"
+      "status": "gia_presente_Netflix_non_disponibile_verificato_utente"
     },
     {
       "title": "Tata Matilda e il Grande Botto",
@@ -306,11 +306,11 @@
     },
     {
       "title": "Tom & Jerry",
-      "status": "utente_non_disponibile_richiesta_da_inserire"
+      "status": "richiesta_salvata_non_disponibile_Netflix_confermato_utente"
     },
     {
       "title": "Tom e Jerry - Il film",
-      "status": "utente_non_disponibile_richiesta_da_inserire"
+      "status": "richiesta_salvata_non_disponibile_Netflix_confermato_utente"
     },
     {
       "title": "Un bambino chiamato Natale",
