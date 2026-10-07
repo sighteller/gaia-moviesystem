@@ -10,7 +10,7 @@
     },
     {
       "title": "Alvin Superstar - Nessuno ci può fermare",
-      "status": "pending"
+      "status": "richiesta_salvata_non_disponibile_Netflix_confermato_utente"
     },
     {
       "title": "Alvin Superstar 2",
@@ -18,7 +18,7 @@
     },
     {
       "title": "Alvin Superstar 3: Si salvi chi può",
-      "status": "pending"
+      "status": "richiesta_salvata_non_disponibile_Netflix_confermato_utente"
     },
     {
       "title": "Annie - La felicità è contagiosa",
@@ -50,7 +50,7 @@
     },
     {
       "title": "Cicogne in missione",
-      "status": "pending"
+      "status": "richiesta_salvata_non_disponibile_Netflix_confermato_utente"
     },
     {
       "title": "Daniel Tiger",
@@ -86,11 +86,11 @@
     },
     {
       "title": "Grease",
-      "status": "pending"
+      "status": "richiesta_salvata_non_disponibile_Netflix_confermato_utente"
     },
     {
       "title": "Harry Potter e la pietra filosofale",
-      "status": "pending"
+      "status": "escluso_su_richiesta_utente"
     },
     {
       "title": "Heidi",
@@ -130,7 +130,7 @@
     },
     {
       "title": "Il gatto con gli stivali 2 - L'ultimo desiderio",
-      "status": "pending"
+      "status": "richiesta_salvata_non_disponibile_Netflix_confermato_utente"
     },
     {
       "title": "Il mio vicino Totoro",
@@ -174,11 +174,11 @@
     },
     {
       "title": "La fabbrica di cioccolato",
-      "status": "pending"
+      "status": "aggiunto_dati_cover_link_verificati_utente_citazioni_in_pausa"
     },
     {
       "title": "La strada per El Dorado",
-      "status": "pending"
+      "status": "utente_non_disponibile_richiesta_da_inserire"
     },
     {
       "title": "Leo",
@@ -194,7 +194,7 @@
     },
     {
       "title": "Mamma Mia! Ci risiamo",
-      "status": "pending"
+      "status": "utente_non_disponibile_richiesta_da_inserire"
     },
     {
       "title": "Nanny Mcphee - Tata Matilda",
@@ -230,11 +230,11 @@
     },
     {
       "title": "Piovono polpette",
-      "status": "pending"
+      "status": "utente_non_disponibile_richiesta_da_inserire"
     },
     {
       "title": "Piovono Polpette 2 - La rivincita degli avanzi",
-      "status": "pending"
+      "status": "utente_disponibile_da_inserire"
     },
     {
       "title": "Ponyo sulla scogliera",
@@ -262,7 +262,7 @@
     },
     {
       "title": "Shrek",
-      "status": "pending"
+      "status": "utente_disponibile_da_inserire"
     },
     {
       "title": "Shrek 2",
@@ -294,7 +294,7 @@
     },
     {
       "title": "Tata Matilda e il Grande Botto",
-      "status": "pending"
+      "status": "richiesta_salvata_non_disponibile_Netflix_confermato_utente"
     },
     {
       "title": "That Christmas",
@@ -302,15 +302,15 @@
     },
     {
       "title": "The Blind Side",
-      "status": "pending"
+      "status": "escluso_su_richiesta_utente"
     },
     {
       "title": "Tom & Jerry",
-      "status": "pending"
+      "status": "utente_non_disponibile_richiesta_da_inserire"
     },
     {
       "title": "Tom e Jerry - Il film",
-      "status": "pending"
+      "status": "utente_non_disponibile_richiesta_da_inserire"
     },
     {
       "title": "Un bambino chiamato Natale",
@@ -322,11 +322,11 @@
     },
     {
       "title": "Wicked",
-      "status": "pending"
+      "status": "aggiunto_dati_cover_link_verificati_utente_citazioni_in_pausa"
     },
     {
       "title": "Willy Wonka e la fabbrica di cioccolato",
-      "status": "pending"
+      "status": "aggiunto_dati_cover_link_verificati_utente_citazioni_in_pausa"
     },
     {
       "title": "Wonka",
