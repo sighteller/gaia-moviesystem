@@ -178,7 +178,7 @@
     },
     {
       "title": "La strada per El Dorado",
-      "status": "utente_non_disponibile_richiesta_da_inserire"
+      "status": "richiesta_salvata_non_disponibile_Netflix_confermato_utente"
     },
     {
       "title": "Leo",
@@ -194,7 +194,7 @@
     },
     {
       "title": "Mamma Mia! Ci risiamo",
-      "status": "utente_non_disponibile_richiesta_da_inserire"
+      "status": "richiesta_salvata_non_disponibile_Netflix_confermato_utente"
     },
     {
       "title": "Nanny Mcphee - Tata Matilda",
@@ -230,11 +230,11 @@
     },
     {
       "title": "Piovono polpette",
-      "status": "utente_non_disponibile_richiesta_da_inserire"
+      "status": "richiesta_salvata_non_disponibile_Netflix_confermato_utente"
     },
     {
       "title": "Piovono Polpette 2 - La rivincita degli avanzi",
-      "status": "utente_disponibile_da_inserire"
+      "status": "aggiunto_dati_cover_link_verificati_utente_citazioni_in_pausa"
     },
     {
       "title": "Ponyo sulla scogliera",
@@ -262,7 +262,7 @@
     },
     {
       "title": "Shrek",
-      "status": "utente_disponibile_da_inserire"
+      "status": "aggiunto_dati_cover_link_verificati_utente_citazioni_in_pausa"
     },
     {
       "title": "Shrek 2",
