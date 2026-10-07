@@ -1,4 +1,3 @@
-import { recommend } from './discovery.js?v=20261001i';
 import { curator,esc,safeImage } from './curator-client.js?v=20261001i';
 let config={},covers=[],selectedCover=null,searchPage=1,lastQuery='',totalPages=1,renderVersion=0;
 export function initFeatures({app,state,loadData,startSession,call,deviceId,topbar}) {
@@ -29,10 +28,11 @@ export function initFeatures({app,state,loadData,startSession,call,deviceId,topb
   async function discover(){
     const version=++renderVersion;state.session=null;if(state.currentAudio)state.currentAudio.pause();
     app.innerHTML=shell('<h1>Scopri</h1><p id="feature-message" role="status">Preparo qualche idea…</p>');
-    const {selections}=await call('discoveryHistory',{deviceId:deviceId()});if(version!==renderVersion||!app.querySelector('.curator'))return;
-    const d=recommend(state.titles,state.links,state.selectedPlatformIds,selections);
+    const result=await call('recommendationIdeas',{deviceId:deviceId(),platformIds:state.selectedPlatformIds});if(version!==renderVersion||!app.querySelector('.curator'))return;
+    const rows=result.ideas.map(x=>({title:state.titles.find(t=>t.id===x.titleId),reason:'Un film del tuo catalogo da ritrovare.'})).filter(x=>x.title);
+    const d={favorites:rows.slice(0,8),ideas:rows.slice(8),hasHistory:true};
     const cards=rows=>rows.map(({title:t,reason})=>`<article class="discovery-card">${(t.dvd_cover_url||t.custom_image_url||t.poster_url)?`<img src="${safeImage(t.dvd_cover_url||t.custom_image_url||t.poster_url)}" alt="" loading="lazy">`:''}<h3>${esc(t.name)}</h3><p>${esc(reason)}</p><button class="primary" data-discover-title="${esc(t.id)}">Guarda ↵</button></article>`).join('');
-    app.innerHTML=shell(`<h1>Scopri</h1><p>Idee dal catalogo, sulle tue piattaforme selezionate. Rivedere un preferito è sempre una buona possibilità.</p><p class="hint">${d.hasHistory?'Usiamo le scelte su questo dispositivo: non sono conferme di visione né voti.':'Con le prime scelte potremo personalizzare questa pagina. Per ora esplora il catalogo.'}</p>${d.favorites.length?`<h2>Da riscoprire</h2><div class="discovery-grid">${cards(d.favorites)}</div>`:''}<h2>Altre idee</h2><div class="discovery-grid">${cards(d.ideas)}</div>${!d.favorites.length&&!d.ideas.length?'<p>Nessun titolo disponibile con questi filtri. Modifica i filtri.</p>':''}<p class="hint">I “No” di una sessione non escludono un film per sempre; i titoli cambiati non diventano automaticamente preferiti.</p>`);
+    app.innerHTML=shell(`<h1>Scopri</h1><p>Idee dal catalogo, sulle tue piattaforme selezionate. Rivedere un preferito è sempre una buona possibilità.</p><p class="hint">${d.hasHistory?'I consigli seguono le scelte di Gaia.':'Con le prime scelte potremo personalizzare questa pagina. Per ora esplora il catalogo.'}</p>${d.favorites.length?`<h2>Da riscoprire</h2><div class="discovery-grid">${cards(d.favorites)}</div>`:''}<h2>Altre idee</h2><div class="discovery-grid">${cards(d.ideas)}</div>${!d.favorites.length&&!d.ideas.length?'<p>Nessun titolo disponibile con questi filtri. Modifica i filtri.</p>':''}<p class="hint">I “No” di una sessione non escludono un film per sempre; i titoli cambiati non diventano automaticamente preferiti.</p>`);
   }
   app.addEventListener('click',async e=>{
     const b=e.target.closest('button');if(!b||b.disabled)return;

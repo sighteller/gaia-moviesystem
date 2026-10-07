@@ -2,3 +2,7 @@ collegamento-gaia.txt
 credentials.xml
 **/collegamento-gaia.txt
 **/credentials.xml
+
+__pycache__/
+
+*.pyc
