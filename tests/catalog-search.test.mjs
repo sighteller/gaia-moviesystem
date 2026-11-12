@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {searchCatalog} from '../catalog-search.js';
+const titles=[{id:'a',name:'Il mio vicino Totoro',canonical_title:'My Neighbor Totoro',active:true},{id:'b',name:'Totoro richiesta',request_status:'pending'},{id:'c',name:'Totoro rifiuto',request_status:'rejected'},{id:'d',name:'Totoro archivio',active:false},{id:'e',name:'Totoro episodio',series_id:'parent'}];
+const links=titles.map(t=>({title_id:t.id,platform_id:'netflix',active:true}));
+assert.deepEqual(searchCatalog(titles,links,['netflix'],'TOTÒRO').map(t=>t.id),['a']);
+assert.equal(searchCatalog(titles,links,['netflix'],'my neighbor').length,1);
+assert.equal(searchCatalog(titles,links,['disney'],'totoro').length,0);
+assert.equal(searchCatalog(titles,links,['netflix'],'').length,0);
+assert.equal(searchCatalog(titles,links.map(l=>({...l,active:false})),['netflix'],'totoro').length,0);
+const ranked=[{id:'x',name:'Shrek terzo'},{id:'y',name:'Shrek'}];
+assert.equal(searchCatalog(ranked,ranked.map(t=>({title_id:t.id,platform_id:'p'})),['p'],'Shrek')[0].id,'y');
+console.log('Catalog search checks passed');
