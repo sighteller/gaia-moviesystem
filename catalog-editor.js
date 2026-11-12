@@ -1,6 +1,6 @@
 
 import {curator} from './curator-client.js?v=20261001i';
-import {catalogEntries,episodeLabel} from './series-catalog.js?v=20261112reject';
+import {catalogEntries,episodeLabel} from './series-catalog.js?v=20261112identify';
 const endpoint='https://mahjewznwqvdgtdjtekc.supabase.co/functions/v1/gaia-catalog';
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const safe=x=>{try{const u=new URL(x);return ['https:','http:'].includes(u.protocol)?u.href:''}catch{return ''}};
@@ -58,6 +58,8 @@ saving=true;mark();list.inert=true;status.textContent='Salvataggio di tutte le m
 const quotes=changes.filter(c=>JSON.stringify(c.quote_override)!==JSON.stringify(originals.get(c.id).quote_override));if(quotes.length){let edits=[];try{edits=JSON.parse(localStorage.getItem('gaia_quote_edits')||'[]')}catch{};for(const c of quotes){edits=edits.filter(q=>q.title_id!==c.id);edits.push({...c.quote_override,title_id:c.id,text:c.quote_override?.text||''});}try{localStorage.setItem('gaia_quote_edits',JSON.stringify(edits));localQuotes=edits;}catch{}}
 drafts.clear();status.textContent=result.saved+(result.saved===1?' titolo salvato.':' titoli salvati.')+' ';await load();status.textContent=result.saved+(result.saved===1?' titolo salvato.':' titoli salvati.')+'';}catch(err){status.textContent=persisted?'Modifiche salvate, ma aggiornamento della pagina non riuscito. Riapri il catalogo.':err.message+' Le modifiche restano in questa pagina: puoi riprovare.';}finally{saving=false;list.inert=false;mark();}});
 async function load(){catalog=await call('catalogEditor');const platformFilter=document.querySelector('#platform'),previousPlatform=platformFilter.value;platformFilter.innerHTML='<option value="all">Tutte le piattaforme</option>'+catalog.platforms.map(p=>`<option value="${esc(p.id)}">${esc(p.name)}</option>`).join('');if(catalog.platforms.some(p=>p.id===previousPlatform))platformFilter.value=previousPlatform;originals=new Map(catalog.titles.map(t=>[t.id,initial(t)]));render();mark();}
+const requestedFilter=new URL(location.href).searchParams.get('filter');
+if([...document.querySelector('#filter').options].some(o=>o.value===requestedFilter))document.querySelector('#filter').value=requestedFilter;
 try{await load();status.textContent=''}catch(err){status.textContent=err.message;save.disabled=true;}
 
 let viewingCheck=null;
