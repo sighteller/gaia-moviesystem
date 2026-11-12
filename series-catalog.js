@@ -46,6 +46,7 @@ export function catalogEntries(titles, { query = '', filter = 'active', dirtyIds
   const matchesName = title => searchable(title.name).includes(search);
   const matchesFilter = title => filter === 'all' ||
     filter === 'active' && (title.active || title.request_status === 'pending') ||
+    filter === 'unidentified' && title.active && !title.tmdb_id && !title.series_id ||
     filter === 'requested' && title.request_status === 'pending' ||
     filter === 'rejected' && title.request_status === 'rejected' ||
     filter === 'archived' && !title.active && !['pending','rejected'].includes(title.request_status) ||
