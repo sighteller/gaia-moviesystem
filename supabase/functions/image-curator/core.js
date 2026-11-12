@@ -5,6 +5,7 @@ export function normalizeMetadata(d, type) {
     name: d.title || d.name, original_title: d.original_title || d.original_name,
     release_year: year, runtime_minutes: type === 'movie' ? (d.runtime || null) : null,
     overview: d.overview || '', genres: d.genres || [], original_language: d.original_language,
+    production_companies: (d.production_companies || []).filter(c => Number.isInteger(c.id) && c.id > 0 && typeof c.name === 'string' && c.name.trim()).map(c => ({id:c.id,name:c.name.trim(),origin_country:c.origin_country || ''})),
     poster_url: d.poster_path ? 'https://image.tmdb.org/t/p/original' + d.poster_path : null,
     backdrop_url: d.backdrop_path ? 'https://image.tmdb.org/t/p/original' + d.backdrop_path : null
   };
