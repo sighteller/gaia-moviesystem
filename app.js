@@ -1,3 +1,4 @@
+import {initStatistics} from './statistics.js?v=20261112rankings';
 import {initCatalogSearch} from './catalog-search.js?v=20261112studios';
 import {proposalBadge} from './recommendation-badges.js?v=20261007central';
 import {buildSeriesIndex} from './series-catalog.js?v=20261004series';
@@ -317,10 +318,7 @@ async function finalize(mode){
 
 }
 
-async function renderStats(){
-  const { rows } = await call('stats');
-  app.innerHTML = `<div class="shell">${topbar()}<div style="width:min(1100px,100%);margin:0 auto"><h1 style="font-size:clamp(44px,6vw,76px);letter-spacing:-.05em;margin:10px 0 26px">Statistiche</h1><div style="display:grid;gap:12px">${rows.map(r => `<div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:18px 20px;border:1px solid #30362b;border-radius:16px;background:#1a1d17"><strong>${escapeHtml(r.title.name)}</strong><span>Scelto ${r.chosen}</span><span>No ${r.no}</span><span>Limitata ${r.limited}</span><span>Illimitata ${r.unlimited}</span><span>Completati (≥80%) ${r.completed||0}</span><span>Interrotti ${r.interrupted||0}</span><span>Cambiato ${r.changed}</span></div>`).join('')}</div></div></div>`;
-}
+const renderStats=initStatistics({app,state,call,topbar});
 
 function renderEmpty(){
   app.innerHTML = `<div class="shell">${topbar()}<div class="hero-center"><div class="empty"><h2>Nessun titolo disponibile</h2><p>Modifica il filtro delle piattaforme o scegli un'altra categoria.</p><button class="primary" data-action="categories">Torna alle categorie</button></div></div></div>`;
