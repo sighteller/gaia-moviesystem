@@ -7,7 +7,10 @@ export function searchCatalog(titles,links,platformIds,query){
  return titles.filter(t=>t.active!==false&&!['pending','rejected'].includes(t.request_status)&&!t.series_id&&available.has(t.id)).map(t=>{
   const names=[t.name,t.original_title,t.canonical_title].filter(Boolean).map(normalize);
   const scores=names.filter(n=>tokens.every(token=>n.includes(token))).map(n=>n===q?0:n.startsWith(q)?1:n.includes(q)?2:3);
-  return {title:t,score:scores.length?Math.min(...scores):Infinity};
+  const studios=(Array.isArray(t.production_companies)?t.production_companies:[]).map(c=>normalize(c.name)).filter(Boolean);
+  const studioHit=studios.some(n=>tokens.every(token=>n.includes(token)));
+  const combinedHit=names.some(n=>tokens.every(token=>(n+' '+studios.join(' ')).includes(token)));
+  return {title:t,score:scores.length?Math.min(...scores):studioHit?4:combinedHit?5:Infinity};
  }).filter(x=>Number.isFinite(x.score)).sort((a,b)=>a.score-b.score||a.title.name.localeCompare(b.title.name,'it')).map(x=>x.title);
 }
 export function initCatalogSearch({app,state,topbar,startSession}){
@@ -31,7 +34,7 @@ export function initCatalogSearch({app,state,topbar,startSession}){
  }
  function show(){
   state.session=null;if(state.currentAudio)state.currentAudio.pause();opening=false;
-  app.innerHTML='<div class="shell">'+topbar()+'<section class="curator catalog-search"><h1>Cerca nel catalogo</h1><label for="catalog-query">Film o serie</label><input id="catalog-query" type="search" autocomplete="off" placeholder="Che cosa vuoi vedere?" role="combobox" aria-autocomplete="list" aria-controls="catalog-search-results" aria-expanded="false"><p class="hint">Cerca per titolo italiano o originale, sulle piattaforme selezionate. Usa le frecce per scegliere e Invio per aprire.</p><p id="catalog-search-status" role="status"></p><div id="catalog-search-results" class="catalog-search-grid" role="listbox" aria-label="Risultati della ricerca"></div></section></div>';
+  app.innerHTML='<div class="shell">'+topbar()+'<section class="curator catalog-search"><h1>Cerca nel catalogo</h1><label for="catalog-query">Film, serie o studio di produzione</label><input id="catalog-query" type="search" autocomplete="off" placeholder="Che cosa vuoi vedere?" role="combobox" aria-autocomplete="list" aria-controls="catalog-search-results" aria-expanded="false"><p class="hint">Cerca per titolo italiano, originale o studio (es. Ghibli, Pixar), sulle piattaforme selezionate. Usa le frecce per scegliere e Invio per aprire.</p><p id="catalog-search-status" role="status"></p><div id="catalog-search-results" class="catalog-search-grid" role="listbox" aria-label="Risultati della ricerca"></div></section></div>';
   update();app.querySelector('#catalog-query').focus();
  }
  async function open(index){
