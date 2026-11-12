@@ -47,7 +47,8 @@ export function catalogEntries(titles, { query = '', filter = 'active', dirtyIds
   const matchesFilter = title => filter === 'all' ||
     filter === 'active' && (title.active || title.request_status === 'pending') ||
     filter === 'requested' && title.request_status === 'pending' ||
-    filter === 'archived' && !title.active && title.request_status !== 'pending' ||
+    filter === 'rejected' && title.request_status === 'rejected' ||
+    filter === 'archived' && !title.active && !['pending','rejected'].includes(title.request_status) ||
     filter === 'dirty' && dirtyIds.has(title.id) ||
     filter === 'no-quote' && !title.quote_override?.text;
   const entries = [];
