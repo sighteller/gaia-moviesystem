@@ -1,4 +1,5 @@
 import { curate, normalizeMetadata } from './core.js';
+import { sendGmailNotification } from './gmail-mailer.js';
 const cors = {'Access-Control-Allow-Origin':'https://sighteller.github.io','Access-Control-Allow-Headers':'content-type,authorization,apikey','Access-Control-Allow-Methods':'POST,OPTIONS'};
 const url=Deno.env.get('SUPABASE_URL')!;
 const service=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || JSON.parse(Deno.env.get('SUPABASE_SECRET_KEYS')||'{}').default;
@@ -99,11 +100,17 @@ Deno.serve(async req=>{
       const saved=await remote('rpc/request_public_curated_title',{method:'POST',body:JSON.stringify({candidate_id:payload.candidateId,title_category:payload.category})});
       let notification='not_configured';
       const key=Deno.env.get('RESEND_API_KEY'),from=Deno.env.get('FILM_REQUEST_EMAIL_FROM'),to=Deno.env.get('FILM_REQUEST_EMAIL_TO');
-      if(saved.created&&key&&from&&to){
+      const gmailUrl=Deno.env.get('GMAIL_BRIDGE_URL'),gmailSecret=Deno.env.get('GMAIL_BRIDGE_SECRET');
+      const gmailSelected=!!(gmailUrl||gmailSecret);
+      if(saved.created&&(gmailSelected?!!(gmailUrl&&gmailSecret):!!(key&&from&&to))){
         try{
           const title=(await remote('titles?id=eq.'+saved.titleId+'&select=name'))[0];
+          if(gmailSelected){
+            await sendGmailNotification({url:gmailUrl!,secret:gmailSecret!,titleId:saved.titleId,title:title.name});
+          }else{
           const mail=await fetch('https://api.resend.com/emails',{method:'POST',headers:{Authorization:'Bearer '+key,'Content-Type':'application/json','Idempotency-Key':'gaia-request-'+saved.titleId},body:JSON.stringify({from,to:[to],subject:'Gaia: nuovo titolo richiesto',text:'È stato richiesto: '+title.name+'\n\nApri il catalogo: https://sighteller.github.io/gaia-moviesystem/disponibilita.html'}),signal:AbortSignal.timeout(10000)});
           if(!mail.ok)throw Error('Invio email non riuscito');
+          }
           notification='sent';
           await remote('film_request_notifications?title_id=eq.'+saved.titleId,{method:'PATCH',body:JSON.stringify({status:'sent',sent_at:new Date().toISOString(),last_error:null})});
         }catch{
