@@ -3,7 +3,7 @@ import {buildSeriesIndex} from './series-catalog.js?v=20261004series';
 import { effectiveQuote, standardQuote } from './title-quotes.js?v=20261004catalog';
 import { recordConsultation, choiceMessageHtml, platformUrl } from './choice-summary.js?v=20261002proposals';
 import { mountCoverPicker } from './cover-picker.js?v=20261001i';
-import { initFeatures } from './features.js?v=20261007central';
+import { initFeatures } from './features.js?v=20261112duplicate';
 import { mountJellyfinSync } from './jellyfin-sync.js?v=20261002settings';
 const API_URL = 'https://mahjewznwqvdgtdjtekc.supabase.co/functions/v1/gaia-api';
 
