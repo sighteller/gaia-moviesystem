@@ -157,26 +157,10 @@ Deno.serve(async (req) => {
     }
 
     if (action === "stats") {
-      const [titles, selections, rejections] = await Promise.all([
-        api("titles?select=id,name&active=eq.true"),
-        api("selections?select=title_id,selection_mode,viewing_status,selected_at&order=selected_at.desc"),
-        api("session_rejections?select=title_id"),
-      ]);
-      const rows = titles.map((title) => {
-        const ss = selections.filter((x) => x.title_id === title.id);
-        const rs = rejections.filter((x) => x.title_id === title.id);
-        return {
-          title,
-          chosen: ss.length,
-          no: rs.length,
-          limited: ss.filter((x) => x.selection_mode === "limited").length,
-          unlimited: ss.filter((x) => x.selection_mode === "unlimited").length,
-          completed: ss.filter((x) => x.viewing_status === "presumed_completed").length,
-          interrupted: ss.filter((x) => x.viewing_status === "interrupted").length,
-          changed: ss.filter((x) => x.viewing_status === "changed").length,
-        };
-      }).sort((a,b) => b.chosen - a.chosen || a.title.name.localeCompare(b.title.name));
-      return response({ rows });
+      const key=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+      if(!key)return response({error:'Statistiche non disponibili'},503);
+      const data=await api('rpc/gaia_ranking_stats',{method:'POST',headers:{apikey:key,Authorization:'Bearer '+key},body:'{}'});
+      return response(data);
     }
 
     return response({ error: "Unknown action" }, 400);
