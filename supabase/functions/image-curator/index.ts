@@ -76,6 +76,7 @@ Deno.serve(async req=>{
       const d=await tmdb(path+'?language=it-IT&append_to_response=images,external_ids&include_image_language=it,en,null');
       if(d.adult)throw new HttpError(400,'Titolo non ammesso.');
       const metadata=normalizeMetadata(d,type);
+      const identificationId=payload.identify===true?await remote('rpc/gaia_cache_tmdb_identification',{method:'POST',body:JSON.stringify({provider_id:id,provider_type:type,provider_metadata:metadata})}):undefined;
       const candidates=(d.images?.posters||[]).map((p:any)=>({provider:'tmdb',url:'https://image.tmdb.org/t/p/original'+p.file_path,preview_url:'https://image.tmdb.org/t/p/w342'+p.file_path,width:p.width,height:p.height,language:p.iso_639_1}));
       const warnings=[];const fanartKey=Deno.env.get('FANART_API_KEY'),fanartId=type==='movie'?id:d.external_ids?.tvdb_id;
       if(fanartKey&&fanartId){try{
@@ -86,7 +87,7 @@ Deno.serve(async req=>{
       const selected=curate(candidates,title?24:4);
       await remote('cover_candidates?title_id=is.null&expires_at=lt.'+encodeURIComponent(new Date().toISOString()),{method:'DELETE'});
       const rows=selected.length?await remote('cover_candidates'+(title?'?on_conflict=title_id,url':''),{method:'POST',headers:{Prefer:'return=representation'+(title?',resolution=merge-duplicates':'')},body:JSON.stringify(selected.map(c=>({...c,tmdb_id:id,media_type:type,metadata,created_by:null,title_id:title?.id||null,expires_at:new Date(Date.now()+(title?365:1)*86400000).toISOString()})))}):[];
-      return reply({metadata,candidates:rows,warnings});
+      return reply({metadata,candidates:rows,warnings,identificationId});
     }
     if(!validId(payload.candidateId))throw new HttpError(400,'Scegli una copertina.');
     if(action==='saveCover'){
