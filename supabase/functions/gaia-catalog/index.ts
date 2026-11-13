@@ -9,8 +9,12 @@ Deno.serve(async req=>{
   const text=await req.text();if(text.length>1500000)return reply({error:"Troppe modifiche"},413);
   const {action,payload={}}=JSON.parse(text);
   if(!["catalogEditor","saveCatalog"].includes(action))return reply({error:"Operazione non consentita"},400);
-  const path=action==="catalogEditor"?"gaia_catalog_editor":"gaia_save_catalog";
-  const r=await fetch(base+"/rpc/"+path,{method:"POST",headers:{apikey:key,"Content-Type":"application/json"},body:JSON.stringify(action==="catalogEditor"?{}:{changes:payload.changes})});
+  const identifying=action==="saveCatalog"&&Array.isArray(payload.changes)&&payload.changes.some(c=>c.identification);
+  const path=action==="catalogEditor"?"gaia_catalog_editor":identifying?"gaia_save_identified_catalog":"gaia_save_catalog";
+  const service=identifying?Deno.env.get('SUPABASE_SERVICE_ROLE_KEY'):null;
+  if(identifying&&!service)return reply({error:'Associazione TMDb temporaneamente non disponibile'},503);
+  const headers=service?{apikey:service,Authorization:'Bearer '+service,"Content-Type":"application/json"}:{apikey:key,"Content-Type":"application/json"};
+  const r=await fetch(base+"/rpc/"+path,{method:"POST",headers,body:JSON.stringify(action==="catalogEditor"?{}:{changes:payload.changes})});
   const result=await r.json();if(!r.ok)return reply({error:result.message||"Salvataggio non riuscito"},400);
   return reply(result);
  }catch{return reply({error:"Richiesta non valida o servizio non raggiungibile"},400);}
