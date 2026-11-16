@@ -51,6 +51,7 @@ export function catalogEntries(titles, { query = '', filter = 'active', dirtyIds
     filter === 'rejected' && title.request_status === 'rejected' ||
     filter === 'archived' && !title.active && !['pending','rejected'].includes(title.request_status) ||
     filter === 'dirty' && dirtyIds.has(title.id) ||
+    filter === 'no-audio' && !title.audio_url ||
     filter === 'no-quote' && !title.quote_override?.text;
   const entries = [];
   for (const title of titles) {
