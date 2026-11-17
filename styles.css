@@ -298,3 +298,13 @@ kbd { font:500 13px Inter,sans-serif; display:inline-grid; place-items:center; m
 .camera-panel details{border-top:1px solid #465139;margin-top:12px;padding-top:10px}
 .camera-panel summary{cursor:pointer}.camera-calibration{display:flex;gap:8px;flex-wrap:wrap}
 @media(max-width:650px){.camera-panel{right:12px;width:230px;max-height:60dvh}.camera-panel video{max-height:140px}}
+
+/* The video and guide share uncropped normalized coordinates; preview is mirrored. */
+.camera-preview{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:10px;background:#050805}
+.camera-panel .camera-preview video{display:block;width:100%;height:100%;aspect-ratio:auto;object-fit:contain;max-height:none}
+.camera-position-guide{position:absolute;box-sizing:border-box;border:2px dashed #fff9;border-radius:50%;pointer-events:none;box-shadow:0 0 0 1px #0006}
+.camera-position-guide[hidden]{display:none}
+.camera-position-guide.ready{border:3px solid var(--accent);box-shadow:0 0 12px #d4ff8a66}
+.camera-position{border-bottom:1px solid #465139;padding:10px 0}
+.camera-panel .camera-position-note{font-size:11px;color:var(--muted)}
+.camera-panel button:disabled{opacity:.45;cursor:default}
