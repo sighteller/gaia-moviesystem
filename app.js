@@ -1,4 +1,4 @@
-import {initCameraMode} from './camera-mode.js?v=20261116';
+import {initCameraMode} from './camera-mode.js?v=20261117position';
 import {initStatistics} from './statistics.js?v=20261112rankings';
 import {initCatalogSearch} from './catalog-search.js?v=20261112studios';
 import {proposalBadge} from './recommendation-badges.js?v=20261007central';
