@@ -315,3 +315,6 @@ kbd { font:500 13px Inter,sans-serif; display:inline-grid; place-items:center; m
 #app [data-overlay="filters"] .chip.keyboard-selected:not(.selected){background:#20241d!important;color:var(--text)!important}
 [data-overlay="filters"] .chip::after{content:"";display:inline-block;width:1em;margin-left:.4em}
 [data-overlay="filters"] .chip.selected::after{content:"✓"}
+
+/* Focus is outlined; only an enabled webcam has a filled toggle. */
+#app [data-action="camera"].keyboard-selected[aria-pressed="false"]{background:#20241d!important;color:var(--text)!important}
