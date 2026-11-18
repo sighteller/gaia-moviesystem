@@ -33,7 +33,7 @@ export function initMenuKeyboard({app,state,syncFilters}){
  app.addEventListener('pointerdown',clearHighlight);
  document.addEventListener('keydown',e=>{
   if(e.isComposing||e.altKey||e.ctrlKey||e.metaKey||e.target.closest('.camera-panel'))return;
-  const overlay=app.querySelector('[data-overlay]'),top=e.target.closest('.topbar .small-actions button');
+  const overlay=app.querySelector('[data-overlay]'),top=e.target.closest('.topbar .small-actions button')||(e.target===document.body&&lastAction==='camera'?app.querySelector('[data-action="camera"][aria-pressed="true"]'):null);
   const isBack=e.key==='Backspace'||e.key==='Escape';
   // Editing keeps normal caret and deletion behavior. Escape is always available.
   if(editable(e)&&e.key!=='Escape'&&!(e.key==='ArrowUp'&&e.target.matches('#catalog-query')&&!e.target.value))return;
