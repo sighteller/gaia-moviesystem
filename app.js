@@ -1,3 +1,4 @@
+import {initMenuKeyboard} from './menu-keyboard.js?v=20261118';
 import {initCameraMode} from './camera-mode.js?v=20261117position';
 import {initStatistics} from './statistics.js?v=20261112rankings';
 import {initCatalogSearch} from './catalog-search.js?v=20261112studios';
@@ -98,6 +99,7 @@ function homeCarousel(){
 }
 
 function renderIntro(){
+  menuKeyboard.reset();
   state.category=null;state.session=null;
   if(state.currentAudio){state.currentAudio.pause();state.currentAudio=null;}
   app.innerHTML=`<div class="shell">${topbar()}<section class="intro-screen"><h1 class="intro-greeting"><span data-typewriter>Ciao Gaia!</span><span class="intro-question"><span data-typewriter>che</span>${homeCarousel()}<span data-typewriter>film</span></span><span data-typewriter>vediamo oggi?</span></h1><button class="intro-start" data-action="categories">Cominciamo <svg class="return-glyph" aria-hidden="true" viewBox="0 0 20.35 16.2"><path fill="currentColor" d="M6.07,16.2L0,10.23l6.07-5.97v11.94ZM4.13,11.68v-2.89h16.16v2.89H4.13ZM12.6,2.93V0h7.69v2.93h-7.69ZM17.46,11.68V0h2.89v11.68h-2.89Z"/></svg></button></section></div>`;
@@ -112,6 +114,7 @@ function renderIntro(){
 }
 
 function renderCategories(){
+  menuKeyboard.reset();
   state.category = null; state.session = null;
   if (state.currentAudio) { state.currentAudio.pause(); state.currentAudio = null; }
   app.innerHTML = `<div class="shell">${topbar()}<div class="hero-center category-screen"><div class="category-grid">
@@ -148,6 +151,7 @@ function buildFilteredTitles(){
 
 async function startSession(category,titleId=null){
   if(state.navigating)return;
+  menuKeyboard.reset();
   state.category=category;buildFilteredTitles();
   if(!state.filteredTitles.length){renderEmpty();return;}
   state.navigating=true;
@@ -417,6 +421,7 @@ document.addEventListener('keydown', async e => {
   }
 });
 
+const menuKeyboard=initMenuKeyboard({app,state,syncFilters:()=>{syncFilterIndicator();const mute=app.querySelector('[data-action="mute"]');if(mute)mute.outerHTML=muteButton();}});
 initCatalogSearch({app,state,topbar,startSession});
 const cameraMode=initCameraMode({app,isMuted:()=>state.muted,onStart:()=>renderCategories()});
 initFeatures({ app, state, loadData, renderCategories, startSession, call, deviceId, topbar });
