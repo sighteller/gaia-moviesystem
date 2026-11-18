@@ -308,3 +308,5 @@ kbd { font:500 13px Inter,sans-serif; display:inline-grid; place-items:center; m
 .camera-position{border-bottom:1px solid #465139;padding:10px 0}
 .camera-panel .camera-position-note{font-size:11px;color:var(--muted)}
 .camera-panel button:disabled{opacity:.45;cursor:default}
+
+#app .keyboard-selected{background:var(--accent)!important;color:#17200c!important;border-color:var(--accent)!important;outline:2px solid var(--accent);outline-offset:2px}
