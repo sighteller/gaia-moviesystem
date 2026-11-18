@@ -6,6 +6,7 @@ export function initCameraMode({app,isMuted,onStart}){
  panel.innerHTML='<div class="camera-panel-head"><strong>Modalità webcam</strong><button type="button" data-camera-stop aria-label="Disattiva webcam">×</button></div><div class="camera-preview"><video autoplay muted playsinline aria-label="Anteprima webcam"></video><div class="camera-position-guide" hidden aria-hidden="true"></div></div><section class="camera-position"><strong>Posizionamento</strong><p data-position-status role="status"></p><button type="button" data-position-save disabled>Memorizza posizione</button> <button type="button" data-position-reset hidden>Cancella riferimento</button><p class="camera-position-note">Solo misure salvate in questo browser, senza foto o video. Rifai il riferimento se sposti la webcam. Non occorre tenere la testa dritta.</p></section><div class="camera-reading"><span>Risposta in tempo reale</span><strong data-camera-signal>In attesa</strong></div><p data-camera-question aria-live="polite"></p><p data-camera-status role="status"></p><button type="button" data-camera-repeat>Ripeti domanda</button><details open><summary>Calibrazione dei gesti</summary><p>Mantieni ciascuna posizione per circa un secondo dopo il clic.</p><div class="camera-calibration">'+[['rest','Riposo'],['yes','Sì'],['no','No']].map(([key,label])=>'<button type="button" data-camera-sample="'+key+'">'+label+'</button>').join('')+'</div><p data-camera-counts></p><button type="button" data-camera-save>Salva esempi nel browser</button><button type="button" data-camera-reset>Ricomincia calibrazione</button><p>Riconoscimento sperimentale. I gesti vanno calibrati sulla postura di oggi. Nessuna registrazione o invio del video.</p></details>';
  document.body.append(panel);
  const video=panel.querySelector('video'),signal=panel.querySelector('[data-camera-signal]'),status=panel.querySelector('[data-camera-status]'),question=panel.querySelector('[data-camera-question]'),gate=new GestureGate(),flow=new CameraStartFlow();
+ let restoreKeyboardFocus=false;
  let enabled=false,loading=false,version=0,stream=null,detector=null,frame=null,capture=null,samples=normalizeSamples(),lastRun=-Infinity,lastFrame=-1,wasIntro=false;
  const positionStatus=panel.querySelector('[data-position-status]'),positionButton=panel.querySelector('[data-position-save]'),positionReset=panel.querySelector('[data-position-reset]'),guide=panel.querySelector('.camera-position-guide'),preview=panel.querySelector('.camera-preview');
  let reference=null,positionCapture=null,lastBounds=null,readySince=null;
@@ -45,15 +46,19 @@ export function initCameraMode({app,isMuted,onStart}){
  drawReference();positionText(reference?'Riferimento salvato. Attiva la webcam per controllare la posizione.':'Attiva la webcam, poi memorizza la posizione comoda.');
  const labels={yes:'Sì',no:'No',rest:'Riposo',uncertain:'Incerto',uncalibrated:'Da calibrare',missing:'Viso non disponibile'};
  const tell=text=>{if(status.textContent!==text)status.textContent=text;};
- const sync=()=>{app.querySelectorAll('[data-action="camera"]').forEach(b=>{b.classList.toggle('active',enabled||loading);b.setAttribute('aria-pressed',String(enabled||loading));b.setAttribute('aria-label',enabled||loading?'Disattiva webcam':'Attiva webcam');});
+ const sync=()=>{app.querySelectorAll('[data-action="camera"]').forEach(b=>{b.classList.toggle('active',enabled||loading);b.setAttribute('aria-pressed',String(enabled||loading));b.setAttribute('aria-label',enabled||loading?'Disattiva webcam':'Attiva webcam');b.title=enabled||loading?'Disattiva webcam':'Attiva webcam';});
   const bar=app.querySelector('.topbar');if(bar)panel.style.top=Math.max(8,bar.getBoundingClientRect().bottom+8)+'px';};
  function counts(){panel.querySelector('[data-camera-counts]').textContent='Riposo: '+samples.rest.length+' · Sì: '+samples.yes.length+' · No: '+samples.no.length;}
  function speak(text){if(isMuted()||!('speechSynthesis' in window))return;window.speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(text);utterance.lang='it-IT';window.speechSynthesis.speak(utterance);}
  function ask(){question.textContent='Ciao Gaia! Vuoi cominciare?';gate.reset();speak(question.textContent);}
+ function returnCameraFocus(){
+  const button=app.querySelector('[data-action="camera"]');
+  if(button&&restoreKeyboardFocus&&(document.activeElement===document.body||document.activeElement===button||panel.contains(document.activeElement)))button.focus({preventScroll:true});
+ }
  function stop(message=''){
   version++;enabled=false;loading=false;flow.stop();capture=null;positionCapture=null;lastBounds=null;readySince=null;positionButton.disabled=true;guide.classList.remove('ready');gate.reset();if(frame!==null)cancelAnimationFrame(frame);frame=null;
   stream?.getTracks().forEach(t=>t.stop());stream=null;video.pause();video.srcObject=null;detector?.close();detector=null;
-  if('speechSynthesis' in window)window.speechSynthesis.cancel();panel.hidden=!message;signal.textContent='Webcam spenta';question.textContent='';tell(message);sync();
+  if('speechSynthesis' in window)window.speechSynthesis.cancel();panel.hidden=!message;signal.textContent='Webcam spenta';question.textContent='';tell(message);sync();returnCameraFocus();
  }
  async function start(){
   const ticket=++version;loading=true;panel.hidden=false;question.textContent='';tell('Consenti l’accesso alla webcam. Il microfono non viene usato.');sync();
@@ -68,7 +73,7 @@ export function initCameraMode({app,isMuted,onStart}){
    const model=await FaceLandmarker.createFromOptions(files,{baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task'},runningMode:'VIDEO',numFaces:2,minFaceDetectionConfidence:.65,minFacePresenceConfidence:.65,minTrackingConfidence:.65});
    if(ticket!==version){model.close();return;}detector=model;loading=false;enabled=true;lastFrame=-1;lastRun=-Infinity;gate.reset();
    stream.getVideoTracks().forEach(t=>t.addEventListener('ended',()=>{if(enabled)stop('La webcam è stata scollegata. Puoi riattivarla.');},{once:true}));
-   flow.start(performance.now());question.textContent='Tra 5 secondi ti chiederò se vuoi cominciare.';counts();tell('Calibra riposo, sì e no prima di rispondere.');sync();frame=requestAnimationFrame(tick);
+   flow.start(performance.now());question.textContent='Tra 5 secondi ti chiederò se vuoi cominciare.';counts();tell('Calibra riposo, sì e no prima di rispondere.');sync();returnCameraFocus();frame=requestAnimationFrame(tick);
   }catch(error){if(ticket===version)stop(error.name==='NotAllowedError'?'Accesso alla webcam negato. Consenti l’accesso e premi di nuovo la videocamera.':error.name==='NotFoundError'?'Nessuna webcam disponibile.':error.name==='NotReadableError'?'La webcam è occupata da un’altra applicazione.':('Impossibile avviare la webcam: '+error.message));}
  }
  function tick(now){
@@ -113,7 +118,7 @@ export function initCameraMode({app,isMuted,onStart}){
   if(b.hasAttribute('data-camera-reset')){samples=normalizeSamples();capture=null;gate.reset();counts();tell('Calibrazione azzerata. Aggiungi riposo, sì e no.');}
   if(b.hasAttribute('data-camera-save')){try{localStorage.setItem('gaia_movement_examples_v1',JSON.stringify({version:1,samples,date:new Date().toISOString()}));tell('Esempi salvati solo in questo browser. Nessuna immagine salvata.');}catch{tell('Non riesco a salvare gli esempi in questo browser.');}}
  });
- app.addEventListener('click',e=>{if(e.target.closest('[data-action="camera"]')){if(enabled||loading)stop();else start();}});
+ app.addEventListener('click',e=>{if(e.target.closest('[data-action="camera"]')){restoreKeyboardFocus=e.detail===0;if(enabled||loading)stop();else start();}});
  const observer=new MutationObserver(()=>{sync();const intro=!!app.querySelector('.intro-screen');if(enabled&&intro&&!wasIntro){flow.start(performance.now());gate.reset();question.textContent='Tra 5 secondi ti chiederò se vuoi cominciare.';}wasIntro=intro;});observer.observe(app,{childList:true,subtree:true});
  window.addEventListener('resize',sync);
  document.addEventListener('visibilitychange',()=>{capture=null;if(positionCapture&&enabled){flow.start(performance.now());question.textContent='Memorizzazione interrotta. Puoi riprovare.';}positionCapture=null;lastBounds=null;readySince=null;positionButton.disabled=true;guide.classList.remove('ready');gate.reset();if(document.hidden){signal.textContent='In pausa';}});
