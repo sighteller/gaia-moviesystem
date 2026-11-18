@@ -93,13 +93,26 @@ async function resumeSessionIfAny() {
   return true;
 }
 
+let homeRanking=[],homeRankingAt=0,homeRankingRequest=null;
+async function refreshHomeRanking(){
+  if(homeRankingRequest||Date.now()-homeRankingAt<60000)return homeRankingRequest;
+  homeRankingRequest=call('stats').then(data=>{
+    homeRanking=(data.favorites||[]).filter(row=>row.period==='week'&&row.count>0).sort((a,b)=>a.rank-b.rank).map(row=>row.titleId);
+    homeRankingAt=Date.now();
+    const current=app.querySelector('.intro-screen .home-carousel');
+    if(current)current.outerHTML=homeCarousel();
+  }).catch(error=>{console.error('Classifica homepage non disponibile',error);}).finally(()=>{homeRankingRequest=null;});
+  return homeRankingRequest;
+}
 function homeCarousel(){
-  const films=state.titles.filter(t=>t.media_type==='movie'&&/^https:\/\//.test(titleImage(t))).slice(0,5);
+  const byId=new Map(state.titles.map(t=>[t.id,t]));
+  const films=homeRanking.map(id=>byId.get(id)).filter(t=>t&&t.active!==false&&t.media_type==='movie'&&/^https:\/\//.test(titleImage(t))).slice(0,5);
   return `<div class="home-carousel" aria-hidden="true">${films.map((t,i)=>`<div class="home-carousel-card" style="--slot:${i}"><img src="${escapeHtml(titleImage(t))}" alt="" draggable="false"></div>`).join('')}</div>`;
 }
 
 function renderIntro(){
   menuKeyboard.reset();
+  refreshHomeRanking();
   state.category=null;state.session=null;
   if(state.currentAudio){state.currentAudio.pause();state.currentAudio=null;}
   app.innerHTML=`<div class="shell">${topbar()}<section class="intro-screen"><h1 class="intro-greeting"><span data-typewriter>Ciao Gaia!</span><span class="intro-question"><span data-typewriter>che</span>${homeCarousel()}<span data-typewriter>film</span></span><span data-typewriter>vediamo oggi?</span></h1><button class="intro-start" data-action="categories">Cominciamo <svg class="return-glyph" aria-hidden="true" viewBox="0 0 20.35 16.2"><path fill="currentColor" d="M6.07,16.2L0,10.23l6.07-5.97v11.94ZM4.13,11.68v-2.89h16.16v2.89H4.13ZM12.6,2.93V0h7.69v2.93h-7.69ZM17.46,11.68V0h2.89v11.68h-2.89Z"/></svg></button></section></div>`;
@@ -133,7 +146,7 @@ app.addEventListener('pointerover',e=>{const b=e.target.closest('.category-card'
 app.addEventListener('focusin',e=>{const b=e.target.closest('.category-card');if(b)chooseCategory(b);});
 
 function renderFilters(){
-  const chips = state.platforms.map(p => `<button class="chip ${state.selectedPlatformIds.includes(p.id)?'selected':''}" data-platform-filter="${p.id}">${escapeHtml(p.name)}</button>`).join('');
+  const chips = state.platforms.map(p => `<button class="chip ${state.selectedPlatformIds.includes(p.id)?'selected':''}" aria-pressed="${state.selectedPlatformIds.includes(p.id)}" data-platform-filter="${p.id}">${escapeHtml(p.name)}</button>`).join('');
   app.insertAdjacentHTML('beforeend', `<div class="platform-panel" data-overlay="filters"><div class="platform-box"><h2>Filtri</h2><p>Mostra solo i titoli disponibili su almeno una delle piattaforme selezionate.</p><div class="chips">${chips}</div><button class="ghost-btn" data-action="close-filters">Fatto</button></div></div>`);
 }
 
@@ -319,6 +332,7 @@ async function finalize(mode){
   });
   if(state.session?.id!==sessionId)return;
   state.session = null;
+  homeRankingAt=0;
   renderPlatformSummary(mode,p);
 
 }
@@ -368,7 +382,7 @@ app.addEventListener('click', async e => {
     const id = b.dataset.platformFilter;
     const i = state.selectedPlatformIds.indexOf(id);
     if (i >= 0) state.selectedPlatformIds.splice(i, 1); else state.selectedPlatformIds.push(id);
-    savePlatformFilter(); b.classList.toggle('selected'); return;
+    savePlatformFilter(); const selected=state.selectedPlatformIds.includes(id);b.classList.toggle('selected',selected);b.setAttribute('aria-pressed',String(selected)); return;
   }
   if (b.dataset.category) return startSession(b.dataset.category);
   if (b.dataset.action === 'categories') return renderCategories();
