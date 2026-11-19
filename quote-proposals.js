@@ -3817,7 +3817,21 @@ export const quoteProposals = [
       "excerpt": false
     }
   ]
-}
+},
+  {
+    "names": [
+      "Valzer con Bashir"
+    ],
+    "year": 2008,
+    "options": [
+      {
+        "text": "Era peggio di LSD andato a male",
+        "speaker": "Ari Folman",
+        "source": "https://www.mymovies.it/film/2008/valzerconbashir/frasi/",
+        "excerpt": false
+      }
+    ]
+  }
 ];
 const normalize = value => String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
 export function proposalsFor(title) {
