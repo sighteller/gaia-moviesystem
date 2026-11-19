@@ -32,3 +32,11 @@ Il mittente effettivo è sempre l'account proprietario che autorizza lo script. 
 Da un checkout già disponibile con Node: `node tests/gmail-notifications.test.mjs`. Usa solo simulazioni: nessuna email reale, nessuna dipendenza aggiuntiva.
 
 Fonti ufficiali: [Web app](https://developers.google.com/apps-script/guides/web), [MailApp](https://developers.google.com/apps-script/reference/mail/mail-app), [quote](https://developers.google.com/apps-script/guides/services/quotas).
+
+## Segnalazioni di errore
+
+Il modulo usa lo stesso destinatario delle richieste film. Il nuovo formato firmato include nome, schermata e descrizione, e la notifica ha oggetto «Gaia: nuova segnalazione di errore». Il formato delle richieste film resta supportato.
+
+Aggiornare Code.gs nel progetto Apps Script esistente, poi creare una nuova versione del deployment web attivo mantenendo l'URL, le proprietà e i permessi attuali. Un GET all'URL /exec della versione aggiornata include `reportVersion: 2` e non invia email.
+
+Prima di pubblicare il modulo, applicare la migrazione `20261119090000_gaia_error_reports.sql` e distribuire image-curator. Se il provider non conferma l'invio, la segnalazione rimane nella tabella `gaia_error_reports`, consultabile dall'amministratore.

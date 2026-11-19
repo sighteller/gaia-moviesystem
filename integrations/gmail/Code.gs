@@ -24,23 +24,31 @@ function sendGaiaTestEmail(){
  MailApp.sendEmail({to:c.recipient,subject:'Gaia: email di prova',body:'Le notifiche delle richieste film di Gaia sono configurate.\n\nCatalogo: https://sighteller.github.io/gaia-moviesystem/disponibilita.html',name:'Gaia | Movie System'});
  return 'Email di prova inviata.';
 }
-function doGet(){return json_({ok:false,error:'Usare una richiesta POST firmata.'});}
+function doGet(){return json_({ok:false,reportVersion:2,error:'Usare una richiesta POST firmata.'});}
 function doPost(e){
  var lock=null;
  try{
   var body=e&&e.postData&&e.postData.contents;
-  if(typeof body!=='string'||body.length>4000)return json_({ok:false,error:'Richiesta non valida.'});
+  if(typeof body!=='string'||body.length>27000)return json_({ok:false,error:'Richiesta non valida.'});
   var request=JSON.parse(body),p=request.payload,secret=PropertiesService.getScriptProperties().getProperty('GAIA_MAIL_SECRET');
-  if(!Array.isArray(p)||p.length!==4||p[0]!==1||typeof p[1]!=='string'||!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(p[1])||typeof p[2]!=='string'||!p[2].trim()||p[2].length>300||!Number.isSafeInteger(p[3])||typeof secret!=='string'||!/^[a-f0-9]{64}$/i.test(secret))return json_({ok:false,error:'Richiesta non valida.'});
-  var age=Math.floor(Date.now()/1000)-p[3];
+  if(!Array.isArray(p)||typeof secret!=='string'||!/^[a-f0-9]{64}$/i.test(secret)||typeof p[1]!=='string'||!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(p[1]))return json_({ok:false,error:'Richiesta non valida.'});
+  var validText=function(text,min,max){return typeof text==='string'&&text.trim().length>=min&&text.length<=max;};
+  var report=p[0]===2&&p.length===6&&validText(p[2],1,100)&&validText(p[3],1,180)&&validText(p[4],10,4000);
+  var film=p[0]===1&&p.length===4&&validText(p[2],1,300);
+  var timestamp=p[p.length-1];
+  if(!(report||film)||!Number.isSafeInteger(timestamp))return json_({ok:false,error:'Richiesta non valida.'});
+  var age=Math.floor(Date.now()/1000)-timestamp;
   if(age>300||age< -60||!same_(signature_(p,secret),request.signature))return json_({ok:false,error:'Richiesta non autorizzata.'});
   var c=configuration_();
   lock=LockService.getScriptLock();
   if(!lock.tryLock(10000))return json_({ok:false,error:'Invio da riprovare.'});
-  var ledgerKey='GAIA_SENT_'+p[1].toLowerCase();
+  var ledgerKey=(report?'GAIA_REPORT_SENT_':'GAIA_SENT_')+p[1].toLowerCase();
   if(c.properties.getProperty(ledgerKey))return json_({ok:true,duplicate:true});
   if(MailApp.getRemainingDailyQuota()<1)return json_({ok:false,error:'Quota giornaliera terminata.'});
-  MailApp.sendEmail({to:c.recipient,subject:'Gaia: nuovo titolo richiesto',body:'È stato richiesto: '+p[2]+'\n\nApri il catalogo: https://sighteller.github.io/gaia-moviesystem/disponibilita.html',name:'Gaia | Movie System'});
+  var subject=report?'Gaia: nuova segnalazione di errore':'Gaia: nuovo titolo richiesto';
+  var message=report?'Nome: '+p[2]+'\nPagina: '+p[3]+'\n\nProblema:\n'+p[4]+'\n\nRiferimento: '+p[1]
+    :'È stato richiesto: '+p[2]+'\n\nApri il catalogo: https://sighteller.github.io/gaia-moviesystem/disponibilita.html';
+  MailApp.sendEmail({to:c.recipient,subject:subject,body:message,name:'Gaia | Movie System'});
   c.properties.setProperty(ledgerKey,String(Date.now()));
   return json_({ok:true,duplicate:false});
  }catch(error){return json_({ok:false,error:'Notifica non inviata. Verificare autorizzazione e configurazione.'});}
