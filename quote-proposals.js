@@ -4208,6 +4208,104 @@ export const quoteProposals = [
         "source": "https://it.wikiquote.org/wiki/Una_notte_al_museo"
       }
     ]
+  },
+  {
+    "names": [
+      "Dilili a Parigi"
+    ],
+    "year": 2018,
+    "options": [
+      {
+        "text": "Io sono lieta di conoscervi",
+        "speaker": "Dilili",
+        "excerpt": false,
+        "source": "https://www.mymovies.it/film/2018/dilili-a-parigi/frasi/"
+      }
+    ]
+  },
+  {
+    "names": [
+      "Le avventure del topino Despereaux"
+    ],
+    "year": 2008,
+    "options": [
+      {
+        "text": "C'era una volta... come se lo dovessi scoprire tu",
+        "speaker": "Despereaux",
+        "excerpt": false,
+        "source": "https://www.mymovies.it/film/2008/le-avventure-del-topino-despereaux/frasi/"
+      }
+    ]
+  },
+  {
+    "names": [
+      "Zathura - Un'avventura spaziale"
+    ],
+    "year": 2005,
+    "options": [
+      {
+        "text": "non è una capra, non è una capra, NON È UNA CAPRA!",
+        "speaker": "Danny",
+        "excerpt": true,
+        "source": "https://www.mymovies.it/film/2005/zathura-unavventura-spaziale/frasi/"
+      }
+    ]
+  },
+  {
+    "names": [
+      "Racconti incantati"
+    ],
+    "year": 2008,
+    "options": [
+      {
+        "text": "Sarò come la vostra puzza di piedi, inseparabile!",
+        "speaker": "Skeeter Bronson",
+        "excerpt": false,
+        "source": "https://www.mymovies.it/film/2008/racconti-incantati/frasi/"
+      }
+    ]
+  },
+  {
+    "names": [
+      "StreetDance 3D"
+    ],
+    "year": 2010,
+    "options": [
+      {
+        "text": "Siete qui per imparare? Io direi il contrario!",
+        "speaker": "Carly",
+        "excerpt": false,
+        "source": "https://www.mymovies.it/film/2010/streetdance3d/frasi/"
+      }
+    ]
+  },
+  {
+    "names": [
+      "New York Academy - Freedance"
+    ],
+    "year": 2018,
+    "options": [
+      {
+        "text": "Quando il pubblico si siede e le luci si spengono per un attimo anche il tempo si ferma in attesa che la magia abbia inizio.",
+        "speaker": "Zander",
+        "excerpt": false,
+        "source": "https://www.mymovies.it/film/2018/high-strung-free-dance/frasi/"
+      }
+    ]
+  },
+  {
+    "names": [
+      "Kubo e la spada magica"
+    ],
+    "year": 2016,
+    "options": [
+      {
+        "text": "Se devi battere le palpebre, fallo ora.",
+        "speaker": "Kubo",
+        "excerpt": false,
+        "source": "https://filmora.wondershare.it/more-tips/film-stop-motion.html"
+      }
+    ]
   }
 ];
 const normalize = value => String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
