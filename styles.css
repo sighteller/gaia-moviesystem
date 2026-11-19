@@ -321,3 +321,8 @@ kbd { font:500 13px Inter,sans-serif; display:inline-grid; place-items:center; m
 
 /* Keep proposal labels clearly separated from film controls at every title length. */
 .movie-copy { margin-bottom:24px; }
+
+.request-title-section{margin-top:20px;border-color:var(--accent)!important}
+#title-import [data-availability][hidden]{display:none}
+#import-button[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
+#import-hint{min-height:1.5em;margin:0;font-size:14px}
