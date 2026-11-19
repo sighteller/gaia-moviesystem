@@ -9,7 +9,7 @@ export function initMenuKeyboard({app,state,syncFilters}){
  function menu(){const bs=buttons();focus(bs.find(b=>b.dataset.action===lastAction)||bs[0]);}
  function content(){
   clearHighlight();
-  const target=app.querySelector('.movie-stage,.category-card.preselected,.mode-card.preselected,.intro-start,.catalog-search input,.statistics-screen button,.curator input,.curator button');
+  const target=app.querySelector('.movie-stage,.viewing-screen,.category-card.preselected,.mode-card.preselected,.intro-start,.catalog-search input,.statistics-screen button,.curator input,.curator button');
   target?.focus({preventScroll:true});
  }
  function restore(){
