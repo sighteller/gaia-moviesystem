@@ -1,4 +1,5 @@
-import {initMenuKeyboard} from './menu-keyboard.js?v=20261118camera-toggle';
+import {initViewing} from './viewing.js?v=20261119';
+import {initMenuKeyboard} from './menu-keyboard.js?v=20261119viewing';
 import {initCameraMode} from './camera-mode.js?v=20261118toggle';
 import {initStatistics} from './statistics.js?v=20261112rankings';
 import {initCatalogSearch} from './catalog-search.js?v=20261112studios';
@@ -70,7 +71,7 @@ let viewingCheck=null, viewingReturnPending=false;
 async function checkInterruptedViewing() {
   if(savingChoice){viewingReturnPending=true;return;}
   if(viewingCheck)return viewingCheck;
-  viewingCheck=call('checkViewing',{deviceId:deviceId()});
+  viewingCheck=viewingController.refresh();
   try{return await viewingCheck;}finally{viewingCheck=null;}
 }
 function handleViewingReturn(){
@@ -111,6 +112,7 @@ function homeCarousel(){
 }
 
 function renderIntro(){
+  if(viewingController.isActive()){viewingController.show();return;}
   menuKeyboard.reset();
   refreshHomeRanking();
   state.category=null;state.session=null;
@@ -163,6 +165,7 @@ function buildFilteredTitles(){
 }
 
 async function startSession(category,titleId=null){
+  if(viewingController.isActive()){viewingController.show();return;}
   if(state.navigating)return;
   menuKeyboard.reset();
   state.category=category;buildFilteredTitles();
@@ -302,8 +305,7 @@ function renderPlatformSummary(mode,savedPlatform=null){
   const t=currentTitle();const ps=availablePlatformsForTitle(t);const count=state.consultation.titleIds.length;
   const link=savedPlatform?state.links.find(l=>l.title_id===t.id&&l.platform_id===savedPlatform.id):null;
   const url=platformUrl(link?.url);
-  const quote=effectiveQuote(t,state.quotes);
-  app.innerHTML=`<div class="shell">${topbar()}<div class="hero-center"><div class="empty choice-result"><h2 class="film-quote">${quote?`«${escapeHtml(quote.text)}»`:escapeHtml(standardQuote)}</h2><p class="quote-attribution">${quote?.speaker?`${escapeHtml(quote.speaker)} · `:''}${escapeHtml(t.name)}${quote?.source?` <a class="quote-source" href="${escapeHtml(quote.source)}" target="_blank" rel="noopener noreferrer" aria-label="Fonte della citazione">↗</a>`:''}</p><p class="choice-counter">${choiceMessageHtml(count)}</p><h3>Dove lo guardiamo?</h3><div class="platform-list">${ps.map((p,i)=>{const href=platformUrl(state.links.find(l=>l.title_id===t.id&&l.platform_id===p.id)?.url);const chosen=savedPlatform?.id===p.id;const label=`${escapeHtml(p.name)} <kbd>${i+1}</kbd>`;return href&&(!savedPlatform||chosen)?`<a class="platform-option ${chosen?'selected':''}" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none" data-choice-platform="${p.id}" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${label}</a>`:`<button class="platform-option ${chosen?'selected':''}" data-choice-platform="${p.id}" ${savedPlatform?'disabled':''}>${label}</button>`;}).join('')}</div><p class="choice-status" role="status"></p>${savedPlatform&&!url?'<p>Il collegamento diretto a questa piattaforma non è ancora configurato.</p>':''}<button class="ghost-btn" data-action="home">Torna a Gaia</button></div></div></div>`;
+  app.innerHTML=`<div class="shell">${topbar()}<div class="hero-center"><div class="empty choice-result"><h2 class="choice-message">${choiceMessageHtml(count)}</h2><p class="quote-attribution">${escapeHtml(t.name)}</p><h3>Dove lo guardiamo?</h3><div class="platform-list">${ps.map((p,i)=>{const href=platformUrl(state.links.find(l=>l.title_id===t.id&&l.platform_id===p.id)?.url);const chosen=savedPlatform?.id===p.id;const label=`${escapeHtml(p.name)} <kbd>${i+1}</kbd>`;return href&&(!savedPlatform||chosen)?`<a class="platform-option ${chosen?'selected':''}" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none" data-choice-platform="${p.id}" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${label}</a>`:`<button class="platform-option ${chosen?'selected':''}" data-choice-platform="${p.id}" ${savedPlatform?'disabled':''}>${label}</button>`;}).join('')}</div><p class="choice-status" role="status"></p>${savedPlatform&&!url?'<p>Il collegamento diretto a questa piattaforma non è ancora configurato.</p>':''}<button class="ghost-btn" data-action="home">Torna a Gaia</button></div></div></div>`;
 }
 
 function renderMode(){
@@ -333,7 +335,7 @@ async function finalize(mode){
   if(state.session?.id!==sessionId)return;
   state.session = null;
   homeRankingAt=0;
-  renderPlatformSummary(mode,p);
+  await viewingController.refresh(true);
 
 }
 
@@ -435,6 +437,7 @@ document.addEventListener('keydown', async e => {
   }
 });
 
+const viewingController=initViewing({app,state,call,deviceId,topbar,onHome:()=>{menuKeyboard.reset();renderIntro();}});
 const menuKeyboard=initMenuKeyboard({app,state,syncFilters:()=>{syncFilterIndicator();const mute=app.querySelector('[data-action="mute"]');if(mute)mute.outerHTML=muteButton();}});
 initCatalogSearch({app,state,topbar,startSession});
 const cameraMode=initCameraMode({app,isMuted:()=>state.muted,onStart:()=>renderCategories()});
