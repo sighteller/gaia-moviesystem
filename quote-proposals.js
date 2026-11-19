@@ -3849,6 +3849,12 @@ export const quoteProposals = [
         "speaker": "Pod",
         "excerpt": false,
         "source": "https://it.wikiquote.org/wiki/Arrietty_-_Il_mondo_segreto_sotto_il_pavimento"
+      },
+      {
+        "text": "Non sono affatto dei ladri, sono \"prendimprestito\".",
+        "speaker": "Shō",
+        "excerpt": true,
+        "source": "https://it.wikiquote.org/wiki/Arrietty_-_Il_mondo_segreto_sotto_il_pavimento"
       }
     ]
   },
@@ -3861,6 +3867,18 @@ export const quoteProposals = [
       {
         "text": "Il bacio del vero amore è la cosa più potente al mondo.",
         "speaker": "Giselle",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/Come_d%27incanto"
+      },
+      {
+        "text": "No, è proprio un giorno. E domani saranno due giorni!",
+        "speaker": "Giselle",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/Come_d%27incanto"
+      },
+      {
+        "text": "Quando la trovi, le chiedi se ha una sorella?",
+        "speaker": "Operaio",
         "excerpt": false,
         "source": "https://it.wikiquote.org/wiki/Come_d%27incanto"
       }
@@ -3903,6 +3921,12 @@ export const quoteProposals = [
         "speaker": "Crudelia De Mon",
         "excerpt": false,
         "source": "https://it.wikiquote.org/wiki/La_carica_dei_101"
+      },
+      {
+        "text": "Prima il motivo, mia cara, e poi le parole!",
+        "speaker": "Rudy",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/La_carica_dei_101"
       }
     ]
   },
@@ -3915,6 +3939,18 @@ export const quoteProposals = [
       {
         "text": "Demolire le cose vecchie non è forse lo stesso che buttare via le memorie del passato?",
         "speaker": "Shun",
+        "excerpt": true,
+        "source": "https://it.wikiquote.org/wiki/La_collina_dei_papaveri"
+      },
+      {
+        "text": "Non c'è felicità pari a questa.",
+        "speaker": "Onodera",
+        "excerpt": true,
+        "source": "https://it.wikiquote.org/wiki/La_collina_dei_papaveri"
+      },
+      {
+        "text": "Senti un po'... e di fare le pulizie che ne diresti?",
+        "speaker": "Mer",
         "excerpt": true,
         "source": "https://it.wikiquote.org/wiki/La_collina_dei_papaveri"
       }
@@ -3937,6 +3973,12 @@ export const quoteProposals = [
         "speaker": "Tito",
         "excerpt": false,
         "source": "https://it.wikiquote.org/wiki/Oliver_%26_Company"
+      },
+      {
+        "text": "Il mio nome è Francis. Francis. Non Frank, né Francisco. Francis.",
+        "speaker": "Francis",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/Oliver_%26_Company"
       }
     ]
   },
@@ -3948,6 +3990,18 @@ export const quoteProposals = [
     "options": [
       {
         "text": "Fermo lì. A B C, per di qui, per di lì.",
+        "speaker": "Eglantine Price",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/Pomi_d%27ottone_e_manici_di_scopa"
+      },
+      {
+        "text": "Impossibile vi sento già dire! Ora vedremo!",
+        "speaker": "Emelius Browne",
+        "excerpt": true,
+        "source": "https://it.wikiquote.org/wiki/Pomi_d%27ottone_e_manici_di_scopa"
+      },
+      {
+        "text": "Lo sarà davvero se non mi presta attenzione!",
         "speaker": "Eglantine Price",
         "excerpt": false,
         "source": "https://it.wikiquote.org/wiki/Pomi_d%27ottone_e_manici_di_scopa"
@@ -3971,6 +4025,12 @@ export const quoteProposals = [
         "speaker": "Anna",
         "excerpt": false,
         "source": "https://it.wikiquote.org/wiki/Quando_c%27era_Marnie"
+      },
+      {
+        "text": "Tu sei il mio prezioso segreto.",
+        "speaker": "Marnie",
+        "excerpt": true,
+        "source": "https://it.wikiquote.org/wiki/Quando_c%27era_Marnie"
       }
     ]
   },
@@ -3991,6 +4051,12 @@ export const quoteProposals = [
         "speaker": "Rio Morales",
         "excerpt": false,
         "source": "https://it.wikiquote.org/wiki/Spider-Man_-_Un_nuovo_universo"
+      },
+      {
+        "text": "A modo nostro, in fondo... siamo tutti Spider-Man.",
+        "speaker": "Mary Jane Watson",
+        "excerpt": true,
+        "source": "https://it.wikiquote.org/wiki/Spider-Man_-_Un_nuovo_universo"
       }
     ]
   },
@@ -4005,6 +4071,70 @@ export const quoteProposals = [
         "speaker": "Taki",
         "excerpt": false,
         "source": "https://it.wikiquote.org/wiki/Your_Name."
+      },
+      {
+        "text": "Ogni tanto, la mattina, quando mi sveglio, mi capita di ritrovarmi in lacrime.",
+        "speaker": "Mitsuha",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/Your_Name."
+      },
+      {
+        "text": "Questa sensazione si è impossessata di me da quel giorno.",
+        "speaker": "Mitsuha",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/Your_Name."
+      }
+    ]
+  },
+  {
+    "names": [
+      "Heidi"
+    ],
+    "year": 1974,
+    "options": [
+      {
+        "text": "Il vento può raccontare tante storie",
+        "speaker": "Nonno",
+        "excerpt": true,
+        "source": "https://it.wikiquote.org/wiki/Heidi_(serie_animata_1974)"
+      },
+      {
+        "text": "Molto spesso una buccia troppo dura nasconde un frutto tenero",
+        "speaker": "Parroco",
+        "excerpt": true,
+        "source": "https://it.wikiquote.org/wiki/Heidi_(serie_animata_1974)"
+      },
+      {
+        "text": "Sii indulgente, vecchio mio, tu sei più intelligente di loro.",
+        "speaker": "Parroco",
+        "excerpt": true,
+        "source": "https://it.wikiquote.org/wiki/Heidi_(serie_animata_1974)"
+      }
+    ]
+  },
+  {
+    "names": [
+      "A Week Away"
+    ],
+    "year": 2021,
+    "options": [
+      {
+        "text": "Prima regola: sempre avere un piano B.",
+        "speaker": "Will",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/A_Week_Away"
+      },
+      {
+        "text": "Mi piace l'odore del paintball al mattino!",
+        "speaker": "David",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/A_Week_Away"
+      },
+      {
+        "text": "l'amore è la risposta in un mare di domande",
+        "speaker": "Will",
+        "excerpt": true,
+        "source": "https://it.wikiquote.org/wiki/A_Week_Away"
       }
     ]
   }
