@@ -119,11 +119,13 @@ Deno.serve(async (req) => {
       return response({ ok: true });
     }
 
-    if (action === "checkViewing") {
-      if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(payload.deviceId || "")) return response({ error: "Invalid device" }, 400);
-      return response(await api("rpc/gaia_check_viewing", {
-        method: "POST", body: JSON.stringify({ target_device: payload.deviceId }),
-      }));
+    if (action === "checkViewing" || action === "stopViewing") {
+      const valid=x=>/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(x||"");
+      if(!valid(payload.deviceId)||(action==="stopViewing"&&!valid(payload.selectionId)))return response({error:"Invalid viewing"},400);
+      const key=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+      if(!key)return response({error:'Visione non disponibile'},503);
+      return response(await api('rpc/gaia_viewing_state',{method:'POST',headers:{apikey:key,Authorization:'Bearer '+key},
+        body:JSON.stringify({target_device:payload.deviceId,target_selection:payload.selectionId||null,stop_viewing:action==='stopViewing'})}));
     }
 
     if (action === "finalize") {
