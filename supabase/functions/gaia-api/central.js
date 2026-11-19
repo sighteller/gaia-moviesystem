@@ -79,6 +79,9 @@ export function createCentralHandler({rpc,catalog,now=()=>Date.now()}){
        if(loaded.session.status==='completed')return {ok:true,duplicate:true};
        const title=rootTitles.find(t=>t.id===p.titleId);
        if(!title||!loaded.session.enabled_platform_ids.includes(p.platformId)||!data.links.some(l=>l.title_id===p.titleId&&l.platform_id===p.platformId))throw Object.assign(new Error('Unavailable platform'),{status:400});
+       const priorViewing=await rpc('gaia_viewing_state',{target_device:p.deviceId});
+       const previous=model.choices.at(-1),closed=priorViewing.lastViewing;
+       if(previous&&closed?.dismissed&&closed.endedAt&&closed.sessionId===previous.sessionId)previous.expectedEndAt=closed.endedAt;
        const clicked=Date.parse(p.clickedAt);const at=Number.isFinite(clicked)&&Math.abs(clicked-now())<300000?clicked:now();const isNew=recordChoice(model,title,at);
        choice={titleId:p.titleId,platformId:p.platformId,mode:p.mode,at:new Date(at).toISOString(),isNew};
       }else throw Object.assign(new Error('Unknown action'),{status:400});
