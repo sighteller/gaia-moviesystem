@@ -1,5 +1,5 @@
 import { curate, normalizeMetadata } from './core.js';
-import { sendGmailNotification } from './gmail-mailer.js';
+import { sendGmailNotification, sendGmailErrorReport } from './gmail-mailer.js';
 const cors = {'Access-Control-Allow-Origin':'https://sighteller.github.io','Access-Control-Allow-Headers':'content-type,authorization,apikey','Access-Control-Allow-Methods':'POST,OPTIONS'};
 const url=Deno.env.get('SUPABASE_URL')!;
 const service=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || JSON.parse(Deno.env.get('SUPABASE_SECRET_KEYS')||'{}').default;
@@ -40,12 +40,55 @@ function checkFilmRequestRate(req:Request){
  if(++b.count>5)throw new HttpError(429,'Hai già inviato diverse richieste. Riprova tra qualche minuto.');
  if(filmRequestRates.size>1000)for(const [k,v] of filmRequestRates)if(now-v.start>600000)filmRequestRates.delete(k);
 }
+function reportText(value:unknown,min:number,max:number){
+  const text=typeof value==='string'?value.trim():'';
+  if([...text].length<min||text.length>max||text.includes('\u0000'))throw new HttpError(400,'Controlla il nome, la pagina e la descrizione.');
+  return text;
+}
+async function reportError(payload:Record<string,unknown>){
+  if(!payload||!validId(payload.id))throw new HttpError(400,'Segnalazione non valida.');
+  const id=payload.id as string;
+  const name=reportText(payload.name,1,100),page=reportText(payload.page,1,180),description=reportText(payload.description,10,4000);
+  const saved=await remote('rpc/submit_gaia_error_report',{method:'POST',body:JSON.stringify({report_id:id,name,page,problem:description})});
+  if(saved.conflict)throw new HttpError(409,'Il riferimento è già usato. Ricarica la pagina e riprova.');
+  if(saved.limited)throw new HttpError(429,'Troppe segnalazioni in poco tempo. Riprova più tardi.');
+  if(!saved.created)return {notification:saved.notification};
+
+  const gmailUrl=Deno.env.get('GMAIL_BRIDGE_URL'),gmailSecret=Deno.env.get('GMAIL_BRIDGE_SECRET');
+  const key=Deno.env.get('RESEND_API_KEY'),from=Deno.env.get('FILM_REQUEST_EMAIL_FROM'),to=Deno.env.get('FILM_REQUEST_EMAIL_TO');
+  const gmailSelected=!!(gmailUrl||gmailSecret);
+  if(!(gmailSelected?gmailUrl&&gmailSecret:key&&from&&to))return {notification:'pending'};
+
+  let notification='failed';
+  try {
+    if(gmailSelected){
+      await sendGmailErrorReport({url:gmailUrl!,secret:gmailSecret!,id,name,page,description});
+    }else{
+      const mail=await fetch('https://api.resend.com/emails',{
+        method:'POST',
+        headers:{Authorization:'Bearer '+key,'Content-Type':'application/json','Idempotency-Key':'gaia-error-report-'+id},
+        body:JSON.stringify({from,to:[to],subject:'Gaia: nuova segnalazione di errore',text:'Nome: '+name+'\nPagina: '+page+'\n\nProblema:\n'+description+'\n\nRiferimento: '+id}),
+        signal:AbortSignal.timeout(10000)
+      });
+      if(!mail.ok)throw Error('Invio email non riuscito');
+    }
+    notification='sent';
+  }catch{
+    // The report remains available to the owner when the email provider fails.
+  }
+  await remote('gaia_error_reports?id=eq.'+id,{method:'PATCH',body:JSON.stringify({notification})}).catch(()=>{});
+  return {notification};
+}
 const coverFields='id,title_id,tmdb_id,media_type,provider,url,preview_url,width,height,language';
 Deno.serve(async req=>{
   if(req.method==='OPTIONS')return new Response('ok',{headers:cors});
   if(req.method!=='POST')return reply({error:'Method not allowed'},405);
   try{
     const {action,payload={}}=await req.json();
+    if(action==='reportError'){
+      checkFilmRequestRate(req);
+      return reply(await reportError(payload));
+    }
     if(action==='status')return reply({tmdb:!!((await providerToken())||Deno.env.get('TMDB_API_KEY')),fanart:!!Deno.env.get('FANART_API_KEY')});
     if(action==='covers'){
       if(!validId(payload.titleId))throw new HttpError(400,'Titolo non valido.');

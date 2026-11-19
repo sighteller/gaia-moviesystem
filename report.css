@@ -1,0 +1,14 @@
+.report-footer { padding: 16px clamp(20px, 4vw, 56px) 24px; }
+.report-link { color: var(--muted); font-size: .875rem; text-underline-offset: .23em; }
+.report-link:hover, .report-link:focus-visible { color: var(--text); }
+.report-footer-app { position: fixed; inset: auto auto 0 0; z-index: 3; padding-bottom: max(14px, env(safe-area-inset-bottom)); }
+.report-footer-app .report-link { display: inline-block; background: var(--bg); border-radius: 6px; padding: 5px 8px; }
+.report-page { max-width: 690px; margin: 0 auto; padding: clamp(22px, 5vw, 52px) 22px; }
+.report-page h1 { margin: 30px 0 20px; font-size: clamp(30px, 6vw, 54px); line-height: 1.08; }
+.report-form { display: grid; gap: 19px; }
+.report-form label { display: grid; gap: 8px; font-weight: 650; }
+.report-form input, .report-form textarea { width: 100%; padding: 12px; font: inherit; color: var(--text); background: var(--panel); border: 1px solid var(--border); border-radius: 8px; }
+.report-form textarea { min-height: 150px; resize: vertical; }
+.report-form button { justify-self: start; }
+.report-page :focus-visible, .report-footer :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.report-hint { margin: 0; color: var(--muted); }

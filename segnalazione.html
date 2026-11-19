@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Segnala un errore · Gaia</title>
+  <link rel="stylesheet" href="styles.css?v=20261119badge-spacing">
+  <link rel="stylesheet" href="report.css?v=1">
+</head>
+<body>
+  <main class="report-page">
+    <a class="report-link" id="report-back" href="./">Torna a Gaia</a>
+    <h1>Segnala un errore</h1>
+    <form class="report-form" id="report-form">
+      <label>Nome di chi segnala
+        <input name="name" required maxlength="100" autocomplete="name">
+      </label>
+      <label>Pagina o schermata
+        <input name="page" required maxlength="180">
+      </label>
+      <label>Descrivi il problema
+        <textarea name="description" required minlength="10" maxlength="4000" aria-describedby="report-hint"></textarea>
+      </label>
+      <p class="report-hint" id="report-hint">Scrivi cosa stavi facendo, cosa ti aspettavi e cosa è successo. Evita password e altri dati riservati.</p>
+      <button class="primary" type="submit">Invia segnalazione</button>
+    </form>
+    <p id="report-status" role="status"></p>
+  </main>
+  <script type="module" src="error-report.js?v=1"></script>
+</body>
+</html>

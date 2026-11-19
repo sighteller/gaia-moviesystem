@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import {createHmac,webcrypto} from 'node:crypto';
 export async function verifyMailer(mailerSource,bridgeSource){
- const {sendGmailNotification}=await import('data:text/javascript;base64,'+Buffer.from(mailerSource).toString('base64'));
+ const {sendGmailNotification,sendGmailErrorReport}=await import('data:text/javascript;base64,'+Buffer.from(mailerSource).toString('base64'));
  const secret='a'.repeat(64), sent=[], props=new Map([['GAIA_MAIL_SENDER','sender@example.com'],['GAIA_MAIL_RECIPIENT','recipient@example.com'],['GAIA_MAIL_SECRET',secret]]);
  let quota=100,owner='sender@example.com',locked=false,tests=0;
  const context={PropertiesService:{getScriptProperties:()=>({getProperty:k=>props.get(k)||null,setProperty:(k,v)=>props.set(k,v)})},
@@ -27,6 +27,16 @@ export async function verifyMailer(mailerSource,bridgeSource){
  for(const url of ['http://script.google.com/macros/s/x/exec','https://evil.example/macros/s/x/exec','https://script.google.com/macros/s/x/dev','https://user:pass@script.google.com/macros/s/x/exec'])await assert.rejects(call({url},async()=>{throw Error('Should not fetch')}));tests++;
  await assert.rejects(call({},async()=>({ok:true,json:async()=>{throw Error('HTML login')}})));tests++;
  await assert.rejects(call({},async()=>({ok:false})));tests++;
+ const report={url:base.url,secret,id:base.titleId,name:'Anna',page:'Scelta del titolo',description:'Il player si blocca.\n'+ 'à'.repeat(3800)};
+ const notifyReport=()=>sendGmailErrorReport(report,{fetchFn,cryptoImpl:webcrypto});
+ assert.equal((await notifyReport()).sent,true);
+ assert.equal(sent[1].to,sent[0].to);
+ assert.equal(sent[1].subject,'Gaia: nuova segnalazione di errore');
+ for(const value of [report.name,report.page,report.description])assert.ok(sent[1].body.includes(value));tests++;
+ assert.equal((await notifyReport()).duplicate,true);assert.equal(sent.length,2);tests++;
+ const changedReport=structuredClone(envelope);changedReport.payload[4]='Descrizione modificata';
+ assert.equal(context.doPost({postData:{contents:JSON.stringify(changedReport)}}).ok,false);tests++;
+ assert.equal(context.doGet().reportVersion,2);
  assert.equal(context.doGet().ok,false);assert.equal(locked,false);tests++;
  return {passed:tests,emailsSimulated:sent.length,realEmailsSent:0};
 }
