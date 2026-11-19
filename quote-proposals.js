@@ -4137,6 +4137,77 @@ export const quoteProposals = [
         "source": "https://it.wikiquote.org/wiki/A_Week_Away"
       }
     ]
+  },
+  {
+    "names": [
+      "Lilo.&.Stitch.II.Che.disastro.Stitch"
+    ],
+    "year": null,
+    "options": [
+      {
+        "text": "Stitch no cattivo... Stitch coccoloso!",
+        "speaker": "Stitch",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/Lilo_%26_Stitch_2_-_Che_disastro_Stitch%21"
+      }
+    ]
+  },
+  {
+    "names": [
+      "Lilo.&.Stitch.III.Leroy.&.Stitch"
+    ],
+    "year": null,
+    "options": [
+      {
+        "text": "Mi hai già deluso abbondantemente, per ben 625 volte!",
+        "speaker": "Hamsterviel",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/Leroy_%26_Stitch"
+      }
+    ]
+  },
+  {
+    "names": [
+      "Lilo.&.Stitch.IV.Provaci.ancora.Stitch"
+    ],
+    "year": null,
+    "options": [
+      {
+        "text": "Non sono un gerbillo, sono un criceto!!",
+        "speaker": "Dr. Hamsterviel",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/Provaci_ancora%2C_Stitch%21"
+      }
+    ]
+  },
+  {
+    "names": [
+      "Tutti assieme appassionatamente"
+    ],
+    "year": null,
+    "options": [
+      {
+        "text": "Quando Iddio chiude una porta è sempre per aprirne un'altra.",
+        "speaker": "Maria",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/Tutti_insieme_appassionatamente"
+      }
+    ]
+  },
+  {
+    "names": [
+      "Una notte al museo 1 parte 1",
+      "Una notte al museo 1 parte 2"
+    ],
+    "year": null,
+    "options": [
+      {
+        "text": "Scemo scemo, dammi gomma gomma!",
+        "speaker": "Testa dell'Isola di Pasqua",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/Una_notte_al_museo"
+      }
+    ]
   }
 ];
 const normalize = value => String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
