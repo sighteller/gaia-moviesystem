@@ -318,3 +318,6 @@ kbd { font:500 13px Inter,sans-serif; display:inline-grid; place-items:center; m
 
 /* Focus is outlined; only an enabled webcam has a filled toggle. */
 #app [data-action="camera"].keyboard-selected[aria-pressed="false"]{background:#20241d!important;color:var(--text)!important}
+
+/* Keep proposal labels clearly separated from film controls at every title length. */
+.movie-copy { margin-bottom:24px; }
