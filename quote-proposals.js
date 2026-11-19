@@ -3831,6 +3831,182 @@ export const quoteProposals = [
         "excerpt": false
       }
     ]
+  },
+  {
+    "names": [
+      "Arietty - Il mondo segreto sotto il pavimento"
+    ],
+    "year": 2010,
+    "options": [
+      {
+        "text": "Papà, è divertente prendere in prestito.",
+        "speaker": "Arrietty",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/Arrietty_-_Il_mondo_segreto_sotto_il_pavimento"
+      },
+      {
+        "text": "Ci sono anche pericoli che si può evitare di sfidare.",
+        "speaker": "Pod",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/Arrietty_-_Il_mondo_segreto_sotto_il_pavimento"
+      }
+    ]
+  },
+  {
+    "names": [
+      "Come d'incanto"
+    ],
+    "year": 2007,
+    "options": [
+      {
+        "text": "Il bacio del vero amore è la cosa più potente al mondo.",
+        "speaker": "Giselle",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/Come_d%27incanto"
+      }
+    ]
+  },
+  {
+    "names": [
+      "Flashdance"
+    ],
+    "year": 1983,
+    "options": [
+      {
+        "text": "Tu sei così piccolo che per diventare più grande devi uscire fuori.",
+        "speaker": "Richie",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/Flashdance"
+      },
+      {
+        "text": "Chi rinuncia ai propri sogni è costretto a morire.",
+        "speaker": "Nick Hurley",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/Flashdance"
+      }
+    ]
+  },
+  {
+    "names": [
+      "La carica dei 101"
+    ],
+    "year": 1961,
+    "options": [
+      {
+        "text": "Ci rotoleremo tutti nella fuliggine e sembreremo dei terranova!",
+        "speaker": "Pongo",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/La_carica_dei_101"
+      },
+      {
+        "text": "Miseramente, cara! Come al solito, superbamente a pezzi!",
+        "speaker": "Crudelia De Mon",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/La_carica_dei_101"
+      }
+    ]
+  },
+  {
+    "names": [
+      "La collina dei papaveri"
+    ],
+    "year": 2011,
+    "options": [
+      {
+        "text": "Demolire le cose vecchie non è forse lo stesso che buttare via le memorie del passato?",
+        "speaker": "Shun",
+        "excerpt": true,
+        "source": "https://it.wikiquote.org/wiki/La_collina_dei_papaveri"
+      }
+    ]
+  },
+  {
+    "names": [
+      "Oliver & Company"
+    ],
+    "year": 1988,
+    "options": [
+      {
+        "text": "Il fortissimo duo è diventato un fortissimo assolo.",
+        "speaker": "Dodger",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/Oliver_%26_Company"
+      },
+      {
+        "text": "Aaah! Un alieno!",
+        "speaker": "Tito",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/Oliver_%26_Company"
+      }
+    ]
+  },
+  {
+    "names": [
+      "Pomi d'ottone e manici di scopa"
+    ],
+    "year": 1971,
+    "options": [
+      {
+        "text": "Fermo lì. A B C, per di qui, per di lì.",
+        "speaker": "Eglantine Price",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/Pomi_d%27ottone_e_manici_di_scopa"
+      }
+    ]
+  },
+  {
+    "names": [
+      "Quando c'era Marnie"
+    ],
+    "year": 2014,
+    "options": [
+      {
+        "text": "Senti, Marnie: ma tu chi saresti?",
+        "speaker": "Anna",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/Quando_c%27era_Marnie"
+      },
+      {
+        "text": "Non mi importa chi sia Marnie, io voglio aiutare Marnie.",
+        "speaker": "Anna",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/Quando_c%27era_Marnie"
+      }
+    ]
+  },
+  {
+    "names": [
+      "Spider-Man: Un nuovo universo"
+    ],
+    "year": 2018,
+    "options": [
+      {
+        "text": "Forse non sono io in ritardo, ma voi in anticipo!",
+        "speaker": "Miles Morales",
+        "excerpt": true,
+        "source": "https://it.wikiquote.org/wiki/Spider-Man_-_Un_nuovo_universo"
+      },
+      {
+        "text": "La nostra famiglia non fugge dai problemi, Miles.",
+        "speaker": "Rio Morales",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/Spider-Man_-_Un_nuovo_universo"
+      }
+    ]
+  },
+  {
+    "names": [
+      "Your Name."
+    ],
+    "year": 2016,
+    "options": [
+      {
+        "text": "Sono sempre alla ricerca di qualcosa o di qualcuno.",
+        "speaker": "Taki",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/Your_Name."
+      }
+    ]
   }
 ];
 const normalize = value => String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
