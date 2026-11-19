@@ -2,6 +2,15 @@ import { curator,esc,safeImage } from './curator-client.js?v=20261001i';
 let config={},covers=[],selectedCover=null,searchPage=1,lastQuery='',totalPages=1,renderVersion=0;
 export function initFeatures({app,state,loadData,startSession,call,deviceId,topbar}) {
   const shell=body=>`<div class="shell">${topbar()}<section class="curator">${body}</section></div>`;
+  const importHint='Seleziona una copertina tra le varie opzioni';
+  function updateImportButton(form){
+    if(!form)return;const b=form.querySelector('#import-button');if(!b)return;
+    const requested=form.querySelector('[name="request-film"]').checked;
+    const reason=b.dataset.duplicate?'Titolo già presente nel catalogo.':requested?(!selectedCover&&!covers[0]?'Nessuna copertina automatica disponibile per questo titolo.':''):!selectedCover?importHint:!form.querySelector('[name="platform"]:checked')?'Seleziona almeno una piattaforma.':'';
+    b.disabled=!!b.dataset.duplicate;b.setAttribute('aria-disabled',String(!!reason));b.title=reason;
+    b.textContent=b.dataset.duplicate?'Già nel catalogo':requested?'Richiedi film':'Aggiungi al catalogo';
+    b.dataset.reason=reason;const hint=form.querySelector('#import-hint');if(hint)hint.textContent='';
+  }
   const message=(text,error=false)=>{const el=app.querySelector('#feature-message');if(el){el.textContent=text;el.classList.toggle('error',error);}};
   async function searchScreen(){
     const version=++renderVersion;state.session=null;if(state.currentAudio)state.currentAudio.pause();selectedCover=null;
@@ -23,7 +32,8 @@ export function initFeatures({app,state,loadData,startSession,call,deviceId,topb
     const d=await curator('candidates',{tmdbId:x.tmdb_id,mediaType:x.media_type});if(version!==renderVersion||!app.querySelector('.curator'))return;covers=d.candidates;
     const duplicate=state.titles.some(t=>t.tmdb_id===x.tmdb_id&&t.media_type===x.media_type);
     const main=d.metadata.poster_url||covers[0]?.url;
-    app.innerHTML=shell(`<h1>${esc(d.metadata.name)}</h1><div class="new-title-layout"><div class="poster-column"><div class="poster-wrap">${main?`<img src="${safeImage(main)}" alt="${esc(d.metadata.name)}">`:''}</div><div class="cover-thumbnails" aria-label="Copertine alternative">${covers.map((c,i)=>`<button class="cover-thumb" data-new-cover="${esc(c.id)}" aria-label="Copertina alternativa ${i+1}" aria-pressed="false"><img src="${safeImage(c.preview_url)}" alt="" loading="lazy"></button>`).join('')}</div></div><div><p>${x.media_type==='series'?'Serie TV':'Film'} · ${esc(d.metadata.release_year||'Anno sconosciuto')}</p><p>${esc(d.metadata.overview)}</p><p id="feature-message" role="status">${duplicate?'Titolo già presente nel catalogo.':covers.length?'Clicca una delle cover sotto l’immagine principale per sceglierla.':'Nessuna cover soddisfa i requisiti di qualità.'}</p><form id="title-import"><label>Categoria<select name="category"><option value="film" ${d.metadata.genres.some(g=>g.id===16)?'':'selected'}>Film</option><option value="animation" ${d.metadata.genres.some(g=>g.id===16)?'selected':''}>Animazione</option></select></label><fieldset><legend>Dove è disponibile?</legend><p class="hint">Conferma tu la disponibilità sulle piattaforme.</p>${state.platforms.map(p=>`<label class="checkbox"><input name="platform" type="checkbox" value="${esc(p.id)}">${esc(p.name)}</label>`).join('')}<label class="checkbox"><input name="request-film" type="checkbox">Richiedi film</label><p class="hint">Se non è ancora disponibile, richiedilo: apparirà in cima al catalogo.</p></fieldset><button class="primary" id="import-button" ${duplicate?'data-duplicate="true"':''} disabled>${duplicate?'Già nel catalogo':'Aggiungi al catalogo'}</button>${duplicate?'<p>Questo titolo è già nel catalogo e non può essere aggiunto di nuovo. <a href="disponibilita.html">Apri il catalogo</a></p>':''}</form><button class="ghost-btn" data-feature="back-search">Cerca un altro titolo</button></div></div><p class="hint">This product uses the TMDB API but is not endorsed or certified by TMDB.</p><a href="https://www.themoviedb.org/" target="_blank" rel="noopener"><img class="tmdb-logo" src="https://files.readme.io/29c6fee-blue_short.svg" alt="TMDb"></a>`);
+    app.innerHTML=shell(`<h1>${esc(d.metadata.name)}</h1><div class="new-title-layout"><div class="poster-column"><div class="poster-wrap">${main?`<img src="${safeImage(main)}" alt="${esc(d.metadata.name)}">`:''}</div><div class="cover-thumbnails" aria-label="Copertine alternative">${covers.map((c,i)=>`<button class="cover-thumb" data-new-cover="${esc(c.id)}" aria-label="Copertina alternativa ${i+1}" aria-pressed="false"><img src="${safeImage(c.preview_url)}" alt="" loading="lazy"></button>`).join('')}</div></div><div><p>${x.media_type==='series'?'Serie TV':'Film'} · ${esc(d.metadata.release_year||'Anno sconosciuto')}</p><p>${esc(d.metadata.overview)}</p><p id="feature-message" role="status">${duplicate?'Titolo già presente nel catalogo.':covers.length?'Clicca una delle cover sotto l’immagine principale per sceglierla.':'Nessuna cover soddisfa i requisiti di qualità.'}</p><form id="title-import"><label>Categoria<select name="category"><option value="film" ${d.metadata.genres.some(g=>g.id===16)?'':'selected'}>Film</option><option value="animation" ${d.metadata.genres.some(g=>g.id===16)?'selected':''}>Animazione</option></select></label><fieldset data-availability><legend>Dove è disponibile?</legend><p class="hint">Conferma tu la disponibilità sulle piattaforme.</p>${state.platforms.map(p=>`<label class="checkbox"><input name="platform" type="checkbox" value="${esc(p.id)}">${esc(p.name)}</label>`).join('')}</fieldset><fieldset class="request-title-section"><legend>Richiedi film</legend><label class="checkbox"><input name="request-film" type="checkbox">Questo titolo non è disponibile: voglio richiederlo</label><p class="hint">Apparirà in cima al catalogo. Non serve scegliere una copertina: useremo automaticamente quella disponibile.</p></fieldset><button class="primary" id="import-button" aria-describedby="import-hint" ${duplicate?'data-duplicate="true" disabled':''}>${duplicate?'Già nel catalogo':'Aggiungi al catalogo'}</button><p id="import-hint" class="import-hint" role="status" aria-live="polite"></p>${duplicate?'<p>Questo titolo è già nel catalogo e non può essere aggiunto di nuovo. <a href="disponibilita.html">Apri il catalogo</a></p>':''}</form><button class="ghost-btn" data-feature="back-search">Cerca un altro titolo</button></div></div><p class="hint">This product uses the TMDB API but is not endorsed or certified by TMDB.</p><a href="https://www.themoviedb.org/" target="_blank" rel="noopener"><img class="tmdb-logo" src="https://files.readme.io/29c6fee-blue_short.svg" alt="TMDb"></a>`);
+    updateImportButton(app.querySelector('#title-import'));
   }
   async function discover(){
     const version=++renderVersion;state.session=null;if(state.currentAudio)state.currentAudio.pause();
@@ -41,7 +51,7 @@ export function initFeatures({app,state,loadData,startSession,call,deviceId,topb
       if(b.dataset.action==='add-title')return await searchScreen();
       if(b.dataset.action==='discover')return await discover();
       if(b.dataset.result)return await candidates(JSON.parse(b.dataset.result));
-      if(b.dataset.newCover){selectedCover=b.dataset.newCover;const c=covers.find(x=>x.id===selectedCover);app.querySelector('.poster-wrap img').src=c.url;app.querySelectorAll('[data-new-cover]').forEach(x=>{const active=x.dataset.newCover===selectedCover;x.classList.toggle('selected',active);x.setAttribute('aria-pressed',String(active));});const ib=app.querySelector('#import-button');ib.disabled=!!ib.dataset.duplicate;return;}
+      if(b.dataset.newCover){selectedCover=b.dataset.newCover;const c=covers.find(x=>x.id===selectedCover);app.querySelector('.poster-wrap img').src=c.url;app.querySelectorAll('[data-new-cover]').forEach(x=>{const active=x.dataset.newCover===selectedCover;x.classList.toggle('selected',active);x.setAttribute('aria-pressed',String(active));});updateImportButton(app.querySelector('#title-import'));return;}
       if(b.dataset.feature==='back-search')return await searchScreen();
       if(b.dataset.feature==='next-page')return await search(lastQuery,searchPage+1);
       if(b.dataset.feature==='prev-page')return await search(lastQuery,searchPage-1);
@@ -49,11 +59,17 @@ export function initFeatures({app,state,loadData,startSession,call,deviceId,topb
     }catch(err){message(err.message,true);}
   });
   app.addEventListener('change',e=>{
-    if(e.target.name!=='request-film')return;
-    const form=e.target.closest('form'),requested=e.target.checked;
-    form.querySelectorAll('[name="platform"]').forEach(x=>{x.disabled=requested;if(requested)x.checked=false;});
-    const button=form.querySelector('#import-button');
-    button.textContent=button.dataset.duplicate?'Già nel catalogo':requested?'Richiedi film':'Aggiungi al catalogo';
+    const form=e.target.closest('#title-import');if(!form)return;
+    if(e.target.name==='request-film'){
+      const requested=e.target.checked;
+      form.querySelector('[data-availability]').hidden=requested;
+      form.querySelectorAll('[name="platform"]').forEach(x=>{x.disabled=requested;});
+    }
+    updateImportButton(form);
+  });
+  for(const event of ['pointerover','focusin'])app.addEventListener(event,e=>{
+    const b=e.target.closest('#import-button');if(!b)return;
+    const hint=b.closest('form').querySelector('#import-hint');hint.textContent=b.dataset.reason||'';
   });
   app.addEventListener('submit',async e=>{
     if(!['title-search','title-import'].includes(e.target.id))return;
@@ -61,10 +77,13 @@ export function initFeatures({app,state,loadData,startSession,call,deviceId,topb
     try{
       if(form.id==='title-search')await search(String(data.get('query')).trim());
       else{
-        const platformIds=data.getAll('platform'),requested=data.has('request-film');if(!selectedCover||(!requested&&!platformIds.length))throw new Error('Scegli la cover e almeno una piattaforma.');
-        const result=await curator(requested?'request':'import',{candidateId:selectedCover,category:data.get('category'),platformIds});
+        const platformIds=data.getAll('platform'),requested=data.has('request-film');
+        const candidateId=selectedCover||(requested?covers[0]?.id:null);
+        if(!candidateId)throw new Error(requested?'Nessuna copertina automatica disponibile per questo titolo.':importHint);
+        if(!requested&&!platformIds.length)throw new Error('Seleziona almeno una piattaforma.');
+        const result=await curator(requested?'request':'import',{candidateId,category:data.get('category'),platformIds});
         await loadData();app.innerHTML=shell(requested?`<h1>Richiesta salvata</h1><p>Il titolo è in cima al catalogo, evidenziato in verde.</p><p>${result.notification==='sent'?'Email di avviso inviata.':'L’avviso email è in attesa della configurazione del servizio di posta.'}</p><a href="disponibilita.html">Apri il catalogo</a><button class="primary" data-action="add-title">Richiedi un altro titolo</button>`:'<h1>Titolo aggiunto</h1><p>Il titolo e la cover sono nel catalogo Gaia.</p><button class="primary" data-action="add-title">Aggiungi un altro titolo</button>');
       }
-    }catch(err){message(err.message,true);}finally{if(button.isConnected)button.disabled=form.id==='title-import'&&!selectedCover;}
+    }catch(err){message(err.message,true);}finally{if(button.isConnected){button.disabled=false;if(form.id==='title-import')updateImportButton(form);}}
   });
 }
