@@ -326,3 +326,10 @@ kbd { font:500 13px Inter,sans-serif; display:inline-grid; place-items:center; m
 #title-import [data-availability][hidden]{display:none}
 #import-button[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
 #import-hint{min-height:1.5em;margin:0;font-size:14px}
+
+.viewing-screen{width:min(900px,100%);margin:auto;text-align:center;padding:32px 0}
+.viewing-screen:focus{outline:none}.viewing-screen h1{font-size:clamp(28px,4vw,48px);margin:12px 0 28px}
+.viewing-screen .film-quote{font-size:clamp(28px,4vw,52px);font-weight:600;letter-spacing:-.03em;margin:24px 0;line-height:1.2}
+.viewing-eyebrow{color:var(--accent);font-weight:600}.viewing-timer{font-size:clamp(48px,9vw,96px);font-weight:600;font-variant-numeric:tabular-nums;margin:20px 0}
+.viewing-screen [data-viewing-end]{font-size:22px}.viewing-screen .ghost-btn{display:inline-block;margin:12px 6px;text-decoration:none}
+.viewing-screen .hint{font-size:14px}.choice-result .choice-message{font-size:clamp(32px,4vw,56px);line-height:1.2}
