@@ -5,7 +5,7 @@ export function normalizeQuote(q){
  const source=String(q.source||'').trim();if(source&&(new URL(source).protocol!=='https:'||source.length>2000))throw Error('La fonte deve iniziare con https://');
  return {text:q.text===' '?' ':q.text.trim(),speaker:String(q.speaker||'').trim(),source,reviewed:q.reviewed===true,reviewed_at:q.reviewed===true?(q.reviewed_at||null):null};
 }
-function signature(q){if(!q)return 'null';const {reviewed_at,...rest}=normalizeQuote(q);return JSON.stringify(rest);}
+function signature(q){if(!q)return 'null';const {reviewed_at,reviewed,...rest}=normalizeQuote(q);return JSON.stringify(rest);}
 export function sharedQuotes(catalog){return catalog.titles.filter(t=>t.quote_override).map(t=>({...t.quote_override,title_id:t.id}));}
 export function createQuoteStore({request,storage=localStorage}={}){
  let catalog=null;
