@@ -4614,6 +4614,286 @@ export const quoteProposals = [
         "excerpt": true
       }
     ]
+  },
+  {
+    "names": [
+      "Alvin Superstar 2"
+    ],
+    "year": 2009,
+    "options": [
+      {
+        "text": "Di colpo mi è venuta una gran stanchezza.",
+        "speaker": "Alvin · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt1231580/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "That Christmas"
+    ],
+    "year": 2024,
+    "options": [
+      {
+        "text": "Prenditi dieci minuti fuori. Magari il freddo estremo ti rianima il cervello.",
+        "speaker": "Signorina Trapper · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt14855468/characters/nm0789716",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Vivo"
+    ],
+    "year": 2021,
+    "options": [
+      {
+        "text": "Vivo, non avere paura!",
+        "speaker": "Andrés · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt6338498/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Snoopy & Friends - Il film dei Peanuts"
+    ],
+    "year": 2015,
+    "options": [
+      {
+        "text": "È bello avere qualcuno che si sieda e ti ascolti.",
+        "speaker": "Charlie Brown · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt2452042/quotes/",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Un bambino chiamato Natale"
+    ],
+    "year": 2021,
+    "options": [
+      {
+        "text": "Il dolore è il prezzo che paghiamo per amare, e ne vale la pena, un milione di volte.",
+        "speaker": "Zia Ruth · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt10187208/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Lassie"
+    ],
+    "year": 2005,
+    "options": [
+      {
+        "text": "Chi ha inventato questo gioco idiota?",
+        "speaker": "Il duca · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0431213/characters/nm0000564/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Over the Moon - Il fantastico mondo di Lunaria"
+    ],
+    "year": 2020,
+    "options": [
+      {
+        "text": "La levitazione magnetica è fantastica!",
+        "speaker": "Fei Fei da bambina · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt7488208/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Elliott, il drago invisibile"
+    ],
+    "year": 1977,
+    "options": [
+      {
+        "text": "Non posso venderti Elliott. Non è mio.",
+        "speaker": "Pete · Traduzione nostra",
+        "source": "https://en.wikiquote.org/wiki/Pete%27s_Dragon_%281977_film%29",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "La carica dei 101 II - Macchia, un eroe a Londra"
+    ],
+    "year": 2003,
+    "options": [
+      {
+        "text": "Papà aveva ragione. Sono solo uno dei centouno.",
+        "speaker": "Macchia · Traduzione nostra",
+        "source": "https://en.wikiquote.org/wiki/101_Dalmatians_II%3A_Patch%27s_London_Adventure",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Ritorno all'isola che non c'è"
+    ],
+    "year": 2002,
+    "options": [
+      {
+        "text": "Se sei la figlia di Wendy, allora qui ti piacerà un sacco.",
+        "speaker": "Peter Pan · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0280030/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Red e Toby nemiciamici 2"
+    ],
+    "year": 2006,
+    "options": [
+      {
+        "text": "Perché piove sempre quando le cose vanno male?",
+        "speaker": "Floyd · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0465997/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "L'incredibile storia di Winter il delfino"
+    ],
+    "year": 2011,
+    "options": [
+      {
+        "text": "Solo perché sei ferito non significa che tu sia distrutto.",
+        "speaker": "Dottor Cameron McCarthy · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt1564349/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Il drago dei desideri"
+    ],
+    "year": 2021,
+    "options": [
+      {
+        "text": "Non conosco il senso della vita, ma le persone a cui tieni, i tuoi amici e la tua famiglia, valgono più di tutto quello che ho mai posseduto.",
+        "speaker": "Long · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt5562070/quotes/",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Leo"
+    ],
+    "year": 2023,
+    "options": [
+      {
+        "text": "Sono solo contento di essere ancora qui.",
+        "speaker": "Leo · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt5755238/characters/nm0001191",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Cani e gatti - La vendetta di Kitty"
+    ],
+    "year": 2010,
+    "options": [
+      {
+        "text": "Salva i cani, salva il mondo.",
+        "speaker": "Catherine · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt1287468/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Come cani e gatti"
+    ],
+    "year": 2001,
+    "options": [
+      {
+        "text": "Fallire non è un’opzione.",
+        "speaker": "Il mastino · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0239395/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Winnie the Pooh - Nuove avventure nel Bosco dei Cento Acri"
+    ],
+    "year": 2011,
+    "options": [
+      {
+        "text": "Beh, meno male che l’ho notato. Altrimenti non l’avrei visto.",
+        "speaker": "Pooh · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt1449283/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Pimpi, piccolo grande eroe"
+    ],
+    "year": 2003,
+    "options": [
+      {
+        "text": "I miei amici hanno bisogno di me!",
+        "speaker": "Pimpi · Traduzione nostra",
+        "source": "https://en.wikiquote.org/wiki/Piglet%27s_Big_Movie",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Winnie the Pooh e gli Efelanti"
+    ],
+    "year": 2005,
+    "options": [
+      {
+        "text": "E poi c’è questo mostriciattolo maiale che strilla in continuazione.",
+        "speaker": "Lumpy · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0407121/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "L'era glaciale - In rotta di collisione"
+    ],
+    "year": 2016,
+    "options": [
+      {
+        "text": "La donnola è atterrata.",
+        "speaker": "Buck · Traduzione nostra",
+        "source": "https://en.wikiquote.org/wiki/Ice_Age%3A_Collision_Course",
+        "excerpt": false
+      }
+    ]
   }
 ];
 const normalize = value => String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
