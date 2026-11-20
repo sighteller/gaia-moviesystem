@@ -5468,6 +5468,48 @@ export const quoteProposals = [
         "excerpt": true
       }
     ]
+  },
+  {
+    "names": [
+      "Il libro della giungla Special Edition"
+    ],
+    "year": null,
+    "options": [
+      {
+        "text": "Ora che ci penso nessuna pantera mi ha mai chiesto la zampa!",
+        "speaker": "Baloo",
+        "source": "https://it.wikiquote.org/wiki/Il_libro_della_giungla_(film_1967)",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Il Magico Mondo di Winnie The Pooh: Tanti amici e il primo amore"
+    ],
+    "year": 2003,
+    "options": [
+      {
+        "text": "L’ho nascosto in un posto sicuro, dove non può far saltare in aria giardini o conigli innocenti.",
+        "speaker": "Tappo · Traduzione nostra",
+        "source": "https://pooh.fandom.com/wiki/No_Rabbit%27s_a_Fortress",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Lilo & Stitch's Island of Adventures"
+    ],
+    "year": 2003,
+    "options": [
+      {
+        "text": "La gelosia puzza, ma siamo ancora amici.",
+        "speaker": "Lilo · Traduzione nostra",
+        "source": "https://en.wikiquote.org/wiki/Lilo_%26_Stitch%3A_The_Series_%28season_1%29",
+        "excerpt": true
+      }
+    ]
   }
 ];
 const normalize = value => String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
