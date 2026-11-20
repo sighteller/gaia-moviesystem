@@ -876,6 +876,36 @@ export const titleQuotes = [
     "text": "Yuk, yuk",
     "speaker": "",
     "source": ""
+  },
+  {
+    "names": [
+      "I Simpson Classici (1)",
+      "I Simpson Classici (2)",
+      "I Simpson Classici (3)",
+      "I Simpson Classici (4)"
+    ],
+    "year": 2026,
+    "text": "Non mangerò la pastina della Gaia, non mangerò la pastina della Gaia, non mangerò la pastina della Gaia",
+    "speaker": "",
+    "source": ""
+  },
+  {
+    "names": [
+      "La Pimpa"
+    ],
+    "year": 1983,
+    "text": "Ciao Armando",
+    "speaker": "",
+    "source": ""
+  },
+  {
+    "names": [
+      "Shaun, vita da pecora - Missione Natale"
+    ],
+    "year": 2021,
+    "text": "Baaa!",
+    "speaker": "",
+    "source": ""
   }
 ];
 
