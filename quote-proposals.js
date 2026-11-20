@@ -4334,6 +4334,286 @@ export const quoteProposals = [
         "source": "https://www.ocarinaplayer.com/thepond-blog/consigli-ascolto-bambini/fame-saranno-famosi/"
       }
     ]
+  },
+  {
+    "names": [
+      "Chitty Chitty Bang Bang"
+    ],
+    "year": 1968,
+    "options": [
+      {
+        "text": "Com’è andata in India?",
+        "speaker": "Caractacus Potts · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0062803/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Alvin Superstar"
+    ],
+    "year": 2007,
+    "options": [
+      {
+        "text": "Dave, guidi come un vecchio orso assonnato!",
+        "speaker": "Alvin · Traduzione nostra",
+        "source": "https://en.wikiquote.org/wiki/Alvin_and_the_Chipmunks",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Bee Movie"
+    ],
+    "year": 2007,
+    "options": [
+      {
+        "text": "Le api non si preoccupano di quello che gli umani ritengono impossibile.",
+        "speaker": "Narratore · Traduzione nostra",
+        "source": "https://en.m.wikiquote.org/wiki/Bee_Movie",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Chicken Little - Amici per le penne"
+    ],
+    "year": 2005,
+    "options": [
+      {
+        "text": "Puoi smetterla di dirlo?",
+        "speaker": "Chicken Little · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0371606/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Nimona"
+    ],
+    "year": 2023,
+    "options": [
+      {
+        "text": "Tagliare le braccia non è un linguaggio dell’amore!",
+        "speaker": "Nimona · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt19500164/characters/nm1631269",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Il mostro dei mari"
+    ],
+    "year": 2022,
+    "options": [
+      {
+        "text": "Si può essere eroi e avere comunque torto.",
+        "speaker": "Jacob Holland · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt9288046/quotes/",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Togo - Una grande amicizia"
+    ],
+    "year": 2019,
+    "options": [
+      {
+        "text": "Adesso dovremmo avere paura del ghiaccio?",
+        "speaker": "Leonhard Seppala · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt5116302/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Ballerina"
+    ],
+    "year": 2016,
+    "options": [
+      {
+        "text": "Non fare lo stesso errore.",
+        "speaker": "Félicie · Traduzione nostra",
+        "source": "https://en.wikiquote.org/wiki/Ballerina_%282016_film%29",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Onward - Oltre la magia"
+    ],
+    "year": 2020,
+    "options": [
+      {
+        "text": "Giuro che questo è l’anno sabbatico più lungo di sempre.",
+        "speaker": "Laurel Lightfoot · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt7146812/quotes/?item=qt4997701",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "West Side Story"
+    ],
+    "year": 1961,
+    "options": [
+      {
+        "text": "Io amo Tony.",
+        "speaker": "Maria · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0055614/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "L'unico e insuperabile Ivan"
+    ],
+    "year": 2020,
+    "options": [
+      {
+        "text": "Io sono l’unico e insuperabile Ivan.",
+        "speaker": "Ivan · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt3661394/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "La sirenetta - Quando tutto ebbe inizio"
+    ],
+    "year": 2008,
+    "options": [
+      {
+        "text": "Papà. Andiamo a casa.",
+        "speaker": "Ariel · Traduzione nostra",
+        "source": "https://en.wikiquote.org/wiki/The_Little_Mermaid%3A_Ariel%27s_Beginning",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "La canzone del mare"
+    ],
+    "year": 2014,
+    "options": [
+      {
+        "text": "Figlio mio, ricordami nelle tue storie e nelle tue canzoni.",
+        "speaker": "Bronagh · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt1865505/quotes/?item=qt3367443",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Ernest & Celestine"
+    ],
+    "year": 2012,
+    "options": [
+      {
+        "text": "Gli orsi di sopra e i topi di sotto?",
+        "speaker": "Célestine · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt1816518/characters/nm5312818/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Lilli e il vagabondo"
+    ],
+    "year": 2019,
+    "options": [
+      {
+        "text": "Ogni giorno potrebbe essere un’avventura.",
+        "speaker": "Biagio · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt8096832/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Garfield 2 - Il Film"
+    ],
+    "year": 2006,
+    "options": [
+      {
+        "text": "Sono della sicurezza, amico. Ti proteggo da te stesso.",
+        "speaker": "Garfield · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0455499/characters/nm0005227/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Stargirl"
+    ],
+    "year": 2020,
+    "options": [
+      {
+        "text": "Ho i miei metodi.",
+        "speaker": "Stargirl Caraway · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt4858674/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "KPop Demon Hunters"
+    ],
+    "year": 2025,
+    "options": [
+      {
+        "text": "L’ho fatto per la tigre, ma l’uccello continua a rubarlo.",
+        "speaker": "Jinu · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt14205554/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Balto - Sulle ali dell'avventura"
+    ],
+    "year": 2004,
+    "options": [
+      {
+        "text": "Pensavo che la differenza fosse che solo uno dei due ha un cuore.",
+        "speaker": "Balto · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0423849/quotes/?item=qt2434068",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Spellbound - L'incantesimo"
+    ],
+    "year": 2024,
+    "options": [
+      {
+        "text": "Il tuo regno ha bisogno di qualcuno che governi davvero.",
+        "speaker": "Bolinar · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt7215232/quotes/",
+        "excerpt": true
+      }
+    ]
   }
 ];
 const normalize = value => String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
