@@ -1,14 +1,14 @@
 import {BrowserFaceEngine} from './browser-face-engine.js?v=20261120browser';
 import {savedModel,refreshSharedModel,modelLabel} from './browser-model-store.js?v=20261120shared';
 import {normalizeReference,averagePosition,positionHint} from './camera-position-core.js?v=20261117';
-import {CameraChoiceFlow} from './camera-choice-flow.js?v=20261120browser';
+import {CameraChoiceFlow,CHOICE_DURATIONS,YES_SELECTION_MS} from './camera-choice-flow.js?v=20261120choice';
 export function initCameraMode({app,isMuted,getContext,onOffer,onAsk,onChoose,onAdvance,onCancel,onStop,onManageModel,modelSource={savedModel,refresh:refreshSharedModel}}){
  const panel=document.createElement('aside');panel.className='camera-panel';panel.hidden=true;panel.setAttribute('aria-label','Webcam e risposte');
  panel.innerHTML=`<div class="camera-panel-head"><strong>Modalità webcam</strong><button type="button" data-camera-stop aria-label="Disattiva webcam">×</button></div>
  <div class="camera-preview"><video autoplay muted playsinline aria-label="Anteprima webcam"></video><div class="camera-position-guide" hidden aria-hidden="true"></div></div>
  <div class="camera-reading"><span>Modello di Gaia</span><strong data-camera-signal aria-live="polite">In attesa</strong></div><p data-camera-question aria-live="polite"></p><p data-camera-status role="status"></p>
  <button type="button" data-camera-reference>Rifai riferimento di riposo</button><button type="button" data-camera-repeat>Riprendi scelta</button>
- <label class="camera-duration">Tempo per titolo<select data-camera-duration><option value="10">10 secondi</option><option value="15" selected>15 secondi</option><option value="20">20 secondi</option><option value="30">30 secondi</option></select></label>
+ <label class="camera-duration">Tempo per titolo<select data-camera-duration>${CHOICE_DURATIONS.map(seconds=>`<option value="${seconds}"${seconds===5?' selected':''}>${seconds} secondi</option>`).join('')}</select></label>
  <details><summary>Modello e inquadratura</summary><p data-camera-model></p><button type="button" data-camera-manage>Gestisci modello nelle impostazioni</button><p>La webcam usa automaticamente il modello salvato sul sito. I fotogrammi vengono elaborati nel browser.</p>
  <strong>Posizionamento</strong><p data-position-status></p><button type="button" data-position-save disabled>Memorizza inquadratura</button> <button type="button" data-position-reset hidden>Cancella guida</button><p class="camera-position-note">La guida aiuta a ritrovare l’inquadratura. Il riferimento di riposo viene raccolto di nuovo a ogni avvio: non occorre tenere la testa dritta.</p><a href="camera-test.html">Prova il modello con un video</a></details>`;
  document.body.append(panel);
@@ -71,7 +71,6 @@ export function initCameraMode({app,isMuted,getContext,onOffer,onAsk,onChoose,on
  async function handle(event,context,ticket){
   if(!event)return;const selected=option(context,event.index);if(!selected)return;
   if(event.type==='offer'){onOffer?.(context,selected);if(selected.silent){stopSpeech();text(question,`${selected.label}?`);}else speak(selected.question||`${selected.label}?`);return;}
-  if(event.type==='pending'){text(question,`Possibile sì per ${selected.label}. Aspetto 3 secondi…`);return;}
   if(event.type==='cancel'){onCancel?.(context);stopSpeech();text(question,`Riprendiamo da ${selected.label}.`);return;}
   if(event.type==='ask'){
    rendering=true;
@@ -91,14 +90,14 @@ export function initCameraMode({app,isMuted,getContext,onOffer,onAsk,onChoose,on
  function tick(now){
   if(!enabled)return;animation=requestAnimationFrame(tick);
   if(document.hidden||video.paused||video.readyState<2){flow.reset();return;}
-  if(latest&&now-latest.received>350){text(signal,'Non valutabile');if(flow.phase==='waiting'||flow.phase==='confirm'){onCancel?.(getContext());flow.cancel();}flow.hold(now);}
+  if(latest&&now-latest.received>350){text(signal,'Non valutabile');if(flow.phase==='confirm'){onCancel?.(getContext());flow.cancel();}flow.hold(now);}
   if(busy||now-lastRun<124||video.currentTime===lastMedia)return;
   lastRun=now;lastMedia=video.currentTime;busy=true;const ticket=version,atEpoch=epoch;origin??=now;const time=(now-origin)/1000,captureAt=now;
   engine.frame(video,time,atEpoch).then(result=>{
    if(ticket!==version||atEpoch!==epoch||!enabled||document.hidden)return;
    const received=performance.now();if(received-captureAt>350){text(signal,'Non valutabile');flow.update(received,'unavailable',getContext());tell('Il riconoscitore è in ritardo. Chiudi altre schede o applicazioni e riprova.');return;}
    latest={...result,received};updatePosition(result.bounds,received);
-   const labels={yes:'Possibile sì',rest:'Riposo',uncertain:'Incerto',unavailable:'Non valutabile'};text(signal,labels[result.state]);panel.dataset.reading=result.state;
+   const labels={yes:'Si',rest:'No/Riposo',uncertain:'Incerto',unavailable:'Non valutabile'};text(signal,labels[result.state]);panel.dataset.reading=result.state;
    if(time<3){tell(`Riferimento di riposo: ${Math.max(0,3-time).toFixed(1)} secondi rimasti.`);return;}
    if(!result.reference_ready){tell('Viso non abbastanza visibile nei primi tre secondi. Sistema l’inquadratura e premi Rifai riferimento di riposo.');return;}
    if(result.state==='unavailable')tell(result.reason==='missing_face'?'Viso non rilevabile: scelta sospesa.':'Raccolgo il movimento recente prima di interpretare la risposta.');
@@ -106,7 +105,8 @@ export function initCameraMode({app,isMuted,getContext,onOffer,onAsk,onChoose,on
    if(rendering||actionBusy){flow.hold(received);return;}
    const context=getContext();
    if(!context){flow.reset();if(!manualPause)text(question,'Completa questa schermata con i comandi manuali.');return;}
-   const event=flow.update(received,result.state,context,{paused:speaking||rendering||actionBusy||manualPause||!!positionCapture,duration:context.kind==='movie'?Number($('[data-camera-duration]').value)*1000:8000});
+   const event=flow.update(received,result.state,context,{paused:(speaking&&flow.phase==='confirm')||rendering||actionBusy||manualPause||!!positionCapture,duration:Number($('[data-camera-duration]').value)*1000});
+   if(flow.phase==='scan'&&result.state==='yes'&&flow.yesSince!==null&&!manualPause&&!positionCapture){const remaining=Math.max(0,(YES_SELECTION_MS-(received-flow.yesSince))/1000);text(question,`Si per ${option(context)?.label||'questa opzione'} · mantieni ancora ${remaining.toFixed(1)} s.`);}
    handle(event,context,ticket).catch(()=>{if(ticket===version){manualPause=true;tell('Lettura sospesa. Premi Riprendi scelta.');}});
   }).catch(e=>{if(ticket===version)stop(e.message);}).finally(()=>{if(ticket===version){busy=false;if(referenceRequested){referenceRequested=false;referenceAgain();}}});
  }
@@ -124,7 +124,7 @@ export function initCameraMode({app,isMuted,getContext,onOffer,onAsk,onChoose,on
   if(b.hasAttribute('data-position-reset')){reference=null;positionCapture=null;try{localStorage.removeItem('gaia_camera_position_v1');}catch{}drawReference();}
  });
  $('[data-camera-duration]').addEventListener('change',()=>{flow.reset();onCancel?.(getContext());});
- app.addEventListener('pointerdown',e=>{if(enabled&&!e.target.closest('[data-action="camera"]')){flow.reset();stopSpeech();manualPause=true;tell('Comandi manuali in uso. Premi Riprendi scelta per tornare alla webcam.');}});
+ app.addEventListener('pointerdown',e=>{if(enabled&&!e.target.closest('[data-action="camera"]')){flow.reset();stopSpeech();manualPause=false;tell('Lettura pronta sulla nuova opzione.');}});
  app.addEventListener('click',e=>{if(e.target.closest('[data-action="camera"]')){restoreKeyboardFocus=e.detail===0;enabled||loading?stop():start();}});
  new MutationObserver(sync).observe(app,{childList:true,subtree:true});window.addEventListener('resize',sync);
  window.addEventListener('gaia-personal-model-changed',e=>{if(enabled||engine)stop('Il modello del sito è stato aggiornato. Riattiva la webcam per usare la nuova versione.');model=e.detail.model;sync();});

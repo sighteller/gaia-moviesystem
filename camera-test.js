@@ -17,7 +17,7 @@ function refresh(){
  if(video.seeking)return show('Cambio posizione…','Ricostruisco il movimento nel punto scelto.');
  const f=latest,age=f?video.currentTime-f.time:Infinity;
  if(!f||f.epoch!==epoch||age<-.001||age>.22)return show(video.paused?'In pausa':'Attendo il fotogramma…',video.paused?'Premi Riproduci per continuare.':'La risposta precedente non viene mantenuta sui nuovi fotogrammi.');
- const labels={yes:'Possibile sì',rest:'Riposo / non-sì',uncertain:'Incerto',unavailable:'Non valutabile'};
+ const labels={yes:'Si',rest:'No/Riposo',uncertain:'Incerto',unavailable:'Non valutabile'};
  const reasons={opening:'Raccolgo il riferimento dei primi tre secondi.',missing_reference:'Riferimento insufficiente: riparti con il viso visibile nei primi tre secondi.',missing_face:'Viso non rilevabile. Nessuna risposta interpretata.',history:'Raccolgo il movimento recente.'};
  show(labels[f.state],`${video.paused?'In pausa · ':''}${f.time.toFixed(2)} s · ${reasons[f.reason]||'Indicatore '+f.score_yes.toFixed(2)+' · non è una probabilità'}`,f.state,f.score_yes);preview(f.roi);
 }

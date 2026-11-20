@@ -18,7 +18,7 @@ I nuovi test Node verificano:
 
 - importazione compatibile e rifiuto dei file di annotazioni;
 - causalità, astensione e memoria limitata;
-- attesa di tre secondi, nuova lettura dopo la domanda e un solo evento di scelta;
+- Si continuo per più di due secondi senza riposo preliminare, nuova lettura dopo la domanda e un solo evento di scelta;
 - ritorno a non-sì, perdita del volto, grandi interruzioni, cambi di titolo e pagina nascosta;
 - tempo scaduto distinto da rifiuto e scansione delle categorie;
 - worker e webcam simulati, permesso negato, interruzione delle tracce e chiusura del worker.
@@ -30,3 +30,9 @@ L’anteprima del sito principale carica il catalogo e apre il nuovo pannello da
 ## Primo test di utilizzo
 
 Importare il modello personale sul sito una sola volta, poi provare un filmato nuovo in camera-test.html. Valutare sia sì mancati sia possibili sì nei tratti non annotati. Ripetere con la webcam nelle condizioni reali, con i comandi manuali disponibili. Le correzioni si conservano come annotazioni; non modificano automaticamente il modello durante la prova.
+
+## Correzione della selezione dopo la prova dell’utente
+
+Eliminati il riarmo obbligatorio da riposo e la pausa permanente dopo i clic manuali. Un Si continuo oltre 2.000 ms apre la conferma, anche se presente fin dall’inizio della lettura utile. No/Riposo avanza a 2, 3, 4, 5, 7 o 10 secondi; Incerto e Non valutabile non fanno avanzare. La lettura Si durante la proposta conta anche mentre viene letto il nome dell’opzione; la domanda di conferma deve invece terminare prima di acquisire la risposta finale.
+
+Test di regressione verificano l’apertura della conferma, l’assenza di un evento prima dei due secondi, la nuova lettura dopo la domanda, i sei intervalli, l’interruzione del gesto, i clic manuali e un solo evento di scelta. I test dell’interfaccia usano un MediaStream e un worker simulati, senza azionare la webcam reale dell’operatore.
