@@ -1,3 +1,4 @@
+import {createCameraModelHandler,MODEL_ACTIONS} from '../../../shared-camera-model.js';
 import {uploadTitleAudio} from './audio-upload.js';
 const cors={"Access-Control-Allow-Origin":"https://sighteller.github.io","Access-Control-Allow-Headers":"content-type","Access-Control-Allow-Methods":"POST, OPTIONS"};
 const base=Deno.env.get("SUPABASE_URL")+"/rest/v1";
@@ -5,6 +6,9 @@ const key=JSON.parse(Deno.env.get("SUPABASE_PUBLISHABLE_KEYS")||"{}").default;
 const reply=(data,status=200)=>new Response(JSON.stringify(data),{status,headers:{...cors,"Content-Type":"application/json"}});
 const audioRates=new Map();
 function audioRate(req){const key=req.headers.get('x-forwarded-for')?.split(',')[0]||'shared',now=Date.now();let bucket=audioRates.get(key);if(!bucket||now-bucket.start>600000){bucket={start:now,count:0};audioRates.set(key,bucket);}if(++bucket.count>30)throw Error('Troppi caricamenti: riprova tra qualche minuto.');if(audioRates.size>1000)for(const[k,v]of audioRates)if(now-v.start>600000)audioRates.delete(k);}
+const cameraModels=createCameraModelHandler({baseUrl:Deno.env.get('SUPABASE_URL'),service:Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')});
+const modelRates=new Map();
+function modelRate(req){const ip=req.headers.get('x-forwarded-for')?.split(',')[0]||'shared',now=Date.now();let bucket=modelRates.get(ip);if(!bucket||now-bucket.start>600000){bucket={start:now,count:0};modelRates.set(ip,bucket);}if(++bucket.count>20)return false;if(modelRates.size>2000)for(const[k,v]of modelRates)if(now-v.start>600000)modelRates.delete(k);return true;}
 Deno.serve(async req=>{
  if(req.method==="OPTIONS")return new Response("ok",{headers:cors});
  if(req.method!=="POST")return reply({error:"Metodo non consentito"},405);
@@ -14,6 +18,12 @@ Deno.serve(async req=>{
   }
   const text=await req.text();if(text.length>1500000)return reply({error:"Troppe modifiche"},413);
   const {action,payload={}}=JSON.parse(text);
+  if(MODEL_ACTIONS.includes(action)){
+   if(req.headers.get('Origin')!=='https://sighteller.github.io')return reply({error:'Apri le impostazioni dal sito di Gaia.'},403);
+   if(text.length>96000)return reply({error:'Il file del modello è troppo grande.'},413);
+   if(action==='cameraModelSave'&&!modelRate(req))return reply({error:'Troppi caricamenti. Riprova tra qualche minuto.'},429);
+   const result=await cameraModels(action,payload);return reply(result.data,result.status);
+  }
   if(!["catalogEditor","saveCatalog"].includes(action))return reply({error:"Operazione non consentita"},400);
   const audioChanging=action==="saveCatalog"&&Array.isArray(payload.changes)&&payload.changes.some(c=>c.audio_change);
   const restructuring=action==="saveCatalog"&&Array.isArray(payload.changes)&&payload.changes.some(c=>c.structure);

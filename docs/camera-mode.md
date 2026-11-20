@@ -2,11 +2,11 @@
 
 Il pulsante webcam del sito principale usa il modello personalizzato di Gaia. Non contatta il servizio locale Python e non richiede installazioni o programmi da avviare sul computer. L’accesso alla webcam rimane esplicito e il microfono non viene richiesto.
 
-## Primo utilizzo
+## Modello del sito
 
-Aprire la videocamera, espandere Modello e inquadratura e scegliere **Carica modello di Gaia** con il file JSON del classificatore. Il file è letto sul dispositivo e conservato in localStorage per questa origine. Non viene pubblicato nel repository né inviato a un server. Video di addestramento, annotazioni ed esempi del vecchio calibratore non sono modelli e non vengono importati come tali. Un modello incompatibile viene rifiutato con un messaggio.
+Il modello viene caricato e sostituito da **Impostazioni → Modello di Gaia**. La webcam e la prova video lo recuperano automaticamente dal sito, anche su un browser o dispositivo nuovo. La copia già scaricata nel browser è soltanto una cache; non è più l’unica sorgente del modello. Il modello attuale è già configurato.
 
-Il modello viene ritrovato alle visite successive nello stesso browser; un altro browser o dispositivo richiede l’importazione. In caso di salvataggio locale non consentito rimane utilizzabile nella pagina aperta, con avviso. La webcam non viene attivata automaticamente al caricamento o al ritorno sul sito.
+Scegliere un file prepara e verifica il modello, senza cambiare quello attivo. Premere **Salva modello sul sito** applica la sostituzione a tutti i dispositivi. Un modello incompatibile viene rifiutato e una sostituzione durante la lettura richiede di riavviarla. La webcam non viene attivata automaticamente al caricamento della pagina. Vedere `shared-camera-model.md` per salvataggio, sincronizzazione e accesso.
 
 ## Uso
 
@@ -20,7 +20,7 @@ Il tempo di scorrimento avanza con letture utilizzabili senza un sì, compresa l
 
 ## Prova con video
 
-Il collegamento **Prova il modello con un video** apre `camera-test.html`, sulla stessa origine del sito e con lo stesso modello memorizzato. Caricare un filmato, avviare la lettura e mettere in pausa per segnare sì/riposo/casi dubbi. Le annotazioni precedenti possono essere importate nella sezione Le tue annotazioni, con associazione al filmato originale o collegamento esplicito al file rinominato. Si possono scaricare annotazioni e risultati della singola prova. I fotogrammi non visitati non vengono trattati come riposo né come previsioni corrette; il confronto controlla i punti etichettati, il centro degli intervalli.
+Il collegamento **Prova il modello con un video** apre `camera-test.html`, con lo stesso modello condiviso salvato nelle impostazioni. Caricare un filmato, avviare la lettura e mettere in pausa per segnare sì/riposo/casi dubbi. Le annotazioni precedenti possono essere importate nella sezione Le tue annotazioni, con associazione al filmato originale o collegamento esplicito al file rinominato. Si possono scaricare annotazioni e risultati della singola prova. I fotogrammi non visitati non vengono trattati come riposo né come previsioni corrette; il confronto controlla i punti etichettati, il centro degli intervalli.
 
 Il ritaglio automatico cerca il volto nel fotogramma intero e in finestre sovrapposte. Il ritaglio manuale della prova video è facoltativo; cambiarlo richiede una nuova lettura dall’inizio. Gli spostamenti nel filmato scartano la storia recente e le risposte pendenti, mantenendo il riferimento iniziale dello stesso video.
 

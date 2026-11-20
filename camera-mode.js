@@ -1,19 +1,19 @@
 import {BrowserFaceEngine} from './browser-face-engine.js?v=20261120browser';
-import {savedModel,importModel,modelLabel} from './browser-model-store.js?v=20261120browser2';
+import {savedModel,refreshSharedModel,modelLabel} from './browser-model-store.js?v=20261120shared';
 import {normalizeReference,averagePosition,positionHint} from './camera-position-core.js?v=20261117';
 import {CameraChoiceFlow} from './camera-choice-flow.js?v=20261120browser';
-export function initCameraMode({app,isMuted,getContext,onOffer,onAsk,onChoose,onAdvance,onCancel,onStop}){
+export function initCameraMode({app,isMuted,getContext,onOffer,onAsk,onChoose,onAdvance,onCancel,onStop,onManageModel,modelSource={savedModel,refresh:refreshSharedModel}}){
  const panel=document.createElement('aside');panel.className='camera-panel';panel.hidden=true;panel.setAttribute('aria-label','Webcam e risposte');
  panel.innerHTML=`<div class="camera-panel-head"><strong>Modalità webcam</strong><button type="button" data-camera-stop aria-label="Disattiva webcam">×</button></div>
  <div class="camera-preview"><video autoplay muted playsinline aria-label="Anteprima webcam"></video><div class="camera-position-guide" hidden aria-hidden="true"></div></div>
  <div class="camera-reading"><span>Modello di Gaia</span><strong data-camera-signal aria-live="polite">In attesa</strong></div><p data-camera-question aria-live="polite"></p><p data-camera-status role="status"></p>
  <button type="button" data-camera-reference>Rifai riferimento di riposo</button><button type="button" data-camera-repeat>Riprendi scelta</button>
  <label class="camera-duration">Tempo per titolo<select data-camera-duration><option value="10">10 secondi</option><option value="15" selected>15 secondi</option><option value="20">20 secondi</option><option value="30">30 secondi</option></select></label>
- <details><summary>Modello e inquadratura</summary><p data-camera-model></p><label class="camera-model-upload">Carica modello di Gaia<input data-camera-model-file type="file" accept=".json,application/json"></label><p>Una volta caricato, resta in questo browser. Video e movimenti vengono elaborati qui, senza inviarli a un servizio.</p>
+ <details><summary>Modello e inquadratura</summary><p data-camera-model></p><button type="button" data-camera-manage>Gestisci modello nelle impostazioni</button><p>La webcam usa automaticamente il modello salvato sul sito. I fotogrammi vengono elaborati nel browser.</p>
  <strong>Posizionamento</strong><p data-position-status></p><button type="button" data-position-save disabled>Memorizza inquadratura</button> <button type="button" data-position-reset hidden>Cancella guida</button><p class="camera-position-note">La guida aiuta a ritrovare l’inquadratura. Il riferimento di riposo viene raccolto di nuovo a ogni avvio: non occorre tenere la testa dritta.</p><a href="camera-test.html">Prova il modello con un video</a></details>`;
  document.body.append(panel);
  const $=selector=>panel.querySelector(selector),video=$('video'),signal=$('[data-camera-signal]'),status=$('[data-camera-status]'),question=$('[data-camera-question]'),flow=new CameraChoiceFlow();
- let enabled=false,loading=false,version=0,stream=null,engine=null,animation=null,busy=false,lastRun=-Infinity,lastMedia=-1,origin=null,epoch=0,latest=null,model=savedModel(),restoreKeyboardFocus=false;
+ let enabled=false,loading=false,version=0,stream=null,engine=null,animation=null,busy=false,lastRun=-Infinity,lastMedia=-1,origin=null,epoch=0,latest=null,model=modelSource.savedModel(),restoreKeyboardFocus=false;
  let speaking=false,speechVersion=0,speechTimer=null,rendering=false,actionBusy=false,manualPause=false,referenceRequested=false,positionCapture=null,reference=null,lastBounds=null,readySince=null;
  const guide=$('.camera-position-guide'),preview=$('.camera-preview');
  try{reference=normalizeReference(JSON.parse(localStorage.getItem('gaia_camera_position_v1')||'null'));}catch{}
@@ -40,11 +40,13 @@ export function initCameraMode({app,isMuted,getContext,onOffer,onAsk,onChoose,on
   panel.hidden=!message;text(signal,'Webcam spenta');text(question,'');tell(message);guide.classList.remove('ready');sync();returnFocus();
  }
  async function start(){
-  model=model||savedModel();panel.hidden=false;panel.scrollTop=0;
-  if(!model){$('details').open=true;tell('Carica il modello di Gaia. Poi premi di nuovo la videocamera.');sync();return;}
-  const ticket=++version;loading=true;sync();tell('Preparo il modello nel browser…');
-  const currentEngine=new BrowserFaceEngine();engine=currentEngine;
+  panel.hidden=false;panel.scrollTop=0;
+  const ticket=++version;loading=true;sync();tell('Recupero il modello salvato sul sito…');
   try{
+   const shared=await modelSource.refresh({force:true,allowCache:true});if(ticket!==version)return;model=shared.model;
+   if(!model){loading=false;$('details').open=true;tell('Nessun modello disponibile. Apri Gestisci modello nelle impostazioni.');sync();return;}
+   const currentEngine=new BrowserFaceEngine();engine=currentEngine;
+   tell(shared.cached?'Uso il modello del sito già scaricato su questo dispositivo.':'Preparo il modello nel browser…');
    await currentEngine.start(model);if(ticket!==version){currentEngine.close();return;}
    if(!navigator.mediaDevices?.getUserMedia)throw Error('Webcam non supportata. Usa un browser aggiornato.');
    tell('Consenti l’accesso alla webcam. Il microfono non viene usato.');
@@ -115,20 +117,17 @@ export function initCameraMode({app,isMuted,getContext,onOffer,onAsk,onChoose,on
  panel.addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;
   if(b.hasAttribute('data-camera-stop'))return stop();
+  if(b.hasAttribute('data-camera-manage')){stop();onManageModel?.();return;}
   if(b.hasAttribute('data-camera-reference'))return referenceAgain();
   if(b.hasAttribute('data-camera-repeat')){flow.reset();stopSpeech();manualPause=false;return;}
   if(b.hasAttribute('data-position-save')){if(enabled&&lastBounds){positionCapture={start:performance.now(),values:[]};flow.reset();}return;}
   if(b.hasAttribute('data-position-reset')){reference=null;positionCapture=null;try{localStorage.removeItem('gaia_camera_position_v1');}catch{}drawReference();}
  });
  $('[data-camera-duration]').addEventListener('change',()=>{flow.reset();onCancel?.(getContext());});
- $('[data-camera-model-file]').addEventListener('change',async e=>{
-  const file=e.target.files?.[0];if(!file)return;
-  try{const imported=await importModel(file);model=imported.model;stop();panel.hidden=false;$('details').open=true;tell(imported.persisted?'Modello pronto. Premi la videocamera per iniziare.':'Modello pronto per questa pagina. Il browser non consente di conservarlo.');sync();}catch(err){tell(err.message);}finally{e.target.value='';}
- });
  app.addEventListener('pointerdown',e=>{if(enabled&&!e.target.closest('[data-action="camera"]')){flow.reset();stopSpeech();manualPause=true;tell('Comandi manuali in uso. Premi Riprendi scelta per tornare alla webcam.');}});
  app.addEventListener('click',e=>{if(e.target.closest('[data-action="camera"]')){restoreKeyboardFocus=e.detail===0;enabled||loading?stop():start();}});
  new MutationObserver(sync).observe(app,{childList:true,subtree:true});window.addEventListener('resize',sync);
- window.addEventListener('storage',e=>{if(e.key==='gaia_personal_model_v1'){stop('Modello cambiato in un’altra scheda. Riattiva la webcam.');model=savedModel();sync();}});
+ window.addEventListener('gaia-personal-model-changed',e=>{if(enabled||engine)stop('Il modello del sito è stato aggiornato. Riattiva la webcam per usare la nuova versione.');model=e.detail.model;sync();});
  document.addEventListener('visibilitychange',()=>{if(enabled){++epoch;latest=null;flow.reset();positionCapture=null;stopSpeech();text(signal,'In pausa');}});
  window.addEventListener('pagehide',()=>stop());drawReference();sync();return {stop,isActive:()=>enabled||loading};
 }

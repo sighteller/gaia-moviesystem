@@ -1,6 +1,8 @@
+import {mountModelSettings} from './model-settings.js?v=20261120shared';
+import {startModelSync} from './browser-model-store.js?v=20261120shared';
 import {initViewing} from './viewing.js?v=20261120bianca1990';
 import {initMenuKeyboard} from './menu-keyboard.js?v=20261119viewing';
-import {initCameraMode} from './camera-mode.js?v=20261120browser2';
+import {initCameraMode} from './camera-mode.js?v=20261120shared';
 import {initStatistics} from './statistics.js?v=20261112rankings';
 import {initCatalogSearch} from './catalog-search.js?v=20261112studios';
 import {proposalBadge} from './recommendation-badges.js?v=20261007central';
@@ -154,7 +156,9 @@ function renderFilters(){
 
 function renderSettings(){
   if(app.querySelector('[data-overlay]'))return;
-  app.insertAdjacentHTML('beforeend', `<div class="platform-panel" data-overlay="settings"><section class="platform-box settings-box" role="dialog" aria-modal="true" aria-labelledby="settings-heading"><h2 id="settings-heading">Impostazioni</h2><h3>Catalogo completo</h3><p>Gestisci titoli, copertine, citazioni e piattaforme.</p><a class="ghost-btn" href="disponibilita.html">Gestisci catalogo</a><h3>Citazioni dei film</h3><p>Leggi le frasi scelte, aggiungi quelle che ricordi o usa la frase standard.</p><a class="ghost-btn" href="citazioni.html">Gestisci citazioni</a><div id="jellyfin-sync-panel"></div><button class="ghost-btn" data-action="close-settings">Fatto</button></section></div>`);
+  cameraMode.stop();
+  app.insertAdjacentHTML('beforeend', `<div class="platform-panel" data-overlay="settings"><section class="platform-box settings-box" role="dialog" aria-modal="true" aria-labelledby="settings-heading"><h2 id="settings-heading">Impostazioni</h2><div id="camera-model-settings"></div><h3>Catalogo completo</h3><p>Gestisci titoli, copertine, citazioni e piattaforme.</p><a class="ghost-btn" href="disponibilita.html">Gestisci catalogo</a><h3>Citazioni dei film</h3><p>Leggi le frasi scelte, aggiungi quelle che ricordi o usa la frase standard.</p><a class="ghost-btn" href="citazioni.html">Gestisci citazioni</a><div id="jellyfin-sync-panel"></div><button class="ghost-btn" data-action="close-settings">Fatto</button></section></div>`);
+  mountModelSettings(app.querySelector('#camera-model-settings'));
   mountJellyfinSync(app.querySelector('#jellyfin-sync-panel'),loadData);
   app.querySelector('[data-action="close-settings"]').focus({preventScroll:true});
 }
@@ -464,17 +468,20 @@ const cameraMode=initCameraMode({
   },
   onAdvance:async context=>{if(cameraContext()?.key!==context.key||context.kind!=='movie')return false;await nextMovie(false);return cameraContext()?.key!==context.key;},
   onCancel:context=>{if(context?.kind==='movie'&&cameraContext()?.key===context.key&&app.querySelector('.movie-stage[data-confirming]'))cancelConfirm();},
+  onManageModel:renderSettings,
   onStop:clearCameraHighlight
 });
 initFeatures({ app, state, loadData, renderCategories, startSession, call, deviceId, topbar });
 document.addEventListener('gaia-render-movie', renderMovie);
 
+startModelSync();
 (async function init(){
   try {
     if(verificationDevice)await call('recommendationVerification',{deviceId:verificationDevice});
     await loadData();
     await checkInterruptedViewing();
     renderIntro();
+    if(new URL(location.href).searchParams.get('settings')==='model')renderSettings();
   } catch (err) {
     console.error(err);
     app.innerHTML = `<div class="shell"><div class="empty"><h2>Errore di connessione</h2><p>Gaia non riesce a leggere il catalogo in questo momento.</p></div></div>`;

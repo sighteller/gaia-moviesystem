@@ -1,5 +1,5 @@
 import {BrowserFaceEngine} from './browser-face-engine.js?v=20261120browser';
-import {savedModel,importModel,modelLabel} from './browser-model-store.js?v=20261120browser2';
+import {savedModel,refreshSharedModel,startModelSync,modelLabel} from './browser-model-store.js?v=20261120shared';
 import {initAnnotations} from './video-annotations.js?v=20261120browser';
 import {priorFrame,compareAnnotations} from './personal-results.js?v=20261120browser';
 const $=id=>document.getElementById(id),video=$('video'),annotations=initAnnotations(video);
@@ -28,8 +28,9 @@ function currentFrames(){return [...new Map(frames.map(f=>[f.time.toFixed(4),f])
 function comparison(){const rows=annotations.current()?.annotations||[];if(!rows.length||!frames.length){$('browser-comparison').textContent='Importa o segna le risposte nella casella 2 per confrontarle con questa prova.';return;}const c=compareAnnotations(currentFrames(),rows);$('browser-comparison').textContent=`Nei punti visitati della prova: ${c.yesFound} sì attivati · ${c.yesMissed} sì non attivati · ${c.falseYes} riposi scambiati per sì · ${c.unavailable} non valutabili o non visitati · ${c.uncertainLabels} etichette dubbie escluse. Per gli intervalli si controlla il centro. Non è una misura di tutti gli errori nel filmato.`;}
 annotations.subscribe(comparison);
 async function start(){
- if(!file||!model||running)return;stop('Preparo il riconoscimento nel browser…');running=true;frames=[];epoch=0;lastTime=-1;lastRun=-Infinity;controls();video.pause();video.currentTime=0;const ticket=version;engine=new BrowserFaceEngine();
+ if(!file||running)return;stop('Recupero il modello del sito…');running=true;frames=[];epoch=0;lastTime=-1;lastRun=-Infinity;controls();video.pause();video.currentTime=0;const ticket=version;engine=new BrowserFaceEngine();
  try{
+  const shared=await refreshSharedModel({force:true,allowCache:true});if(ticket!==version)return;model=shared.model;if(!model){stop('Nessun modello sul sito. Caricalo dalle impostazioni.');return;}
   modelHash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(JSON.stringify(model))))).map(b=>b.toString(16).padStart(2,'0')).join('');
   await engine.start(model);if(ticket!==version)return;await engine.reset(roi());if(ticket!==version)return;status('Lettura attiva nel browser. Puoi mettere in pausa e segnare le risposte vere.');
   animation=requestAnimationFrame(tick);try{await video.play();}catch{status('Modello pronto. Premi Riproduci sul video per iniziare.');}
@@ -46,9 +47,8 @@ function tick(now){
 }
 $('browser-file-input').onchange=e=>{
  const next=e.target.files?.[0];if(!next)return;if(!next.size){status('Il video è vuoto. Scegli il filmato originale.');return;}
- stop();video.pause();video.removeAttribute('src');video.load();if(url)URL.revokeObjectURL(url);file=next;video.hidden=false;$('browser-empty').hidden=true;url=URL.createObjectURL(file);frames=[];video.src=url;video.load();annotations.setFile(file);$('browser-file').textContent=file.name;$('browser-counts').textContent='';controls();status(model?'Video aperto. Premi Avvia lettura nel browser.':'Video aperto. Carica anche il modello di Gaia.');e.target.value='';
+ stop();video.pause();video.removeAttribute('src');video.load();if(url)URL.revokeObjectURL(url);file=next;video.hidden=false;$('browser-empty').hidden=true;url=URL.createObjectURL(file);frames=[];video.src=url;video.load();annotations.setFile(file);$('browser-file').textContent=file.name;$('browser-counts').textContent='';controls();status(model?'Video aperto. Premi Avvia lettura nel browser.':'Video aperto. Recupero il modello del sito…');e.target.value='';
 };
-$('browser-model-input').onchange=async e=>{const next=e.target.files?.[0];if(!next)return;try{const value=await importModel(next);stop();frames=[];model=value.model;controls();status(value.persisted?'Modello conservato in questo browser. Puoi avviare la lettura.':'Modello pronto per questa pagina; il browser non consente di conservarlo.');}catch(err){status(err.message);}finally{e.target.value='';}};
 $('browser-start').onclick=start;$('browser-stop').onclick=()=>stop();
 for(const id of ['browser-zoom','browser-x','browser-y'])$(id).addEventListener('input',()=>{if(running)stop('Ritaglio cambiato. Riavvia la lettura per raccogliere il riferimento con il nuovo ritaglio.');preview();});
 video.addEventListener('loadedmetadata',controls);video.addEventListener('loadeddata',()=>{controls();preview();});video.addEventListener('timeupdate',refresh);video.addEventListener('pause',()=>{refresh();comparison();});
@@ -60,5 +60,7 @@ $('browser-export').onclick=()=>{
  const link=document.createElement('a'),objectUrl=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));link.href=objectUrl;link.download='gaia-risultati-browser.json';link.click();setTimeout(()=>URL.revokeObjectURL(objectUrl),1000);
 };
 document.addEventListener('visibilitychange',()=>{if(running){++epoch;latest=null;lastTime=-1;refresh();}});
-window.addEventListener('storage',e=>{if(e.key==='gaia_personal_model_v1'){stop('Modello cambiato in un’altra scheda. Riavvia la lettura.');frames=[];model=savedModel();controls();}});
+window.addEventListener('gaia-personal-model-changed',e=>{if(running&&engine?.worker)stop('Modello aggiornato sul sito. Riavvia la lettura per usare la nuova versione.');frames=[];model=e.detail.model;controls();comparison();});
 window.addEventListener('pagehide',()=>{stop();if(url)URL.revokeObjectURL(url);});controls();
+
+startModelSync();refreshSharedModel().then(value=>{model=value.model;controls();if(!model)status('Nessun modello disponibile: apri le impostazioni del sito.');}).catch(e=>status(e.message));
