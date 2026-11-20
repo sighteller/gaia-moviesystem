@@ -2,7 +2,7 @@ import {mountModelSettings} from './model-settings.js?v=20261120shared';
 import {startModelSync} from './browser-model-store.js?v=20261120shared';
 import {initViewing} from './viewing.js?v=20261120bianca1990';
 import {initMenuKeyboard} from './menu-keyboard.js?v=20261119viewing';
-import {initCameraMode} from './camera-mode.js?v=20261120choice';
+import {initCameraMode} from './camera-mode.js?v=20261120tolerance';
 import {initStatistics} from './statistics.js?v=20261112rankings';
 import {initCatalogSearch} from './catalog-search.js?v=20261112studios';
 import {proposalBadge} from './recommendation-badges.js?v=20261007central';
@@ -446,7 +446,7 @@ const menuKeyboard=initMenuKeyboard({app,state,syncFilters:()=>{syncFilterIndica
 initCatalogSearch({app,state,topbar,startSession});
 function cameraContext(){
   if(state.navigating||savingChoice||document.hidden||app.querySelector('[data-overlay],dialog[open]'))return null;
-  if(app.querySelector('.intro-screen'))return {key:'intro',kind:'intro',options:[{id:'start',label:'cominciare',question:'Ciao Gaia! Vuoi cominciare?',confirmQuestion:'Vuoi cominciare, sei sicura?'}]};
+  if(app.querySelector('.intro-screen'))return {key:'intro',kind:'intro',options:[{id:'start',label:'cominciare',question:'Ciao Gaia! Vuoi cominciare?'}]};
   const categories=[...app.querySelectorAll('[data-category]')].filter(b=>!b.disabled);
   if(categories.length)return {key:'categories',kind:'categories',options:categories.map(b=>({id:b.dataset.category,label:b.querySelector('h2')?.textContent||b.textContent.trim()}))};
   const stage=app.querySelector('.movie-stage'),title=currentTitle();

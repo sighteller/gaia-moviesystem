@@ -1,13 +1,14 @@
 import {BrowserFaceEngine} from './browser-face-engine.js?v=20261120browser';
 import {savedModel,refreshSharedModel,modelLabel} from './browser-model-store.js?v=20261120shared';
 import {normalizeReference,averagePosition,positionHint} from './camera-position-core.js?v=20261117';
-import {CameraChoiceFlow,CHOICE_DURATIONS,YES_SELECTION_MS} from './camera-choice-flow.js?v=20261120choice';
+import {CameraChoiceFlow,CHOICE_DURATIONS,YES_SELECTION_MS} from './camera-choice-flow.js?v=20261120tolerance';
 export function initCameraMode({app,isMuted,getContext,onOffer,onAsk,onChoose,onAdvance,onCancel,onStop,onManageModel,modelSource={savedModel,refresh:refreshSharedModel}}){
  const panel=document.createElement('aside');panel.className='camera-panel';panel.hidden=true;panel.setAttribute('aria-label','Webcam e risposte');
  panel.innerHTML=`<div class="camera-panel-head"><strong>Modalità webcam</strong><button type="button" data-camera-stop aria-label="Disattiva webcam">×</button></div>
  <div class="camera-preview"><video autoplay muted playsinline aria-label="Anteprima webcam"></video><div class="camera-position-guide" hidden aria-hidden="true"></div></div>
  <div class="camera-reading"><span>Modello di Gaia</span><strong data-camera-signal aria-live="polite">In attesa</strong></div><p data-camera-question aria-live="polite"></p><p data-camera-status role="status"></p>
  <button type="button" data-camera-reference>Rifai riferimento di riposo</button><button type="button" data-camera-repeat>Riprendi scelta</button>
+ <p class="camera-position-note">Per scegliere e confermare: almeno 1,5 secondi di Si negli ultimi 2,5. Sono ammesse brevi pause incerte.</p>
  <label class="camera-duration">Tempo per titolo<select data-camera-duration>${CHOICE_DURATIONS.map(seconds=>`<option value="${seconds}"${seconds===5?' selected':''}>${seconds} secondi</option>`).join('')}</select></label>
  <details><summary>Modello e inquadratura</summary><p data-camera-model></p><button type="button" data-camera-manage>Gestisci modello nelle impostazioni</button><p>La webcam usa automaticamente il modello salvato sul sito. I fotogrammi vengono elaborati nel browser.</p>
  <strong>Posizionamento</strong><p data-position-status></p><button type="button" data-position-save disabled>Memorizza inquadratura</button> <button type="button" data-position-reset hidden>Cancella guida</button><p class="camera-position-note">La guida aiuta a ritrovare l’inquadratura. Il riferimento di riposo viene raccolto di nuovo a ogni avvio: non occorre tenere la testa dritta.</p><a href="camera-test.html">Prova il modello con un video</a></details>`;
@@ -74,7 +75,7 @@ export function initCameraMode({app,isMuted,getContext,onOffer,onAsk,onChoose,on
   if(event.type==='cancel'){onCancel?.(context);stopSpeech();text(question,`Riprendiamo da ${selected.label}.`);return;}
   if(event.type==='ask'){
    rendering=true;
-   try{await onAsk?.(context,selected);if(ticket!==version)return;speak(selected.confirmQuestion||`Sei sicura di scegliere ${selected.label}?`);}finally{if(ticket===version)rendering=false;}return;
+   try{await onAsk?.(context,selected);if(ticket!==version)return;speak('Sei sicura?');}finally{if(ticket===version)rendering=false;}return;
   }
   if(event.type==='choose'||event.type==='advance'){
    actionBusy=true;stopSpeech();
@@ -100,13 +101,13 @@ export function initCameraMode({app,isMuted,getContext,onOffer,onAsk,onChoose,on
    const labels={yes:'Si',rest:'No/Riposo',uncertain:'Incerto',unavailable:'Non valutabile'};text(signal,labels[result.state]);panel.dataset.reading=result.state;
    if(time<3){tell(`Riferimento di riposo: ${Math.max(0,3-time).toFixed(1)} secondi rimasti.`);return;}
    if(!result.reference_ready){tell('Viso non abbastanza visibile nei primi tre secondi. Sistema l’inquadratura e premi Rifai riferimento di riposo.');return;}
-   if(result.state==='unavailable')tell(result.reason==='missing_face'?'Viso non rilevabile: scelta sospesa.':'Raccolgo il movimento recente prima di interpretare la risposta.');
+   if(result.state==='unavailable')tell(result.reason==='missing_face'?'Viso non rilevabile: il tempo senza lettura non conta come Si.':'Raccolgo il movimento recente prima di interpretare la risposta.');
    else if(!manualPause)tell('Modello attivo nel browser. Senza un sì si avanza per tempo scaduto.');
    if(rendering||actionBusy){flow.hold(received);return;}
    const context=getContext();
    if(!context){flow.reset();if(!manualPause)text(question,'Completa questa schermata con i comandi manuali.');return;}
    const event=flow.update(received,result.state,context,{paused:(speaking&&flow.phase==='confirm')||rendering||actionBusy||manualPause||!!positionCapture,duration:Number($('[data-camera-duration]').value)*1000});
-   if(flow.phase==='scan'&&result.state==='yes'&&flow.yesSince!==null&&!manualPause&&!positionCapture){const remaining=Math.max(0,(YES_SELECTION_MS-(received-flow.yesSince))/1000);text(question,`Si per ${option(context)?.label||'questa opzione'} · mantieni ancora ${remaining.toFixed(1)} s.`);}
+   if(!speaking&&!rendering&&!actionBusy&&!manualPause&&!positionCapture&&['scan','confirm'].includes(flow.phase)){text(question,`${flow.phase==='confirm'?'Sei sicura?':option(context)?.label||'Questa opzione'} · Si rilevato: ${(flow.yesMs/1000).toFixed(1)} / ${(YES_SELECTION_MS/1000).toFixed(1)} s negli ultimi 2,5 s.`);}
    handle(event,context,ticket).catch(()=>{if(ticket===version){manualPause=true;tell('Lettura sospesa. Premi Riprendi scelta.');}});
   }).catch(e=>{if(ticket===version)stop(e.message);}).finally(()=>{if(ticket===version){busy=false;if(referenceRequested){referenceRequested=false;referenceAgain();}}});
  }
