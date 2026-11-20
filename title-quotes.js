@@ -858,7 +858,25 @@ export const titleQuotes = [
   "text": "Forza, Marahute, torniamo a casa.",
   "speaker": "Cody",
   "source": "https://disney.fandom.com/it/wiki/Cody_(Bianca_e_Bernie)"
-}
+},
+  {
+    "names": [
+      "Garfield Cartoons"
+    ],
+    "year": 2026,
+    "text": "Spuntino di mezzanotte",
+    "speaker": "",
+    "source": ""
+  },
+  {
+    "names": [
+      "Topolino: Sole, Sale e Sport"
+    ],
+    "year": 2006,
+    "text": "Yuk, yuk",
+    "speaker": "",
+    "source": ""
+  }
 ];
 
 export function titleQuote(title){
