@@ -5530,7 +5530,749 @@ export const quoteProposals = [
       "excerpt": false
     }
   ]
-}
+},
+  {
+    "names": [
+      "Aladdin"
+    ],
+    "year": 2019,
+    "options": [
+      {
+        "text": "Devi avere più fiducia in quello che hai da offrire.",
+        "speaker": "Genio · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt6139732/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Anastasia"
+    ],
+    "year": 1997,
+    "options": [
+      {
+        "text": "Mi chiamo Anya.",
+        "speaker": "Anastasia · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0118617/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Atlantis - L'impero perduto"
+    ],
+    "year": 2001,
+    "options": [
+      {
+        "text": "Signor Whitmore, questo libro è la chiave per trovare il continente perduto di Atlantide.",
+        "speaker": "Milo",
+        "source": "https://it.wikiquote.org/wiki/Atlantis_-_L%27impero_perduto",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Camp Rock"
+    ],
+    "year": 2008,
+    "options": [
+      {
+        "text": "Non conta solo l’immagine. Se la gente non vede chi sei davvero, non ha senso.",
+        "speaker": "Shane Gray · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt1055366/quotes/",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Camp Rock 2: The Final Jam"
+    ],
+    "year": 2010,
+    "options": [
+      {
+        "text": "Sto cercando di salvare qualcosa a cui tengo.",
+        "speaker": "Mitchie Torres · Traduzione nostra",
+        "source": "https://www.moviefone.com/movie/camp-rock-2-the-final-jam/10040029/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Cenerentola"
+    ],
+    "year": 1950,
+    "options": [
+      {
+        "text": "Ora un nome. Ne ho uno! Ottavio. Ma per farla breve, ti chiameremo Gus.",
+        "speaker": "Cenerentola",
+        "source": "https://it.wikiquote.org/wiki/Cenerentola_%28film_1950%29",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Cenerentola - Il gioco del destino"
+    ],
+    "year": 2007,
+    "options": [
+      {
+        "text": "Mi fido di te, figliolo. Sono i topi parlanti a preoccuparmi!",
+        "speaker": "Re · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0465940/quotes/?item=qt0451537",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Cenerentola II - Quando i sogni diventano realtà"
+    ],
+    "year": 2002,
+    "options": [
+      {
+        "text": "Non sarebbe bello se tutti potessero sedersi dove vogliono?",
+        "speaker": "Cenerentola · Traduzione nostra",
+        "source": "https://en.wikiquote.org/wiki/Cinderella_II%3A_Dreams_Come_True",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Daniel Tiger"
+    ],
+    "year": 2012,
+    "options": [
+      {
+        "text": "Sono così deluso. Grrr!",
+        "speaker": "Daniel Tiger · Traduzione nostra",
+        "source": "https://en.wikiquote.org/wiki/Daniel_Tiger%27s_Neighborhood",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Due fantagenitori!"
+    ],
+    "year": 2001,
+    "options": [
+      {
+        "text": "Ho sposato quella intelligente.",
+        "speaker": "Cosmo · Traduzione nostra",
+        "source": "https://www.imdb.com/it/title/tt0235918/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Estremamente Pippo"
+    ],
+    "year": 2000,
+    "options": [
+      {
+        "text": "Ti sei mai chiesto perché portiamo sempre i guanti?",
+        "speaker": "Bobby · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0208185/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Genitori in trappola"
+    ],
+    "year": 1998,
+    "options": [
+      {
+        "text": "Sorelle? Hallie, noi siamo gemelle!",
+        "speaker": "Annie",
+        "source": "https://it.wikiquote.org/wiki/Genitori_in_trappola",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "High School Musical"
+    ],
+    "year": 2006,
+    "options": [
+      {
+        "text": "Come hanno potuto farmi questo? Avevo già scelto i colori per il mio camerino!",
+        "speaker": "Sharpay",
+        "source": "https://www.pensieriparole.it/frasi-film/high-school-musical-%282006%29/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "High School Musical 2"
+    ],
+    "year": 2007,
+    "options": [
+      {
+        "text": "Non farmi la predica su Ryan.",
+        "speaker": "Sharpay Evans · Traduzione nostra",
+        "source": "https://www.imdb.com/it/title/tt0810900/",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "High School Musical 3: Senior Year"
+    ],
+    "year": 2008,
+    "options": [
+      {
+        "text": "Perché da quassù riesco a vedere meglio il mondo.",
+        "speaker": "Troy",
+        "source": "https://www.mymovies.it/film/2008/high-school-musical-3-senior-year/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "I sospiri del mio cuore"
+    ],
+    "year": 1995,
+    "options": [
+      {
+        "text": "Shizuku, volevo solo dirti che mi è piaciuto molto il tuo testo.",
+        "speaker": "Seiji · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0113824/quotes?item=qt0948847",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Il gigante di ferro"
+    ],
+    "year": 1999,
+    "options": [
+      {
+        "text": "Tu sei chi scegli e cerchi di essere.",
+        "speaker": "Dean",
+        "source": "https://it.wikiquote.org/wiki/Il_gigante_di_ferro",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Il mio vicino Totoro"
+    ],
+    "year": 1988,
+    "options": [
+      {
+        "text": "Gli alberi e le persone erano buoni amici.",
+        "speaker": "Tatsuo Kusakabe · Traduzione nostra",
+        "source": "https://www.imdb.com/it/title/tt0096283/",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Il robot selvaggio"
+    ],
+    "year": 2024,
+    "options": [
+      {
+        "text": "A volte, per sopravvivere, devi diventare qualcosa di più di ciò che sei stato programmato per essere.",
+        "speaker": "Roz · Trailer",
+        "source": "https://www.mymovies.it/film/2024/il-robot-selvaggio/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "In viaggio con Pippo"
+    ],
+    "year": 1995,
+    "options": [
+      {
+        "text": "Sei mio figlio, Max. Per quanto tu possa crescere, sarai sempre mio figlio.",
+        "speaker": "Pippo · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0113198/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Kiki - Consegne a domicilio"
+    ],
+    "year": 1989,
+    "options": [
+      {
+        "text": "Ognuno di noi ha bisogno di trovare la propria ispirazione, Kiki. A volte non è facile.",
+        "speaker": "Ursula · Traduzione nostra",
+        "source": "https://www.imdb.com/it/title/tt0097814/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "La bella e la bestia"
+    ],
+    "year": 1991,
+    "options": [
+      {
+        "text": "Caspita! Non sbagli un colpo, Gaston! Sei il più grande cacciatore del regno!",
+        "speaker": "Le Tont",
+        "source": "https://it.wikiquote.org/wiki/La_bella_e_la_bestia_%28film_1991%29",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "La bella e la bestia - Un magico Natale"
+    ],
+    "year": 1997,
+    "options": [
+      {
+        "text": "Volevo solo renderti felice.",
+        "speaker": "Belle · Traduzione nostra",
+        "source": "https://www.imdb.com/it/title/tt0118692/",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "La fabbrica di cioccolato"
+    ],
+    "year": 2005,
+    "options": [
+      {
+        "text": "Io ho visto Willy Wonka con questi miei occhi. Lavoravo nella sua fabbrica.",
+        "speaker": "Nonno Joe",
+        "source": "https://it.wikiquote.org/wiki/La_fabbrica_di_cioccolato",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Lassie"
+    ],
+    "year": 1994,
+    "options": [
+      {
+        "text": "Va tutto bene, Lassie, vai! Torna a casa!",
+        "speaker": "Traduzione nostra",
+        "source": "https://clip.cafe/lassie-1994",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Le follie dell'imperatore"
+    ],
+    "year": 2000,
+    "options": [
+      {
+        "text": "Ho pensato di iniziare con una zuppa e un’insalata leggera, e poi vedere come ci sentiamo dopo.",
+        "speaker": "Kronk · Traduzione nostra",
+        "source": "https://www.imdb.com/it/title/tt0120917/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Le follie di Kronk"
+    ],
+    "year": 2005,
+    "options": [
+      {
+        "text": "Non piangete per me, Marge e Tina.",
+        "speaker": "Kronk",
+        "source": "https://it.wikiquote.org/wiki/Le_follie_di_Kronk",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Lilo & Stitch"
+    ],
+    "year": 2002,
+    "options": [
+      {
+        "text": "Siamo sorelle. È il nostro lavoro.",
+        "speaker": "Lilo · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0275847/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Lilo & Stitch"
+    ],
+    "year": 2003,
+    "options": [
+      {
+        "text": "La gelosia puzza, ma siamo ancora amici.",
+        "speaker": "Lilo · Traduzione nostra",
+        "source": "https://en.wikiquote.org/wiki/Lilo_%26_Stitch%3A_The_Series_%28season_1%29",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Mamma, ho perso l'aereo"
+    ],
+    "year": 1990,
+    "options": [
+      {
+        "text": "Signora, ho otto anni. Pensi che sarei qui da solo? Non credo proprio.",
+        "speaker": "Kevin McCallister · Traduzione nostra",
+        "source": "https://www.imdb.com/it/title/tt0099785/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Mamma, ho riperso l'aereo - Mi sono smarrito a New York"
+    ],
+    "year": 1992,
+    "options": [
+      {
+        "text": "Come può essere Natale senza un albero di Natale, mamma?!",
+        "speaker": "Kevin McCallister",
+        "source": "https://it.wikiquote.org/wiki/Mamma%2C_ho_riperso_l%27aereo%3A_mi_sono_smarrito_a_New_York",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Mulan 2"
+    ],
+    "year": 2004,
+    "options": [
+      {
+        "text": "Sembra ieri che combattevamo gli Unni e salvavamo la Cina!",
+        "speaker": "Mushu · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0279967/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Peppa Pig"
+    ],
+    "year": 2004,
+    "options": [
+      {
+        "text": "Dinosauro! Grrr!",
+        "speaker": "George · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0426769/quotes",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Pernille"
+    ],
+    "year": 2021,
+    "options": [
+      {
+        "text": "Sigrid, potresti venire qui, per favore?",
+        "speaker": "Traduzione nostra",
+        "source": "https://www.springfieldspringfield.co.uk/view_episode_scripts.php?episode=s01e01&tv-show=pernille-2021",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Pinocchio"
+    ],
+    "year": 2002,
+    "options": [
+      {
+        "text": "Perché se rimango qui, mi toccherà fare come tutti i ragazzi: vale dire andare a scuola e studiare.",
+        "speaker": "Pinocchio",
+        "source": "https://it.wikiquote.org/wiki/Pinocchio_%28film_2002%29",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Piovono polpette 2 - La rivincita degli avanzi"
+    ],
+    "year": 2013,
+    "options": [
+      {
+        "text": "C’è una falla nella barca!",
+        "speaker": "Flint Lockwood · Traduzione nostra",
+        "source": "https://www.moviefone.com/movie/cloudy-with-a-chance-of-meatballs-2/56451/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Pocahontas"
+    ],
+    "year": 1995,
+    "options": [
+      {
+        "text": "Preferisco morire domani, che vivere 100 anni senza conoscerti.",
+        "speaker": "John Smith",
+        "source": "https://www.mymovies.it/film/1995/pocahontas/frasi/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Ponyo sulla scogliera"
+    ],
+    "year": 2008,
+    "options": [
+      {
+        "text": "Ponyo vuole il prosciutto!",
+        "speaker": "Ponyo · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0876563/quotes/?item=qt0962833",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Rio"
+    ],
+    "year": 2011,
+    "options": [
+      {
+        "text": "Nei tuoi sogni da scimmietta.",
+        "speaker": "Gioiello · Traduzione nostra",
+        "source": "https://www.imdb.com/it/title/tt1436562/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Shrek"
+    ],
+    "year": 2001,
+    "options": [
+      {
+        "text": "Ciao, principessa!",
+        "speaker": "Asino",
+        "source": "https://www.mymovies.it/film/2001/shrek/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Si alza il vento"
+    ],
+    "year": 2013,
+    "options": [
+      {
+        "text": "Si alza il vento... bisogna tentare di vivere.",
+        "speaker": "Jirō",
+        "source": "https://it.wikiquote.org/wiki/Si_alza_il_vento",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Tarzan"
+    ],
+    "year": 1999,
+    "options": [
+      {
+        "text": "Perché non mi hai detto che ci sono creature uguali a me?",
+        "speaker": "Tarzan",
+        "source": "https://it.wikiquote.org/wiki/Tarzan_%28film_1999%29",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Topolino e la magia del Natale"
+    ],
+    "year": 1999,
+    "options": [
+      {
+        "text": "Non ancora! Non può essere già finito il Natale!",
+        "speaker": "Louie · Traduzione nostra",
+        "source": "https://en.wikiquote.org/wiki/Mickey%27s_Once_Upon_a_Christmas",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Wicked"
+    ],
+    "year": 2024,
+    "options": [
+      {
+        "text": "Ti ho lasciato un po’ di spazio!",
+        "speaker": "Glinda",
+        "source": "https://www.comingsoon.it/film/wicked/62642/scheda/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Willy Wonka e la fabbrica di cioccolato"
+    ],
+    "year": 1971,
+    "options": [
+      {
+        "text": "Abbiamo così tanto tempo e così poco da fare. Fermi, è il contrario...",
+        "speaker": "Willy Wonka",
+        "source": "https://it.wikiquote.org/wiki/Willy_Wonka_e_la_fabbrica_di_cioccolato",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Doraemon - Il film 2"
+    ],
+    "year": 2020,
+    "options": [
+      {
+        "text": "Voglio rivedere la nonna ancora una volta!",
+        "speaker": "Nobita · Traduzione nostra",
+        "source": "https://subtitlecat.com/subs/295/Stand.By.Me.Doraemon.2.2020.1080p.BluRay.x264.AAC5.1-%5BYTS.MX%5D.html",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Doraemon: Il film - Nobita e il nuovo dinosauro"
+    ],
+    "year": 2020,
+    "options": [
+      {
+        "text": "Sono stata così in pensiero per te!",
+        "speaker": "Shizuka · Traduzione nostra",
+        "source": "https://clip.cafe/doraemon-nobitas-new-dinosaur-2020/nobita-s3/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Topolino - Strepitoso Natale!"
+    ],
+    "year": 2004,
+    "options": [
+      {
+        "text": "Max, non vedo l’ora di conoscere tuo padre.",
+        "speaker": "Mona · Traduzione nostra",
+        "source": "https://transcripts.simpleremix.com/script.php/mickeys-twice-upon-a-christmas-2004-1mND",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Garfield 2"
+    ],
+    "year": 2006,
+    "options": [
+      {
+        "text": "Sono della sicurezza, amico. Ti proteggo da te stesso.",
+        "speaker": "Garfield · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0455499/characters/nm0005227/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Palle di neve"
+    ],
+    "year": 2015,
+    "options": [
+      {
+        "text": "Non viene nessuno. Sicuro che siano tuoi amici?",
+        "speaker": "Traduzione nostra",
+        "source": "https://www.transcripts.foreverdreaming.org/viewtopic.php?t=229118",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Peter Rabbit 2 - Un birbante in fuga"
+    ],
+    "year": 2021,
+    "options": [
+      {
+        "text": "La dieta comincia adesso.",
+        "speaker": "Pigling Bland · Traduzione nostra",
+        "source": "https://www.quotes.net/movies/peter_rabbit_2%3A_the_runaway_%282021%29_156838",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Tutti insieme appassionatamente"
+    ],
+    "year": 1965,
+    "options": [
+      {
+        "text": "Quando Iddio chiude una porta è sempre per aprirne un'altra.",
+        "speaker": "Maria",
+        "excerpt": false,
+        "source": "https://it.wikiquote.org/wiki/Tutti_insieme_appassionatamente"
+      }
+    ]
+  },
+  {
+    "names": [
+      "Un delfino per amico"
+    ],
+    "year": 2007,
+    "options": [
+      {
+        "text": "È stata una stupidaggine, va bene?",
+        "speaker": "Traduzione nostra",
+        "source": "https://transcripts.foreverdreaming.org/viewtopic.php?p=343602",
+        "excerpt": true
+      }
+    ]
+  }
 ];
 const normalize = value => String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
 export function proposalsFor(title) {
