@@ -1,128 +1,134 @@
-import {faceBounds,normalizeReference,averagePosition,positionHint} from './camera-position-core.js?v=20261117';
-import {vectorFromFace,classify,GestureGate,normalizeSamples} from './camera-movement-core.js?v=20261116';
-import {CameraStartFlow} from './camera-start-flow.js?v=20261116';
-export function initCameraMode({app,isMuted,onStart}){
+import {BrowserFaceEngine} from './browser-face-engine.js?v=20261120browser';
+import {savedModel,importModel,modelLabel} from './browser-model-store.js?v=20261120browser';
+import {normalizeReference,averagePosition,positionHint} from './camera-position-core.js?v=20261117';
+import {CameraChoiceFlow} from './camera-choice-flow.js?v=20261120browser';
+export function initCameraMode({app,isMuted,getContext,onOffer,onAsk,onChoose,onAdvance,onCancel,onStop}){
  const panel=document.createElement('aside');panel.className='camera-panel';panel.hidden=true;panel.setAttribute('aria-label','Webcam e risposte');
- panel.innerHTML='<div class="camera-panel-head"><strong>Modalità webcam</strong><button type="button" data-camera-stop aria-label="Disattiva webcam">×</button></div><div class="camera-preview"><video autoplay muted playsinline aria-label="Anteprima webcam"></video><div class="camera-position-guide" hidden aria-hidden="true"></div></div><section class="camera-position"><strong>Posizionamento</strong><p data-position-status role="status"></p><button type="button" data-position-save disabled>Memorizza posizione</button> <button type="button" data-position-reset hidden>Cancella riferimento</button><p class="camera-position-note">Solo misure salvate in questo browser, senza foto o video. Rifai il riferimento se sposti la webcam. Non occorre tenere la testa dritta.</p></section><div class="camera-reading"><span>Risposta in tempo reale</span><strong data-camera-signal>In attesa</strong></div><p data-camera-question aria-live="polite"></p><p data-camera-status role="status"></p><button type="button" data-camera-repeat>Ripeti domanda</button><details open><summary>Calibrazione dei gesti</summary><p>Mantieni ciascuna posizione per circa un secondo dopo il clic.</p><div class="camera-calibration">'+[['rest','Riposo'],['yes','Sì'],['no','No']].map(([key,label])=>'<button type="button" data-camera-sample="'+key+'">'+label+'</button>').join('')+'</div><p data-camera-counts></p><button type="button" data-camera-save>Salva esempi nel browser</button><button type="button" data-camera-reset>Ricomincia calibrazione</button><p>Riconoscimento sperimentale. I gesti vanno calibrati sulla postura di oggi. Nessuna registrazione o invio del video.</p></details>';
+ panel.innerHTML=`<div class="camera-panel-head"><strong>Modalità webcam</strong><button type="button" data-camera-stop aria-label="Disattiva webcam">×</button></div>
+ <div class="camera-preview"><video autoplay muted playsinline aria-label="Anteprima webcam"></video><div class="camera-position-guide" hidden aria-hidden="true"></div></div>
+ <div class="camera-reading"><span>Modello di Gaia</span><strong data-camera-signal aria-live="polite">In attesa</strong></div><p data-camera-question aria-live="polite"></p><p data-camera-status role="status"></p>
+ <button type="button" data-camera-reference>Rifai riferimento di riposo</button><button type="button" data-camera-repeat>Riprendi scelta</button>
+ <label class="camera-duration">Tempo per titolo<select data-camera-duration><option value="10">10 secondi</option><option value="15" selected>15 secondi</option><option value="20">20 secondi</option><option value="30">30 secondi</option></select></label>
+ <details><summary>Modello e inquadratura</summary><p data-camera-model></p><label class="camera-model-upload">Carica modello di Gaia<input data-camera-model-file type="file" accept=".json,application/json"></label><p>Una volta caricato, resta in questo browser. Video e movimenti vengono elaborati qui, senza inviarli a un servizio.</p>
+ <strong>Posizionamento</strong><p data-position-status></p><button type="button" data-position-save disabled>Memorizza inquadratura</button> <button type="button" data-position-reset hidden>Cancella guida</button><p class="camera-position-note">La guida aiuta a ritrovare l’inquadratura. Il riferimento di riposo viene raccolto di nuovo a ogni avvio: non occorre tenere la testa dritta.</p><a href="camera-test.html">Prova il modello con un video</a></details>`;
  document.body.append(panel);
- const video=panel.querySelector('video'),signal=panel.querySelector('[data-camera-signal]'),status=panel.querySelector('[data-camera-status]'),question=panel.querySelector('[data-camera-question]'),gate=new GestureGate(),flow=new CameraStartFlow();
- let restoreKeyboardFocus=false;
- let enabled=false,loading=false,version=0,stream=null,detector=null,frame=null,capture=null,samples=normalizeSamples(),lastRun=-Infinity,lastFrame=-1,wasIntro=false;
- const positionStatus=panel.querySelector('[data-position-status]'),positionButton=panel.querySelector('[data-position-save]'),positionReset=panel.querySelector('[data-position-reset]'),guide=panel.querySelector('.camera-position-guide'),preview=panel.querySelector('.camera-preview');
- let reference=null,positionCapture=null,lastBounds=null,readySince=null;
+ const $=selector=>panel.querySelector(selector),video=$('video'),signal=$('[data-camera-signal]'),status=$('[data-camera-status]'),question=$('[data-camera-question]'),flow=new CameraChoiceFlow();
+ let enabled=false,loading=false,version=0,stream=null,engine=null,animation=null,busy=false,lastRun=-Infinity,lastMedia=-1,origin=null,epoch=0,latest=null,model=savedModel(),restoreKeyboardFocus=false;
+ let speaking=false,speechVersion=0,speechTimer=null,rendering=false,actionBusy=false,manualPause=false,referenceRequested=false,positionCapture=null,reference=null,lastBounds=null,readySince=null;
+ const guide=$('.camera-position-guide'),preview=$('.camera-preview');
  try{reference=normalizeReference(JSON.parse(localStorage.getItem('gaia_camera_position_v1')||'null'));}catch{}
- const positionText=text=>{if(positionStatus.textContent!==text)positionStatus.textContent=text;};
- function drawReference(){
-  guide.hidden=!reference;positionReset.hidden=!reference;
-  if(reference){const b=reference.bounds;guide.style.left=((1-b.x-b.w/2)*100)+'%';guide.style.top=((b.y-b.h/2)*100)+'%';guide.style.width=(b.w*100)+'%';guide.style.height=(b.h*100)+'%';}
+ const text=(el,value)=>{if(el.textContent!==value)el.textContent=value;};
+ const tell=value=>text(status,value);
+ function drawReference(){guide.hidden=!reference;$('[data-position-reset]').hidden=!reference;if(reference){const b=reference.bounds;guide.style.left=(1-b.x-b.w/2)*100+'%';guide.style.top=(b.y-b.h/2)*100+'%';guide.style.width=b.w*100+'%';guide.style.height=b.h*100+'%';}}
+ function sync(){
+  app.querySelectorAll('[data-action="camera"]').forEach(b=>{b.classList.toggle('active',enabled||loading);b.setAttribute('aria-pressed',String(enabled||loading));b.setAttribute('aria-label',enabled||loading?'Disattiva webcam':'Attiva webcam');b.title=enabled||loading?'Disattiva webcam':'Attiva webcam';});
+  const bar=app.querySelector('.topbar');if(bar)panel.style.top=Math.max(8,bar.getBoundingClientRect().bottom+8)+'px';
+  $('[data-camera-model]').textContent=modelLabel(model);$('[data-position-save]').disabled=!enabled||!lastBounds||!!positionCapture;
+  $('[data-camera-reference]').disabled=!enabled;$('[data-camera-repeat]').disabled=!enabled;
  }
- function updatePosition(bounds,now){
-  lastBounds=bounds;positionButton.disabled=!enabled||!bounds||!!positionCapture;
-  const aspect=video.videoWidth/video.videoHeight||4/3;
-  preview.style.aspectRatio=String(aspect);
-  if(positionCapture){
-   gate.reset();guide.classList.remove('ready');readySince=null;
-   if(!bounds){positionCapture=null;positionText('Memorizzazione annullata: mantieni un solo viso interamente visibile.');flow.start(now);return false;}
-   positionCapture.values.push(bounds);
-   const elapsed=now-positionCapture.start;positionText('Mantieni la posizione comoda… '+Math.max(1,Math.ceil((3000-elapsed)/1000)));
-   if(elapsed>=3000){
-    const mean=averagePosition(positionCapture.values);positionCapture=null;
-    if(!mean){positionText('Troppo movimento: riprova mantenendo la posizione per tre secondi.');}
-    else{
-     const next={version:1,bounds:mean,aspect};
-     try{localStorage.setItem('gaia_camera_position_v1',JSON.stringify(next));reference=next;drawReference();positionText('Posizione memorizzata in questo browser.');}
-     catch{positionText('Il browser non consente il salvataggio. Riprova consentendo i dati del sito.');}
-    }
-    flow.start(now);question.textContent='Tra 5 secondi ti chiederò se vuoi cominciare.';
-   }
-   return false;
-  }
-  const hint=positionHint(bounds,reference,aspect);
-  if(hint.ready)readySince??=now;else readySince=null;
-  const ready=readySince!==null&&now-readySince>=1000;
-  guide.classList.toggle('ready',ready);positionText(ready?'Posizione pronta ✓':hint.text);
-  return true;
+ function stopSpeech(){++speechVersion;speaking=false;clearTimeout(speechTimer);speechTimer=null;window.speechSynthesis?.cancel();}
+ function speak(value){
+  stopSpeech();text(question,value);if(isMuted()||!window.speechSynthesis)return;
+  const token=speechVersion,utterance=new SpeechSynthesisUtterance(value);utterance.lang='it-IT';speaking=true;
+  const finish=()=>{if(token===speechVersion){speaking=false;clearTimeout(speechTimer);}};utterance.onend=finish;utterance.onerror=finish;
+  speechTimer=setTimeout(()=>{if(token===speechVersion){window.speechSynthesis.cancel();finish();}},10000);window.speechSynthesis.speak(utterance);
  }
- drawReference();positionText(reference?'Riferimento salvato. Attiva la webcam per controllare la posizione.':'Attiva la webcam, poi memorizza la posizione comoda.');
- const labels={yes:'Sì',no:'No',rest:'Riposo',uncertain:'Incerto',uncalibrated:'Da calibrare',missing:'Viso non disponibile'};
- const tell=text=>{if(status.textContent!==text)status.textContent=text;};
- const sync=()=>{app.querySelectorAll('[data-action="camera"]').forEach(b=>{b.classList.toggle('active',enabled||loading);b.setAttribute('aria-pressed',String(enabled||loading));b.setAttribute('aria-label',enabled||loading?'Disattiva webcam':'Attiva webcam');b.title=enabled||loading?'Disattiva webcam':'Attiva webcam';});
-  const bar=app.querySelector('.topbar');if(bar)panel.style.top=Math.max(8,bar.getBoundingClientRect().bottom+8)+'px';};
- function counts(){panel.querySelector('[data-camera-counts]').textContent='Riposo: '+samples.rest.length+' · Sì: '+samples.yes.length+' · No: '+samples.no.length;}
- function speak(text){if(isMuted()||!('speechSynthesis' in window))return;window.speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(text);utterance.lang='it-IT';window.speechSynthesis.speak(utterance);}
- function ask(){question.textContent='Ciao Gaia! Vuoi cominciare?';gate.reset();speak(question.textContent);}
- function returnCameraFocus(){
-  const button=app.querySelector('[data-action="camera"]');
-  if(button&&restoreKeyboardFocus&&(document.activeElement===document.body||document.activeElement===button||panel.contains(document.activeElement)))button.focus({preventScroll:true});
- }
+ function returnFocus(){const button=app.querySelector('[data-action="camera"]');if(button&&restoreKeyboardFocus&&(document.activeElement===document.body||panel.contains(document.activeElement)))button.focus({preventScroll:true});}
  function stop(message=''){
-  version++;enabled=false;loading=false;flow.stop();capture=null;positionCapture=null;lastBounds=null;readySince=null;positionButton.disabled=true;guide.classList.remove('ready');gate.reset();if(frame!==null)cancelAnimationFrame(frame);frame=null;
-  stream?.getTracks().forEach(t=>t.stop());stream=null;video.pause();video.srcObject=null;detector?.close();detector=null;
-  if('speechSynthesis' in window)window.speechSynthesis.cancel();panel.hidden=!message;signal.textContent='Webcam spenta';question.textContent='';tell(message);sync();returnCameraFocus();
+  ++version;enabled=false;loading=false;busy=false;actionBusy=false;rendering=false;manualPause=false;referenceRequested=false;flow.reset();onStop?.();latest=null;positionCapture=null;lastBounds=null;readySince=null;origin=null;
+  if(animation!==null)cancelAnimationFrame(animation);animation=null;engine?.close();engine=null;stream?.getTracks().forEach(t=>t.stop());stream=null;video.pause();video.srcObject=null;stopSpeech();
+  panel.hidden=!message;text(signal,'Webcam spenta');text(question,'');tell(message);guide.classList.remove('ready');sync();returnFocus();
  }
  async function start(){
-  const ticket=++version;loading=true;panel.hidden=false;question.textContent='';tell('Consenti l’accesso alla webcam. Il microfono non viene usato.');sync();
+  model=model||savedModel();panel.hidden=false;
+  if(!model){$('details').open=true;tell('Carica il modello di Gaia. Poi premi di nuovo la videocamera.');sync();return;}
+  const ticket=++version;loading=true;sync();tell('Preparo il modello nel browser…');
+  const currentEngine=new BrowserFaceEngine();engine=currentEngine;
   try{
-   if(!navigator.mediaDevices?.getUserMedia)throw Error('Webcam non supportata in questo browser.');
-   const source=await navigator.mediaDevices.getUserMedia({video:{width:{ideal:640},height:{ideal:480}},audio:false});
+   await currentEngine.start(model);if(ticket!==version){currentEngine.close();return;}
+   if(!navigator.mediaDevices?.getUserMedia)throw Error('Webcam non supportata. Usa un browser aggiornato.');
+   tell('Consenti l’accesso alla webcam. Il microfono non viene usato.');
+   const source=await navigator.mediaDevices.getUserMedia({video:{width:{ideal:1280},height:{ideal:720}},audio:false});
    if(ticket!==version){source.getTracks().forEach(t=>t.stop());return;}
-   stream=source;video.srcObject=source;await video.play();tell('Preparo il riconoscimento dei movimenti…');
-   const {FaceLandmarker,FilesetResolver}=await import('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.21/vision_bundle.mjs');
-   const files=await FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.21/wasm');
-   if(ticket!==version)return;
-   const model=await FaceLandmarker.createFromOptions(files,{baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task'},runningMode:'VIDEO',numFaces:2,minFaceDetectionConfidence:.65,minFacePresenceConfidence:.65,minTrackingConfidence:.65});
-   if(ticket!==version){model.close();return;}detector=model;loading=false;enabled=true;lastFrame=-1;lastRun=-Infinity;gate.reset();
-   stream.getVideoTracks().forEach(t=>t.addEventListener('ended',()=>{if(enabled)stop('La webcam è stata scollegata. Puoi riattivarla.');},{once:true}));
-   flow.start(performance.now());question.textContent='Tra 5 secondi ti chiederò se vuoi cominciare.';counts();tell('Calibra riposo, sì e no prima di rispondere.');sync();returnCameraFocus();frame=requestAnimationFrame(tick);
-  }catch(error){if(ticket===version)stop(error.name==='NotAllowedError'?'Accesso alla webcam negato. Consenti l’accesso e premi di nuovo la videocamera.':error.name==='NotFoundError'?'Nessuna webcam disponibile.':error.name==='NotReadableError'?'La webcam è occupata da un’altra applicazione.':('Impossibile avviare la webcam: '+error.message));}
+   stream=source;video.srcObject=source;await video.play();if(ticket!==version)return;
+   enabled=true;loading=false;origin=null;epoch=0;lastRun=-Infinity;lastMedia=-1;latest=null;manualPause=false;flow.reset();text(question,'Mantieni per tre secondi la postura di riposo comoda di oggi.');tell('Raccolgo il riferimento di riposo.');
+   stream.getVideoTracks().forEach(t=>t.addEventListener('ended',()=>{if(ticket===version)stop('Webcam scollegata. Puoi riattivarla.');},{once:true}));
+   sync();returnFocus();animation=requestAnimationFrame(tick);
+  }catch(e){if(ticket===version)stop(e.name==='NotAllowedError'?'Accesso alla webcam negato. Consenti la webcam e riprova.':e.name==='NotFoundError'?'Nessuna webcam disponibile.':e.name==='NotReadableError'?'Webcam occupata da un’altra applicazione.':e.message);}
+ }
+ function updatePosition(bounds,now){
+  lastBounds=bounds;preview.style.aspectRatio=String(video.videoWidth/video.videoHeight||4/3);sync();
+  if(positionCapture){
+   if(!bounds){positionCapture=null;text($('[data-position-status]'),'Viso perso: riprova a memorizzare l’inquadratura.');return;}
+   positionCapture.values.push(bounds);
+   if(now-positionCapture.start>=3000){const mean=averagePosition(positionCapture.values);positionCapture=null;if(mean){reference={version:1,bounds:mean,aspect:video.videoWidth/video.videoHeight};try{localStorage.setItem('gaia_camera_position_v1',JSON.stringify(reference));}catch{}drawReference();}else text($('[data-position-status]'),'Troppo movimento. Riprova a memorizzare l’inquadratura.');}
+  }
+  const hint=positionHint(bounds,reference,video.videoWidth/video.videoHeight||4/3);if(hint.ready)readySince??=now;else readySince=null;guide.classList.toggle('ready',readySince!==null&&now-readySince>=1000);text($('[data-position-status]'),reference?hint.text:'Puoi memorizzare questa inquadratura come guida facoltativa.');
+ }
+ function option(context,index=flow.index){return context?.options?.[index];}
+ async function handle(event,context,ticket){
+  if(!event)return;const selected=option(context,event.index);if(!selected)return;
+  if(event.type==='offer'){onOffer?.(context,selected);if(selected.silent){stopSpeech();text(question,`${selected.label}?`);}else speak(selected.question||`${selected.label}?`);return;}
+  if(event.type==='pending'){text(question,`Possibile sì per ${selected.label}. Aspetto 3 secondi…`);return;}
+  if(event.type==='cancel'){onCancel?.(context);stopSpeech();text(question,`Riprendiamo da ${selected.label}.`);return;}
+  if(event.type==='ask'){
+   rendering=true;
+   try{await onAsk?.(context,selected);if(ticket!==version)return;speak(selected.confirmQuestion||`Sei sicura di scegliere ${selected.label}?`);}finally{if(ticket===version)rendering=false;}return;
+  }
+  if(event.type==='choose'||event.type==='advance'){
+   actionBusy=true;stopSpeech();
+   try{
+    const changed=event.type==='choose'?await onChoose(context,selected):await onAdvance(context);
+    if(ticket!==version)return;
+    if(changed===false){manualPause=true;tell('Non riesco a completare il passaggio. Usa i comandi manuali oppure Riprendi scelta.');}
+    else if(event.type==='choose')text(question,`${selected.label}: confermato.`);
+   }catch{if(ticket===version){manualPause=true;tell('Passaggio non riuscito. Usa i comandi manuali oppure Riprendi scelta.');}}
+   finally{if(ticket===version)actionBusy=false;}
+  }
  }
  function tick(now){
-  if(!enabled)return;frame=requestAnimationFrame(tick);
-  if(document.hidden||video.paused||video.readyState<2){gate.reset();return;}
-  if(flow.tick(now)==='ask')ask();
-  if(now-lastRun<90||video.currentTime===lastFrame)return;lastRun=now;lastFrame=video.currentTime;
-  try{
-   const faces=detector.detectForVideo(video,now).faceLandmarks;
-   const bounds=faces.length===1?faceBounds(faces[0]):null;
-   if(!updatePosition(bounds,now))return;
-   const vector=faces.length===1?vectorFromFace(faces[0]):null;
-   panel.querySelectorAll('[data-camera-sample]').forEach(b=>b.disabled=!vector);
-   if(!vector){capture=null;gate.update('missing',now);signal.textContent=faces.length>1?'Più visi visibili':'Viso non disponibile';tell('Serve un solo viso visibile. Nessuna risposta viene accettata.');return;}
-   if(capture){
-    capture.start??=now;capture.values.push(vector);signal.textContent='Calibrazione…';
-    if(now-capture.start<1100)return;
-    const mean=[0,1].map(i=>capture.values.reduce((sum,x)=>sum+x[i],0)/capture.values.length),spread=Math.max(...capture.values.map(x=>Math.hypot(x[0]-mean[0],x[1]-mean[1])));
-    if(spread>.07)tell('Posizione troppo variabile: ripeti mantenendola più stabile.');
-    else if(samples[capture.key].length>=100)tell('Limite di esempi raggiunto. Puoi ricominciare la calibrazione.');
-    else{samples[capture.key].push(mean);counts();tell('Esempio aggiunto. Torna al riposo prima di rispondere.');}
-    capture=null;gate.reset();return;
-   }
-   const label=classify(vector,samples,.38);if(signal.textContent!==labels[label])signal.textContent=labels[label]||'Incerto';
-   if(!samples.rest.length||!samples.yes.length||!samples.no.length){gate.reset();tell('Aggiungi almeno un esempio di riposo, sì e no.');return;}
-   const event=gate.update(label,now,700);
-   tell(label==='uncertain'?'Movimento incerto: torna al riposo.':gate.armed?'Pronto a ricevere una risposta.':'Torna al riposo tra due risposte.');
-   if(event&&!app.querySelector('[data-overlay],dialog[open]')){
-    const action=flow.answer(event);
-    if(action==='start'){question.textContent='Cominciamo!';onStart();}
-    else if(action==='wait'){question.textContent='Va bene, resto in attesa. Premi Ripeti domanda quando vuoi.';}
-   }
-  }catch(error){stop('Riconoscimento interrotto: puoi riattivare la webcam.');}
+  if(!enabled)return;animation=requestAnimationFrame(tick);
+  if(document.hidden||video.paused||video.readyState<2){flow.reset();return;}
+  if(latest&&now-latest.received>350){text(signal,'Non valutabile');if(flow.phase==='waiting'||flow.phase==='confirm'){onCancel?.(getContext());flow.cancel();}flow.hold(now);}
+  if(busy||now-lastRun<124||video.currentTime===lastMedia)return;
+  lastRun=now;lastMedia=video.currentTime;busy=true;const ticket=version,atEpoch=epoch;origin??=now;const time=(now-origin)/1000,captureAt=now;
+  engine.frame(video,time,atEpoch).then(result=>{
+   if(ticket!==version||atEpoch!==epoch||!enabled||document.hidden)return;
+   const received=performance.now();if(received-captureAt>350){text(signal,'Non valutabile');flow.update(received,'unavailable',getContext());tell('Il riconoscitore è in ritardo. Chiudi altre schede o applicazioni e riprova.');return;}
+   latest={...result,received};updatePosition(result.bounds,received);
+   const labels={yes:'Possibile sì',rest:'Riposo',uncertain:'Incerto',unavailable:'Non valutabile'};text(signal,labels[result.state]);panel.dataset.reading=result.state;
+   if(time<3){tell(`Riferimento di riposo: ${Math.max(0,3-time).toFixed(1)} secondi rimasti.`);return;}
+   if(!result.reference_ready){tell('Viso non abbastanza visibile nei primi tre secondi. Sistema l’inquadratura e premi Rifai riferimento di riposo.');return;}
+   if(result.state==='unavailable')tell(result.reason==='missing_face'?'Viso non rilevabile: scelta sospesa.':'Raccolgo il movimento recente prima di interpretare la risposta.');
+   else if(!manualPause)tell('Modello attivo nel browser. Senza un sì si avanza per tempo scaduto.');
+   if(rendering||actionBusy){flow.hold(received);return;}
+   const context=getContext();
+   if(!context){flow.reset();if(!manualPause)text(question,'Completa questa schermata con i comandi manuali.');return;}
+   const event=flow.update(received,result.state,context,{paused:speaking||rendering||actionBusy||manualPause||!!positionCapture,duration:context.kind==='movie'?Number($('[data-camera-duration]').value)*1000:8000});
+   handle(event,context,ticket).catch(()=>{if(ticket===version){manualPause=true;tell('Lettura sospesa. Premi Riprendi scelta.');}});
+  }).catch(e=>{if(ticket===version)stop(e.message);}).finally(()=>{if(ticket===version){busy=false;if(referenceRequested){referenceRequested=false;referenceAgain();}}});
+ }
+ async function referenceAgain(){
+  if(!enabled||actionBusy)return;if(busy){referenceRequested=true;tell('Preparo un nuovo riferimento…');return;}tell('Raccolgo un nuovo riferimento di riposo…');++epoch;const ticket=version;flow.reset();stopSpeech();latest=null;origin=null;lastMedia=-1;busy=true;
+  try{await engine.reset();if(ticket===version){manualPause=false;text(question,'Mantieni per tre secondi la postura di riposo comoda di oggi.');}}catch(e){if(ticket===version)stop(e.message);}finally{if(ticket===version)busy=false;}
  }
  panel.addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;
-  if(b.hasAttribute('data-position-save')){if(enabled&&lastBounds){capture=null;gate.reset();flow.stop();positionCapture={start:performance.now(),values:[]};question.textContent='Memorizzazione della posizione in corso.';positionButton.disabled=true;}return;}
-  if(b.hasAttribute('data-position-reset')){try{localStorage.removeItem('gaia_camera_position_v1');reference=null;positionCapture=null;readySince=null;drawReference();guide.classList.remove('ready');positionText('Riferimento cancellato. Puoi memorizzare una nuova posizione.');}catch{positionText('Non riesco a cancellare il riferimento in questo browser.');}return;}
   if(b.hasAttribute('data-camera-stop'))return stop();
-  if(b.hasAttribute('data-camera-repeat')){if(enabled){flow.start(performance.now());gate.reset();question.textContent='Tra 5 secondi ti chiederò se vuoi cominciare.';}return;}
-  if(b.dataset.cameraSample){if(!enabled)return;capture={key:b.dataset.cameraSample,start:null,values:[]};gate.reset();tell('Mantieni la posizione: '+labels[capture.key]);return;}
-  if(b.hasAttribute('data-camera-reset')){samples=normalizeSamples();capture=null;gate.reset();counts();tell('Calibrazione azzerata. Aggiungi riposo, sì e no.');}
-  if(b.hasAttribute('data-camera-save')){try{localStorage.setItem('gaia_movement_examples_v1',JSON.stringify({version:1,samples,date:new Date().toISOString()}));tell('Esempi salvati solo in questo browser. Nessuna immagine salvata.');}catch{tell('Non riesco a salvare gli esempi in questo browser.');}}
+  if(b.hasAttribute('data-camera-reference'))return referenceAgain();
+  if(b.hasAttribute('data-camera-repeat')){flow.reset();stopSpeech();manualPause=false;return;}
+  if(b.hasAttribute('data-position-save')){if(enabled&&lastBounds){positionCapture={start:performance.now(),values:[]};flow.reset();}return;}
+  if(b.hasAttribute('data-position-reset')){reference=null;positionCapture=null;try{localStorage.removeItem('gaia_camera_position_v1');}catch{}drawReference();}
  });
- app.addEventListener('click',e=>{if(e.target.closest('[data-action="camera"]')){restoreKeyboardFocus=e.detail===0;if(enabled||loading)stop();else start();}});
- const observer=new MutationObserver(()=>{sync();const intro=!!app.querySelector('.intro-screen');if(enabled&&intro&&!wasIntro){flow.start(performance.now());gate.reset();question.textContent='Tra 5 secondi ti chiederò se vuoi cominciare.';}wasIntro=intro;});observer.observe(app,{childList:true,subtree:true});
- window.addEventListener('resize',sync);
- document.addEventListener('visibilitychange',()=>{capture=null;if(positionCapture&&enabled){flow.start(performance.now());question.textContent='Memorizzazione interrotta. Puoi riprovare.';}positionCapture=null;lastBounds=null;readySince=null;positionButton.disabled=true;guide.classList.remove('ready');gate.reset();if(document.hidden){signal.textContent='In pausa';}});
- window.addEventListener('pagehide',()=>stop());
- try{const saved=JSON.parse(localStorage.getItem('gaia_movement_examples_v1')||'null');if(saved?.version===1)samples=normalizeSamples(saved.samples);}catch{}
- counts();sync();return {stop,isActive:()=>enabled||loading};
+ $('[data-camera-duration]').addEventListener('change',()=>{flow.reset();onCancel?.(getContext());});
+ $('[data-camera-model-file]').addEventListener('change',async e=>{
+  const file=e.target.files?.[0];if(!file)return;
+  try{const imported=await importModel(file);model=imported.model;stop();panel.hidden=false;$('details').open=true;tell(imported.persisted?'Modello pronto. Premi la videocamera per iniziare.':'Modello pronto per questa pagina. Il browser non consente di conservarlo.');sync();}catch(err){tell(err.message);}finally{e.target.value='';}
+ });
+ app.addEventListener('pointerdown',e=>{if(enabled&&!e.target.closest('[data-action="camera"]')){flow.reset();stopSpeech();manualPause=true;tell('Comandi manuali in uso. Premi Riprendi scelta per tornare alla webcam.');}});
+ app.addEventListener('click',e=>{if(e.target.closest('[data-action="camera"]')){restoreKeyboardFocus=e.detail===0;enabled||loading?stop():start();}});
+ new MutationObserver(sync).observe(app,{childList:true,subtree:true});window.addEventListener('resize',sync);
+ window.addEventListener('storage',e=>{if(e.key==='gaia_personal_model_v1'){stop('Modello cambiato in un’altra scheda. Riattiva la webcam.');model=savedModel();sync();}});
+ document.addEventListener('visibilitychange',()=>{if(enabled){++epoch;latest=null;flow.reset();positionCapture=null;stopSpeech();text(signal,'In pausa');}});
+ window.addEventListener('pagehide',()=>stop());drawReference();sync();return {stop,isActive:()=>enabled||loading};
 }

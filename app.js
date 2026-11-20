@@ -1,6 +1,6 @@
 import {initViewing} from './viewing.js?v=20261119';
 import {initMenuKeyboard} from './menu-keyboard.js?v=20261119viewing';
-import {initCameraMode} from './camera-mode.js?v=20261118toggle';
+import {initCameraMode} from './camera-mode.js?v=20261120browser';
 import {initStatistics} from './statistics.js?v=20261112rankings';
 import {initCatalogSearch} from './catalog-search.js?v=20261112studios';
 import {proposalBadge} from './recommendation-badges.js?v=20261007central';
@@ -440,7 +440,32 @@ document.addEventListener('keydown', async e => {
 const viewingController=initViewing({app,state,call,deviceId,topbar,onHome:()=>{menuKeyboard.reset();renderIntro();}});
 const menuKeyboard=initMenuKeyboard({app,state,syncFilters:()=>{syncFilterIndicator();const mute=app.querySelector('[data-action="mute"]');if(mute)mute.outerHTML=muteButton();}});
 initCatalogSearch({app,state,topbar,startSession});
-const cameraMode=initCameraMode({app,isMuted:()=>state.muted,onStart:()=>renderCategories()});
+function cameraContext(){
+  if(state.navigating||savingChoice||document.hidden||app.querySelector('[data-overlay],dialog[open]'))return null;
+  if(app.querySelector('.intro-screen'))return {key:'intro',kind:'intro',options:[{id:'start',label:'cominciare',question:'Ciao Gaia! Vuoi cominciare?',confirmQuestion:'Vuoi cominciare, sei sicura?'}]};
+  const categories=[...app.querySelectorAll('[data-category]')].filter(b=>!b.disabled);
+  if(categories.length)return {key:'categories',kind:'categories',options:categories.map(b=>({id:b.dataset.category,label:b.querySelector('h2')?.textContent||b.textContent.trim()}))};
+  const stage=app.querySelector('.movie-stage'),title=currentTitle();
+  if(stage&&state.session&&title)return {key:`movie:${state.session.id}:${title.id}:${state.history.length}`,kind:'movie',confirming:!!stage.dataset.confirming,options:[{id:title.id,label:title.name,silent:!!state.currentAudio&&!state.currentAudio.paused}]};
+  return null;
+}
+function clearCameraHighlight(){app.querySelectorAll('.camera-selected').forEach(b=>b.classList.remove('camera-selected'));}
+const cameraMode=initCameraMode({
+  app,isMuted:()=>state.muted,getContext:cameraContext,
+  onOffer:(context,option)=>{clearCameraHighlight();if(context.kind==='categories')app.querySelectorAll('[data-category]').forEach(b=>b.classList.toggle('camera-selected',b.dataset.category===option.id));},
+  onAsk:async context=>{if(cameraContext()?.key!==context.key)return;if(context.kind==='movie'){state.currentAudio?.pause();await renderConfirm();}},
+  onChoose:async(context,option)=>{
+    if(cameraContext()?.key!==context.key)return false;
+    clearCameraHighlight();
+    if(context.kind==='intro'){renderCategories();return true;}
+    if(context.kind==='categories'){await startSession(option.id);return cameraContext()?.key!==context.key;}
+    if(context.kind==='movie'&&app.querySelector('.movie-stage[data-confirming]')){renderMode();return true;}
+    return false;
+  },
+  onAdvance:async context=>{if(cameraContext()?.key!==context.key||context.kind!=='movie')return false;await nextMovie(false);return cameraContext()?.key!==context.key;},
+  onCancel:context=>{if(context?.kind==='movie'&&cameraContext()?.key===context.key&&app.querySelector('.movie-stage[data-confirming]'))cancelConfirm();},
+  onStop:clearCameraHighlight
+});
 initFeatures({ app, state, loadData, renderCategories, startSession, call, deviceId, topbar });
 document.addEventListener('gaia-render-movie', renderMovie);
 
