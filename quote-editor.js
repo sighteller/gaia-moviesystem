@@ -1,5 +1,5 @@
-import {proposalsFor} from './quote-proposals.js?v=20261120quotes';
-import {effectiveQuote,standardQuote,titleQuote} from './title-quotes.js?v=20261120quotes';
+import {proposalsFor} from './quote-proposals.js?v=20261120bianca1990';
+import {effectiveQuote,standardQuote,titleQuote} from './title-quotes.js?v=20261120bianca1990';
 const endpoint='https://mahjewznwqvdgtdjtekc.supabase.co/functions/v1/gaia-api';
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 async function call(action,payload={}){const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,payload})});const d=await r.json();if(!r.ok||d.error)throw Error(d.error||'Salvataggio non riuscito');return d;}
