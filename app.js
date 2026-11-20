@@ -1,11 +1,11 @@
-import {initViewing} from './viewing.js?v=20261119';
+import {initViewing} from './viewing.js?v=20261120quotes';
 import {initMenuKeyboard} from './menu-keyboard.js?v=20261119viewing';
 import {initCameraMode} from './camera-mode.js?v=20261120browser2';
 import {initStatistics} from './statistics.js?v=20261112rankings';
 import {initCatalogSearch} from './catalog-search.js?v=20261112studios';
 import {proposalBadge} from './recommendation-badges.js?v=20261007central';
 import {buildSeriesIndex} from './series-catalog.js?v=20261004series';
-import { effectiveQuote, standardQuote } from './title-quotes.js?v=20261004catalog';
+import { effectiveQuote, standardQuote } from './title-quotes.js?v=20261120quotes';
 import { recordConsultation, choiceMessageHtml, platformUrl } from './choice-summary.js?v=20261002proposals';
 import { mountCoverPicker } from './cover-picker.js?v=20261001i';
 import { initFeatures } from './features.js?v=20261119requests';
