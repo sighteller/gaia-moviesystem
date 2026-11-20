@@ -5510,7 +5510,27 @@ export const quoteProposals = [
         "excerpt": true
       }
     ]
-  }
+  },
+{
+  "names": [
+    "Bianca e Bernie nella terra dei canguri"
+  ],
+  "year": 1990,
+  "options": [
+    {
+      "text": "Forza, Marahute, torniamo a casa.",
+      "speaker": "Cody",
+      "source": "https://disney.fandom.com/it/wiki/Cody_(Bianca_e_Bernie)",
+      "excerpt": false
+    },
+    {
+      "text": "Grazie, amico mio.",
+      "speaker": "Cody",
+      "source": "https://disney.fandom.com/it/wiki/Cody_(Bianca_e_Bernie)",
+      "excerpt": false
+    }
+  ]
+}
 ];
 const normalize = value => String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
 export function proposalsFor(title) {
