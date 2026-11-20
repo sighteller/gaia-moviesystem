@@ -18,7 +18,7 @@ function matchesFilters(t){
  const query=document.querySelector('#search').value.toLocaleLowerCase('it'),filter=document.querySelector('#filter').value;
  return t.name.toLocaleLowerCase('it').includes(query)&&(filter==='all'||quoteGroup(t)===filter);
 }
-function applyCatalog(catalog){titles=catalog.titles.filter(t=>t.media_type!=='episode'&&!t.series_id);overrides=sharedQuotes(catalog);updateLocalRecovery();}
+function applyCatalog(catalog){titles=catalog.titles.filter(t=>t.active===true&&t.media_type!=='episode'&&!t.series_id);overrides=sharedQuotes(catalog);updateLocalRecovery();}
 function updateLocalRecovery(){
  const ids=new Set(titles.map(t=>String(t.id))),pending=quoteStore.pendingLocal().filter(q=>ids.has(String(q.title_id))),button=document.querySelector('#publish-local');
  button.hidden=!pending.length;button.textContent='Pubblica sul sito le citazioni locali ('+pending.length+')';document.querySelector('#local-recovery').hidden=!pending.length;
