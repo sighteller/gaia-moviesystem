@@ -5174,6 +5174,300 @@ export const quoteProposals = [
         "excerpt": false
       }
     ]
+  },
+  {
+    "names": [
+      "Amicinemici - Le avventure di Gav e Mei"
+    ],
+    "year": 2005,
+    "options": [
+      {
+        "text": "Quando parlo con Gabu, dimentico tutti i pensieri tristi.",
+        "speaker": "Mei · Traduzione nostra",
+        "source": "https://www.youtube.com/watch?v=hj4JRtN7mOw",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Arthur e la guerra dei due mondi"
+    ],
+    "year": 2010,
+    "options": [
+      {
+        "text": "La limonata è una tradizione di famiglia.",
+        "speaker": "Traduzione nostra",
+        "source": "https://transcripts.foreverdreaming.org/viewtopic.php?t=57136",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Arthur e la vendetta di Maltazard"
+    ],
+    "year": 2009,
+    "options": [
+      {
+        "text": "Fidati di me, nonno. Tornerò.",
+        "speaker": "Arthur · Traduzione nostra",
+        "source": "https://transcripts.foreverdreaming.org/viewtopic.php?t=228935",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Azur e Asmar"
+    ],
+    "year": 2006,
+    "options": [
+      {
+        "text": "Solo il sapere permette di andare oltre la superstizione.",
+        "speaker": "",
+        "source": "https://s015a2b5f2bbc5d86.jimcontent.com/download/version/1642321316/module/11557422021/name/Azur%20e%20Asmar%20scheda.pdf",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Balto e Togo - La leggenda"
+    ],
+    "year": 2019,
+    "options": [
+      {
+        "text": "Vi assicuro che stiamo facendo del nostro meglio, quindi per favore fate come dice il dottore.",
+        "speaker": "Traduzione nostra",
+        "source": "https://clip.cafe/the-great-alaskan-race-2019/i-i-assure-were-doing-the-best-can-right-now/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Big Fish e Begonia"
+    ],
+    "year": null,
+    "options": [
+      {
+        "text": "Ma sono in debito con lui. Mi ha salvato la vita.",
+        "speaker": "Chun · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt1920885/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Descendants: Wicked Wonderland"
+    ],
+    "year": 2026,
+    "options": [
+      {
+        "text": "Va bene, ma… tu cosa vuoi per te?",
+        "speaker": "Traduzione nostra",
+        "source": "https://clip.cafe/descendants-wicked-wonderland-2026/i-didnt-mean-it-like-that/",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Doraemon – Nobita e l’isola del tesoro"
+    ],
+    "year": 2018,
+    "options": [
+      {
+        "text": "Quell’isola è una nave pirata camuffata.",
+        "speaker": "Traduzione nostra",
+        "source": "https://www.transcripts.foreverdreaming.org/viewtopic.php?t=145335",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Doraemon: Il film - Nobita e la nascita del Giappone"
+    ],
+    "year": 2016,
+    "options": [
+      {
+        "text": "Quando avete finito, potete tornare nella grotta.",
+        "speaker": "Traduzione nostra",
+        "source": "https://www.transcripts.foreverdreaming.org/viewtopic.php?t=145289",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Il vento tra i salici"
+    ],
+    "year": 1949,
+    "options": [
+      {
+        "text": "Venite! Vi farò vedere il mondo!",
+        "speaker": "Signor Rospo · Traduzione nostra",
+        "source": "https://en.wikiquote.org/wiki/The_Wind_in_the_Willows_(1949_film)",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Kirikù e gli animali selvaggi"
+    ],
+    "year": 2005,
+    "options": [
+      {
+        "text": "Sono fiero di te. Ma è tardi. Bisogna dormire.",
+        "speaker": "Traduzione nostra",
+        "source": "https://clip.cafe/kirikou-the-wild-beasts-2005/et-pourquoi-me-regardes-tu-a-linfini/",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "L'illusionista"
+    ],
+    "year": 2010,
+    "options": [
+      {
+        "text": "I maghi non esistono.",
+        "speaker": "Tatischeff (biglietto) · Traduzione nostra",
+        "source": "https://www.pure.ed.ac.uk/ws/files/19960437/TheIllusionist_AVPP.pdf",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "La freccia azzurra"
+    ],
+    "year": 1996,
+    "options": [
+      {
+        "text": "Nella notte di Natale, Babbo Natale porta i doni a tutti i bambini del mondo.",
+        "speaker": "Voce fuori campo",
+        "source": "https://archivio.unita.news/assets/derived/1996/11/27/issue_full.pdf",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "La profezia delle ranocchie"
+    ],
+    "year": 2003,
+    "options": [
+      {
+        "text": "Una rana che parla?",
+        "speaker": "Traduzione nostra",
+        "source": "https://subtitlecat.com/subs/628/Raining%20Cats%20and%20Frogs%202003.html",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "La società segreta dei principi minori"
+    ],
+    "year": 2020,
+    "options": [
+      {
+        "text": "Tra poche settimane Eleanor, la legittima erede, compirà diciotto anni e diventerà regina di Illyria.",
+        "speaker": "Traduzione nostra",
+        "source": "https://clip.cafe/secret-society-of-second-born-royals-2020/chattering-s273/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Momo alla conquista del tempo"
+    ],
+    "year": 2001,
+    "options": [
+      {
+        "text": "Voglio più cose",
+        "speaker": "Bambola parlante",
+        "source": "https://www.commissionefilmcei.it/film/momo-alla-conquista-del-tempo/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Opopomoz"
+    ],
+    "year": 2003,
+    "options": [
+      {
+        "text": "Opopomoz",
+        "speaker": "Rocco",
+        "source": "https://it.wikipedia.org/wiki/Opopomoz",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Palla.di.neve"
+    ],
+    "year": 2015,
+    "options": [
+      {
+        "text": "Non viene nessuno. Sicuro che siano tuoi amici?",
+        "speaker": "Traduzione nostra",
+        "source": "https://www.transcripts.foreverdreaming.org/viewtopic.php?t=229118",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Stepping 2 - La strada del successo"
+    ],
+    "year": 2010,
+    "options": [
+      {
+        "text": "È così che ci sfidiamo.",
+        "speaker": "Traduzione nostra",
+        "source": "https://www.springfieldspringfield.co.uk/movie_script.php?movie=stomp-the-yard-2-homecoming",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Un delfino per amico"
+    ],
+    "year": 2006,
+    "options": [
+      {
+        "text": "È stata una stupidaggine, va bene?",
+        "speaker": "Traduzione nostra",
+        "source": "https://transcripts.foreverdreaming.org/viewtopic.php?p=343602",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Winnie the Pooh - Il Musical Di Tigro E.Pooh"
+    ],
+    "year": null,
+    "options": [
+      {
+        "text": "Sono un’infinità di regole, Tappo.",
+        "speaker": "Darby · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt1415904/quotes?item=qt0560457",
+        "excerpt": true
+      }
+    ]
   }
 ];
 const normalize = value => String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
