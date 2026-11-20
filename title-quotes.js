@@ -849,7 +849,16 @@ export const titleQuotes = [
     "text": " ",
     "speaker": "",
     "source": ""
-  }
+  },
+{
+  "names": [
+    "Bianca e Bernie nella terra dei canguri"
+  ],
+  "year": 1990,
+  "text": "Forza, Marahute, torniamo a casa.",
+  "speaker": "Cody",
+  "source": "https://disney.fandom.com/it/wiki/Cody_(Bianca_e_Bernie)"
+}
 ];
 
 export function titleQuote(title){
