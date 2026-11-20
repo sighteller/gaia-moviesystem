@@ -6272,6 +6272,146 @@ export const quoteProposals = [
         "excerpt": true
       }
     ]
+  },
+  {
+    "names": [
+      "Doraemon - Il film"
+    ],
+    "year": 2014,
+    "options": [
+      {
+        "text": "Non voglio affidarmi a un gadget.",
+        "speaker": "Traduzione nostra",
+        "source": "https://en.wikiquote.org/wiki/Stand_by_Me_Doraemon",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Pingu"
+    ],
+    "year": 1986,
+    "options": [
+      {
+        "text": "Noot noot",
+        "speaker": "Pingu",
+        "source": "https://lbbonline.com/work/161982?edition=germany",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Shaun, vita da pecora - Il film"
+    ],
+    "year": 2015,
+    "options": [
+      {
+        "text": "Baa!",
+        "speaker": "Il gregge · Belato",
+        "source": "https://www.springfieldspringfield.co.uk/movie_script.php?movie=shaun-the-sheep-movie",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "I Simpson Backstage Pass"
+    ],
+    "year": 2026,
+    "options": [
+      {
+        "text": "Che cosa sono, un sarto?",
+        "speaker": "Homer · Traduzione nostra",
+        "source": "https://simpsonswiki.com/wiki/A_Tale_of_Two_Springfields/Quotes",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "I Simpson Backstage Pass (2)"
+    ],
+    "year": 2026,
+    "options": [
+      {
+        "text": "Papà, per favore, guida e basta.",
+        "speaker": "Lisa · Traduzione nostra",
+        "source": "https://simpsonswiki.com/wiki/Homerpalooza/Quotes",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "I Simpson Backstage Pass (3)"
+    ],
+    "year": 2026,
+    "options": [
+      {
+        "text": "Una birra, Moe!",
+        "speaker": "Barney · Traduzione nostra",
+        "source": "https://simpsonswiki.com/wiki/Homer%27s_Barbershop_Quartet/Quotes",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "I Simpson Backstage Pass (4)"
+    ],
+    "year": 2026,
+    "options": [
+      {
+        "text": "Meno male che me l’hai detto! Stavo per andare in Messico!",
+        "speaker": "Otto",
+        "source": "https://www.nonsonsolofilm.it/i-simpson-terza-stagione-citazioni-e-dialoghi/",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "I Simpson Film Festival (1)"
+    ],
+    "year": 2026,
+    "options": [
+      {
+        "text": "Biglietti per il cinema! Non mi sembra un buon motivo per distruggere un’auto.",
+        "speaker": "Homer · Traduzione nostra",
+        "source": "https://simpsonswiki.com/wiki/Beyond_Blunderdome/Quotes",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "I Simpson Film Festival (2)"
+    ],
+    "year": 2026,
+    "options": [
+      {
+        "text": "Pizza avvelenata.",
+        "speaker": "Bart",
+        "source": "https://it.wikiquote.org/wiki/I_Simpson_(quarta_stagione)",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "I Simspson Film Festival (3)"
+    ],
+    "year": 2026,
+    "options": [
+      {
+        "text": "No, mammina! È l’aurora boreale!",
+        "speaker": "Skinner",
+        "source": "https://orgoglionerd.it/i-22-cortometraggi-di-springfield-compiono-25-anni/amp/",
+        "excerpt": false
+      }
+    ]
   }
 ];
 const normalize = value => String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
