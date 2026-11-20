@@ -723,6 +723,132 @@ export const titleQuotes = [
     "text": "Sii gentile e abbi coraggio.",
     "speaker": "La madre di Ella",
     "source": "https://www.fondazionedettoris.it/site/content/con-cenerentola-vola-la-fantasia"
+  },
+  {
+    "names": [
+      "Pingu Innamorato"
+    ],
+    "year": 2009,
+    "text": "Noot noot",
+    "speaker": "",
+    "source": ""
+  },
+  {
+    "names": [
+      "La tartaruga rossa"
+    ],
+    "year": 2016,
+    "text": "Mi sono chiesto quali emozioni volessi esprimere in questo film. La risposta è stata la profonda meraviglia che provo per la natura.",
+    "speaker": "",
+    "source": ""
+  },
+  {
+    "names": [
+      "Garfield Cartoon"
+    ],
+    "year": 2026,
+    "text": "Spuntino di mezzanotte",
+    "speaker": "",
+    "source": ""
+  },
+  {
+    "names": [
+      "Garfield Cartoon"
+    ],
+    "year": null,
+    "text": "Spuntino di mezzanotte",
+    "speaker": "",
+    "source": ""
+  },
+  {
+    "names": [
+      "Shrek 1 - \"Alheyuya\" (Josan)"
+    ],
+    "year": null,
+    "text": "hallelujah",
+    "speaker": "",
+    "source": ""
+  },
+  {
+    "names": [
+      "Topolino- sole Sale e Sport"
+    ],
+    "year": null,
+    "text": "Yuk, yuk",
+    "speaker": "",
+    "source": ""
+  },
+  {
+    "names": [
+      "Il mio amico Nanuk"
+    ],
+    "year": 2014,
+    "text": "Riempi ogni singolo minuto con sessanta secondi che valga la pena vivere, tua sarà la terra",
+    "speaker": "",
+    "source": ""
+  },
+  {
+    "names": [
+      "L'Era Glaciale - Un continente di risate - Parte 1"
+    ],
+    "year": 2010,
+    "text": "Anche se le cose sembrano andar male, c'è sempre un arcobaleno dietro ad ogni nuvola e davanti una tranquilla navigazione.",
+    "speaker": "",
+    "source": ""
+  },
+  {
+    "names": [
+      "Lassie torna a casa"
+    ],
+    "year": 2020,
+    "text": "Woof",
+    "speaker": "",
+    "source": ""
+  },
+  {
+    "names": [
+      "Le avventure di Pocahontas, principessa indiana"
+    ],
+    "year": 1994,
+    "text": "Tu credi che io sia una selvaggia",
+    "speaker": "",
+    "source": ""
+  },
+  {
+    "names": [
+      "Poly"
+    ],
+    "year": 2020,
+    "text": "Dovete aiutarci",
+    "speaker": "",
+    "source": ""
+  },
+  {
+    "names": [
+      "Principi e principesse"
+    ],
+    "year": 2000,
+    "text": "Datemi un bacio. Uno. Piccolo piccolo.",
+    "speaker": "",
+    "source": ""
+  },
+  {
+    "names": [
+      "This is Beat - Sfida di ballo"
+    ],
+    "year": 2011,
+    "text": "Dance",
+    "speaker": "",
+    "source": ""
+  },
+  {
+    "names": [
+      "降龙大师之捉妖榜"
+    ],
+    "year": 2020,
+    "text": " ",
+    "speaker": "",
+    "source": ""
   }
 ];
 
