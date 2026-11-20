@@ -4306,6 +4306,34 @@ export const quoteProposals = [
         "source": "https://filmora.wondershare.it/more-tips/film-stop-motion.html"
       }
     ]
+  },
+  {
+    "names": [
+      "Kirikù e la strega Karabà"
+    ],
+    "year": 1998,
+    "options": [
+      {
+        "text": "Mamma, dammi la vita!",
+        "speaker": "Kirikù",
+        "excerpt": false,
+        "source": "https://cinemascuola.lombardiaspettacolo.com/uploads/ckeditor/attachments/5649f733494e2635c5000019/3_DOSSIER_KIRIKOU.pdf"
+      }
+    ]
+  },
+  {
+    "names": [
+      "Saranno famosi"
+    ],
+    "year": 1982,
+    "options": [
+      {
+        "text": "Ma queste cose costano ed è esattamente qui che comincerete a pagare, col sudore",
+        "speaker": "Lydia Grant",
+        "excerpt": true,
+        "source": "https://www.ocarinaplayer.com/thepond-blog/consigli-ascolto-bambini/fame-saranno-famosi/"
+      }
+    ]
   }
 ];
 const normalize = value => String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
