@@ -1,13 +1,14 @@
+import {createSelectionAudio} from './selection-audio.js?v=20261120audio';
 import {mountModelSettings} from './model-settings.js?v=20261120shared';
 import {startModelSync} from './browser-model-store.js?v=20261120shared';
-import {initViewing} from './viewing.js?v=20261120bianca1990';
+import {initViewing} from './viewing.js?v=20261120audioquotes';
 import {initMenuKeyboard} from './menu-keyboard.js?v=20261119viewing';
-import {initCameraMode} from './camera-mode.js?v=20261120tolerance';
+import {initCameraMode} from './camera-mode.js?v=20261120audio';
 import {initStatistics} from './statistics.js?v=20261112rankings';
 import {initCatalogSearch} from './catalog-search.js?v=20261112studios';
 import {proposalBadge} from './recommendation-badges.js?v=20261007central';
 import {buildSeriesIndex} from './series-catalog.js?v=20261004series';
-import { effectiveQuote, standardQuote } from './title-quotes.js?v=20261120bianca1990';
+import { effectiveQuote, standardQuote } from './title-quotes.js?v=20261120audioquotes';
 import { recordConsultation, choiceMessageHtml, platformUrl } from './choice-summary.js?v=20261002proposals';
 import { mountCoverPicker } from './cover-picker.js?v=20261001i';
 import { initFeatures } from './features.js?v=20261119requests';
@@ -23,6 +24,15 @@ const state = {
   session: null, history: [], confirmPlatform: null, currentAudio: null, navigating:false, pendingMode:null,
   consultation:{titleIds:[],steps:0,lastTitleId:null}, proposalEntries:[],shownIds:new Set(),shownPromise:null,shownSignature:null,recommendationMode:'test'
 };
+
+const selectionAudio=createSelectionAudio({isMuted:()=>state.muted,onPlayback:audio=>{state.currentAudio=audio;},allowSpeech:()=>!cameraMode.isActive()});
+function manualPrompt(){
+ if(cameraMode.isActive())return;
+ if(app.querySelector('.intro-screen'))selectionAudio.speak('Ciao Gaia! Che film vediamo oggi?');
+ else if(app.querySelector('.movie-stage[data-confirming]'))selectionAudio.speak('Sei sicura?');
+ else if(app.querySelector('.movie-stage'))playAudio(currentTitle());
+ else {const category=app.querySelector('.category-card.preselected h2');if(category)selectionAudio.speak(category.textContent);}
+}
 
 const verificationDevice=new URL(location.href).searchParams.get('verifyDevice');
 function deviceId() {
@@ -56,7 +66,7 @@ async function loadData() {
   const titles = data.titles || [];
   const seriesIndex = buildSeriesIndex(titles);
   state.titles = titles.filter(t => !seriesIndex.parents.has(t.id));
-  try { state.quotes = JSON.parse(localStorage.getItem('gaia_quote_edits') || '[]'); } catch { state.quotes = []; }
+  state.quotes = []; // Shared catalog quotes are authoritative; legacy drafts can be recovered in Citazioni.
   state.platforms = (data.platforms || []).filter(p => ['jellyfin','netflix','disney-plus','prime-video','rai-play'].includes(p.slug));
   const allowedIds = new Set(state.platforms.map(p=>p.id));
   if (Array.isArray(state.selectedPlatformIds)) state.selectedPlatformIds=state.selectedPlatformIds.filter(id=>allowedIds.has(id));
@@ -120,6 +130,7 @@ function renderIntro(){
   state.category=null;state.session=null;
   if(state.currentAudio){state.currentAudio.pause();state.currentAudio=null;}
   app.innerHTML=`<div class="shell">${topbar()}<section class="intro-screen"><h1 class="intro-greeting"><span data-typewriter>Ciao Gaia!</span><span class="intro-question"><span data-typewriter>che</span>${homeCarousel()}<span data-typewriter>film</span></span><span data-typewriter>vediamo oggi?</span></h1><button class="intro-start" data-action="categories">Cominciamo <svg class="return-glyph" aria-hidden="true" viewBox="0 0 20.35 16.2"><path fill="currentColor" d="M6.07,16.2L0,10.23l6.07-5.97v11.94ZM4.13,11.68v-2.89h16.16v2.89H4.13ZM12.6,2.93V0h7.69v2.93h-7.69ZM17.46,11.68V0h2.89v11.68h-2.89Z"/></svg></button></section></div>`;
+  manualPrompt();
   if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
     let delay=0;
     app.querySelectorAll('[data-typewriter]').forEach(line=>{
@@ -143,8 +154,10 @@ function renderCategories(){
 
 function chooseCategory(button,focus=false){
   if(!button)return;
+  const changed=!button.classList.contains('preselected');
   document.querySelectorAll('.category-card').forEach(b=>b.classList.toggle('preselected',b===button));
   if(focus)button.focus({preventScroll:true});
+  if(changed&&!cameraMode.isActive())selectionAudio.speak(button.querySelector('h2')?.textContent||button.textContent);
 }
 app.addEventListener('pointerover',e=>{const b=e.target.closest('.category-card');if(b)chooseCategory(b,true);});
 app.addEventListener('focusin',e=>{const b=e.target.closest('.category-card');if(b)chooseCategory(b);});
@@ -238,11 +251,7 @@ async function refreshMovie(stage,direction){
   for(const part of [posterColumn,stage.querySelector('.movie-copy')])part.getAnimations().forEach(a=>a.cancel());
 }
 
-function playAudio(t){
-  if (state.currentAudio) { state.currentAudio.pause(); state.currentAudio = null; }
-  if (state.muted || !t.audio_url) return;
-  const a = new Audio(t.audio_url); state.currentAudio = a; a.play().catch(()=>{});
-}
+function playAudio(t){selectionAudio.playTitle(t);}
 
 async function touchSession(titleId=currentTitle()?.id,history=state.history){
   if(!state.session)return;
@@ -291,6 +300,7 @@ async function renderConfirm(){
   if(state.navigating)return;
   const stage=app.querySelector('.movie-stage');if(!stage)return;
   if(stage.dataset.confirming)return;
+  selectionAudio.stop();
   const watch=stage.querySelector('.watch-btn');
   state.navigating=true;watch?.classList.add('navigation-flash');
   await new Promise(resolve=>setTimeout(resolve,220));
@@ -298,6 +308,7 @@ async function renderConfirm(){
   if(!stage.isConnected)return;
   stage.dataset.confirming='true';
   stage.querySelector('.movie-navigation').innerHTML='<p class="confirmation-question">Sei sicura?</p><div class="confirm-navigation navigation-arrows"><button class="ghost-btn arrow-btn" data-action="back-to-movie" aria-label="Torna al film">←</button><button class="ghost-btn confirm-btn preselected" data-action="confirm-title">Conferma</button></div>';
+  if(!cameraMode.isActive())selectionAudio.speak('Sei sicura?');
 }
 function cancelConfirm(){
   const stage=app.querySelector('.movie-stage');if(!stage)return;
@@ -313,6 +324,7 @@ function renderPlatformSummary(mode,savedPlatform=null){
 }
 
 function renderMode(){
+  selectionAudio.stop();
   app.innerHTML = `<div class="shell">${topbar()}<div class="hero-center"><div><h1 style="font-size:clamp(42px,6vw,76px);letter-spacing:-.05em;margin:0 0 28px">Come è avvenuta la scelta?</h1><div class="mode-grid">
     <button class="mode-card preselected" data-mode="unlimited"><h2>Illimitata</h2><p>Nessun limite imposto alla scelta.</p></button>
     <button class="mode-card" data-mode="limited"><h2>Limitata</h2><p>Scelta fra pochi titoli.</p></button>
@@ -352,9 +364,9 @@ function renderEmpty(){
 function toggleMute(){
   state.muted = !state.muted;
   localStorage.setItem('gaia_muted', state.muted ? '1' : '0');
-  if (state.muted && state.currentAudio) state.currentAudio.pause();
+  if(state.muted)selectionAudio.stop();
   app.querySelectorAll('[data-action="mute"]').forEach(b=>b.outerHTML=muteButton());
-  if (!state.muted && document.querySelector('.movie-stage')) playAudio(currentTitle());
+  if(cameraMode.isActive())cameraMode.audioChanged();else if(!state.muted)manualPrompt();
 }
 
 let savingChoice=false;

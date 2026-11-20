@@ -33,3 +33,9 @@ MediaPipe Web 0.10.21, modalità IMAGE e CPU, eseguito in un Web Worker classico
 Le immagini sono trasferite al worker del dispositivo, senza richieste HTTP contenenti fotogrammi, audio, punti del volto o coefficienti personali. La memoria contiene solo riferimento iniziale e storia recente limitata; le immagini vengono liberate dopo l’inferenza. L’anteprima a specchio non modifica l’immagine analizzata. Disattivare la webcam interrompe le tracce, termina il worker, annulla richieste, animazioni, sintesi vocale e stato della scelta. La pagina di prova conserva i risultati fino al cambio sorgente/modello o a una nuova prova, per consentirne l’esportazione.
 
 Il modello è piccolo e contiene 12 caratteristiche di posa/movimento. Non riconosce identità o intenzioni. Le soglie congelate sono ≥0,70 possibile sì, ≤0,30 riposo, altrimenti incerto. La verifica sperimentale sui filmati nuovi di Gaia rimane necessaria. Vedere `browser-model-verification.md` per controlli e limiti del trasferimento.
+
+## Audio indipendente dalla webcam
+
+Il pulsante audio controlla anche la scelta manuale. Il sito preferisce l’audio registrato di un titolo; se manca o non è riproducibile, legge il nome con la voce italiana del browser. Introduzione, categoria selezionata e domanda «Sei sicura?» vengono lette anche senza webcam. Con la webcam attiva la sintesi delle domande resta gestita dal suo flusso per evitare voci duplicate e non contare la conferma durante il parlato. Muto interrompe sia registrazioni sia voce.
+
+Il ritaglio automatico del volto è attivo per webcam e video, senza interruttore: cerca il viso nel fotogramma e in finestre sovrapposte e analizza un ritaglio ingrandito. L’anteprima resta intera. Nel test video un ritaglio manuale sostituisce quello automatico fino al reset. Il ritaglio non ricostruisce dettagli mancanti.

@@ -1,0 +1,9 @@
+# Citazioni condivise
+
+Citazioni usa ora il catalogo centrale esistente (`catalogEditor` e `saveCatalog`), senza una nuova API o una migrazione. Testo, personaggio, fonte, revisione e data sono salvati in `titles.quote_override`. Un nuovo browser legge subito il valore dal sito. La cache locale non prevale più nel sito principale o nell’editor catalogo. Le pagine già aperte vedono le nuove citazioni dopo un ricaricamento.
+
+Il client carica una revisione fresca prima di scrivere e preserva nome, categoria, copertina, anno, disponibilità e collegamenti attuali. Blocca il salvataggio se la citazione è cambiata dopo il caricamento della pagina; il controllo di revisione dell’API protegge anche dalla concorrenza fra lettura e scrittura. Il successo è mostrato solo dopo la conferma del server. Un errore della cache locale non annulla un salvataggio centrale riuscito.
+
+Vecchie citazioni locali diverse da quelle condivise compaiono nella sezione di recupero, con i titoli interessati. Solo il comando esplicito «Pubblica sul sito le citazioni locali» le trasferisce e sostituisce le corrispondenti citazioni centrali; nessuna migrazione automatica. Gli altri dispositivi possono ricaricare la pagina per leggere gli aggiornamenti.
+
+Sette test verificano visibilità su un client nuovo senza cache, conservazione dei campi estranei alla citazione, conflitti, errori di rete, cache piena, recupero esplicito, frase standard e validazione. Cinque test audio verificano lettura senza webcam, priorità delle registrazioni, fallback, assenza di riproduzioni tardive, muto e assenza di sintesi duplicata con webcam. I 21 test di scelta e interfaccia webcam continuano a passare. Il test preesistente sulle fonti di tutte le citazioni statiche fallisce su voci già prive di personaggio/fonte: il file title-quotes.js non viene modificato da questa correzione.

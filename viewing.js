@@ -1,4 +1,4 @@
-import {effectiveQuote,standardQuote} from './title-quotes.js?v=20261120bianca1990';
+import {effectiveQuote,standardQuote} from './title-quotes.js?v=20261120audioquotes';
 import {platformUrl} from './choice-summary.js?v=20261002proposals';
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function viewingClock(view,now){

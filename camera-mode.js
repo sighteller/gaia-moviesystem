@@ -130,5 +130,5 @@ export function initCameraMode({app,isMuted,getContext,onOffer,onAsk,onChoose,on
  new MutationObserver(sync).observe(app,{childList:true,subtree:true});window.addEventListener('resize',sync);
  window.addEventListener('gaia-personal-model-changed',e=>{if(enabled||engine)stop('Il modello del sito è stato aggiornato. Riattiva la webcam per usare la nuova versione.');model=e.detail.model;sync();});
  document.addEventListener('visibilitychange',()=>{if(enabled){++epoch;latest=null;flow.reset();positionCapture=null;stopSpeech();text(signal,'In pausa');}});
- window.addEventListener('pagehide',()=>stop());drawReference();sync();return {stop,isActive:()=>enabled||loading};
+ window.addEventListener('pagehide',()=>stop());drawReference();sync();return {stop,isActive:()=>enabled||loading,audioChanged(){stopSpeech();if(!enabled||isMuted())return;const context=getContext(),selected=option(context);if(selected)speak(flow.phase==='confirm'?'Sei sicura?':selected.question||`${selected.label}?`);}};
 }
