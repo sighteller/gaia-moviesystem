@@ -1,5 +1,5 @@
 import {BrowserFaceEngine} from './browser-face-engine.js?v=20261120browser';
-import {savedModel,importModel,modelLabel} from './browser-model-store.js?v=20261120browser';
+import {savedModel,importModel,modelLabel} from './browser-model-store.js?v=20261120browser2';
 import {normalizeReference,averagePosition,positionHint} from './camera-position-core.js?v=20261117';
 import {CameraChoiceFlow} from './camera-choice-flow.js?v=20261120browser';
 export function initCameraMode({app,isMuted,getContext,onOffer,onAsk,onChoose,onAdvance,onCancel,onStop}){
@@ -40,7 +40,7 @@ export function initCameraMode({app,isMuted,getContext,onOffer,onAsk,onChoose,on
   panel.hidden=!message;text(signal,'Webcam spenta');text(question,'');tell(message);guide.classList.remove('ready');sync();returnFocus();
  }
  async function start(){
-  model=model||savedModel();panel.hidden=false;
+  model=model||savedModel();panel.hidden=false;panel.scrollTop=0;
   if(!model){$('details').open=true;tell('Carica il modello di Gaia. Poi premi di nuovo la videocamera.');sync();return;}
   const ticket=++version;loading=true;sync();tell('Preparo il modello nel browser…');
   const currentEngine=new BrowserFaceEngine();engine=currentEngine;

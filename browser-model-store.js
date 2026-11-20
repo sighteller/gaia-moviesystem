@@ -7,4 +7,4 @@ export async function importModel(file){
  let persisted=true;try{localStorage.setItem(KEY,JSON.stringify(model));}catch{persisted=false;}
  window.dispatchEvent(new CustomEvent('gaia-personal-model-changed',{detail:{model}}));return {model,persisted};
 }
-export function modelLabel(model){return model?`${model.name||'Modello di Gaia'} · 12 misure di posa e movimento`:'Carica il modello di Gaia una volta per questo browser.';}
+export function modelLabel(model){return model?'Modello personalizzato di Gaia · pronto':'Carica il modello di Gaia una volta per questo browser.';}

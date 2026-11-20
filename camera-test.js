@@ -1,5 +1,5 @@
 import {BrowserFaceEngine} from './browser-face-engine.js?v=20261120browser';
-import {savedModel,importModel,modelLabel} from './browser-model-store.js?v=20261120browser';
+import {savedModel,importModel,modelLabel} from './browser-model-store.js?v=20261120browser2';
 import {initAnnotations} from './video-annotations.js?v=20261120browser';
 import {priorFrame,compareAnnotations} from './personal-results.js?v=20261120browser';
 const $=id=>document.getElementById(id),video=$('video'),annotations=initAnnotations(video);

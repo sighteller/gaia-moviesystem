@@ -1,6 +1,6 @@
 import {initViewing} from './viewing.js?v=20261119';
 import {initMenuKeyboard} from './menu-keyboard.js?v=20261119viewing';
-import {initCameraMode} from './camera-mode.js?v=20261120browser';
+import {initCameraMode} from './camera-mode.js?v=20261120browser2';
 import {initStatistics} from './statistics.js?v=20261112rankings';
 import {initCatalogSearch} from './catalog-search.js?v=20261112studios';
 import {proposalBadge} from './recommendation-badges.js?v=20261007central';
