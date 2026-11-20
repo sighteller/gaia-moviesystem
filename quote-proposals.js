@@ -4894,6 +4894,286 @@ export const quoteProposals = [
         "excerpt": false
       }
     ]
+  },
+  {
+    "names": [
+      "Il giardino segreto"
+    ],
+    "year": 2020,
+    "options": [
+      {
+        "text": "Questo è un giardino magico.",
+        "speaker": "Traduzione nostra",
+        "source": "https://www.transcripts.foreverdreaming.org/viewtopic.php?p=178201",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Fata madrina cercasi"
+    ],
+    "year": 2020,
+    "options": [
+      {
+        "text": "Ho finito di fare le cose a modo tuo.",
+        "speaker": "Mackenzie · Traduzione nostra",
+        "source": "https://www.springfieldspringfield.co.uk/movie_script.php?movie=godmothered",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Feel the Beat"
+    ],
+    "year": 2020,
+    "options": [
+      {
+        "text": "L’April che ha spinto Ruth Zimmer giù dal palco?",
+        "speaker": "Traduzione nostra",
+        "source": "https://clip.cafe/feel-the-beat-2020/hi-is-april-for/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Magic Camp"
+    ],
+    "year": 2020,
+    "options": [
+      {
+        "text": "Non vedete un mazzo di carte nelle mie mani, ma… adesso sì.",
+        "speaker": "Theo · Traduzione nostra",
+        "source": "https://clip.cafe/magic-camp-2020/you-dont-see-a-deck-of-cards-in-hands/",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Footloose"
+    ],
+    "year": 2011,
+    "options": [
+      {
+        "text": "Ho il diritto di ballare quando, dove e come voglio. È un diritto che non potete togliermi.",
+        "speaker": "Ren MacCormack · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt1068242/characters/nm1552693/",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Arctic - Un'avventura glaciale"
+    ],
+    "year": 2019,
+    "options": [
+      {
+        "text": "Non puoi combattere il tuo metabolismo.",
+        "speaker": "PB · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt4426464/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Bigfoot junior"
+    ],
+    "year": 2017,
+    "options": [
+      {
+        "text": "Mio padre è Bigfoot?",
+        "speaker": "Adam · Traduzione nostra",
+        "source": "https://transcripts.simpleremix.com/script.php/son-of-bigfoot-2017-Nyq2",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "C'era una volta nella foresta"
+    ],
+    "year": 1993,
+    "options": [
+      {
+        "text": "Zio Cornelius, perché hai l’aria così triste?",
+        "speaker": "Michelle · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0107745/quotes/?item=qt0115678",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "High School Musical: The Musical: La Serie"
+    ],
+    "year": 2019,
+    "options": [
+      {
+        "text": "Mi ci vorrebbe un miracolo per affrontare il secondo atto.",
+        "speaker": "Ricky · Traduzione nostra",
+        "source": "https://clip.cafe/high-school-musical-the-musical-the-series-2019/we-will-now-have-a-ten-minute-intermission/",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Jimmy Neutron - Ragazzo prodigio"
+    ],
+    "year": 2001,
+    "options": [
+      {
+        "text": "Io sono Jimmy Neutron e tu sei una forma di vita aliena.",
+        "speaker": "Jimmy Neutron · Traduzione nostra",
+        "source": "https://www.script-o-rama.com/movie_scripts/j/jimmy-neutron-script-transcript-movie.html",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "La voce del cigno"
+    ],
+    "year": 2001,
+    "options": [
+      {
+        "text": "Che le colline riecheggino della tua nuova voce, figlio mio.",
+        "speaker": "Padre di Louie · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0206367/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Pattini d'argento"
+    ],
+    "year": 2020,
+    "options": [
+      {
+        "text": "Dimentica tutto e guarda avanti.",
+        "speaker": "Traduzione nostra",
+        "source": "https://www.subtitlecat.com/subs/1621/Silver%20Skates%20%282020%29_Russian_1080p_BluRay_x264_AAC.html",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Peter.Rabbit.2.Un.Birbante.In.Fuga"
+    ],
+    "year": 2020,
+    "options": [
+      {
+        "text": "La dieta comincia adesso.",
+        "speaker": "Pigling Bland · Traduzione nostra",
+        "source": "https://www.quotes.net/movies/peter_rabbit_2%3A_the_runaway_%282021%29_156838",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Rock Dog"
+    ],
+    "year": 2016,
+    "options": [
+      {
+        "text": "Sono completamente paralizzato, tranne la bocca… e un dito!",
+        "speaker": "Angus Scattergood · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt2822672/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Stepping - Dalla strada al palcoscenico"
+    ],
+    "year": 2007,
+    "options": [
+      {
+        "text": "Non si tratta solo di te. Si tratta di noi, siamo una squadra.",
+        "speaker": "Duron · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0775539/quotes/?item=qt0335436",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Walking on Sunshine"
+    ],
+    "year": 2014,
+    "options": [
+      {
+        "text": "Dimenticavo. Mai dire quello che provi, giusto?",
+        "speaker": "Raf · Traduzione nostra",
+        "source": "https://en.wikiquote.org/wiki/Walking_on_Sunshine_%28film%29",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Winnie the Pooh - Ro e la magia della primavera"
+    ],
+    "year": 2004,
+    "options": [
+      {
+        "text": "Ah, adoro i finali saltellanti.",
+        "speaker": "Tigro · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0384696/quotes/",
+        "excerpt": false
+      }
+    ]
+  },
+  {
+    "names": [
+      "Looney Tunes: Canto di Natale"
+    ],
+    "year": 2006,
+    "options": [
+      {
+        "text": "Buon Natale a tutti!",
+        "speaker": "Bugs Bunny · Traduzione nostra",
+        "source": "https://movies.fandom.com/wiki/Bah%2C_Humduck%21_A_Looney_Tunes_Christmas/Transcript",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Peng e i due anatroccoli"
+    ],
+    "year": 2018,
+    "options": [
+      {
+        "text": "Gli uccelli sono così arroganti.",
+        "speaker": "Banzou · Traduzione nostra",
+        "source": "https://en.wikiquote.org/wiki/Duck_Duck_Goose_%28film%29",
+        "excerpt": true
+      }
+    ]
+  },
+  {
+    "names": [
+      "Le avventure di Winnie the Pooh"
+    ],
+    "year": 1977,
+    "options": [
+      {
+        "text": "Ce n’è ancora?",
+        "speaker": "Winnie the Pooh · Traduzione nostra",
+        "source": "https://www.imdb.com/title/tt0076363/characters/nm0001982/",
+        "excerpt": false
+      }
+    ]
   }
 ];
 const normalize = value => String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
