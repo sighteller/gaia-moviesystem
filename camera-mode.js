@@ -1,4 +1,4 @@
-import {createSelectionAudio} from './selection-audio.js?v=20261121voices';
+import {createSelectionAudio} from './selection-audio.js?v=20261121decode';
 import {BrowserFaceEngine} from './browser-face-engine.js?v=20261120browser';
 import {savedModel,refreshSharedModel,modelLabel} from './browser-model-store.js?v=20261120shared';
 import {normalizeReference,averagePosition,positionHint} from './camera-position-core.js?v=20261117';
