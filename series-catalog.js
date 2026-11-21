@@ -44,18 +44,20 @@ export function catalogEntries(titles, { query = '', filter = 'active', dirtyIds
   const searchable = value => normalized(value).normalize('NFD').replace(/\p{M}/gu, '');
   const search = searchable(query);
   const matchesName = title => searchable(title.name).includes(search);
+  const isActive = title => title.active && !['pending','rejected'].includes(title.request_status);
+  const missingMedia = ['no-audio','no-quote'].includes(filter);
   const matchesFilter = title => filter === 'all' ||
-    filter === 'active' && title.active && !['pending','rejected'].includes(title.request_status) ||
+    filter === 'active' && isActive(title) ||
     filter === 'unidentified' && title.active && !title.tmdb_id && !title.manually_identified && !title.series_id ||
     filter === 'requested' && title.request_status === 'pending' ||
     filter === 'rejected' && title.request_status === 'rejected' ||
     filter === 'archived' && !title.active && !['pending','rejected'].includes(title.request_status) ||
     filter === 'dirty' && dirtyIds.has(title.id) ||
-    filter === 'no-audio' && !title.audio_url ||
-    filter === 'no-quote' && !title.quote_override?.text;
+    filter === 'no-audio' && isActive(title) && !title.audio_url ||
+    filter === 'no-quote' && isActive(title) && !title.quote_override?.text;
   const entries = [];
   for (const title of titles) {
-    if (index.parents.has(title.id)) continue;
+    if (index.parents.has(title.id) || missingMedia && !isActive(title)) continue;
     const children = index.children.get(title.id) || [];
     const rootHit = matchesName(title) && matchesFilter(title);
     // Preserve archived episode records inside a visible series; their status stays explicit.
