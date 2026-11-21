@@ -1,9 +1,9 @@
-import {createSelectionAudio} from './selection-audio.js?v=20261120audio';
+import {createSelectionAudio} from './selection-audio.js?v=20261121voices';
 import {mountModelSettings} from './model-settings.js?v=20261120shared';
 import {startModelSync} from './browser-model-store.js?v=20261120shared';
 import {initViewing} from './viewing.js?v=20261120audioquotes';
 import {initMenuKeyboard} from './menu-keyboard.js?v=20261119viewing';
-import {initCameraMode} from './camera-mode.js?v=20261120audio';
+import {initCameraMode} from './camera-mode.js?v=20261121voices';
 import {initStatistics} from './statistics.js?v=20261112rankings';
 import {initCatalogSearch} from './catalog-search.js?v=20261112studios';
 import {proposalBadge} from './recommendation-badges.js?v=20261007central';
@@ -26,9 +26,11 @@ const state = {
 };
 
 const selectionAudio=createSelectionAudio({isMuted:()=>state.muted,onPlayback:audio=>{state.currentAudio=audio;},allowSpeech:()=>!cameraMode.isActive()});
+for(const event of ['pointerdown','keydown'])document.addEventListener(event,()=>selectionAudio.unlock(),{capture:true});
 function manualPrompt(){
  if(cameraMode.isActive())return;
  if(app.querySelector('.intro-screen'))selectionAudio.speak('Ciao Gaia! Che film vediamo oggi?');
+ else if(app.querySelector('.platform-list'))selectionAudio.speak('Dove lo guardiamo?');
  else if(app.querySelector('.movie-stage[data-confirming]'))selectionAudio.speak('Sei sicura?');
  else if(app.querySelector('.movie-stage'))playAudio(currentTitle());
  else {const category=app.querySelector('.category-card.preselected h2');if(category)selectionAudio.speak(category.textContent);}
@@ -316,11 +318,13 @@ function cancelConfirm(){
   stage.focus({preventScroll:true});
 }
 function renderPlatformSummary(mode,savedPlatform=null){
+  selectionAudio.stop();
   state.pendingMode=mode;
   const t=currentTitle();const ps=availablePlatformsForTitle(t);const count=state.consultation.titleIds.length;
   const link=savedPlatform?state.links.find(l=>l.title_id===t.id&&l.platform_id===savedPlatform.id):null;
   const url=platformUrl(link?.url);
   app.innerHTML=`<div class="shell">${topbar()}<div class="hero-center"><div class="empty choice-result"><h2 class="choice-message">${choiceMessageHtml(count)}</h2><p class="quote-attribution">${escapeHtml(t.name)}</p><h3>Dove lo guardiamo?</h3><div class="platform-list">${ps.map((p,i)=>{const href=platformUrl(state.links.find(l=>l.title_id===t.id&&l.platform_id===p.id)?.url);const chosen=savedPlatform?.id===p.id;const label=`${escapeHtml(p.name)} <kbd>${i+1}</kbd>`;return href&&(!savedPlatform||chosen)?`<a class="platform-option ${chosen?'selected':''}" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none" data-choice-platform="${p.id}" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${label}</a>`:`<button class="platform-option ${chosen?'selected':''}" data-choice-platform="${p.id}" ${savedPlatform?'disabled':''}>${label}</button>`;}).join('')}</div><p class="choice-status" role="status"></p>${savedPlatform&&!url?'<p>Il collegamento diretto a questa piattaforma non è ancora configurato.</p>':''}<button class="ghost-btn" data-action="home">Torna a Gaia</button></div></div></div>`;
+  selectionAudio.speak('Dove lo guardiamo?');
 }
 
 function renderMode(){
@@ -352,6 +356,7 @@ async function finalize(mode){
   state.session = null;
   homeRankingAt=0;
   await viewingController.refresh(true);
+  selectionAudio.speak('Buona visione!');
 
 }
 

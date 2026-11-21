@@ -1,3 +1,4 @@
+import {createSelectionAudio} from './selection-audio.js?v=20261121voices';
 import {BrowserFaceEngine} from './browser-face-engine.js?v=20261120browser';
 import {savedModel,refreshSharedModel,modelLabel} from './browser-model-store.js?v=20261120shared';
 import {normalizeReference,averagePosition,positionHint} from './camera-position-core.js?v=20261117';
@@ -27,12 +28,11 @@ export function initCameraMode({app,isMuted,getContext,onOffer,onAsk,onChoose,on
   $('[data-camera-model]').textContent=modelLabel(model);$('[data-position-save]').disabled=!enabled||!lastBounds||!!positionCapture;
   $('[data-camera-reference]').disabled=!enabled;$('[data-camera-repeat]').disabled=!enabled;
  }
- function stopSpeech(){++speechVersion;speaking=false;clearTimeout(speechTimer);speechTimer=null;window.speechSynthesis?.cancel();}
- function speak(value){
-  stopSpeech();text(question,value);if(isMuted()||!window.speechSynthesis)return;
-  const token=speechVersion,utterance=new SpeechSynthesisUtterance(value);utterance.lang='it-IT';speaking=true;
-  const finish=()=>{if(token===speechVersion){speaking=false;clearTimeout(speechTimer);}};utterance.onend=finish;utterance.onerror=finish;
-  speechTimer=setTimeout(()=>{if(token===speechVersion){window.speechSynthesis.cancel();finish();}},10000);window.speechSynthesis.speak(utterance);
+ const promptAudio=createSelectionAudio({isMuted,onPlayback:audio=>{speaking=!!audio;}});
+ for(const event of ['pointerdown','keydown'])document.addEventListener(event,()=>promptAudio.unlock(),{capture:true});
+ function stopSpeech(){++speechVersion;speaking=false;clearTimeout(speechTimer);speechTimer=null;promptAudio.stop();}
+ function speak(value,key){
+  stopSpeech();text(question,value);promptAudio.speak(value,key);
  }
  function returnFocus(){const button=app.querySelector('[data-action="camera"]');if(button&&restoreKeyboardFocus&&(document.activeElement===document.body||panel.contains(document.activeElement)))button.focus({preventScroll:true});}
  function stop(message=''){
@@ -71,7 +71,7 @@ export function initCameraMode({app,isMuted,getContext,onOffer,onAsk,onChoose,on
  function option(context,index=flow.index){return context?.options?.[index];}
  async function handle(event,context,ticket){
   if(!event)return;const selected=option(context,event.index);if(!selected)return;
-  if(event.type==='offer'){onOffer?.(context,selected);if(selected.silent){stopSpeech();text(question,`${selected.label}?`);}else speak(selected.question||`${selected.label}?`);return;}
+  if(event.type==='offer'){onOffer?.(context,selected);if(selected.silent){stopSpeech();text(question,`${selected.label}?`);}else speak(selected.question||`${selected.label}?`,context.kind==='movie'?'watch':context.kind==='categories'?(selected.id==='animation'?'animation':'live-action'):null);return;}
   if(event.type==='cancel'){onCancel?.(context);stopSpeech();text(question,`Riprendiamo da ${selected.label}.`);return;}
   if(event.type==='ask'){
    rendering=true;
