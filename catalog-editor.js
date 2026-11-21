@@ -3,7 +3,7 @@ import {recordKind,updateStructure} from './catalog-structure.js?v=20261113episo
 import {openTmdbIdentification} from './catalog-identification.js?v=20261113identify';
 
 import {curator} from './curator-client.js?v=20261001i';
-import {catalogEntries,episodeLabel} from './series-catalog.js?v=20261116audio';
+import {catalogEntries,episodeLabel} from './series-catalog.js?v=20261121filters';
 const endpoint='https://mahjewznwqvdgtdjtekc.supabase.co/functions/v1/gaia-catalog';
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const safe=x=>{try{const u=new URL(x);return ['https:','http:'].includes(u.protocol)?u.href:''}catch{return ''}};
