@@ -1,6 +1,6 @@
 import {promptRecording} from './prompt-recordings.js?v=20261121aacfix';
 // Audio is independent of webcam recognition. Recorded titles take priority.
-export function createSelectionAudio({isMuted,onPlayback=()=>{},allowSpeech=()=>true,speech=window.speechSynthesis,makeAudio=url=>{const audio=new Audio(url);audio.hidden=true;audio.dataset.gaiaAudio='';document.body.append(audio);return audio;},makeUtterance=text=>new SpeechSynthesisUtterance(text)}){
+export function createSelectionAudio({isMuted,onPlayback=()=>{},allowSpeech=()=>true,speech=window.speechSynthesis,makeAudio=url=>{const audio=new Audio(url);audio.hidden=true;audio.dataset.gaiaAudio='';audio.addEventListener('ended',()=>audio.remove(),{once:true});document.body.append(audio);return audio;},makeUtterance=text=>new SpeechSynthesisUtterance(text)}){
  let current=null,serial=0,pending=null;
  function stop(){pending=null;++serial;const old=current;current=null;if(old){old.pause();old.remove?.();}speech?.cancel();onPlayback(null);}
  function speakFallback(text){
