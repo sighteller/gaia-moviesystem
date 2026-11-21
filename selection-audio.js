@@ -1,8 +1,8 @@
 import {promptRecording} from './prompt-recordings.js?v=20261121voices';
 // Audio is independent of webcam recognition. Recorded titles take priority.
-export function createSelectionAudio({isMuted,onPlayback=()=>{},allowSpeech=()=>true,speech=window.speechSynthesis,makeAudio=url=>new Audio(url),makeUtterance=text=>new SpeechSynthesisUtterance(text)}){
+export function createSelectionAudio({isMuted,onPlayback=()=>{},allowSpeech=()=>true,speech=window.speechSynthesis,makeAudio=url=>{const audio=new Audio(url);audio.hidden=true;audio.dataset.gaiaAudio='';document.body.append(audio);return audio;},makeUtterance=text=>new SpeechSynthesisUtterance(text)}){
  let current=null,serial=0,pending=null;
- function stop(){pending=null;++serial;const old=current;current=null;if(old)old.pause();speech?.cancel();onPlayback(null);}
+ function stop(){pending=null;++serial;const old=current;current=null;if(old){old.pause();old.remove?.();}speech?.cancel();onPlayback(null);}
  function speakFallback(text){
   stop();if(isMuted()||!allowSpeech()||!speech||!text)return;
   const ticket=serial,utterance=makeUtterance(text);utterance.lang='it-IT';let paused=false;
@@ -19,6 +19,7 @@ export function createSelectionAudio({isMuted,onPlayback=()=>{},allowSpeech=()=>
   const failed=error=>{
    if(ticket!==serial||current!==audio)return;
    if(error?.name==='NotAllowedError'){pending={audio,ticket,fallback};onPlayback(null);return;}
+   console.warn('Registrazione audio non riproducibile',String(url),error?.name||audio.error?.code,audio.error?.message||'');
    fallback?.();
   };
   audio.addEventListener('ended',finish,{once:true});
