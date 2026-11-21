@@ -17,5 +17,5 @@ export function promptRecording(text, key) {
   else if (normalized === 'vuoi guardare questo') key = 'watch';
  }
  if (key === 'hello') key = greeting;
- return promptKeys.includes(key) ? new URL(key + '.m4a', base).href : null;
+ return promptKeys.includes(key) ? new URL(key + '.m4a?v=20261121aacfix', base).href : null;
 }
