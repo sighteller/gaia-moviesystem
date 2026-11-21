@@ -45,7 +45,7 @@ export function catalogEntries(titles, { query = '', filter = 'active', dirtyIds
   const search = searchable(query);
   const matchesName = title => searchable(title.name).includes(search);
   const matchesFilter = title => filter === 'all' ||
-    filter === 'active' && (title.active || title.request_status === 'pending') ||
+    filter === 'active' && title.active && !['pending','rejected'].includes(title.request_status) ||
     filter === 'unidentified' && title.active && !title.tmdb_id && !title.manually_identified && !title.series_id ||
     filter === 'requested' && title.request_status === 'pending' ||
     filter === 'rejected' && title.request_status === 'rejected' ||
@@ -60,7 +60,7 @@ export function catalogEntries(titles, { query = '', filter = 'active', dirtyIds
     const rootHit = matchesName(title) && matchesFilter(title);
     // Preserve archived episode records inside a visible series; their status stays explicit.
     const childHits = children.filter(child => matchesName(child) &&
-      (filter === 'active' ? title.active || child.active : matchesFilter(child)));
+      (filter === 'active' ? matchesFilter(title) || matchesFilter(child) : matchesFilter(child)));
     if (!rootHit && !childHits.length) continue;
     entries.push({ title, children: rootHit ? children : childHits });
   }
